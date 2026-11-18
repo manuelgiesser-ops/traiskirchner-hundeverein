@@ -227,3 +227,14 @@ header.scrolled .brand img{width:48px;height:48px}
 @media(min-width:761px) and (max-width:1050px){.hero-character.hero-editorial{min-height:570px;grid-template-columns:1fr 1fr;padding:55px 4vw}.hero-character .hero-copy h1{font-size:clamp(3.05rem,6.5vw,5.2rem)}.hero-subject{width:115%;margin-left:-7%;height:42vw}.hero-character .hero-orbit{right:5%;width:48vw}}
 @media(max-width:760px){.hero-character.hero-editorial{display:grid;grid-template-columns:1fr;grid-template-areas:"art" "copy";padding:9px 20px 62px;min-height:0;gap:12px}.hero-character .hero-orbit{width:min(70vw,380px);top:clamp(137px,36vw,215px);right:12%;transform:translate(0,-50%)}.hero-character .hero-subject{height:clamp(245px,65vw,415px);width:calc(100% + 20px);margin-left:-10px;translate:none}.hero-character .hero-inner{padding:0;margin:0}.hero-character .hero-copy h1{font-size:clamp(2.95rem,11.5vw,5.4rem);margin-bottom:17px}.hero-character .hero-copy p{max-width:34ch}.hero-character .hero-ground{inset:0 -25% auto;height:64%}.hero-terrain{top:0;right:-15%;width:100%;height:65%;opacity:.14}.hero-leash{width:94%;left:3%;bottom:auto;top:clamp(175px,47vw,270px);opacity:.5}.hero-edge{height:24px}.hero-character .hero-meta{margin-top:17px}.section{padding:58px 0}.section-leash{width:115%;left:-39%;top:2%;opacity:.16}.agility-art{width:58%;right:-17%;top:2%;opacity:.15}.dog-mark{width:105px;top:1.5%;right:3%;opacity:.14}.course-editorial .course:nth-child(n){margin-top:0}.field-story{align-items:center}.field-story>.prose{padding-top:0}.contact-leash{width:110%;right:-42%;bottom:0;opacity:.16}}
 @media(prefers-reduced-motion:reduce){.hero-character .hero-orbit,.hero-subject,.hero-subject img,.hero-leash .leash-draw,.hero-leash .leash-end{animation:none!important;translate:none!important}.hero-subject{transform:none!important}.hero-terrain,.magnetic-btn{translate:none!important}.motion-ready .decorated-section .leash-draw{stroke-dashoffset:0!important}.motion-ready .decorated-section .leash-end{opacity:1!important}.motion-ready .dog-mark{opacity:.19!important;transform:rotate(-9deg)!important}.motion-ready .portrait-frame{clip-path:none!important}}
+
+/* Last-pass accessibility, portrait alignment and section edges. */
+.person .portrait-frame:focus-visible{outline-offset:4px}
+@media(prefers-reduced-motion:reduce){.person .portrait-frame img{transition:none!important}.hero-character .hero-copy h1 b{animation:none!important}}
+.paused .hero-subject,.paused .hero-terrain,.paused .magnetic-btn{translate:none!important}
+.paused .hero-orbit{opacity:.93!important}
+.paused .hero-leash .leash-draw{stroke-dashoffset:0!important}
+.paused .hero-leash .leash-end{opacity:1!important}
+.agility-art .leash-draw{stroke-dasharray:6 5}
+.motion-ready .decorated-section .agility-art .leash-draw,.motion-ready .agility-art .leash-draw{stroke-dasharray:1}
+@media(min-width:761px) and (max-width:920px){.hero-character .hero-copy h1{font-size:clamp(2.9rem,6vw,4.6rem)}}
