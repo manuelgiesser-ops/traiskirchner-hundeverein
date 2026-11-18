@@ -33,11 +33,11 @@ if('IntersectionObserver' in window){const observer=new IntersectionObserver(es=
   breed(document.querySelector('.course-editorial'),'corner-right','collie');
   breed(document.querySelector('.team-editorial'),'corner-right','shepherd');
   breed(document.querySelector('.field-editorial'),'corner-left','husky');
-  breed(document.querySelector('.final-contact'),'corner-right','walk');
+  breed(document.querySelector('.final-contact'),'corner-right','retriever');
   lineDecor(document.querySelector('.final-contact'),'corner-left','leaf');
  }else{
   const name=location.pathname.split('/').pop()||'';
-  const choices={'agility.html':'agility','hoopers.html':'collie','welpen.html':'retriever','grundkurs.html':'bulldog','fortgeschritten.html':'shepherd','unterordnung.html':'shepherd','social-walk.html':'walk','training.html':'collie','verein.html':'husky','team.html':'retriever','mitgliedschaft.html':'bulldog','kurszeiten.html':'shepherd','galerie.html':'husky','kontakt.html':'walk','aktuelles.html':'collie'};
+  const choices={'agility.html':'agility','hoopers.html':'collie','welpen.html':'retriever','grundkurs.html':'bulldog','fortgeschritten.html':'shepherd','unterordnung.html':'shepherd','social-walk.html':'husky','training.html':'collie','verein.html':'husky','team.html':'retriever','mitgliedschaft.html':'bulldog','kurszeiten.html':'shepherd','galerie.html':'husky','kontakt.html':'retriever','aktuelles.html':'collie'};
   const chosen=choices[name];const lead=document.querySelector('.pagelead');
   if(chosen&&lead&&!lead.classList.contains('withpic'))breed(lead,'corner-right',chosen);else if(lead&&!chosen)lineDecor(lead,'corner-right','trail');
   const sections=[...document.querySelectorAll('main>.section')];
