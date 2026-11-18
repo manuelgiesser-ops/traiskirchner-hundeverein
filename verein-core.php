@@ -57,7 +57,8 @@ function thv_text(string $key,int $max,bool $required=true): string {
 function thv_email(): string { $v=strtolower(thv_text('email',254)); if(!filter_var($v,FILTER_VALIDATE_EMAIL))throw new DomainException('Bitte gib eine gültige E-Mail-Adresse ein.');return $v; }
 function thv_password(string $key='password'): string { $p=(string)($_POST[$key]??''); if(strlen($p)<12||strlen($p)>72)throw new DomainException('Das Passwort muss 12 bis 72 Bytes lang sein.');return $p; }
 function thv_id(): string { return bin2hex(random_bytes(12)); }
-function thv_images(): array { return [''=>'Ohne Bild','assets/team-960.webp'=>'Vereinsteam','assets/jump-960.webp'=>'Agility','assets/puppy-960.webp'=>'Welpen','assets/dog-960.webp'=>'Grundkurs','assets/obed-960.webp'=>'Unterordnung','assets/hoopers-960.webp'=>'Hoopers','assets/walk-960.webp'=>'Gemeinsam unterwegs','assets/field-960.webp'=>'Trainingsgelände','assets/house-960.webp'=>'Vereinshaus']; }
+require_once __DIR__.'/studio-media-lib.php';
+function thv_images(): array { $base=[''=>'Ohne Bild','assets/team-960.webp'=>'Vereinsteam','assets/jump-960.webp'=>'Agility','assets/puppy-960.webp'=>'Welpen','assets/dog-960.webp'=>'Grundkurs','assets/obed-960.webp'=>'Unterordnung','assets/hoopers-960.webp'=>'Hoopers','assets/walk-960.webp'=>'Gemeinsam unterwegs','assets/field-960.webp'=>'Trainingsgelände','assets/house-960.webp'=>'Vereinshaus']; try{return $base+thv_state(fn($s)=>thv_media_choices($s));}catch(Throwable $e){return $base;} }
 function thv_new_user(string $email,string $name,string $password,string $role,bool $change): array {
     return ['id'=>thv_id(),'email'=>$email,'name'=>$name,'hash'=>password_hash($password,PASSWORD_DEFAULT),'role'=>$role,'active'=>true,'change'=>$change,'version'=>1,'created'=>date(DATE_ATOM)];
 }
