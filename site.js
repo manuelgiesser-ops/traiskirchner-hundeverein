@@ -261,7 +261,7 @@ const thvPhotoData=Promise.resolve({"faces":{"sari":{"x":0.39743,"y":0.59646,"wi
   puppy:{href:'welpen.html',name:'Welpen und Junghunde',info:'Spielerisch Bindung, Rückruf, Leinenführigkeit und erste Signale aufbauen.'},
   basic:{href:'grundkurs.html',name:'Grundkurs',info:'Alltag, Kommunikation und Grundgehorsam gemeinsam trainieren.'},
   obedience:{href:'unterordnung.html',name:'Unterordnung für Anfänger',info:'Die Grundlagen der Unterordnung kennenlernen und Zusammenarbeit üben.'},
-  advanced:{href:'fortgeschritten.html',name:'Unterordnung für Fortgeschrittene',info:'Mit abgelegter BH-Prüfung erlernte Übungen festigen und verfeinern.'},
+  advanced:{href:'fortgeschritten.html',name:'Unterordnung für Fortgeschrittene',info:'Mit bestandener Begleithundeprüfung erlernte Übungen festigen und verfeinern.'},
   agility:{href:'agility.html',name:'Agility',info:'Gemeinsam einen Hindernisparcours meistern. Geeignet ab einem Jahr für gesunde Hunde.'},
   hoopers:{href:'hoopers.html',name:'Hoopers',info:'Den Hund auf Distanz durch einen Parcours ohne Sprünge führen. Ab einem Jahr.'},
   social:{href:'social-walk.html',name:'Social Walk',info:'Begleitete Spaziergänge zum Üben von Hundebegegnungen, Leinenführigkeit und Impulskontrolle.'}
@@ -284,15 +284,19 @@ const thvPhotoData=Promise.resolve({"faces":{"sari":{"x":0.39743,"y":0.59646,"wi
  function update(){
   const age=val('age'),goal=val('goal'),bh=val('bh'),sport=val('sport');
   step('goal').hidden=!age;
+  step('goal').querySelector('legend').innerHTML=age==='young'?'<span>2</span> Was möchtet ihr später trainieren? (optional)':'<span>2</span> Was möchtet ihr gemeinsam erreichen?';
   step('bh').hidden=!(age&&age!=='young'&&goal==='obedience');
   step('sport').hidden=!(age==='adult'&&goal==='sport');
   reset.hidden=!age;result.hidden=true;status.textContent='';
-  if(!age||!goal)return;
+  if(!age)return;
   if(age==='young'){
-   if(goal==='social')return render(['puppy'],'Für einen Social Walk frag bitte nach der passenden Gruppe und dem Mindestalter.');
-   if(goal==='sport')return render(['puppy'],'Agility und Hoopers sind laut Kursübersicht ab einem Jahr möglich.');
-   return render(['puppy'],'');
+   if(goal==='social')return render(['puppy'],'Hier lernt dein junger Hund neue Situationen kennen. Ein Social Walk kann zusätzlich infrage kommen. Ob die Gruppe und das Alter passen, klärt das Trainerteam.');
+   if(goal==='sport')return render(['puppy'],'Jetzt könnt ihr spielerisch Geschicklichkeit und Zusammenarbeit aufbauen. Agility und Hoopers sind ab einem Jahr möglich.');
+   if(goal==='obedience')return render(['puppy'],'Hier lernt ihr erste Signale und sichere Zusammenarbeit. Ab neun Monaten könnt ihr in die Unterordnung für Anfänger wechseln.');
+   if(goal==='everyday')return render(['puppy'],'Der Kurs legt die Grundlage für Rückruf, Leinenführigkeit und Vertrauen. Ab neun Monaten steht euch der Grundkurs offen.');
+   return render(['puppy'],'Für Hunde unter neun Monaten ist dies der altersgerechte Einstieg. Wähle optional euer Trainingsziel, um mehr über die nächsten Schritte zu erfahren.');
   }
+  if(!goal)return;
   if(goal==='everyday')return render(['basic'],'');
   if(goal==='social')return render(['social'],'Termine und die passende Gruppe bitte vorab erfragen.');
   if(goal==='obedience'&&bh)return render([bh==='yes'?'advanced':'obedience'],'');
