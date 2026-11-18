@@ -779,3 +779,59 @@ header.scrolled .brand img{width:52px;height:52px}
 @media(max-width:760px){.course-directory{gap:18px;margin-top:23px}.course-directory .course-group{padding:13px}.course-group-heading{gap:9px;margin-bottom:14px;padding-bottom:13px}.course-group-heading>svg{width:29px;height:29px;margin-top:1px}.course-group-heading h3{font-size:25px;line-height:1.1}.course-group-heading p{font-size:12px}.course-directory .courses.grouped-cards,.course-directory .group-aktiv .courses.grouped-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.course-directory .grouped-cards .course>div{padding:11px 9px}.course-directory .grouped-cards .course h3{font-size:clamp(17px,4.9vw,23px);line-height:1.15;margin-bottom:13px}.course-directory .grouped-cards .course .context-detail{font-size:10px}.course-directory .course-action{font-size:11px;gap:4px}.course-directory .group-aktiv .grouped-cards>a.course.reveal:nth-child(3){grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:stretch}.course-directory .group-aktiv .grouped-cards>a.course.reveal:nth-child(3)>.media-frame{height:100%;min-height:105px;aspect-ratio:1.5}.course-directory .group-aktiv .grouped-cards>a.course.reveal:nth-child(3)>div{padding:12px}.bond-story.bond-unified{padding-top:36px;padding-bottom:46px;gap:26px}.bond-unified .bond-copy h2{font-size:clamp(2.4rem,10vw,3.8rem);max-width:15ch}.bond-unified .bond-copy p{font-size:16px}.bond-leash-mark{width:210px;margin:10px 0 0}}
 @media(max-width:350px){.course-directory .course-group{padding:10px}.course-directory .grouped-cards .course>div{padding:9px 6px}.course-directory .grouped-cards .course h3{font-size:17px}}
 @media(prefers-reduced-motion:reduce){.bond-unified-thread{stroke-dashoffset:0!important;transition:none!important}.bond-unified-paw{opacity:1!important;transition:none!important}.course-directory .course-action span{transition:none}}
+
+/* V19: airy editorial course groups. No nested card borders, no small boxed headings. */
+.course-directory.course-modern{display:flex;flex-direction:column;gap:0;margin-top:clamp(26px,4vw,54px)}
+.course-modern .course-group{display:grid;grid-template-columns:minmax(185px,.72fr) minmax(0,2.3fr);align-items:start;gap:clamp(25px,4vw,70px);padding:clamp(26px,4vw,53px) 0;background:none;border:0;border-top:1px solid #a9ad9c65;border-radius:0;overflow:visible}
+.course-modern .course-group:first-child{border-top:0;padding-top:0}
+.course-modern .course-group:last-child{padding-bottom:0}
+.course-modern .course-group-heading{display:flex;flex-direction:column;gap:10px;border:0;padding:8px 0 0;margin:0}
+.course-modern .course-group-heading>svg{width:42px;height:42px;box-sizing:content-box;padding:9px;background:#d9dfcf;color:#496447;border-radius:50%;margin:0}
+.course-modern .group-unterordnung .course-group-heading>svg{background:#e4dccc;color:#8a6945}
+.course-modern .group-aktiv .course-group-heading>svg{background:#d7e3d4;color:#456446}
+.course-modern .course-group-heading h3{font-size:clamp(27px,3vw,42px);font-weight:400;line-height:1.07;letter-spacing:-.04em;margin-bottom:10px;max-width:13ch}
+.course-modern .course-group-heading p{font-size:15px;line-height:1.55;max-width:25ch;color:#61695b}
+.course-modern .courses.grouped-cards{gap:clamp(15px,2vw,28px)}
+.course-modern .grouped-cards>a.course.reveal:nth-child(n){background:transparent;border:0;border-radius:0;overflow:visible;box-shadow:none;gap:0}
+.course-modern .grouped-cards .course>.media-frame{aspect-ratio:1.45;border-radius:13px;overflow:hidden;background:#d5d9ce;box-shadow:0 6px 18px #23352712}
+.course-modern .grouped-cards .course>img{border-radius:13px}
+.course-modern .grouped-cards .course>.media-frame>img{object-fit:cover}
+.course-modern .grouped-cards .course>div{padding:clamp(13px,1.4vw,18px) 46px 6px 2px;min-height:0;display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start}
+.course-modern .grouped-cards .course .context-detail{font-size:12px;letter-spacing:.005em;color:#62715d;margin-bottom:5px}
+.course-modern .grouped-cards .course h3{font-size:clamp(23px,2.25vw,34px);font-weight:500;line-height:1.12;margin:0;color:#24372a}
+.course-modern .course-action{position:absolute;right:1px;top:14px;margin:0;display:grid;place-items:center;gap:0;width:37px;height:37px;border-radius:50%;background:#dce3d4;color:#344e37}
+.course-modern .course-action>span:first-child{font-size:20px;line-height:1}
+.course-modern .course-action .course-action-label{position:absolute;height:1px;width:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.course-modern .grouped-cards>a.course.reveal.seen:hover{transform:translateY(-3px);box-shadow:none}
+.course-modern .course:hover .course-action{background:#354f39;color:#fff8e9}
+.course-modern .course:hover .course-action>span:first-child{transform:translate(1px,-1px)}
+/* Paw prints are foreground accents again: they are visible before and during the image opening. */
+.thv-motion .course-modern .media-frame.thv-media.photo-opening.paw-reveal.thv-media-seen>img{transition:opacity 1.8s ease!important;transition-delay:.8s!important;opacity:1}
+.thv-motion .course-modern .media-frame.thv-media.photo-opening.paw-reveal:not(.thv-media-seen)>img{opacity:.06}
+.thv-motion .course-modern .media-frame.thv-media.photo-opening.paw-reveal.thv-media-seen .thv-film-paws{z-index:5;opacity:0;animation:thvWalkingOverlay 4s linear both!important;color:#d8a66a;filter:drop-shadow(0 1px 2px #2b302b99);background:none;overflow:visible}
+.thv-motion .course-modern .media-frame.thv-media.photo-opening.paw-reveal.thv-media-seen .thv-film-paws .dog-paw{animation:thvCourseFootstep 1.95s var(--paw-delay,0ms) ease-in-out both!important}
+@keyframes thvCourseFootstep{0%{opacity:0}22%{opacity:1}56%{opacity:.92}100%{opacity:0}}
+.thv-motion .course-modern .media-frame[data-opening="pair"].thv-media-seen .thv-film-paws{animation-duration:3s!important}
+.thv-motion .course-modern .media-frame[data-opening="meadow"].thv-media-seen .thv-film-paws{color:#f1c992}
+.course-modern .course.reveal:focus-within img,.paused .course-modern .course img{opacity:1!important;transition:none!important}
+/* Integrated second scene: real companion silhouette, soft gold tracing and drifting paw marks.
+   There is only one trust headline. */
+.bond-story.bond-unified{row-gap:clamp(12px,2vw,24px);padding-bottom:clamp(20px,3vw,42px)}
+.bond-journey{grid-column:1/-1;grid-row:2;position:relative;isolation:isolate;width:100%;max-width:1080px;aspect-ratio:900/230;margin:0 auto;pointer-events:none;background:radial-gradient(ellipse at 50% 50%,#c8ad7913,transparent 44%)}
+.journey-landscape{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.journey-companions{position:absolute;left:50%;top:1%;height:79%;width:auto;max-width:55%;transform:translateX(-50%);overflow:visible}
+.journey-thread,.journey-outline{stroke-dasharray:1;stroke-dashoffset:0}
+.journey-outline{opacity:.5}
+.thv-motion .bond-journey:not(.thv-ornament-seen) :is(.journey-thread,.journey-outline){stroke-dashoffset:1}
+.thv-motion .bond-journey .journey-thread{transition:stroke-dashoffset 2.2s cubic-bezier(.4,0,.25,1)}
+.thv-motion .bond-journey .journey-right{transition-delay:.22s}
+.thv-motion .bond-journey .journey-outline{transition:stroke-dashoffset 2.6s .35s cubic-bezier(.35,0,.2,1)}
+.thv-motion .bond-journey:not(.thv-ornament-seen) :is(.journey-fill,.journey-botanical,.journey-paws){opacity:0}
+.thv-motion .bond-journey .journey-fill{transition:opacity 1.5s 1.25s ease}
+.thv-motion .bond-journey .journey-botanical{transition:opacity 1.1s .65s}
+.thv-motion .bond-journey .journey-paws{transition:opacity 1s 1.8s}
+.paused .bond-journey :is(.journey-thread,.journey-outline){stroke-dashoffset:0!important;transition:none!important}
+.paused .bond-journey :is(.journey-fill,.journey-botanical,.journey-paws){opacity:1!important;transition:none!important}
+@media(max-width:1050px){.course-modern .course-group{grid-template-columns:minmax(150px,.66fr) minmax(0,2.4fr);gap:24px}.course-modern .course-group-heading h3{font-size:30px}.course-modern .grouped-cards .course h3{font-size:24px}.course-modern .group-aktiv .courses.grouped-cards{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:760px){.course-directory.course-modern{margin-top:27px}.course-modern .course-group{grid-template-columns:1fr;gap:18px;padding:26px 0}.course-modern .course-group-heading{flex-direction:row;align-items:center;gap:12px;padding:0}.course-modern .course-group-heading>svg{width:31px;height:31px;padding:8px}.course-modern .course-group-heading h3{font-size:clamp(25px,6.7vw,34px);max-width:none;margin:0 0 4px}.course-modern .course-group-heading p{font-size:12px;max-width:none;line-height:1.45}.course-modern .courses.grouped-cards,.course-modern .group-aktiv .courses.grouped-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.course-modern .grouped-cards .course>.media-frame{aspect-ratio:1.22;border-radius:11px}.course-modern .grouped-cards .course>div{padding:10px 31px 5px 1px}.course-modern .grouped-cards .course .context-detail{font-size:10px;margin-bottom:4px}.course-modern .grouped-cards .course h3{font-size:clamp(19px,5.3vw,26px);line-height:1.13}.course-modern .course-action{width:27px;height:27px;top:10px;right:0}.course-modern .course-action>span:first-child{font-size:17px}.course-modern .group-aktiv .grouped-cards>a.course.reveal:nth-child(3){display:grid;grid-column:1/-1;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:center}.course-modern .group-aktiv .grouped-cards>a.course.reveal:nth-child(3)>.media-frame{height:auto;aspect-ratio:1.5;min-height:0}.course-modern .group-aktiv .grouped-cards>a.course.reveal:nth-child(3)>div{padding:10px 32px 8px 0}.bond-story.bond-unified{row-gap:20px;padding-bottom:22px}.bond-story.bond-unified .bond-journey{grid-row:auto;grid-column:1;aspect-ratio:900/350;margin-top:0}.journey-companions{top:0;height:75%;max-width:75%}.journey-landscape{transform:scale(1.12);transform-origin:center bottom}}
+@media(prefers-reduced-motion:reduce){.thv-motion .course-modern .media-frame>img{opacity:1!important;transition:none!important}.thv-motion .course-modern .thv-film-paws{display:none!important}.bond-journey :is(.journey-thread,.journey-outline){stroke-dashoffset:0!important;transition:none!important}.bond-journey :is(.journey-fill,.journey-botanical,.journey-paws){opacity:1!important;transition:none!important}}

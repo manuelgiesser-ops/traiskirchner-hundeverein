@@ -68,7 +68,7 @@ if('IntersectionObserver' in window){const observer=new IntersectionObserver(es=
   else if(f.closest('.bond-image'))kind='pair';
   else if(f.closest('.editorial-intro'))kind='diagonal';
   else if(f.closest('.field-editorial'))kind='meadow';
-  else if(f.closest('.course'))kind=['diagonal','soft','reverse','pair','meadow'][courseCount++%5];
+  else if(f.closest('.course'))kind=['diagonal','reverse','pair','diagonal','meadow','reverse','pair'][courseCount++%7];
   else kind=['reverse','soft','meadow','pair'][otherCount++%4];
   f.dataset.opening=kind;
   if(kind==='soft')return;
@@ -78,7 +78,7 @@ if('IntersectionObserver' in window){const observer=new IntersectionObserver(es=
   svg.innerHTML=trails[kind].map(([x,y,r],i)=>'<g transform="translate('+x+' '+y+') rotate('+r+') scale('+scale+') translate(-55 -50)"><g class="dog-paw" style="--paw-delay:'+i*gap+'ms">'+paw+'</g></g>').join('');f.append(svg)
  });
 
- const seal=document.querySelector('.thv-bond-seal'),nodes=[...document.querySelectorAll('.thv-corner'),...frames,...(seal?[seal]:[])];
+ const seal=document.querySelector('.thv-bond-seal'),nodes=[...document.querySelectorAll('.thv-corner,.bond-journey'),...frames,...(seal?[seal]:[])];
  const show=e=>e.classList.add(e.classList.contains('thv-media')?'thv-media-seen':'thv-ornament-seen');
  if(!reduced.matches&&'IntersectionObserver'in window){root.classList.add('thv-motion');const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){show(e.target);obs.unobserve(e.target)}}),{threshold:.06,rootMargin:'0px 0px -3% 0px'});nodes.forEach(n=>obs.observe(n))}else nodes.forEach(show);
 })();
