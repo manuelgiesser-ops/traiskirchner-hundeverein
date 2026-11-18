@@ -982,10 +982,16 @@ body:has(#nav.open) .mobile-course-return,body:has(dialog[open]) .mobile-course-
 @media(prefers-reduced-motion:reduce){.mobile-course-return{animation:none!important}.course-discovery-hint{display:none!important}.thv-motion .course-modern .course-discovery>img{filter:none!important;opacity:1!important;transform:none!important;transition:none!important}}
 
 /* V29: brisk, one-time course discovery; the photo is sharp within 0.65s. */
-.thv-motion .course-modern .media-frame.course-discovery:not(.thv-media-seen)>img{opacity:.30;filter:saturate(.75) blur(4px);transition:opacity .52s ease-out,filter .58s ease-out,transform .58s ease-out!important}
-.thv-motion .course-modern .media-frame.course-discovery.thv-media-seen>img{transition:opacity .52s ease-out,filter .58s ease-out,transform .58s ease-out!important;transition-delay:.06s!important}
-.thv-motion .course-modern .media-frame.course-discovery .course-discovery-hint{transition:opacity .18s ease-out}
-.thv-motion .course-modern .media-frame.course-discovery.paw-reveal.thv-media-seen .thv-film-paws{animation:thvWalkingOverlay 1.38s linear both!important}
-.thv-motion .course-modern .media-frame.course-discovery.paw-reveal.thv-media-seen .thv-film-paws .dog-paw{animation:thvCourseFootstep .79s var(--paw-delay,0ms) ease-in-out both!important}
+.thv-motion .course-modern .media-frame.thv-media.photo-opening.paw-reveal.course-discovery:not(.thv-media-seen)>img{opacity:.30;filter:saturate(.75) blur(4px);transition:opacity .52s ease-out,filter .58s ease-out,transform .58s ease-out!important}
+.thv-motion .course-modern .media-frame.thv-media.photo-opening.paw-reveal.course-discovery.thv-media-seen>img{transition:opacity .52s ease-out,filter .58s ease-out,transform .58s ease-out!important;transition-delay:.06s!important}
+.thv-motion .course-modern .media-frame.thv-media.photo-opening.paw-reveal.course-discovery .course-discovery-hint{transition:opacity .18s ease-out}
+.thv-motion .course-modern .media-frame.thv-media.photo-opening.paw-reveal.course-discovery.thv-media-seen .thv-film-paws{animation:thvWalkingOverlay 1.38s linear both!important}
+.thv-motion .course-modern .media-frame.thv-media.photo-opening.paw-reveal.course-discovery.thv-media-seen .thv-film-paws .dog-paw{animation:thvCourseFootstep .79s var(--paw-delay,0ms) ease-in-out both!important}
 .paused .course-modern .course-discovery>img{transition:none!important}
-@media(prefers-reduced-motion:reduce){.thv-motion .course-modern .media-frame.course-discovery>img{transition:none!important}}
+@media(prefers-reduced-motion:reduce){.thv-motion .course-modern .media-frame.thv-media.photo-opening.paw-reveal.course-discovery>img{transition:none!important}}
+
+/* Preserve immediate access on keyboard focus, when motion is paused, and for reduced motion preferences. */
+.thv-motion .course-modern .course:focus-within .media-frame.thv-media.photo-opening.paw-reveal.course-discovery>img,
+.paused .course-modern .media-frame.thv-media.photo-opening.paw-reveal.course-discovery>img{opacity:1!important;filter:none!important;transform:none!important;transition:none!important}
+.paused .course-modern .media-frame.thv-media.photo-opening.paw-reveal.course-discovery .thv-film-paws{display:none!important}
+@media(prefers-reduced-motion:reduce){.thv-motion .course-modern .media-frame.thv-media.photo-opening.paw-reveal.course-discovery>img{opacity:1!important;filter:none!important;transform:none!important;transition:none!important}.thv-motion .course-modern .course-discovery .thv-film-paws{display:none!important}}
