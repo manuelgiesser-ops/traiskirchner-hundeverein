@@ -250,3 +250,61 @@ const thvPhotoData=Promise.resolve({"faces":{"sari":{"x":0.39743,"y":0.59646,"wi
  if('MutationObserver'in window){const nav=document.querySelector('#nav');if(nav)new MutationObserver(schedule).observe(nav,{attributes:true,attributeFilter:['class']})}
  sync();
 })();
+
+/* V34: accessible, local course finder. Recommendations follow the published prerequisites. */
+(()=>{
+ const finder=document.querySelector('.course-finder');if(!finder)return;
+ const form=finder.querySelector('.finder-form'),result=form.querySelector('.finder-result'),status=form.querySelector('.finder-result-status'),reset=form.querySelector('.finder-reset');
+ const step=name=>form.querySelector('[data-finder-step="'+name+'"]');
+ const val=name=>form.querySelector('input[name="'+name+'"]:checked')?.value||'';
+ const courses={
+  puppy:{href:'welpen.html',name:'Welpen und Junghunde',info:'Spielerisch Bindung, Rückruf, Leinenführigkeit und erste Signale aufbauen.'},
+  basic:{href:'grundkurs.html',name:'Grundkurs',info:'Alltag, Kommunikation und Grundgehorsam gemeinsam trainieren.'},
+  obedience:{href:'unterordnung.html',name:'Unterordnung für Anfänger',info:'Die Grundlagen der Unterordnung kennenlernen und Zusammenarbeit üben.'},
+  advanced:{href:'fortgeschritten.html',name:'Unterordnung für Fortgeschrittene',info:'Mit abgelegter BH-Prüfung erlernte Übungen festigen und verfeinern.'},
+  agility:{href:'agility.html',name:'Agility',info:'Gemeinsam einen Hindernisparcours meistern. Geeignet ab einem Jahr für gesunde Hunde.'},
+  hoopers:{href:'hoopers.html',name:'Hoopers',info:'Den Hund auf Distanz durch einen Parcours ohne Sprünge führen. Ab einem Jahr.'},
+  social:{href:'social-walk.html',name:'Social Walk',info:'Begleitete Spaziergänge zum Üben von Hundebegegnungen, Leinenführigkeit und Impulskontrolle.'}
+ };
+ function render(keys,note){
+  const items=keys.map(key=>{
+   const data=courses[key],source=document.querySelector('.course-directory a.course[href="'+data.href+'"] img');
+   const article=document.createElement('article');article.className='finder-result-card';
+   if(source){const img=source.cloneNode(false);img.removeAttribute('class');img.removeAttribute('data-asset');img.removeAttribute('data-full');img.setAttribute('sizes','(max-width: 760px) 33vw, 180px');img.loading='lazy';img.alt='';article.append(img)}
+   const body=document.createElement('div');body.className='finder-result-copy';
+   const title=document.createElement('h3');title.textContent=data.name;const p=document.createElement('p');p.textContent=data.info;
+   const link=document.createElement('a');link.className='finder-result-link';link.href=data.href;link.textContent='Zum Kurs';const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('aria-hidden','true');svg.innerHTML='<path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>';link.append(svg);
+   body.append(title,p,link);article.append(body);return article;
+  });
+  const title=document.createElement('p');title.className='finder-result-label';title.textContent=keys.length===1?'Das könnte gut zu euch passen':'Diese Kurse könnten zu euch passen';
+  const grid=document.createElement('div');grid.className='finder-result-grid';grid.append(...items);
+  const foot=document.createElement('p');foot.className='finder-result-note';foot.textContent=(note?note+' ':'')+'Die endgültige Einteilung erfolgt durch das Trainerteam.';
+  result.replaceChildren(title,grid,foot);result.hidden=false;status.textContent='Empfehlung: '+keys.map(k=>courses[k].name).join(' oder ');
+ }
+ function update(){
+  const age=val('age'),goal=val('goal'),bh=val('bh'),sport=val('sport');
+  step('goal').hidden=!age;
+  step('bh').hidden=!(age&&age!=='young'&&goal==='obedience');
+  step('sport').hidden=!(age==='adult'&&goal==='sport');
+  reset.hidden=!age;result.hidden=true;status.textContent='';
+  if(!age||!goal)return;
+  if(age==='young'){
+   if(goal==='social')return render(['puppy'],'Für einen Social Walk frag bitte nach der passenden Gruppe und dem Mindestalter.');
+   if(goal==='sport')return render(['puppy'],'Agility und Hoopers sind laut Kursübersicht ab einem Jahr möglich.');
+   return render(['puppy'],'');
+  }
+  if(goal==='everyday')return render(['basic'],'');
+  if(goal==='social')return render(['social'],'Termine und die passende Gruppe bitte vorab erfragen.');
+  if(goal==='obedience'&&bh)return render([bh==='yes'?'advanced':'obedience'],'');
+  if(goal==='sport'&&age==='junior')return render(['basic'],'Agility und Hoopers sind ab einem Jahr möglich. Bis dahin könnt ihr Grundlagen festigen.');
+  if(goal==='sport'&&sport)return render(sport==='both'?['agility','hoopers']:[sport],'Besprich vorab, welche sportliche Belastung zu deinem Hund passt.');
+ }
+ form.addEventListener('change',e=>{
+  if(e.target.name==='age'){form.querySelectorAll('input[name="goal"],input[name="bh"],input[name="sport"]').forEach(i=>i.checked=false)}
+  if(e.target.name==='goal'){form.querySelectorAll('input[name="bh"],input[name="sport"]').forEach(i=>i.checked=false)}
+  update();
+ });
+ form.addEventListener('submit',e=>e.preventDefault());
+ form.addEventListener('reset',()=>{requestAnimationFrame(()=>{update();form.querySelector('input[name="age"]')?.focus({preventScroll:true})})});
+ form.hidden=false;update();
+})();

@@ -1017,3 +1017,48 @@ body:has(#nav.open) .mobile-course-return,body:has(dialog[open]) .mobile-course-
 .thv-motion.paused .course-modern .course:not(.course-tap-opening):not(:focus-visible) .media-frame.thv-media.photo-opening.paw-reveal.course-discovery:not(.thv-media-seen)>img{opacity:1!important;filter:none!important;transform:none!important}
 .thv-motion.paused .course-modern .course:not(.course-tap-opening):not(:focus-visible) .media-frame.course-discovery:not(.thv-media-seen) .course-discovery-hint{display:none!important}
 }
+
+/* V34: course finder, intentionally compact and fully local. */
+.course-finder{border:1px solid #bcc9b9;background:#f6f5ed;border-radius:18px;overflow:hidden;margin:clamp(20px,3vw,34px) 0;box-shadow:0 8px 28px #233a2610}
+.course-finder [hidden]{display:none!important}
+.course-finder>summary{list-style:none;display:flex;align-items:center;gap:16px;padding:clamp(15px,2.6vw,28px);cursor:pointer;line-height:1.35;position:relative;color:#29432f}
+.course-finder>summary::-webkit-details-marker{display:none}
+.course-finder>summary::marker{content:''}
+.finder-mark{width:54px;height:54px;flex:0 0 auto;display:grid;place-items:center;border-radius:17px;background:#dfe8d8;color:#4e6a4d}
+.finder-mark svg{width:30px;height:30px;transition:rotate .3s ease}
+.course-finder>summary:hover .finder-mark svg{rotate:-9deg}
+.finder-intro{display:grid;gap:5px;flex:1;min-width:0}
+.finder-intro strong{font-size:clamp(1.05rem,2.1vw,1.5rem);font-weight:700;letter-spacing:-.026em}
+.finder-intro>span{font-size:14px;color:#637261}
+.finder-expand{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#e7ebe1;flex:none}
+.finder-expand svg{width:20px;height:20px;transition:transform .3s}
+.course-finder[open] .finder-expand svg{transform:rotate(180deg)}
+.finder-content{padding:0 clamp(15px,2.6vw,28px) clamp(18px,2.6vw,28px)}
+.finder-form{border-top:1px solid #d9dfd2;padding-top:20px;display:grid;gap:22px}
+.finder-form fieldset{border:0;padding:0;margin:0;min-width:0}
+.finder-form legend{padding:0;margin:0 0 11px;font-size:15px;font-weight:700;display:flex;gap:8px;align-items:center;color:#344b37}
+.finder-form legend span{display:grid;place-items:center;border-radius:50%;background:#dce6d6;color:#3e5b40;width:25px;height:25px;flex:none;font-size:12px}
+.finder-choices{display:flex;flex-wrap:wrap;gap:8px}
+.finder-choice{display:inline-flex;align-items:center;position:relative;cursor:pointer;max-width:100%;margin:0;line-height:1.35}
+.finder-choice input{position:absolute;opacity:0;width:1px;height:1px;padding:0;margin:0}
+.finder-choice span{display:block;border:1px solid #c2cdbd;padding:11px 14px;border-radius:10px;min-height:44px;background:#fffdf7;color:#3a5040;font-size:14px;transition:background .18s,color .18s,border-color .18s}
+.finder-choice input:checked+span{background:#3d5941;border-color:#3d5941;color:#fff9ea}
+.finder-choice input:focus-visible+span{outline:3px solid #d87824;outline-offset:3px}
+@media(hover:hover){.finder-choice:hover span{border-color:#678467}}
+.finder-result-status{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.finder-result{border-radius:15px;background:#e5ecdf;padding:clamp(13px,2vw,22px);animation:thvFinderIn .25s ease-out both}
+.finder-result-label{font-size:13px;font-weight:700;color:#536b54;margin:0 0 12px}
+.finder-result-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:12px}
+.finder-result-card{display:flex;align-items:stretch;gap:14px;background:#fffdf6;border-radius:12px;overflow:hidden;padding:10px;min-width:0}
+.finder-result-card>img{width:clamp(100px,15vw,170px);min-width:0;flex:0 0 auto;height:auto;object-fit:cover;border-radius:8px;aspect-ratio:1.15;align-self:stretch}
+.finder-result-copy{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-width:0;padding:5px 4px 5px 0}
+.finder-result-copy h3{font-size:clamp(18px,2.2vw,25px);letter-spacing:-.03em;line-height:1.15;color:#344b37}
+.finder-result-copy p{margin:6px 0 9px;color:#59685a;font-size:13px;line-height:1.45}
+.finder-result-link{display:inline-flex;align-items:center;gap:8px;color:#3a5940;font-size:14px;font-weight:700;text-decoration:underline;text-underline-offset:4px;padding:5px 0;min-height:32px}
+.finder-result-link svg{width:15px;height:15px}
+.finder-result-note{font-size:12px;color:#566956;margin:12px 0 0;line-height:1.5}
+.finder-bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.finder-reset,.finder-advice{background:none;padding:8px 0;border:0;color:#526b51;text-decoration:underline;text-underline-offset:4px;font-size:13px;line-height:1.5;min-height:36px}
+@keyframes thvFinderIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@media(max-width:760px){.course-finder{border-radius:14px}.course-finder>summary{gap:10px}.finder-mark{width:43px;height:43px;border-radius:13px}.finder-mark svg{width:24px;height:24px}.finder-intro>span{font-size:12px}.finder-expand{width:28px;height:28px}.finder-expand svg{width:17px;height:17px}.finder-form{gap:19px}.finder-choice{flex:1 1 auto}.finder-choice span{width:100%;text-align:center;padding:10px 11px;font-size:13px}.finder-result-card{gap:10px}.finder-result-card>img{width:clamp(75px,25vw,122px)}.finder-result-copy p{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.course-finder *{animation:none!important;transition:none!important}}
