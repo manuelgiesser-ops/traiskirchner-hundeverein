@@ -955,3 +955,28 @@ header .navwrap .brand img.thv-original-logo,header.scrolled .navwrap .brand img
 .course-return-inner .btn{flex:none;margin:0;white-space:normal}
 @media(max-width:760px){#kurse{scroll-margin-top:0}.home-team-actions,.course-return-inner{align-items:flex-start;flex-direction:column;gap:16px}.course-return-inner .btn{max-width:100%}}
 @media(prefers-reduced-motion:reduce){.course-back svg{transition:none}}
+
+/* V28: only one back arrow, and a discreet mobile return pill. */
+.pagelead .crumb.course-back::before,.course-return .course-back::before,.course-return .course-back::after{content:none!important;display:none!important}
+.mobile-course-return{display:none}
+.mobile-course-return[hidden]{display:none!important}
+@media(max-width:760px){
+.mobile-course-return:not([hidden]){position:fixed;z-index:45;left:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));display:inline-flex;align-items:center;gap:7px;padding:10px 15px;min-height:44px;border:1px solid #dfdccd;border-radius:28px;background:#f7f4e9f5;color:#344b36;box-shadow:0 4px 20px #172a2420;font-size:13px;font-weight:600;line-height:1.3;backdrop-filter:blur(10px);animation:thvReturnIn .24s ease-out both}
+.mobile-course-return svg{width:17px;height:17px;flex:none}
+body:has(#nav.open) .mobile-course-return,body:has(dialog[open]) .mobile-course-return{display:none!important}
+}
+@keyframes thvReturnIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+/* A visible course teaser instead of a blank tile. Hover/keyboard reveals it once;
+   touch devices open the same paw animation when the photo enters view. */
+.thv-motion .course-modern .media-frame.course-discovery{background:#dce1d4;isolation:isolate}
+.thv-motion .course-modern .media-frame.course-discovery:not(.thv-media-seen)>img{opacity:.27;filter:saturate(.65) blur(6px);transform:scale(1.025)!important;transition:opacity 1.2s ease,filter 1.3s ease,transform 1.3s ease!important}
+.thv-motion .course-modern .media-frame.course-discovery.thv-media-seen>img{opacity:1;filter:none;transform:none!important;transition:opacity 1.5s ease,filter 1.45s ease,transform 1.45s ease!important;transition-delay:.3s!important}
+.course-discovery-hint{display:none}
+.thv-motion .course-modern .media-frame.course-discovery .course-discovery-hint{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;z-index:3;opacity:1;transition:opacity .35s ease;background:radial-gradient(ellipse at center,#e9e7d6b0,transparent 72%)}
+.course-discovery-hint svg{width:35px;height:35px;color:#516c50;filter:drop-shadow(0 1px 2px #f6efdf90)}
+.thv-motion .course-modern .media-frame.course-discovery.thv-media-seen .course-discovery-hint{opacity:0}
+.thv-motion .course-modern .media-frame.course-discovery.thv-media-seen .thv-film-paws{color:#e9c58e!important}
+.paused .course-modern .course-discovery>img{filter:none!important;opacity:1!important;transform:none!important;transition:none!important}
+.paused .course-discovery-hint,.thv-motion .course-modern .course:focus-within .course-discovery-hint{display:none!important}
+.thv-motion .course-modern .course:focus-within .course-discovery>img{filter:none!important;opacity:1!important;transform:none!important;transition:none!important}
+@media(prefers-reduced-motion:reduce){.mobile-course-return{animation:none!important}.course-discovery-hint{display:none!important}.thv-motion .course-modern .course-discovery>img{filter:none!important;opacity:1!important;transform:none!important;transition:none!important}}

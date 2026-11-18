@@ -80,7 +80,28 @@ if('IntersectionObserver' in window){const observer=new IntersectionObserver(es=
 
  const seal=document.querySelector('.thv-bond-seal'),nodes=[...document.querySelectorAll('.thv-corner,.bond-journey'),...frames,...(seal?[seal]:[])];
  const show=e=>e.classList.add(e.classList.contains('thv-media')?'thv-media-seen':'thv-ornament-seen');
- if(!reduced.matches&&'IntersectionObserver'in window){root.classList.add('thv-motion');const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){show(e.target);obs.unobserve(e.target)}}),{threshold:.06,rootMargin:'0px 0px -3% 0px'});nodes.forEach(n=>obs.observe(n))}else nodes.forEach(show);
+ if(!reduced.matches&&'IntersectionObserver'in window){
+  root.classList.add('thv-motion');
+  const fine=matchMedia('(hover:hover) and (pointer:fine)');
+  const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){show(e.target);obs.unobserve(e.target)}}),{threshold:.06,rootMargin:'0px 0px -3% 0px'});
+  const courseFrames=frames.filter(f=>f.closest('.course-modern .course'));
+  const courseSet=new Set(courseFrames);
+  const touchObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){show(e.target);touchObserver.unobserve(e.target)}}),{threshold:.32,rootMargin:'0px 0px -5% 0px'});
+  nodes.filter(n=>!courseSet.has(n)).forEach(n=>obs.observe(n));
+  courseFrames.forEach(f=>{
+   const card=f.closest('.course');
+   f.classList.add('course-discovery');
+   const hint=document.createElement('span');hint.className='course-discovery-hint';hint.setAttribute('aria-hidden','true');
+   hint.innerHTML='<svg viewBox="0 0 110 100" aria-hidden="true" focusable="false"><g fill="currentColor">'+paw+'</g></svg>';
+   f.append(hint);
+   const discover=()=>{show(f);touchObserver.unobserve(f)};
+   card.addEventListener('pointerenter',e=>{if(e.pointerType!=='touch'&&fine.matches)discover()});
+   card.addEventListener('focusin',discover);
+   card.addEventListener('pointerdown',discover,{passive:true});
+   if(!fine.matches)touchObserver.observe(f);
+   fine.addEventListener?.('change',e=>{if(!e.matches&&!f.classList.contains('thv-media-seen'))touchObserver.observe(f);else touchObserver.unobserve(f)});
+  });
+ }else nodes.forEach(show);
 })();
 
 
@@ -196,3 +217,22 @@ const thvPhotoData=Promise.resolve({"faces":{"sari":{"x":0.39743,"y":0.59646,"wi
 
 /* Friendly paw marks on navigation and action links, not functional direction controls. */
 (()=>{const paw="<svg viewBox=\"0 0 32 32\" aria-hidden=\"true\" focusable=\"false\" fill=\"currentColor\"><ellipse cx=\"7.1\" cy=\"12.3\" rx=\"3.4\" ry=\"5\" transform=\"rotate(-28 7.1 12.3)\"/><ellipse cx=\"13.2\" cy=\"7.4\" rx=\"3.5\" ry=\"5.2\" transform=\"rotate(-9 13.2 7.4)\"/><ellipse cx=\"21\" cy=\"7.4\" rx=\"3.5\" ry=\"5.2\" transform=\"rotate(9 21 7.4)\"/><ellipse cx=\"27\" cy=\"12.3\" rx=\"3.4\" ry=\"5\" transform=\"rotate(28 27 12.3)\"/><path d=\"M6.5 23.1C6.5 19.4 10.3 17.1 12.6 14.2Q17.1 9.3 21.4 14.2C23.9 17.1 27 19.5 27 23.1C27 29.5 21.1 30 17 27.6C12.5 30 6.5 29.5 6.5 23.1Z\"/></svg>";document.querySelectorAll('a.btn,a.textlink,a.hero-secondary,a.course').forEach(link=>{link.querySelectorAll('span').forEach(s=>{if(!['↗','→'].includes(s.textContent.trim())||s.children.length)return;s.classList.add('link-paw');s.setAttribute('aria-hidden','true');s.innerHTML=paw})})})();
+
+/* V28: compact course return link follows a mobile reader only while needed. */
+(()=>{
+ const top=document.querySelector('.pagelead .course-back'),bottom=document.querySelector('.course-return .course-back');
+ if(!top||!bottom)return;
+ const link=top.cloneNode(true);link.className='mobile-course-return';link.textContent='';link.append(top.querySelector('svg').cloneNode(true),document.createTextNode('Alle Kurse'));
+ link.setAttribute('aria-label','Zurück zu allen Kursen');link.hidden=true;document.body.append(link);
+ const mobile=matchMedia('(max-width:760px)');let pending=false;
+ function sync(){pending=false;
+  const a=top.getBoundingClientRect(),b=bottom.getBoundingClientRect(),header=document.querySelector('header')?.getBoundingClientRect().bottom||0;
+  const visible=mobile.matches&&a.bottom<header+3&&b.top>innerHeight-55&&!document.querySelector('#nav.open');
+  link.hidden=!visible;
+ }
+ function schedule(){if(!pending){pending=true;requestAnimationFrame(sync)}}
+ window.addEventListener('scroll',schedule,{passive:true});window.addEventListener('resize',schedule,{passive:true});mobile.addEventListener?.('change',schedule);
+ document.querySelector('.menu')?.addEventListener('click',schedule);
+ if('MutationObserver'in window){const nav=document.querySelector('#nav');if(nav)new MutationObserver(schedule).observe(nav,{attributes:true,attributeFilter:['class']})}
+ sync();
+})();
