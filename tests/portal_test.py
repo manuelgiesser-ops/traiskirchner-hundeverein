@@ -5,7 +5,7 @@ with tempfile.TemporaryDirectory() as temp:
     base=pathlib.Path(temp)
     web=base/'public_html';web.mkdir()
     private=base/'thv-private';private.mkdir(mode=0o700)
-    for name in ['verein-core.php','vereinsbereich.php','vereinsdaten.php','vereinsartikel.php']:
+    for name in ['verein-core.php','vereinsbereich.php','vereinsdaten.php','vereinsartikel.php','studio-media-lib.php','studio-api.php','studio-manifest.json','website-studio.php','vereins-backup.php']:
         shutil.copy(root/name,web/name)
     key=secrets.token_hex(24);adminpw=secrets.token_hex(16);newpw=secrets.token_hex(16)
     (private/'setup.key').write_text(key)
@@ -66,6 +66,12 @@ with tempfile.TemporaryDirectory() as temp:
         assert 'Berechtigung' in member.post('request-status',id=qid,status='confirmed')[1]
         assert 'Anfrage aktualisiert' in admin.post('request-status',id=qid,status='confirmed')[1]
         assert 'Bestätigt' in member.req('/vereinsbereich.php?tab=anfragen')[1]
+        # Studio permission and published-versus-draft checks.
+        assert anon.req('/studio-api.php')[0]==403
+        assert member.req('/studio-api.php')[0]==403
+        ss=json.loads(admin.req('/studio-api.php')[1]);assert len(ss['manifest'])==16
+        assert admin.req('/website-studio.php')[0]==200
+        assert admin.req('/vereins-backup.php')[0]==200
         assert 'Test Member' not in anon.req('/vereinsdaten.php')[1]
         assert 'Passwort' not in anon.req('/vereinsdaten.php')[1]
         print('PASS: setup, login, password change, public/draft/internal content, roles, private storage, course request.')

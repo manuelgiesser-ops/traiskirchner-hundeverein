@@ -8,6 +8,10 @@ on:
       - 'vereinsbereich.php'
       - 'vereinsdaten.php'
       - 'vereinsartikel.php'
+      - 'studio-*.php'
+      - 'website-*.php'
+      - 'vereins-backup.php'
+      - 'studio-manifest.json'
       - 'tests/portal_test.py'
       - '.github/workflows/thv-portal-test.yml'
 permissions:
@@ -20,9 +24,6 @@ jobs:
       - uses: actions/checkout@v4
       - name: PHP syntax
         run: |
-          php -l verein-core.php
-          php -l vereinsbereich.php
-          php -l vereinsdaten.php
-          php -l vereinsartikel.php
+          for file in *.php; do php -l "$file" || exit 1; done
       - name: Isolated access and publishing tests
         run: python3 tests/portal_test.py
