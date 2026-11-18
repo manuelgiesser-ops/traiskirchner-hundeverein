@@ -193,3 +193,6 @@ const thvPhotoData=Promise.resolve({"faces":{"sari":{"x":0.39743,"y":0.59646,"wi
   });
  });
 })();
+
+/* Friendly paw marks on navigation and action links, not functional direction controls. */
+(()=>{const paw="<svg viewBox=\"0 0 32 32\" aria-hidden=\"true\" focusable=\"false\" fill=\"currentColor\"><ellipse cx=\"7.1\" cy=\"12.3\" rx=\"3.4\" ry=\"5\" transform=\"rotate(-28 7.1 12.3)\"/><ellipse cx=\"13.2\" cy=\"7.4\" rx=\"3.5\" ry=\"5.2\" transform=\"rotate(-9 13.2 7.4)\"/><ellipse cx=\"21\" cy=\"7.4\" rx=\"3.5\" ry=\"5.2\" transform=\"rotate(9 21 7.4)\"/><ellipse cx=\"27\" cy=\"12.3\" rx=\"3.4\" ry=\"5\" transform=\"rotate(28 27 12.3)\"/><path d=\"M6.5 23.1C6.5 19.4 10.3 17.1 12.6 14.2Q17.1 9.3 21.4 14.2C23.9 17.1 27 19.5 27 23.1C27 29.5 21.1 30 17 27.6C12.5 30 6.5 29.5 6.5 23.1Z\"/></svg>";document.querySelectorAll('a.btn,a.textlink,a.hero-secondary,a.course').forEach(link=>{link.querySelectorAll('span').forEach(s=>{if(!['↗','→'].includes(s.textContent.trim())||s.children.length)return;s.classList.add('link-paw');s.setAttribute('aria-hidden','true');s.innerHTML=paw})})})();

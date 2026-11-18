@@ -858,3 +858,36 @@ footer .brand img[data-asset="logo"]{height:62px;width:49px;padding:0;background
 .thv-motion .bond-journey-new .journey-outline{transition:stroke-dashoffset 2.35s .1s ease-out}
 .thv-motion .bond-journey-new .journey-fill{transition:opacity 1.55s .95s ease}
 @media(max-width:760px){.navwrap .brand .thv-original-logo,header.scrolled .navwrap .brand .thv-original-logo{height:48px;width:38px}.bond-story.bond-unified .bond-journey-new{max-width:420px;aspect-ratio:254/150;margin:3px auto 0}.bond-journey-new .journey-companions{inset:0;height:100%;width:100%;max-width:none}}
+
+/* V22: original club colours, quieter header and smoother gold vector ornament. */
+.navwrap .brand .thv-original-logo,header.scrolled .navwrap .brand .thv-original-logo{width:61px;height:61px;filter:none;border-radius:7px;background:transparent;padding:0;object-fit:contain}
+footer .brand img[data-asset="logo"]{width:60px;height:60px;filter:none;border-radius:7px;background:transparent;padding:0}
+.hero-character .hero-terrain,.hero-character .hero-leash,.hero-character .hero-orbit{display:none!important}
+.hero-character .hero-horizon{opacity:.075;pointer-events:none}
+.hero-character .hero-horizon .horizon-accent{opacity:.35;animation:none!important;stroke-dashoffset:0}
+.hero-character .hero-action-arc{opacity:.13}
+.hero-character .hero-action-line{stroke-width:.9}
+.hero-character .hero-botanical{opacity:.36}
+.hero-character .hero-dust{opacity:.40}
+.hero-character .hero-meadow{opacity:.065}
+.bond-story.bond-unified .bond-journey-smooth{width:100%;max-width:1040px;aspect-ratio:1000/325;margin:0 auto;background:radial-gradient(ellipse at 50% 52%,#d9b7770c,transparent 67%);overflow:visible}
+.bond-journey-smooth .journey-companions{position:absolute;left:50%;top:0;bottom:auto;width:57%;height:100%;max-width:none;transform:translateX(-50%);overflow:visible;z-index:2}
+.journey-ribbons{position:absolute;inset:0;width:100%;height:100%;overflow:visible;z-index:1}
+.bond-journey-smooth .journey-outline{opacity:.7}
+.thv-motion .bond-journey-smooth .journey-thread{transition:stroke-dashoffset 2.5s cubic-bezier(.28,.04,.27,1)}
+.thv-motion .bond-journey-smooth .journey-thread-right{transition-delay:.2s}
+.thv-motion .bond-journey-smooth .journey-thread-fine{transition-delay:.38s}
+.thv-motion .bond-journey-smooth .journey-outline{transition:stroke-dashoffset 2.1s calc(.45s + var(--trace-delay,0s)) cubic-bezier(.25,.05,.25,1),opacity .9s 2.45s ease}
+.thv-motion .bond-journey-smooth.thv-ornament-seen .journey-outline{opacity:.18}
+.thv-motion .bond-journey-smooth .journey-fill{transition:opacity 1.55s 1.3s ease}
+.link-paw{display:inline-grid!important;place-items:center;flex:0 0 auto;width:19px;height:19px;padding:0;line-height:1;transform-origin:50% 65%;vertical-align:middle}
+.link-paw svg{display:block;width:100%;height:100%;overflow:visible}
+.btn .link-paw,.textlink .link-paw,.hero-secondary .link-paw{margin-left:6px}
+.course-modern .course-action .link-paw{width:19px;height:19px;margin:0}
+.course .arrow.link-paw{width:20px;height:20px}
+@media(hover:hover) and (pointer:fine){a:hover .link-paw{animation:thvHappyPaw .65s cubic-bezier(.3,.65,.25,1) both}}
+a:focus-visible .link-paw{animation:thvHappyPaw .65s ease both}
+@keyframes thvHappyPaw{0%{scale:1;rotate:0deg;translate:0 0}28%{scale:1.17;rotate:-17deg;translate:1px -2px}60%{scale:1.09;rotate:13deg;translate:2px -1px}100%{scale:1;rotate:0deg;translate:0 0}}
+@media(max-width:760px){.navwrap .brand .thv-original-logo,header.scrolled .navwrap .brand .thv-original-logo{width:48px;height:48px;border-radius:6px}.bond-story.bond-unified .bond-journey-smooth{max-width:440px;aspect-ratio:600/345}.bond-journey-smooth .journey-companions{width:100%;height:93%;top:0}.journey-ribbons{width:110%;left:-5%;top:0}.hero-character .hero-horizon{opacity:.05}.hero-character .hero-action-arc{opacity:.08}.course-modern .course-action .link-paw{width:15px;height:15px}}
+.paused .link-paw{animation:none!important}
+@media(prefers-reduced-motion:reduce){.link-paw{animation:none!important}.bond-journey-smooth .journey-outline{opacity:.18!important}}
