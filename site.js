@@ -49,7 +49,7 @@ if('IntersectionObserver' in window){const observer=new IntersectionObserver(es=
  if(home){ornament(document.querySelector('.editorial-intro'),'flowers','nature-left');ornament(document.querySelector('.course-editorial'),'hurdle','nature-left');ornament(document.querySelector('.field-editorial'),'flowers','nature-right');ornament(document.querySelector('.final-contact'),'flowers','nature-left')}else{const name=location.pathname.split('/').pop();const sections=[...document.querySelectorAll('main>.section')];const last=sections.at(-1);if(['agility.html','hoopers.html','training.html'].includes(name))ornament(last,name==='hoopers.html'?'slalom':'hurdle','nature-left');else if(['verein.html','welpen.html','social-walk.html','kontakt.html','team.html'].includes(name))ornament(last,'flowers','nature-left')}
  const heroWorld=document.querySelector('.hero-world');if(heroWorld){const svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox','0 0 260 190');svg.setAttribute('aria-hidden','true');svg.setAttribute('class','hero-botanical');svg.innerHTML=natureArt;heroWorld.append(svg)}
  // The old silhouette illustrations are intentionally retired.
- document.querySelectorAll('header .brand img[data-asset="logo"]').forEach(img=>{const mark=document.createElement('span');mark.className='mark thv-wordmark';mark.setAttribute('aria-hidden','true');mark.innerHTML='THV<span>●</span>';img.replaceWith(mark)});
+ // Keep the original THV club emblem, including the dog.
 
  // Vary photo openings by context rather than replaying one identical paw path.
  const trails={
