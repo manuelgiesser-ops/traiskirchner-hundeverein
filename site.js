@@ -50,7 +50,7 @@ if('IntersectionObserver' in window){const observer=new IntersectionObserver(es=
  const heroWorld=document.querySelector('.hero-world');if(heroWorld){const svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox','0 0 260 190');svg.setAttribute('aria-hidden','true');svg.setAttribute('class','hero-botanical');svg.innerHTML=natureArt;heroWorld.append(svg)}
  // The old silhouette illustrations are intentionally retired.
  document.querySelectorAll('header .brand img[data-asset="logo"]').forEach(img=>{const mark=document.createElement('span');mark.className='mark thv-wordmark';mark.setAttribute('aria-hidden','true');mark.innerHTML='THV<span>●</span>';img.replaceWith(mark)});
- const frames=[...document.querySelectorAll('.media-frame')];frames.forEach(f=>{f.classList.add('thv-media');if(f.closest('.gallery-item'))return;f.classList.add('paw-reveal');const svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox','0 0 240 140');svg.setAttribute('preserveAspectRatio','xMidYMid slice');svg.setAttribute('aria-hidden','true');svg.setAttribute('focusable','false');svg.setAttribute('class','thv-film-paws');svg.innerHTML=[[84,87,-24],[119,70,12],[155,52,-18]].map(([x,y,r])=>'<g transform="translate('+x+' '+y+') rotate('+r+') scale(.36) translate(-55 -50)"><g class="dog-paw">'+paw+'</g></g>').join('');f.append(svg)});
+ const frames=[...document.querySelectorAll('.media-frame')];frames.forEach(f=>{f.classList.add('thv-media');if(f.closest('.gallery-item'))return;f.classList.add('paw-reveal');const svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox','0 0 240 140');svg.setAttribute('preserveAspectRatio','xMidYMid slice');svg.setAttribute('aria-hidden','true');svg.setAttribute('focusable','false');svg.setAttribute('class','thv-film-paws');svg.innerHTML=[[24,109,-22],[70,92,12],[117,74,-19],[164,56,14],[211,38,-20]].map(([x,y,r],i)=>'<g transform="translate('+x+' '+y+') rotate('+r+') scale(.34) translate(-55 -50)"><g class="dog-paw" style="--paw-delay:'+i*380+'ms">'+paw+'</g></g>').join('');f.append(svg)});
  const seal=document.querySelector('.thv-bond-seal'),nodes=[...document.querySelectorAll('.thv-corner'),...frames,...(seal?[seal]:[])];
  const show=e=>e.classList.add(e.classList.contains('thv-media')?'thv-media-seen':'thv-ornament-seen');
  if(!reduced.matches&&'IntersectionObserver'in window){root.classList.add('thv-motion');const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){show(e.target);obs.unobserve(e.target)}}),{threshold:.06,rootMargin:'0px 0px -3% 0px'});nodes.forEach(n=>obs.observe(n))}else nodes.forEach(show);
@@ -108,13 +108,16 @@ const thvPhotoData=Promise.resolve({"faces":{"sari":{"x":0.39743,"y":0.59646,"wi
  image.setAttribute('draggable','false');toggle.insertAdjacentHTML('afterend','<small class="portrait-help">Vergrößertes Foto verschieben, um den Ausschnitt anzupassen.</small>');
 })();
 
-/* Header mask follows the actual photograph, not its surrounding box. */
+/* Header depth: only activate when both aligned photo layers have loaded. */
 (()=>{
- const img=document.querySelector('.hero-subject img');if(!img)return;
- function sizeMask(){const w=img.clientWidth,h=img.clientHeight;if(!w||!h||!img.naturalWidth||!img.naturalHeight)return;const fit=Math.min(w/img.naturalWidth,h/img.naturalHeight);img.style.setProperty('--hero-mask-w',img.naturalWidth*fit+'px');img.style.setProperty('--hero-mask-h',img.naturalHeight*fit+'px')}
+ const hero=document.querySelector('.hero-subject');const img=hero?.querySelector('img[data-asset="jump"]');if(!img)return;
+ function sizeMask(){const w=img.clientWidth,h=img.clientHeight;if(!w||!h||!img.naturalWidth||!img.naturalHeight)return;const fit=Math.min(w/img.naturalWidth,h/img.naturalHeight);const maskW=img.naturalWidth*fit+'px',maskH=img.naturalHeight*fit+'px';for(const node of [img,hero]){node.style.setProperty('--hero-mask-w',maskW);node.style.setProperty('--hero-mask-h',maskH)}}
  img.addEventListener('load',sizeMask);sizeMask();if('ResizeObserver'in window)new ResizeObserver(sizeMask).observe(img);else window.addEventListener('resize',sizeMask,{passive:true});
+ const layer=document.createElement('div');layer.className='hero-depth';layer.setAttribute('aria-hidden','true');
+ const background=new Image(),dog=new Image();background.alt='';dog.alt='';background.className='hero-depth-background';dog.className='hero-depth-dog';
+ let loaded=0;const ready=()=>{if(++loaded!==2)return;if(background.naturalWidth!==dog.naturalWidth||background.naturalHeight!==dog.naturalHeight)return;layer.append(background,dog);hero.append(layer);sizeMask();requestAnimationFrame(()=>hero.classList.add('has-hero-depth'))};
+ background.onload=ready;dog.onload=ready;background.src='generated-media/hero-depth-background.webp?v=16';dog.src='generated-media/hero-depth-dog.webp?v=16';
 })();
-
 /* Group photograph: locally anchored zoom, pinch, drag and a precision lens. */
 (()=>{
  const photos=[...document.querySelectorAll('img[data-asset="team"]')];if(!photos.length)return;

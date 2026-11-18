@@ -657,3 +657,25 @@ header.scrolled .brand img{width:52px;height:52px}
 @media(max-width:760px){.hero-character.hero-editorial{gap:8px;padding-bottom:53px}.hero-character .hero-copy h1{font-size:clamp(2.85rem,11.1vw,5rem)}.hero-highlights{font-size:11px;margin-bottom:17px;gap:6px 9px}.hero-botanical{width:clamp(100px,32vw,185px);bottom:42%;right:-1%;opacity:.26;animation:none}.thv-corner.thv-nature{width:110px;opacity:.17}.thv-corner.thv-nature.nature-left{left:-8px}.thv-corner.thv-nature.nature-right{right:-8px}.course-editorial .thv-nature.nature-hurdle{width:135px;opacity:.18}.field-editorial .thv-nature,.final-contact .thv-corner.thv-nature{width:140px;opacity:.18}}
 @media(prefers-reduced-motion:reduce){.thv-motion .media-frame.paw-reveal>img{opacity:1!important;transition:none!important}.thv-motion .paw-reveal .thv-film-paws{display:none!important}.hero-botanical,.thv-motion .thv-nature{animation:none!important;transition:none!important;translate:none!important}}
 .paused .hero-botanical{animation:none!important}
+
+/* Five paw prints walk calmly across the photographic surface without a sliding shutter. */
+.thv-motion .media-frame.thv-media.paw-reveal.thv-media-seen>img{opacity:1;transition-delay:.18s!important;transition-duration:1.7s!important}
+.thv-motion .media-frame.thv-media.paw-reveal.thv-media-seen .thv-film-paws{background:none;animation:thvWalkingOverlay 3.55s linear both;transition:none!important;color:#f3dcb5;filter:drop-shadow(0 1px 3px #27372780)}
+.thv-motion .media-frame.thv-media.paw-reveal.thv-media-seen .thv-film-paws .dog-paw{opacity:0;animation:thvQuietStep 1.8s var(--paw-delay,0ms) ease-in-out both!important}
+@keyframes thvWalkingOverlay{0%,99%{opacity:1;visibility:visible}100%{opacity:0;visibility:hidden}}
+@keyframes thvQuietStep{0%{opacity:0}27%{opacity:.87}58%{opacity:.72}100%{opacity:0}}
+.thv-motion .paw-reveal.thv-media-seen .group-photo-open{animation:groupButtonIn .55s 1.85s both}
+/* A depth-separated original photo. Keep the natural photo perimeter, not a detached dog cutout. */
+.hero-character.hero-editorial .hero-subject .hero-depth{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;overflow:hidden;mask-image:radial-gradient(ellipse 55% 53% at 50% 49%,#000 64%,#000 74%,#000c 86%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 55% 53% at 50% 49%,#000 64%,#000 74%,#000c 86%,transparent 100%);mask-size:var(--hero-mask-w,100%) var(--hero-mask-h,100%);-webkit-mask-size:var(--hero-mask-w,100%) var(--hero-mask-h,100%);mask-position:center;-webkit-mask-position:center;mask-repeat:no-repeat;-webkit-mask-repeat:no-repeat;transition:opacity .5s;isolation:isolate}
+.hero-character.hero-editorial .hero-subject.has-hero-depth .hero-depth{opacity:1}
+.hero-character.hero-editorial .hero-subject.has-hero-depth>img[data-asset="jump"]{opacity:0;transition:opacity .5s}
+.hero-character.hero-editorial .hero-subject .hero-depth img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;mask-image:none!important;-webkit-mask-image:none!important;mask-size:auto;-webkit-mask-size:auto;filter:none;background:transparent;animation:none;transform:none;scale:1}
+.hero-character.hero-editorial .hero-subject .hero-depth .hero-depth-background{z-index:1}
+.hero-character.hero-editorial .hero-subject .hero-depth .hero-depth-dog{z-index:2;filter:saturate(1.02) contrast(1.025);transform-origin:50% 50%}
+.hero-character.hero-editorial .hero-subject.has-hero-depth .hero-depth-dog{animation:thvJumpArrival 3.3s cubic-bezier(.22,.61,.36,1) both}
+@keyframes thvJumpArrival{0%{transform:translate3d(-7px,5px,0) rotate(-.45deg) scale(.992)}45%{transform:translate3d(2px,-7px,0) rotate(.17deg) scale(1.005)}100%{transform:none}}
+.hero-character .hero-action-arc{opacity:.34}
+.hero-character .hero-dust{opacity:.40}
+.hero-character.hero-offscreen .hero-depth-dog{animation-play-state:paused!important}
+.paused .hero-character.hero-editorial .hero-subject.has-hero-depth .hero-depth-dog{animation:none!important;transform:none!important}
+@media(prefers-reduced-motion:reduce){.hero-character.hero-editorial .hero-subject.has-hero-depth .hero-depth-dog{animation:none!important;transform:none!important}.thv-motion .media-frame.paw-reveal>img{opacity:1!important;transition:none!important}.thv-motion .paw-reveal .thv-film-paws{display:none!important}}
