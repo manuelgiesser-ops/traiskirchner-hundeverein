@@ -25,6 +25,11 @@ with tempfile.TemporaryDirectory() as temp:
             conn.close()
             if status==303 and loc:return self.req('/'+loc.lstrip('/'))
             return status,body
+        def studio(self,payload):
+            conn=http.client.HTTPConnection('127.0.0.1',18764,timeout=10)
+            conn.request('POST','/studio-api.php',json.dumps(payload),{'Cookie':self.cookie,'Content-Type':'application/json'})
+            res=conn.getresponse();status=res.status;body=json.loads(res.read());conn.close()
+            return status,body
         def csrf(self):
             status,body=self.req();assert status==200
             found=re.search(r'name="csrf" value="([a-f0-9]+)"',body);assert found,'No CSRF'
@@ -72,6 +77,26 @@ with tempfile.TemporaryDirectory() as temp:
         ss=json.loads(admin.req('/studio-api.php')[1]);assert len(ss['manifest'])==16
         assert admin.req('/website-studio.php')[0]==200
         assert admin.req('/vereins-backup.php')[0]==200
+        key=next(k for k,v in ss['manifest']['index.html']['fields'].items() if v['kind']=='text')
+        patch={'index.html':{'fields':{key:'Vorläufiger Testtext'},'hidden':[],'order':[]}}
+        status,answer=admin.studio({'action':'save','csrf':ss['csrf'],'revision':ss['revision'],'draft':patch})
+        assert status==200,answer
+        assert json.loads(anon.req('/studio-api.php?mode=public&page=index.html')[1])['patch'] is None
+        status,answer=admin.studio({'action':'publish','csrf':ss['csrf'],'revision':answer['revision'],'draft':patch})
+        assert status==200,answer
+        public=json.loads(anon.req('/studio-api.php?mode=public&page=index.html')[1])
+        assert public['patch']['fields'][key]=='Vorläufiger Testtext'
+        assert 'history' not in public
+        v=answer['history'][-1]['id']
+        status,answer=admin.studio({'action':'restore','csrf':ss['csrf'],'revision':answer['revision'],'id':v})
+        assert status==200,answer
+        assert not answer['draft']
+        assert json.loads(anon.req('/studio-api.php?mode=public&page=index.html')[1])['patch']['fields'][key]=='Vorläufiger Testtext'
+        status,answer=admin.studio({'action':'publish','csrf':ss['csrf'],'revision':answer['revision'],'draft':{}})
+        assert status==200,answer
+        assert json.loads(anon.req('/studio-api.php?mode=public&page=index.html')[1])['patch'] is None
+        status,answer=member.studio({'action':'save','csrf':member.csrf(),'revision':0,'draft':patch})
+        assert status==403
         assert 'Test Member' not in anon.req('/vereinsdaten.php')[1]
         assert 'Passwort' not in anon.req('/vereinsdaten.php')[1]
         print('PASS: setup, login, password change, public/draft/internal content, roles, private storage, course request.')

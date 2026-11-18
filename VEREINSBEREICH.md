@@ -20,3 +20,5 @@ Redaktion und Verwaltung öffnen das Studio über die Übersicht. 16 öffentlich
 Verwaltung: Datensicherung herunterladen (PHP ZIP erforderlich). Bewahre die ZIP streng vertraulich und verschlüsselt auf. Auf dem neuen Hosting dieselbe Website-Version bereitstellen, privaten Ordner einrichten, vorläufigen Administrator anlegen, danach ZIP wiederherstellen. Anschließend mit einem Konto aus der Sicherung anmelden. Die Website-Dateien selbst werden aus GitHub bezogen. Alternativ den ganzen Ordner thv-private (inkl. media/) außerhalb public_html kopieren, Dateirechte prüfen. Bei Upload-Limits größere Sicherungen über den Dateimanager übertragen. Es werden keine echten Daten im Repository gespeichert.
 
 Trainerteam: vorhandene Trainerkarten umsortieren, ausblenden und wieder anzeigen; neue Karten mit Bild, Name und Trainingsbereichen ergänzen. Neue Karten nutzen das Standardlayout, ohne den handvermessenen Fokuspunkt der ursprünglichen Porträts.
+
+Der Mitgliederbereich zeigt kommende datierte Beiträge und Kurse im Vereinskalender. Vergangene Termine erscheinen weiterhin in den Nachrichten und Kursangeboten.
