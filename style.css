@@ -619,7 +619,7 @@ header.scrolled .brand img{width:52px;height:52px}
 .thv-motion .media-frame.thv-media.paw-reveal.thv-media-seen>img{opacity:1;transition-delay:.9s!important}
 .thv-motion .paw-reveal .thv-film-paws{color:#a07e58;opacity:0;transition:none!important;background:radial-gradient(ellipse at center,#f1e7d5a8,transparent 67%)}
 .thv-motion .paw-reveal:not(.thv-media-seen) .thv-film-paws{opacity:0}
-.thv-motion .paw-reveal.thv-media-seen .thv-film-paws{opacity:1!important;animation:thvQuietTrail 2.45s ease both}
+.thv-motion .media-frame.thv-media.paw-reveal.thv-media-seen .thv-film-paws{opacity:0;transition:none!important;animation:thvQuietTrail 2.45s ease both}
 .thv-motion .paw-reveal.thv-media-seen .thv-film-paws .dog-paw{opacity:.86;animation:none!important}
 @keyframes thvQuietTrail{0%{opacity:0;visibility:visible}29%{opacity:1}42%{opacity:1}92%{opacity:0}100%{opacity:0;visibility:hidden}}
 .thv-motion .paw-reveal.thv-media-seen .group-photo-open{animation:groupButtonIn .55s 2.3s both}
