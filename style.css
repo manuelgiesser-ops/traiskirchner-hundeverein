@@ -891,3 +891,20 @@ a:focus-visible .link-paw{animation:thvHappyPaw .65s ease both}
 @media(max-width:760px){.navwrap .brand .thv-original-logo,header.scrolled .navwrap .brand .thv-original-logo{width:48px;height:48px;border-radius:6px}.bond-story.bond-unified .bond-journey-smooth{max-width:440px;aspect-ratio:600/345}.bond-journey-smooth .journey-companions{width:100%;height:93%;top:0}.journey-ribbons{width:110%;left:-5%;top:0}.hero-character .hero-horizon{opacity:.05}.hero-character .hero-action-arc{opacity:.08}.course-modern .course-action .link-paw{width:15px;height:15px}}
 .paused .link-paw{animation:none!important}
 @media(prefers-reduced-motion:reduce){.link-paw{animation:none!important}.bond-journey-smooth .journey-outline{opacity:.18!important}}
+
+/* V23: unique colour logo asset with independent CSS fallback. */
+header .navwrap .brand img.thv-original-logo,header.scrolled .navwrap .brand img.thv-original-logo,footer .brand img[data-asset="logo"]{width:61px;height:61px;object-fit:contain;padding:0;border:0;border-radius:7px;background:linear-gradient(155deg,#ff1600 0%,#ff6900 40%,#ffac17 100%)!important;filter:none!important;mix-blend-mode:normal!important;opacity:1!important;box-shadow:none}
+@media(max-width:760px){header .navwrap .brand img.thv-original-logo,header.scrolled .navwrap .brand img.thv-original-logo{width:48px;height:48px;border-radius:6px}}
+/* Two fine open arcs. They remain behind the dog, never over its face. */
+.hero-character.hero-editorial .hero-subject .thv-hero-rings{position:absolute;left:50%;top:50%;width:84%;height:auto;max-height:100%;transform:translate(-50%,-50%);z-index:-1;pointer-events:none;opacity:.65;overflow:visible}
+.thv-hero-rings .thv-ring-a,.thv-hero-rings .thv-ring-b{stroke-dasharray:1;animation:thvRingArrival 3.8s .42s ease-out both}
+.thv-hero-rings .thv-ring-b{animation-delay:1s}
+@keyframes thvRingArrival{from{stroke-dashoffset:1;opacity:0}to{stroke-dashoffset:0;opacity:1}}
+.bond-journey-smooth .thv-bond-rings{position:absolute;left:50%;top:0;width:56%;height:100%;transform:translateX(-50%);z-index:0;opacity:.62;pointer-events:none;overflow:visible}
+.thv-bond-rings path{stroke-dasharray:1;stroke-dashoffset:0}
+.thv-motion .bond-journey-smooth:not(.thv-ornament-seen) .thv-bond-rings path{stroke-dashoffset:1;opacity:0}
+.thv-motion .bond-journey-smooth .thv-bond-rings path{transition:stroke-dashoffset 3.2s .15s ease-out,opacity 1.6s .15s ease}
+.thv-motion .bond-journey-smooth .thv-bond-rings .thv-ring-b{transition-delay:.65s}
+@media(max-width:760px){.hero-character.hero-editorial .hero-subject .thv-hero-rings{width:86%;opacity:.5}.bond-journey-smooth .thv-bond-rings{width:94%;height:93%;opacity:.52}}
+.paused .thv-hero-rings path,.paused .thv-bond-rings path{animation:none!important;transition:none!important;stroke-dashoffset:0!important;opacity:1!important}
+@media(prefers-reduced-motion:reduce){.thv-hero-rings path,.thv-bond-rings path{animation:none!important;transition:none!important;stroke-dashoffset:0!important;opacity:1!important}}
