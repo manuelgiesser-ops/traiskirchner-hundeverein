@@ -937,3 +937,21 @@ header .navwrap .brand img.thv-original-logo,header.scrolled .navwrap .brand img
 .thv-bond-rings{display:none!important}
 .portrait-dialog .portrait-zoom-toggle,.portrait-dialog .portrait-help{display:none!important}
 @media(max-width:760px){.course-directory.course-modern .course-group-heading>svg.course-category-icon{width:49px;height:49px;padding:9px;border-radius:16px}}
+
+/* V27: clear navigation between a course and the course selection. */
+#kurse{scroll-margin-top:24px}
+.home-team-actions{display:flex;align-items:center;flex-wrap:wrap;gap:14px 22px;margin-top:24px}
+.home-team-actions .textlink{margin:0}.home-team-actions .btn{margin:0;max-width:100%;white-space:normal}
+.course-back{display:inline-flex;align-items:center;gap:10px}
+.pagelead .crumb.course-back{font-size:14px;letter-spacing:0;line-height:1.45;color:#eedbbd;text-decoration:none;transition:color .25s}
+.pagelead .crumb.course-back:hover{color:#fff}
+.course-back svg{flex:none;transition:transform .25s ease}
+.course-back:hover svg{transform:translateX(-3px)}
+.section.course-return{background:#f0eee5}
+.section.course-return{padding:clamp(26px,5vw,64px) 0}
+.course-return-inner{display:flex;justify-content:space-between;align-items:center;gap:24px}
+.course-return-inner h2{font-size:clamp(1.8rem,3.8vw,3rem);line-height:1.1;margin:0 0 10px}
+.course-return-inner p{margin:0;color:#5f6a5b}
+.course-return-inner .btn{flex:none;margin:0;white-space:normal}
+@media(max-width:760px){#kurse{scroll-margin-top:0}.home-team-actions,.course-return-inner{align-items:flex-start;flex-direction:column;gap:16px}.course-return-inner .btn{max-width:100%}}
+@media(prefers-reduced-motion:reduce){.course-back svg{transition:none}}
