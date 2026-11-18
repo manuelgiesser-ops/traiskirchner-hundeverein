@@ -848,3 +848,13 @@ header.scrolled .brand img{width:52px;height:52px}
 .gallery .gallery-item .media-frame:hover img{filter:brightness(1.04)}
 @media(max-width:900px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}}
 @media(max-width:760px){.navwrap .brand .thv-original-logo,header.scrolled .navwrap .brand .thv-original-logo{width:47px;height:47px;padding:2px;border-radius:6px}.gallery .gallery-item>.media-frame,.gallery .gallery-item>img{border-radius:8px}.gallery .gallery-item>span:not(.media-frame){font-size:12px;padding:8px 1px 2px}}
+
+/* V21: true THV mark traced directly from the supplied original, without a white rectangle. */
+.navwrap .brand .thv-original-logo,header.scrolled .navwrap .brand .thv-original-logo{height:64px;width:51px;padding:0;background:none;border:0;border-radius:0;box-shadow:none;object-fit:contain;filter:invert(1);flex:none}
+footer .brand img[data-asset="logo"]{height:62px;width:49px;padding:0;background:none;border:0;border-radius:0;box-shadow:none;object-fit:contain;filter:invert(1)}
+.bond-story.bond-unified .bond-journey-new{max-width:660px;aspect-ratio:254/150;margin:0 auto;overflow:visible;background:radial-gradient(ellipse at 50% 54%,#d9b7770d,transparent 69%)}
+.bond-journey-new .journey-companions{inset:0;width:100%;height:100%;max-width:none;transform:none;overflow:visible}
+.bond-journey-new .journey-outline{opacity:.5}
+.thv-motion .bond-journey-new .journey-outline{transition:stroke-dashoffset 2.35s .1s ease-out}
+.thv-motion .bond-journey-new .journey-fill{transition:opacity 1.55s .95s ease}
+@media(max-width:760px){.navwrap .brand .thv-original-logo,header.scrolled .navwrap .brand .thv-original-logo{height:48px;width:38px}.bond-story.bond-unified .bond-journey-new{max-width:420px;aspect-ratio:254/150;margin:3px auto 0}.bond-journey-new .journey-companions{inset:0;height:100%;width:100%;max-width:none}}
