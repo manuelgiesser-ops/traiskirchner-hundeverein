@@ -926,3 +926,14 @@ header .navwrap .brand img.thv-original-logo,header.scrolled .navwrap .brand img
 .bond-unified .bond-photo-feathered .media-frame>img,.bond-unified .bond-photo-feathered>img{mask-image:linear-gradient(to right,transparent,#000 12%,#000 88%,transparent),linear-gradient(to bottom,transparent,#000 13%,#000 87%,transparent),radial-gradient(ellipse 69% 69% at center,#000 68%,#000a 84%,transparent 100%);mask-composite:intersect;mask-repeat:no-repeat;mask-size:100% 100%}
 }
 @media(max-width:760px){.bond-unified .bond-photo-feathered .media-frame{margin:0 -7px}.bond-unified .bond-photo-feathered img{max-height:400px}}
+
+/* V26: friendly purpose-drawn dog symbols; keep the picture grid open and airy. */
+.course-directory.course-modern .course-group-heading>svg.course-category-icon{box-sizing:border-box;flex:0 0 auto;width:64px;height:64px;padding:13px;border-radius:21px;color:#476449;background:var(--course-icon-bg,#dbe4d4);border:1px solid #62776311;overflow:visible}
+.course-modern .group-einstieg{--course-icon-bg:#dce6d7}
+.course-modern .group-unterordnung{--course-icon-bg:#e9e1d4}
+.course-modern .group-aktiv{--course-icon-bg:#d9e4d5}
+.course-directory.course-modern .group-unterordnung .course-group-heading>svg.course-category-icon{color:#94724e}
+.course-directory.course-modern .group-aktiv .course-group-heading>svg.course-category-icon{color:#4b6a4c}
+.thv-bond-rings{display:none!important}
+.portrait-dialog .portrait-zoom-toggle,.portrait-dialog .portrait-help{display:none!important}
+@media(max-width:760px){.course-directory.course-modern .course-group-heading>svg.course-category-icon{width:49px;height:49px;padding:9px;border-radius:16px}}
