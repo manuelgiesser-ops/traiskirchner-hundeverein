@@ -1466,7 +1466,69 @@
         "default": "Vorstand laut veröffentlichter Vereinsliste. Änderungen bitte direkt beim Verein erfragen."
       }
     },
-    "sections": {}
+    "sections": {},
+    "trainers": {
+      "sari": {
+        "nameKey": "f005",
+        "roleKey": "f006",
+        "name": "Sari"
+      },
+      "michi": {
+        "nameKey": "f007",
+        "roleKey": "f008",
+        "name": "Michi"
+      },
+      "harald": {
+        "nameKey": "f009",
+        "roleKey": "f010",
+        "name": "Harald"
+      },
+      "karo": {
+        "nameKey": "f011",
+        "roleKey": "f012",
+        "name": "Karo"
+      },
+      "otto": {
+        "nameKey": "f013",
+        "roleKey": "f014",
+        "name": "Otto"
+      },
+      "mary": {
+        "nameKey": "f015",
+        "roleKey": "f016",
+        "name": "Mary"
+      },
+      "susi": {
+        "nameKey": "f017",
+        "roleKey": "f018",
+        "name": "Susi"
+      },
+      "alex": {
+        "nameKey": "f019",
+        "roleKey": "f020",
+        "name": "Alex"
+      },
+      "sabrina": {
+        "nameKey": "f021",
+        "roleKey": "f022",
+        "name": "Sabrina"
+      },
+      "conny": {
+        "nameKey": "f023",
+        "roleKey": "f024",
+        "name": "Conny"
+      },
+      "patrick": {
+        "nameKey": "f025",
+        "roleKey": "f026",
+        "name": "Patrick"
+      },
+      "gabi": {
+        "nameKey": "f027",
+        "roleKey": "f028",
+        "name": "Gabi"
+      }
+    }
   },
   "training.html": {
     "fields": {

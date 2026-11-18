@@ -21,6 +21,15 @@ function studio_validate(array $content,array $manifest,array $media): array {
         if(!is_array($hidden)||!is_array($order)||count(array_unique($hidden))!==count($hidden)||count(array_unique($order))!==count($order)||array_diff($hidden,$sections)||array_diff($order,$sections))throw new DomainException('Abschnitt nicht verfügbar.');
         if($order&&count($order)!==count($sections))throw new DomainException('Abschnittsreihenfolge unvollständig.');
         $out[$page]=['fields'=>$fields,'hidden'=>array_values($hidden),'order'=>array_values($order)];
+        if($page==='team.html'&&array_key_exists('trainers',$patch)){
+            $list=$patch['trainers'];if(!is_array($list)||count($list)>60)throw new DomainException('Ungültige Trainerliste.');
+            $seen=[];$clean=[];foreach($list as $t){if(!is_array($t)||!is_string($t['id']??null)||isset($seen[$t['id']]))throw new DomainException('Ungültige Trainerkarte.');
+                $id=$t['id'];$seen[$id]=true;
+                if(isset($manifest[$page]['trainers'][$id])){$clean[]=['id'=>$id];continue;}
+                if(!preg_match('/^new-[a-f0-9]{16}$/',$id)||!is_string($t['name']??null)||!is_string($t['role']??null)||!is_string($t['image']??null)||trim($t['name'])===''||strlen($t['name'])>180||strlen($t['role'])>500||!preg_match('//u',$t['name'].$t['role'])||!isset($media[$t['image']]))throw new DomainException('Bitte vollständige Trainerdaten und ein Bild auswählen.');
+                $clean[]=['id'=>$id,'name'=>$t['name'],'role'=>$t['role'],'image'=>$t['image']];
+            }$out[$page]['trainers']=$clean;
+        }
     }return $out;
 }
 try{
