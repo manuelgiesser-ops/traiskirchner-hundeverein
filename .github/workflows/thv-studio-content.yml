@@ -1,0 +1,23 @@
+name: Mark THV Studio content
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'prepare_studio.py'
+      - '.github/workflows/thv-studio-content.yml'
+permissions:
+  contents: write
+jobs:
+  mark:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 prepare_studio.py
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add '*.html' studio-manifest.json
+          git commit -m "Mark editable website content without changing design"
+          git pull --rebase origin main
+          git push origin HEAD:main
