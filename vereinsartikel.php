@@ -1,0 +1,8 @@
+<?php
+declare(strict_types=1);
+require __DIR__.'/verein-core.php';
+thv_headers(false);header('Cache-Control: no-cache');
+$id=(string)($_GET['id']??'');$entry=null;
+try{$entry=thv_state(function($s)use($id){$e=$s['entries'][$id]??null;return $e&&$e['visibility']==='public'?$e:null;});}catch(Throwable $e){}
+if(!$entry){http_response_code(404);thv_layout_start('Eintrag nicht gefunden');echo '<section class="club-card"><h1>Dieser Eintrag ist nicht verfügbar.</h1><a class="secondary" href="index.html">Zur Startseite</a></section>';thv_layout_end();exit;}
+thv_layout_start($entry['title'],false);?><article class="club-card article-body"><a class="secondary" href="<?=$entry['type']==='course'?'training.html':'aktuelles.html'?>">← Zur Übersicht</a><p class="club-kicker"><?= $entry['type']==='course'?'Kursangebot':'Vereinsnachricht' ?><?= $entry['date']?' · '.h(date('d.m.Y',strtotime($entry['date']))):'' ?></p><h1 class="article-title"><?=h($entry['title'])?></h1><p><?=h($entry['summary'])?></p><?php if($entry['image']):?><img class="article-image" src="<?=h($entry['image'])?>" alt="" decoding="async"><?php endif;if($entry['age']):?><p><strong>Voraussetzungen:</strong> <?=h($entry['age'])?></p><?php endif;if($entry['schedule']):?><p><strong>Kurszeit und Ort:</strong> <?=h($entry['schedule'])?></p><?php endif;?><p class="long-text"><?=h($entry['body'])?></p><?php if($entry['type']==='course'):?><div class="club-actions"><a class="secondary" href="vereinsbereich.php">Als Mitglied Teilnahme anfragen</a><a class="secondary" href="kontakt.html">Kontakt zum Verein</a></div><?php endif;?></article><?php thv_layout_end();?>
