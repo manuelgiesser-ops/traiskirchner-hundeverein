@@ -86,7 +86,6 @@ if('IntersectionObserver' in window){const observer=new IntersectionObserver(es=
   const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){show(e.target);obs.unobserve(e.target)}}),{threshold:.06,rootMargin:'0px 0px -3% 0px'});
   const courseFrames=frames.filter(f=>f.closest('.course-modern .course'));
   const courseSet=new Set(courseFrames);
-  const touchObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){show(e.target);touchObserver.unobserve(e.target)}}),{threshold:.32,rootMargin:'0px 0px -5% 0px'});
   nodes.filter(n=>!courseSet.has(n)).forEach(n=>obs.observe(n));
   courseFrames.forEach(f=>{
    const card=f.closest('.course');
@@ -94,12 +93,27 @@ if('IntersectionObserver' in window){const observer=new IntersectionObserver(es=
    const hint=document.createElement('span');hint.className='course-discovery-hint';hint.setAttribute('aria-hidden','true');
    hint.innerHTML='<svg viewBox="0 0 110 100" aria-hidden="true" focusable="false"><g fill="currentColor">'+paw+'</g></svg>';
    f.append(hint);
-   const discover=()=>{show(f);touchObserver.unobserve(f)};
+   let pointerType='',opening=false;
+   const discover=()=>show(f);
    card.addEventListener('pointerenter',e=>{if(e.pointerType!=='touch'&&fine.matches)discover()});
-   card.addEventListener('focusin',discover);
-   card.addEventListener('pointerdown',discover,{passive:true});
-   if(!fine.matches)touchObserver.observe(f);
-   fine.addEventListener?.('change',e=>{if(!e.matches&&!f.classList.contains('thv-media-seen'))touchObserver.observe(f);else touchObserver.unobserve(f)});
+   card.addEventListener('pointerdown',e=>{pointerType=e.pointerType},{passive:true});
+   card.addEventListener('focusin',()=>{if(card.matches(':focus-visible'))discover()});
+   card.addEventListener('click',e=>{
+    if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||card.target&&card.target!=='_self')return;
+    const touch=e.detail!==0&&(pointerType==='touch'||(!fine.matches&&pointerType!=='mouse'));
+    if(!touch||reduced.matches||root.classList.contains('paused')||f.classList.contains('thv-media-seen')&&!opening)return;
+    e.preventDefault();
+    if(opening)return;
+    opening=true;
+    card.classList.add('course-tap-opening');
+    card.setAttribute('aria-busy','true');
+    // A single tap: the same fast reveal, followed by navigation. Scrolling alone does not open a card.
+    discover();
+    const url=card.href;
+    window.setTimeout(()=>{window.location.assign(url)},650);
+   });
+   window.addEventListener('pageshow',e=>{if(e.persisted&&opening){opening=false;card.classList.remove('course-tap-opening');card.removeAttribute('aria-busy')}});
+
   });
  }else nodes.forEach(show);
 })();

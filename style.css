@@ -995,3 +995,15 @@ body:has(#nav.open) .mobile-course-return,body:has(dialog[open]) .mobile-course-
 .paused .course-modern .media-frame.thv-media.photo-opening.paw-reveal.course-discovery>img{opacity:1!important;filter:none!important;transform:none!important;transition:none!important}
 .paused .course-modern .media-frame.thv-media.photo-opening.paw-reveal.course-discovery .thv-film-paws{display:none!important}
 @media(prefers-reduced-motion:reduce){.thv-motion .course-modern .media-frame.thv-media.photo-opening.paw-reveal.course-discovery>img{opacity:1!important;filter:none!important;transform:none!important;transition:none!important}.thv-motion .course-modern .course-discovery .thv-film-paws{display:none!important}}
+
+/* V31: mobile course preview is revealed by a deliberate tap, not by scrolling. */
+@media(hover:none),(pointer:coarse){
+.thv-motion .course-modern .course:not(.course-tap-opening):not(:focus-visible) .media-frame.thv-media.photo-opening.paw-reveal.course-discovery:not(.thv-media-seen)>img{opacity:.30!important;filter:saturate(.75) blur(4px)!important;transform:scale(1.025)!important}
+.thv-motion .course-modern .course:not(.course-tap-opening):not(:focus-visible) .media-frame.course-discovery:not(.thv-media-seen) .course-discovery-hint{display:grid!important;opacity:1}
+}
+/* Explicit tap takes precedence over the generic focus-within shortcuts. */
+.thv-motion .course-modern .course.course-tap-opening .media-frame.thv-media.photo-opening.paw-reveal.course-discovery.thv-media-seen>img{opacity:1!important;filter:none!important;transform:none!important;transition:opacity .52s ease-out,filter .58s ease-out,transform .58s ease-out!important;transition-delay:.06s!important}
+.thv-motion .course-modern .course.course-tap-opening .media-frame.thv-media.photo-opening.paw-reveal.course-discovery.thv-media-seen .course-discovery-hint{display:grid!important;opacity:0}
+.thv-motion .course-modern .course.course-tap-opening .media-frame.thv-media.photo-opening.paw-reveal.course-discovery.thv-media-seen .thv-film-paws{display:block!important;animation:thvWalkingOverlay .65s linear both!important}
+.thv-motion .course-modern .course.course-tap-opening .media-frame.thv-media.photo-opening.paw-reveal.course-discovery.thv-media-seen .thv-film-paws .dog-paw{animation:thvCourseFootstep .38s calc(var(--paw-delay,0ms) * .45) ease-out both!important}
+@media(prefers-reduced-motion:reduce){.thv-motion .course-modern .course.course-tap-opening .media-frame>img{transition:none!important;opacity:1!important;filter:none!important}}
