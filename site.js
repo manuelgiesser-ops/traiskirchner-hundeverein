@@ -50,7 +50,34 @@ if('IntersectionObserver' in window){const observer=new IntersectionObserver(es=
  const heroWorld=document.querySelector('.hero-world');if(heroWorld){const svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox','0 0 260 190');svg.setAttribute('aria-hidden','true');svg.setAttribute('class','hero-botanical');svg.innerHTML=natureArt;heroWorld.append(svg)}
  // The old silhouette illustrations are intentionally retired.
  document.querySelectorAll('header .brand img[data-asset="logo"]').forEach(img=>{const mark=document.createElement('span');mark.className='mark thv-wordmark';mark.setAttribute('aria-hidden','true');mark.innerHTML='THV<span>●</span>';img.replaceWith(mark)});
- const frames=[...document.querySelectorAll('.media-frame')];frames.forEach(f=>{f.classList.add('thv-media');if(f.closest('.gallery-item'))return;f.classList.add('paw-reveal');const svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox','0 0 240 140');svg.setAttribute('preserveAspectRatio','xMidYMid slice');svg.setAttribute('aria-hidden','true');svg.setAttribute('focusable','false');svg.setAttribute('class','thv-film-paws');svg.innerHTML=[[24,109,-22],[70,92,12],[117,74,-19],[164,56,14],[211,38,-20]].map(([x,y,r],i)=>'<g transform="translate('+x+' '+y+') rotate('+r+') scale(.34) translate(-55 -50)"><g class="dog-paw" style="--paw-delay:'+i*380+'ms">'+paw+'</g></g>').join('');f.append(svg)});
+
+ // Vary photo openings by context rather than replaying one identical paw path.
+ const trails={
+  diagonal:[[26,111,-28],[72,91,12],[118,77,-18],[166,51,16],[213,35,-23]],
+  reverse:[[211,106,-12],[163,87,-40],[116,72,-6],[67,49,-38],[24,34,-11]],
+  pair:[[91,84,-18],[150,65,13]],
+  meadow:[[25,112,-20],[78,120,12],[131,109,-14],[184,115,10]]
+ };
+ const frames=[...document.querySelectorAll('.media-frame')];
+ let courseCount=0,otherCount=0;
+ frames.forEach(f=>{
+  f.classList.add('thv-media','photo-opening');
+  const img=f.querySelector('img');
+  let kind='soft';
+  if(f.closest('.gallery-item')||img?.dataset.asset==='team')kind='soft';
+  else if(f.closest('.bond-image'))kind='pair';
+  else if(f.closest('.editorial-intro'))kind='diagonal';
+  else if(f.closest('.field-editorial'))kind='meadow';
+  else if(f.closest('.course'))kind=['diagonal','soft','reverse','pair','meadow'][courseCount++%5];
+  else kind=['reverse','soft','meadow','pair'][otherCount++%4];
+  f.dataset.opening=kind;
+  if(kind==='soft')return;
+  f.classList.add('paw-reveal');
+  const svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox','0 0 240 140');svg.setAttribute('preserveAspectRatio','xMidYMid meet');svg.setAttribute('aria-hidden','true');svg.setAttribute('focusable','false');svg.setAttribute('class','thv-film-paws');
+  const gap=kind==='pair'?630:kind==='meadow'?470:380,scale=kind==='pair'?.42:kind==='meadow'?.27:.32;
+  svg.innerHTML=trails[kind].map(([x,y,r],i)=>'<g transform="translate('+x+' '+y+') rotate('+r+') scale('+scale+') translate(-55 -50)"><g class="dog-paw" style="--paw-delay:'+i*gap+'ms">'+paw+'</g></g>').join('');f.append(svg)
+ });
+
  const seal=document.querySelector('.thv-bond-seal'),nodes=[...document.querySelectorAll('.thv-corner'),...frames,...(seal?[seal]:[])];
  const show=e=>e.classList.add(e.classList.contains('thv-media')?'thv-media-seen':'thv-ornament-seen');
  if(!reduced.matches&&'IntersectionObserver'in window){root.classList.add('thv-motion');const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){show(e.target);obs.unobserve(e.target)}}),{threshold:.06,rootMargin:'0px 0px -3% 0px'});nodes.forEach(n=>obs.observe(n))}else nodes.forEach(show);
@@ -108,15 +135,15 @@ const thvPhotoData=Promise.resolve({"faces":{"sari":{"x":0.39743,"y":0.59646,"wi
  image.setAttribute('draggable','false');toggle.insertAdjacentHTML('afterend','<small class="portrait-help">Vergrößertes Foto verschieben, um den Ausschnitt anzupassen.</small>');
 })();
 
-/* Header depth: only activate when both aligned photo layers have loaded. */
+/* Match the depth layer to the actual fitted photo, then feather its real edges. */
 (()=>{
- const hero=document.querySelector('.hero-subject');const img=hero?.querySelector('img[data-asset="jump"]');if(!img)return;
- function sizeMask(){const w=img.clientWidth,h=img.clientHeight;if(!w||!h||!img.naturalWidth||!img.naturalHeight)return;const fit=Math.min(w/img.naturalWidth,h/img.naturalHeight);const maskW=img.naturalWidth*fit+'px',maskH=img.naturalHeight*fit+'px';for(const node of [img,hero]){node.style.setProperty('--hero-mask-w',maskW);node.style.setProperty('--hero-mask-h',maskH)}}
- img.addEventListener('load',sizeMask);sizeMask();if('ResizeObserver'in window)new ResizeObserver(sizeMask).observe(img);else window.addEventListener('resize',sizeMask,{passive:true});
+ const hero=document.querySelector('.hero-subject'),img=hero?.querySelector('img[data-asset="jump"]');if(!img)return;
  const layer=document.createElement('div');layer.className='hero-depth';layer.setAttribute('aria-hidden','true');
- const background=new Image(),dog=new Image();background.alt='';dog.alt='';background.className='hero-depth-background';dog.className='hero-depth-dog';
- let loaded=0;const ready=()=>{if(++loaded!==2)return;if(background.naturalWidth!==dog.naturalWidth||background.naturalHeight!==dog.naturalHeight)return;layer.append(background,dog);hero.append(layer);sizeMask();requestAnimationFrame(()=>hero.classList.add('has-hero-depth'))};
- background.onload=ready;dog.onload=ready;background.src='generated-media/hero-depth-background.webp?v=16';dog.src='generated-media/hero-depth-dog.webp?v=16';
+ const bg=new Image(),dog=new Image();bg.alt='';dog.alt='';bg.className='hero-depth-background';dog.className='hero-depth-dog';
+ function sizeMask(){const w=hero.clientWidth,h=hero.clientHeight,iw=bg.naturalWidth||img.naturalWidth,ih=bg.naturalHeight||img.naturalHeight;if(!w||!h||!iw||!ih)return;const fit=Math.min(w/iw,h/ih),mw=iw*fit+'px',mh=ih*fit+'px';for(const node of [img,hero]){node.style.setProperty('--hero-mask-w',mw);node.style.setProperty('--hero-mask-h',mh)}layer.style.width=mw;layer.style.height=mh}
+ img.addEventListener('load',sizeMask);sizeMask();if('ResizeObserver'in window)new ResizeObserver(sizeMask).observe(hero);else window.addEventListener('resize',sizeMask,{passive:true});
+ let loaded=0;const ready=()=>{if(++loaded!==2||bg.naturalWidth!==dog.naturalWidth||bg.naturalHeight!==dog.naturalHeight)return;layer.append(bg,dog);hero.append(layer);sizeMask();requestAnimationFrame(()=>hero.classList.add('has-hero-depth'))};
+ bg.onload=ready;dog.onload=ready;bg.src='generated-media/hero-depth-background.webp?v=16';dog.src='generated-media/hero-depth-dog.webp?v=16';
 })();
 /* Group photograph: locally anchored zoom, pinch, drag and a precision lens. */
 (()=>{
