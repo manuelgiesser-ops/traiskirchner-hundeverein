@@ -37,29 +37,26 @@ if('IntersectionObserver' in window){const observer=new IntersectionObserver(es=
 
 
 /* Generated focal points are measured from the original photos, not guessed per browser. */
-const thvPhotoData=fetch('generated-media/photo-focus.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).catch(()=>null);
-thvPhotoData.then(data=>{
- const hero=document.querySelector('.hero-subject'),img=hero?.querySelector('img');if(!img||!data?.hero)return;
- const cut=new Image();cut.onload=()=>{img.src=cut.src;hero.classList.add('hero-is-cutout')};cut.src='generated-media/'+data.hero;
-});
+const thvPhotoData=Promise.resolve({"faces":{"sari":{"x":0.39743,"y":0.59646,"width":0.09398,"height":0.08264},"michi":{"x":0.45381,"y":0.67327,"width":0.31698,"height":0.22721},"harald":{"x":0.47796,"y":0.63798,"width":0.09919,"height":0.07633},"karo":{"x":0.48014,"y":0.64806,"width":0.09176,"height":0.0783},"otto":{"x":0.58971,"y":0.57122,"width":0.10424,"height":0.08876},"mary":{"x":0.54085,"y":0.65217,"width":0.08818,"height":0.07666},"susi":{"x":0.50403,"y":0.64376,"width":0.07711,"height":0.07285},"alex":{"x":0.54689,"y":0.62043,"width":0.0971,"height":0.08271},"sabrina":{"x":0.49646,"y":0.61626,"width":0.09262,"height":0.07958},"conny":{"x":0.42139,"y":0.62076,"width":0.10588,"height":0.0855},"patrick":{"x":0.50867,"y":0.59547,"width":0.10251,"height":0.09235},"gabi":{"x":0.45399,"y":0.63248,"width":0.08479,"height":0.08129}}});
+
 (()=>{
  const dlg=document.querySelector('.portrait-dialog');if(!dlg)return;
  const image=dlg.querySelector('.portrait-modal-image'),viewport=dlg.querySelector('.portrait-viewport'),toggle=dlg.querySelector('.portrait-zoom-toggle');if(!image||!viewport||!toggle)return;
- let generation=0,zoom=false,point={x:.5,y:.22},scale=2.35,drag=null,manual=false,current=null,focus=null;
+ let generation=0,zoom=false,point={x:.5,y:.22},scale=1.65,drag=null,manual=false,current=null,focus=null;
  const enabled=()=>!matchMedia('(prefers-reduced-motion: reduce)').matches&&!document.documentElement.classList.contains('paused');
  const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
  function apply(animate=true){
   const w=image.offsetWidth,h=image.offsetHeight,iw=image.naturalWidth,ih=image.naturalHeight;
   if(!w||!h||!iw||!ih)return;
   const fit=Math.min(w/iw,h/ih),rw=iw*fit,rh=ih*fit;
-  if(focus&&!manual)scale=clamp(Math.min(w*.43/Math.max(1,focus.width*rw),h*.50/Math.max(1,focus.height*rh)),1.55,4.8);
-  const s=zoom?scale:1,x=zoom?(.5-point.x)*rw*s:0,y=zoom?(.5-point.y)*rh*s:0;
+  // Same gentle magnification for every trainer; never upscale sharply.
+  const s=zoom?scale:1, limitX=Math.max(0,(rw*s-w)/2),limitY=Math.max(0,(rh*s-h)/2),x=zoom?clamp((.5-point.x)*rw*s,-limitX,limitX):0,y=zoom?clamp((.5-point.y)*rh*s,-limitY,limitY):0;
   viewport.style.setProperty('--portrait-scale',String(s));viewport.style.setProperty('--portrait-pan-x',x+'px');viewport.style.setProperty('--portrait-pan-y',y+'px');
   viewport.classList.toggle('portrait-no-motion',!animate||!enabled());viewport.classList.toggle('portrait-zoomed',zoom);
   toggle.textContent=zoom?'Ganzes Foto ansehen':'Gesicht vergrößern';toggle.setAttribute('aria-pressed',String(zoom));
  }
  function open(button){
-  const id=++generation;current=button;zoom=false;manual=false;focus=null;point={x:.5,y:.22};scale=2.35;
+  const id=++generation;current=button;zoom=false;manual=false;focus=null;point={x:.5,y:.22};scale=1.65;
   viewport.style.setProperty('--portrait-scale','1');viewport.style.setProperty('--portrait-pan-x','0px');viewport.style.setProperty('--portrait-pan-y','0px');viewport.classList.remove('portrait-zoomed');viewport.classList.add('portrait-no-motion');toggle.textContent='Gesicht vergrößern';toggle.setAttribute('aria-pressed','false');
   let triggered=false;
   const valid=()=>id===generation&&dlg.open;
