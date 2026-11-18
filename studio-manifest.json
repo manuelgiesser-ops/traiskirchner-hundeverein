@@ -1,0 +1,1857 @@
+{
+  "agility.html": {
+    "fields": {
+      "f001": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Agility"
+      },
+      "f002": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Ab 1 Jahr, gesunde Hunde"
+      },
+      "f003": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/jump-960.webp"
+      },
+      "f004": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Was euch erwartet"
+      },
+      "f005": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Gemeinsam einen Hindernisparcours meistern: Tunnel, Slalom und Steg werden sorgfältig aufgebaut. Dabei zählen klare Signale, Konzentration und passende Laufwege. Das Training richtet sich an Anfänger und Fortgeschrittene."
+      },
+      "f006": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Was du mitbringen solltest"
+      },
+      "f007": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Gut sitzendes Halsband oder Brustgeschirr, normale Leine, kleine Leckerlis und ein geeignetes Lieblingsspielzeug. Für Details und die passende Ausrüstung frag beim Trainerteam nach."
+      },
+      "f008": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Kurszeiten"
+      },
+      "f009": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Kurs anfragen"
+      },
+      "f010": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Weitere Kurse entdecken"
+      },
+      "f011": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Finde das passende Angebot für dich und deinen Hund."
+      }
+    },
+    "sections": {}
+  },
+  "aktuelles.html": {
+    "fields": {
+      "f001": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Aktuelles aus dem Verein"
+      },
+      "f002": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Kursstarts, Prüfungen, Veranstaltungen und Rückblicke."
+      },
+      "f003": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Kommende Termine"
+      },
+      "f004": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Nächste Termine auf Anfrage"
+      },
+      "f005": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Für den nächsten Kursstart, Social Walks und den NÖ Hundepass kontaktiere uns bitte direkt."
+      },
+      "f006": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Termin erfragen"
+      },
+      "f007": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Rückblicke"
+      },
+      "f008": {
+        "kind": "text",
+        "label": "Text",
+        "default": "September 2026"
+      },
+      "f009": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Herbstkurs"
+      },
+      "f010": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Der veröffentlichte Saisonstart war ab 7. September."
+      },
+      "f011": {
+        "kind": "text",
+        "label": "Text",
+        "default": "2024"
+      },
+      "f012": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Junghundeveranlagung"
+      },
+      "f013": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Im Juni dokumentierte der Verein die Junghundeveranlagung."
+      },
+      "f014": {
+        "kind": "text",
+        "label": "Text",
+        "default": "2023"
+      },
+      "f015": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Vereinsleben"
+      },
+      "f016": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Tag der offenen Tür, Prüfungen und das Bärige Doppel gehörten zum Vereinsjahr."
+      },
+      "f017": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Weitere Einblicke"
+      },
+      "f018": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Zur Galerie"
+      }
+    },
+    "sections": {
+      "s001": {
+        "label": "Kommende Termine"
+      },
+      "s002": {
+        "label": "Rückblicke"
+      },
+      "s003": {
+        "label": "Weitere Einblicke"
+      }
+    }
+  },
+  "fortgeschritten.html": {
+    "fields": {
+      "f001": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Unterordnung für Fortgeschrittene"
+      },
+      "f002": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Mit Begleithundeprüfung"
+      },
+      "f003": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/hero-960.webp"
+      },
+      "f004": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Was euch erwartet"
+      },
+      "f005": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Festige bereits erlernte Übungen, verfeinere die Kommunikation und reduziere Hilfen schrittweise. Auf Wunsch kannst du auf weitere Begleithundeprüfungen hinarbeiten."
+      },
+      "f006": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Was du mitbringen solltest"
+      },
+      "f007": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Gut sitzendes Halsband oder Brustgeschirr, normale Leine, kleine Leckerlis und ein geeignetes Lieblingsspielzeug. Für Details und die passende Ausrüstung frag beim Trainerteam nach."
+      },
+      "f008": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Kurszeiten"
+      },
+      "f009": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Kurs anfragen"
+      },
+      "f010": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Weitere Kurse entdecken"
+      },
+      "f011": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Finde das passende Angebot für dich und deinen Hund."
+      }
+    },
+    "sections": {}
+  },
+  "galerie.html": {
+    "fields": {
+      "f001": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Training in Bildern"
+      },
+      "f002": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Einblicke in unser Vereinsleben."
+      },
+      "f003": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/jump-960.webp"
+      },
+      "f004": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Auf dem Trainingsplatz"
+      },
+      "f005": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/hero-960.webp"
+      },
+      "f006": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/jump-960.webp"
+      },
+      "f007": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/run-960.webp"
+      },
+      "f008": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/walk-960.webp"
+      },
+      "f009": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/agility-960.webp"
+      },
+      "f010": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/hoopers-960.webp"
+      },
+      "f011": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/hoop2-960.webp"
+      },
+      "f012": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/team-960.webp"
+      },
+      "f013": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/house-960.webp"
+      },
+      "f014": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/field-960.webp"
+      }
+    },
+    "sections": {
+      "s001": {
+        "label": "Auf dem Trainingsplatz"
+      }
+    }
+  },
+  "grundkurs.html": {
+    "fields": {
+      "f001": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Grundkurs"
+      },
+      "f002": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Ab 9 Monaten"
+      },
+      "f003": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/dog-960.webp"
+      },
+      "f004": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Was euch erwartet"
+      },
+      "f005": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Kommunikation, Alltag und Grundgehorsam stehen im Mittelpunkt. Mit positiver Bestätigung werden Signale wie Platz und Steh sowie Übungen für eine mögliche Begleithundeprüfung aufgebaut."
+      },
+      "f006": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Was du mitbringen solltest"
+      },
+      "f007": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Gut sitzendes Halsband oder Brustgeschirr, normale Leine, kleine Leckerlis und ein geeignetes Lieblingsspielzeug. Für Details und die passende Ausrüstung frag beim Trainerteam nach."
+      },
+      "f008": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Kurszeiten"
+      },
+      "f009": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Kurs anfragen"
+      },
+      "f010": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Weitere Kurse entdecken"
+      },
+      "f011": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Finde das passende Angebot für dich und deinen Hund."
+      }
+    },
+    "sections": {}
+  },
+  "hoopers.html": {
+    "fields": {
+      "f001": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Hoopers"
+      },
+      "f002": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Ab 1 Jahr"
+      },
+      "f003": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/hoopers-960.webp"
+      },
+      "f004": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Was euch erwartet"
+      },
+      "f005": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Beim Hoopers führst du deinen Hund mit Signalen auf Distanz durch einen Parcours. Da keine Sprünge oder Zonengeräte vorkommen, kann der Sport auch für ältere Hunde geeignet sein."
+      },
+      "f006": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Was du mitbringen solltest"
+      },
+      "f007": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Gut sitzendes Halsband oder Brustgeschirr, normale Leine, kleine Leckerlis und ein geeignetes Lieblingsspielzeug. Für Details und die passende Ausrüstung frag beim Trainerteam nach."
+      },
+      "f008": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Kurszeiten"
+      },
+      "f009": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Kurs anfragen"
+      },
+      "f010": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Weitere Kurse entdecken"
+      },
+      "f011": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Finde das passende Angebot für dich und deinen Hund."
+      }
+    },
+    "sections": {}
+  },
+  "index.html": {
+    "fields": {
+      "f001": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Gemeinsam"
+      },
+      "f002": {
+        "kind": "text",
+        "label": "Text",
+        "default": "in Bewegung."
+      },
+      "f003": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Vom Welpentraining bis zum Hundesport: Bei uns findest du das passende Training für dich und deinen Hund."
+      },
+      "f004": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Lerne uns kennen"
+      },
+      "f005": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Kurse entdecken"
+      },
+      "f006": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Unser Verein"
+      },
+      "f007": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/team-960.webp"
+      },
+      "f008": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Unser Team beim Traiskirchner Hundeverein"
+      },
+      "f009": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Seit mehr als vier Jahrzehnten verbindet uns die Freude am gemeinsamen Training."
+      },
+      "f010": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Unser Team engagiert sich ehrenamtlich. Tierwohl, Fairness und die individuelle Entwicklung jedes Teams stehen im Mittelpunkt."
+      },
+      "f011": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Unser Trainerteam kennenlernen"
+      },
+      "f012": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Mehr über den Verein"
+      },
+      "f013": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Unsere Kurse"
+      },
+      "f014": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Finde das Training, das zu dir und deinem Hund passt."
+      },
+      "f015": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Einstieg & Grundlagen"
+      },
+      "f016": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Die ersten Schritte für ein gutes Miteinander."
+      },
+      "f017": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/puppy-960.webp"
+      },
+      "f018": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Bis 9 Monate"
+      },
+      "f019": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Welpen und Junghunde"
+      },
+      "f020": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/dog-960.webp"
+      },
+      "f021": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Ab 9 Monaten"
+      },
+      "f022": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Grundkurs"
+      },
+      "f023": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Unterordnung"
+      },
+      "f024": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Signale festigen und gemeinsam weiterlernen."
+      },
+      "f025": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/obed-960.webp"
+      },
+      "f026": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Ab 9 Monaten"
+      },
+      "f027": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Für Anfänger"
+      },
+      "f028": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/hero-960.webp"
+      },
+      "f029": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Mit Begleithundeprüfung"
+      },
+      "f030": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Für Fortgeschrittene"
+      },
+      "f031": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Sport & gemeinsame Aktivitäten"
+      },
+      "f032": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Bewegung, Beschäftigung und Freude im Team."
+      },
+      "f033": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/jump-960.webp"
+      },
+      "f034": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Ab 1 Jahr, gesunde Hunde"
+      },
+      "f035": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Agility"
+      },
+      "f036": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/hoopers-960.webp"
+      },
+      "f037": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Ab 1 Jahr"
+      },
+      "f038": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Hoopers"
+      },
+      "f039": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/walk-960.webp"
+      },
+      "f040": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Termine auf Anfrage"
+      },
+      "f041": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Social Walk"
+      },
+      "f042": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Alle Kurse und Preise"
+      },
+      "f043": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/run-960.webp"
+      },
+      "f044": {
+        "kind": "text",
+        "label": "Text",
+        "default": "auf beiden Seiten."
+      },
+      "f045": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Mit Geduld, Respekt und Freude wird aus Mensch und Hund ein Team. Ob im Alltag oder auf dem Parcours, wir begleiten euch auf diesem gemeinsamen Weg."
+      },
+      "f046": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Dein Einstieg"
+      },
+      "f047": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Unser Trainingsgelände"
+      },
+      "f048": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/field-960.webp"
+      },
+      "f049": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Agilityplatz des Vereins"
+      },
+      "f050": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/house-960.webp"
+      },
+      "f051": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Unser Trainingsgelände bietet einen Unterordnungsplatz, Agilityplatz, Welpenbereich und ein Vereinshaus. Rundherum laden Felder und Spazierwege zu einer Gassirunde ein."
+      },
+      "f052": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Unser Gelände"
+      },
+      "f053": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Kurszeiten ansehen"
+      },
+      "f054": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Dein Einstieg"
+      },
+      "f055": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Kontakt aufnehmen"
+      },
+      "f056": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Erzähle uns kurz von dir und deinem Hund."
+      },
+      "f057": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Kurs finden"
+      },
+      "f058": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Wir klären, welches Training zu euch passt."
+      },
+      "f059": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Gemeinsam starten"
+      },
+      "f060": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Erkundige dich nach der Einteilung und bring die passende Ausrüstung mit."
+      },
+      "f061": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Kontakt aufnehmen"
+      },
+      "f062": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Aktuell im Verein"
+      },
+      "f063": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Kursbetrieb & Sachkundenachweis"
+      },
+      "f064": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Frag nach den nächsten Terminen."
+      },
+      "f065": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Der letzte veröffentlichte Herbstkurs startete im September 2026. Die kommenden Termine bitte beim Verein erfragen."
+      },
+      "f066": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Aktuelles ansehen"
+      },
+      "f067": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Gut zu wissen"
+      },
+      "f068": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Sind alle Hunderassen willkommen?"
+      },
+      "f069": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Ja. Der Verein bietet Training für Rassehunde und Mischlinge in verschiedenen Altersgruppen an."
+      },
+      "f070": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Wann kann ich einsteigen?"
+      },
+      "f071": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Ein Einstieg ist laut Verein grundsätzlich jederzeit möglich. Bitte kläre den passenden Kurs und die aktuelle Einteilung vorab."
+      },
+      "f072": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Was nehme ich mit?"
+      },
+      "f073": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Eine normale Leine, ein passendes Halsband oder Brustgeschirr, kleine Leckerlis und ein geeignetes Spielzeug. Bitte keine Flexileine."
+      },
+      "f074": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Kann ich den NÖ Hundepass bei euch machen?"
+      },
+      "f075": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Ja, der Verein bietet den Sachkundenachweis an. Den nächsten Termin bitte direkt erfragen."
+      },
+      "f076": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Was kostet die Mitgliedschaft?"
+      },
+      "f077": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Laut veröffentlichter Preisliste 30 € pro Kalenderjahr. Ein Zehnerblock kostet 120 € und ist ein Jahr gültig. Bitte bestätige die Konditionen vor deiner Anmeldung."
+      },
+      "f078": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Wir freuen uns auf euch."
+      },
+      "f079": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Besuche uns in der Hochmühlstraße 34 in Traiskirchen."
+      },
+      "f080": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Kontakt & Anfahrt"
+      },
+      "f081": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Mitglied werden"
+      }
+    },
+    "sections": {
+      "s001": {
+        "label": "Unser Verein"
+      },
+      "s002": {
+        "label": "Unsere Kurse"
+      },
+      "s003": {
+        "label": "Abschnitt 3"
+      },
+      "s004": {
+        "label": "Unser Trainingsgelände"
+      },
+      "s005": {
+        "label": "Dein Einstieg"
+      },
+      "s006": {
+        "label": "Aktuell im Verein"
+      },
+      "s007": {
+        "label": "Gut zu wissen"
+      },
+      "s008": {
+        "label": "Wir freuen uns auf euch."
+      }
+    }
+  },
+  "kontakt.html": {
+    "fields": {
+      "f001": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Wir sind für euch da."
+      },
+      "f002": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Fragen zum Einstieg, zu Kursen oder zur Mitgliedschaft?"
+      },
+      "f003": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Kontakt aufnehmen"
+      },
+      "f004": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Traiskirchner Hundeverein"
+      },
+      "f005": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Anfahrt öffnen"
+      },
+      "f006": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Unser Gelände"
+      },
+      "f007": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/house-960.webp"
+      },
+      "f008": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Vereinshaus"
+      },
+      "f009": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Route planen"
+      }
+    },
+    "sections": {}
+  },
+  "kurszeiten.html": {
+    "fields": {
+      "f001": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Unsere Kurszeiten"
+      },
+      "f002": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Finde den passenden Termin für euch."
+      },
+      "f003": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Trainingsübersicht"
+      },
+      "f004": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Die veröffentlichten Kursübersichten unterscheiden sich teilweise. Die folgende Tabelle dient zur Orientierung und stellt keinen bestätigten aktuellen Stundenplan dar."
+      },
+      "f005": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Montag"
+      },
+      "f006": {
+        "kind": "text",
+        "label": "Text",
+        "default": "18:00"
+      },
+      "f007": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Unterordnung Anfänger, laut Kursübersicht"
+      },
+      "f008": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Montag"
+      },
+      "f009": {
+        "kind": "text",
+        "label": "Text",
+        "default": "19:00"
+      },
+      "f010": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Unterordnung Fortgeschrittene"
+      },
+      "f011": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Mittwoch"
+      },
+      "f012": {
+        "kind": "text",
+        "label": "Text",
+        "default": "18:00 / 19:00"
+      },
+      "f013": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Welpen und Junghunde: Uhrzeit bitte erfragen"
+      },
+      "f014": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Mittwoch"
+      },
+      "f015": {
+        "kind": "text",
+        "label": "Text",
+        "default": "19:00"
+      },
+      "f016": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Grundkurs, laut Kursdetail"
+      },
+      "f017": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Montag / Mittwoch / Freitag"
+      },
+      "f018": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Auf Anfrage"
+      },
+      "f019": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Agility: Einteilung und Kurstag bitte bestätigen"
+      },
+      "f020": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Freitag"
+      },
+      "f021": {
+        "kind": "text",
+        "label": "Text",
+        "default": "16:30 / 18:00"
+      },
+      "f022": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Hoopers: Uhrzeit bitte erfragen"
+      },
+      "f023": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Flexibel"
+      },
+      "f024": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Auf Anfrage"
+      },
+      "f025": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Social Walk"
+      },
+      "f026": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Aktuelle Zeiten erfragen"
+      }
+    },
+    "sections": {}
+  },
+  "mitgliedschaft.html": {
+    "fields": {
+      "f001": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Dein Einstieg"
+      },
+      "f002": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Wir freuen uns, dich und deinen Hund kennenzulernen."
+      },
+      "f003": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/hero-960.webp"
+      },
+      "f004": {
+        "kind": "text",
+        "label": "Text",
+        "default": "So kannst du mitmachen"
+      },
+      "f005": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Kontakt"
+      },
+      "f006": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Erfrage die passende Gruppe und den Einstieg."
+      },
+      "f007": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Anmeldung"
+      },
+      "f008": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Fülle die offizielle Online-Beitrittserklärung aus."
+      },
+      "f009": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Training"
+      },
+      "f010": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Bring die besprochene Ausrüstung mit und lerne das Team kennen."
+      },
+      "f011": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Online-Beitrittserklärung öffnen"
+      },
+      "f012": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Fragen zur Anmeldung"
+      },
+      "f013": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Mitgliedschaft und Preise"
+      },
+      "f014": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Der veröffentlichte Mitgliedsbeitrag beträgt 30 € pro Kalenderjahr. Ein Zehnerblock kostet 120 € und gilt ein Jahr. Lass dir die aktuellen Konditionen vorab bestätigen."
+      },
+      "f015": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Häufige Fragen"
+      },
+      "f016": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Sind alle Hunderassen willkommen?"
+      },
+      "f017": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Ja. Der Verein bietet Training für Rassehunde und Mischlinge in verschiedenen Altersgruppen an."
+      },
+      "f018": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Wann kann ich einsteigen?"
+      },
+      "f019": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Ein Einstieg ist laut Verein grundsätzlich jederzeit möglich. Bitte kläre den passenden Kurs und die aktuelle Einteilung vorab."
+      },
+      "f020": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Was nehme ich mit?"
+      },
+      "f021": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Eine normale Leine, ein passendes Halsband oder Brustgeschirr, kleine Leckerlis und ein geeignetes Spielzeug. Bitte keine Flexileine."
+      },
+      "f022": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Kann ich den NÖ Hundepass bei euch machen?"
+      },
+      "f023": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Ja, der Verein bietet den Sachkundenachweis an. Den nächsten Termin bitte direkt erfragen."
+      },
+      "f024": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Was kostet die Mitgliedschaft?"
+      },
+      "f025": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Laut veröffentlichter Preisliste 30 € pro Kalenderjahr. Ein Zehnerblock kostet 120 € und ist ein Jahr gültig. Bitte bestätige die Konditionen vor deiner Anmeldung."
+      }
+    },
+    "sections": {}
+  },
+  "social-walk.html": {
+    "fields": {
+      "f001": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Social Walk"
+      },
+      "f002": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Termine auf Anfrage"
+      },
+      "f003": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/walk-960.webp"
+      },
+      "f004": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Was euch erwartet"
+      },
+      "f005": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Begleitete Spaziergänge in kleinen Gruppen bieten Gelegenheit, Hundebegegnungen, Leinenführigkeit und Impulskontrolle zu üben. Auch für unsichere oder reaktive Hunde ist das Angebot gedacht. Treffpunkt ist der Verein."
+      },
+      "f006": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Was du mitbringen solltest"
+      },
+      "f007": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Gut sitzendes Halsband oder Brustgeschirr, normale Leine, kleine Leckerlis und ein geeignetes Lieblingsspielzeug. Für Details und die passende Ausrüstung frag beim Trainerteam nach."
+      },
+      "f008": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Kurszeiten"
+      },
+      "f009": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Kurs anfragen"
+      },
+      "f010": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Weitere Kurse entdecken"
+      },
+      "f011": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Finde das passende Angebot für dich und deinen Hund."
+      }
+    },
+    "sections": {}
+  },
+  "team.html": {
+    "fields": {
+      "f001": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Unser Trainerteam"
+      },
+      "f002": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Wir lernen selbst weiter und begleiten euch individuell."
+      },
+      "f003": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/team-960.webp"
+      },
+      "f004": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Unsere Kursleiter"
+      },
+      "f005": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Sari"
+      },
+      "f006": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Agility, Sachkundenachweis"
+      },
+      "f007": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Michi"
+      },
+      "f008": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Grundkurs, Unterordnung, Sachkundenachweis"
+      },
+      "f009": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Harald"
+      },
+      "f010": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Social Walk, Unterordnung, Agility Turniergeher, Sachkundenachweis"
+      },
+      "f011": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Karo"
+      },
+      "f012": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Agility"
+      },
+      "f013": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Otto"
+      },
+      "f014": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Hoopers"
+      },
+      "f015": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Mary"
+      },
+      "f016": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Agility"
+      },
+      "f017": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Susi"
+      },
+      "f018": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Welpen- und Junghundekurs, Grundkurs"
+      },
+      "f019": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Alex"
+      },
+      "f020": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Social Walk, Unterordnung Anfänger"
+      },
+      "f021": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Sabrina"
+      },
+      "f022": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Hoopers, Grundkurs"
+      },
+      "f023": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Conny"
+      },
+      "f024": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Grundkurs, Unterordnung Anfänger"
+      },
+      "f025": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Patrick"
+      },
+      "f026": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Unterordnung Fortgeschritten"
+      },
+      "f027": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Gabi"
+      },
+      "f028": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Hoopers, Welpen- und Junghundekurs"
+      },
+      "f029": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Unser Vorstand"
+      },
+      "f030": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Sarolta Hauer"
+      },
+      "f031": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Obfrau, Schriftführer-Stellvertreterin"
+      },
+      "f032": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Michael Zehethofer"
+      },
+      "f033": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Obfrau-Stellvertreter"
+      },
+      "f034": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Karolina Schletz"
+      },
+      "f035": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Kassierin"
+      },
+      "f036": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Harald Hauer"
+      },
+      "f037": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Hauptabrichtewart"
+      },
+      "f038": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Susanna Bytyci"
+      },
+      "f039": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Schriftführerin"
+      },
+      "f040": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Ernst Rehberger"
+      },
+      "f041": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Beisitzer"
+      },
+      "f042": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Othmar Vrchotka"
+      },
+      "f043": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Beisitzer"
+      },
+      "f044": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Barbara Hämmerle"
+      },
+      "f045": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Beisitzerin"
+      },
+      "f046": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Vorstand laut veröffentlichter Vereinsliste. Änderungen bitte direkt beim Verein erfragen."
+      }
+    },
+    "sections": {}
+  },
+  "training.html": {
+    "fields": {
+      "f001": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Unsere Kurse"
+      },
+      "f002": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Für den Alltag, den Hundesport und alles, was ihr gemeinsam lernen möchtet."
+      },
+      "f003": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/jump-960.webp"
+      },
+      "f004": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Alle Kurse im Überblick"
+      },
+      "f005": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Einstieg & Grundlagen"
+      },
+      "f006": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Die ersten Schritte für ein gutes Miteinander."
+      },
+      "f007": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/puppy-960.webp"
+      },
+      "f008": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Bis 9 Monate"
+      },
+      "f009": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Welpen und Junghunde"
+      },
+      "f010": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/dog-960.webp"
+      },
+      "f011": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Ab 9 Monaten"
+      },
+      "f012": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Grundkurs"
+      },
+      "f013": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Unterordnung"
+      },
+      "f014": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Signale festigen und gemeinsam weiterlernen."
+      },
+      "f015": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/obed-960.webp"
+      },
+      "f016": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Ab 9 Monaten"
+      },
+      "f017": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Für Anfänger"
+      },
+      "f018": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/hero-960.webp"
+      },
+      "f019": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Mit Begleithundeprüfung"
+      },
+      "f020": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Für Fortgeschrittene"
+      },
+      "f021": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Sport & gemeinsame Aktivitäten"
+      },
+      "f022": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Bewegung, Beschäftigung und Freude im Team."
+      },
+      "f023": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/jump-960.webp"
+      },
+      "f024": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Ab 1 Jahr, gesunde Hunde"
+      },
+      "f025": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Agility"
+      },
+      "f026": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/hoopers-960.webp"
+      },
+      "f027": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Ab 1 Jahr"
+      },
+      "f028": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Hoopers"
+      },
+      "f029": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/walk-960.webp"
+      },
+      "f030": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Termine auf Anfrage"
+      },
+      "f031": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Social Walk"
+      },
+      "f032": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Beiträge und Kurskosten"
+      },
+      "f033": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Die Beträge stammen aus der veröffentlichten Vereinsübersicht. Vor der Anmeldung bitte bestätigen lassen. Laut Verein werden bereits bezahlte Kursgebühren nicht rückerstattet; gesetzliche Rechte bleiben unberührt."
+      },
+      "f034": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Zur Mitgliedschaft"
+      }
+    },
+    "sections": {
+      "s001": {
+        "label": "Alle Kurse im Überblick"
+      },
+      "s002": {
+        "label": "Beiträge und Kurskosten"
+      }
+    }
+  },
+  "unterordnung.html": {
+    "fields": {
+      "f001": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Unterordnung für Anfänger"
+      },
+      "f002": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Ab 9 Monaten"
+      },
+      "f003": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/obed-960.webp"
+      },
+      "f004": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Was euch erwartet"
+      },
+      "f005": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Lerne die Grundlagen der Unterordnung kennen und übe mit deinem Hund die Zusammenarbeit. Der Kurs ist auch für Teams geeignet, die diesen Hundesport erstmals ausprobieren möchten."
+      },
+      "f006": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Was du mitbringen solltest"
+      },
+      "f007": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Gut sitzendes Halsband oder Brustgeschirr, normale Leine, kleine Leckerlis und ein geeignetes Lieblingsspielzeug. Für Details und die passende Ausrüstung frag beim Trainerteam nach."
+      },
+      "f008": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Kurszeiten"
+      },
+      "f009": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Kurs anfragen"
+      },
+      "f010": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Weitere Kurse entdecken"
+      },
+      "f011": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Finde das passende Angebot für dich und deinen Hund."
+      }
+    },
+    "sections": {}
+  },
+  "verein.html": {
+    "fields": {
+      "f001": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Unser Verein"
+      },
+      "f002": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Gemeinschaft, Fairness und Freude am Hundesport."
+      },
+      "f003": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/team-960.webp"
+      },
+      "f004": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Seit über 40 Jahren gemeinsam"
+      },
+      "f005": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/walk-960.webp"
+      },
+      "f006": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Gemeinsam unterwegs"
+      },
+      "f007": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Seit über 40 Jahren gibt es den THV. Unsere Funktionäre und Kursleiter arbeiten ehrenamtlich und unentgeltlich. Wir sind Mitglied der Österreichischen Hundesport Union."
+      },
+      "f008": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Alle Rassen, Mischlinge und Altersgruppen sind willkommen. Tierwohl und Fairness haben Vorrang."
+      },
+      "f009": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Unser Trainingsgelände"
+      },
+      "f010": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/house-960.webp"
+      },
+      "f011": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Vereinshaus"
+      },
+      "f012": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Das Gelände umfasst einen Unterordnungsplatz mit Kletterwand, Steigleiter, Sprunggrube und Hürden, einen Agilityplatz, einen Welpenplatz und eine Boxenreihe. Auch ein Vereinshaus gehört dazu."
+      },
+      "f013": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Anfahrt öffnen"
+      },
+      "f014": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/field-960.webp"
+      },
+      "f015": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Agilityplatz"
+      }
+    },
+    "sections": {
+      "s001": {
+        "label": "Seit über 40 Jahren gemeinsam"
+      }
+    }
+  },
+  "welpen.html": {
+    "fields": {
+      "f001": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Welpen und Junghunde"
+      },
+      "f002": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Bis 9 Monate"
+      },
+      "f003": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/puppy-960.webp"
+      },
+      "f004": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Was euch erwartet"
+      },
+      "f005": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Die ersten gemeinsamen Schritte: Spielen, Bindung, Rückruf, Leinenführigkeit und erste Signale. Verschiedene Untergründe und Geräte helfen jungen Hunden, Neues kennenzulernen. Eine Junghundeveranlagung ist zum Abschluss möglich."
+      },
+      "f006": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Was du mitbringen solltest"
+      },
+      "f007": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Gut sitzendes Halsband oder Brustgeschirr, normale Leine, kleine Leckerlis und ein geeignetes Lieblingsspielzeug. Für Details und die passende Ausrüstung frag beim Trainerteam nach."
+      },
+      "f008": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Kurszeiten"
+      },
+      "f009": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Kurs anfragen"
+      },
+      "f010": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Weitere Kurse entdecken"
+      },
+      "f011": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Finde das passende Angebot für dich und deinen Hund."
+      }
+    },
+    "sections": {}
+  }
+}
