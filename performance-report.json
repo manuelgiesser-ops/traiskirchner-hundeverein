@@ -1,0 +1,590 @@
+{
+  "optimized": 25,
+  "total": 25,
+  "failed": [],
+  "images": {
+    "jump": {
+      "original_bytes": 62073,
+      "width": 800,
+      "height": 534,
+      "variants": [
+        {
+          "file": "assets/jump-480.webp",
+          "w": 480,
+          "h": 320,
+          "bytes": 27442
+        },
+        {
+          "file": "assets/jump-960.webp",
+          "w": 800,
+          "h": 534,
+          "bytes": 55064
+        }
+      ]
+    },
+    "hero": {
+      "original_bytes": 2132753,
+      "width": 1000,
+      "height": 699,
+      "variants": [
+        {
+          "file": "assets/hero-480.webp",
+          "w": 480,
+          "h": 336,
+          "bytes": 64454
+        },
+        {
+          "file": "assets/hero-960.webp",
+          "w": 960,
+          "h": 671,
+          "bytes": 242186
+        },
+        {
+          "file": "assets/hero-1600.webp",
+          "w": 1000,
+          "h": 699,
+          "bytes": 320034
+        }
+      ]
+    },
+    "run": {
+      "original_bytes": 119096,
+      "width": 1080,
+      "height": 831,
+      "variants": [
+        {
+          "file": "assets/run-480.webp",
+          "w": 480,
+          "h": 369,
+          "bytes": 41242
+        },
+        {
+          "file": "assets/run-960.webp",
+          "w": 960,
+          "h": 739,
+          "bytes": 99366
+        },
+        {
+          "file": "assets/run-1600.webp",
+          "w": 1080,
+          "h": 831,
+          "bytes": 136726
+        }
+      ]
+    },
+    "walk": {
+      "original_bytes": 182225,
+      "width": 1024,
+      "height": 768,
+      "variants": [
+        {
+          "file": "assets/walk-480.webp",
+          "w": 480,
+          "h": 360,
+          "bytes": 63014
+        },
+        {
+          "file": "assets/walk-960.webp",
+          "w": 960,
+          "h": 720,
+          "bytes": 191042
+        },
+        {
+          "file": "assets/walk-1600.webp",
+          "w": 1024,
+          "h": 768,
+          "bytes": 245392
+        }
+      ]
+    },
+    "agility": {
+      "original_bytes": 399773,
+      "width": 2048,
+      "height": 1152,
+      "variants": [
+        {
+          "file": "assets/agility-480.webp",
+          "w": 480,
+          "h": 270,
+          "bytes": 26232
+        },
+        {
+          "file": "assets/agility-960.webp",
+          "w": 960,
+          "h": 540,
+          "bytes": 100744
+        },
+        {
+          "file": "assets/agility-1600.webp",
+          "w": 1600,
+          "h": 900,
+          "bytes": 310134
+        }
+      ]
+    },
+    "hoopers": {
+      "original_bytes": 2181821,
+      "width": 1000,
+      "height": 750,
+      "variants": [
+        {
+          "file": "assets/hoopers-480.webp",
+          "w": 480,
+          "h": 360,
+          "bytes": 63122
+        },
+        {
+          "file": "assets/hoopers-960.webp",
+          "w": 960,
+          "h": 720,
+          "bytes": 245448
+        },
+        {
+          "file": "assets/hoopers-1600.webp",
+          "w": 1000,
+          "h": 750,
+          "bytes": 325188
+        }
+      ]
+    },
+    "hoop2": {
+      "original_bytes": 2132203,
+      "width": 1000,
+      "height": 750,
+      "variants": [
+        {
+          "file": "assets/hoop2-480.webp",
+          "w": 480,
+          "h": 360,
+          "bytes": 62460
+        },
+        {
+          "file": "assets/hoop2-960.webp",
+          "w": 960,
+          "h": 720,
+          "bytes": 218248
+        },
+        {
+          "file": "assets/hoop2-1600.webp",
+          "w": 1000,
+          "h": 750,
+          "bytes": 288246
+        }
+      ]
+    },
+    "team": {
+      "original_bytes": 1697134,
+      "width": 1000,
+      "height": 666,
+      "variants": [
+        {
+          "file": "assets/team-480.webp",
+          "w": 480,
+          "h": 320,
+          "bytes": 37530
+        },
+        {
+          "file": "assets/team-960.webp",
+          "w": 960,
+          "h": 639,
+          "bytes": 113630
+        },
+        {
+          "file": "assets/team-2400.webp",
+          "w": 1000,
+          "h": 666,
+          "bytes": 158404
+        }
+      ]
+    },
+    "house": {
+      "original_bytes": 125060,
+      "width": 640,
+      "height": 427,
+      "variants": [
+        {
+          "file": "assets/house-480.webp",
+          "w": 480,
+          "h": 320,
+          "bytes": 44908
+        },
+        {
+          "file": "assets/house-960.webp",
+          "w": 640,
+          "h": 427,
+          "bytes": 75322
+        }
+      ]
+    },
+    "field": {
+      "original_bytes": 112987,
+      "width": 640,
+      "height": 427,
+      "variants": [
+        {
+          "file": "assets/field-480.webp",
+          "w": 480,
+          "h": 320,
+          "bytes": 37696
+        },
+        {
+          "file": "assets/field-960.webp",
+          "w": 640,
+          "h": 427,
+          "bytes": 66600
+        }
+      ]
+    },
+    "dog": {
+      "original_bytes": 404827,
+      "width": 2048,
+      "height": 1367,
+      "variants": [
+        {
+          "file": "assets/dog-480.webp",
+          "w": 480,
+          "h": 320,
+          "bytes": 25870
+        },
+        {
+          "file": "assets/dog-960.webp",
+          "w": 960,
+          "h": 641,
+          "bytes": 84050
+        },
+        {
+          "file": "assets/dog-1600.webp",
+          "w": 1600,
+          "h": 1068,
+          "bytes": 264518
+        }
+      ]
+    },
+    "puppy": {
+      "original_bytes": 1432957,
+      "width": 960,
+      "height": 640,
+      "variants": [
+        {
+          "file": "assets/puppy-480.webp",
+          "w": 480,
+          "h": 320,
+          "bytes": 16966
+        },
+        {
+          "file": "assets/puppy-960.webp",
+          "w": 960,
+          "h": 640,
+          "bytes": 44310
+        }
+      ]
+    },
+    "obed": {
+      "original_bytes": 2066175,
+      "width": 1000,
+      "height": 666,
+      "variants": [
+        {
+          "file": "assets/obed-480.webp",
+          "w": 480,
+          "h": 320,
+          "bytes": 61492
+        },
+        {
+          "file": "assets/obed-960.webp",
+          "w": 960,
+          "h": 639,
+          "bytes": 207612
+        },
+        {
+          "file": "assets/obed-1600.webp",
+          "w": 1000,
+          "h": 666,
+          "bytes": 280124
+        }
+      ]
+    },
+    "sari": {
+      "original_bytes": 1365394,
+      "width": 666,
+      "height": 1000,
+      "variants": [
+        {
+          "file": "assets/sari-480.webp",
+          "w": 320,
+          "h": 480,
+          "bytes": 12478
+        },
+        {
+          "file": "assets/sari-960.webp",
+          "w": 639,
+          "h": 960,
+          "bytes": 29286
+        },
+        {
+          "file": "assets/sari-1600.webp",
+          "w": 666,
+          "h": 1000,
+          "bytes": 41564
+        }
+      ]
+    },
+    "michi": {
+      "original_bytes": 1321622,
+      "width": 666,
+      "height": 1000,
+      "variants": [
+        {
+          "file": "assets/michi-480.webp",
+          "w": 320,
+          "h": 480,
+          "bytes": 11150
+        },
+        {
+          "file": "assets/michi-960.webp",
+          "w": 639,
+          "h": 960,
+          "bytes": 24198
+        },
+        {
+          "file": "assets/michi-1600.webp",
+          "w": 666,
+          "h": 1000,
+          "bytes": 33440
+        }
+      ]
+    },
+    "harald": {
+      "original_bytes": 501278,
+      "width": 426,
+      "height": 640,
+      "variants": [
+        {
+          "file": "assets/harald-480.webp",
+          "w": 320,
+          "h": 480,
+          "bytes": 12420
+        },
+        {
+          "file": "assets/harald-960.webp",
+          "w": 426,
+          "h": 640,
+          "bytes": 20964
+        }
+      ]
+    },
+    "karo": {
+      "original_bytes": 1373091,
+      "width": 666,
+      "height": 1000,
+      "variants": [
+        {
+          "file": "assets/karo-480.webp",
+          "w": 320,
+          "h": 480,
+          "bytes": 12842
+        },
+        {
+          "file": "assets/karo-960.webp",
+          "w": 639,
+          "h": 960,
+          "bytes": 29604
+        },
+        {
+          "file": "assets/karo-1600.webp",
+          "w": 666,
+          "h": 1000,
+          "bytes": 40452
+        }
+      ]
+    },
+    "otto": {
+      "original_bytes": 1351809,
+      "width": 666,
+      "height": 1000,
+      "variants": [
+        {
+          "file": "assets/otto-480.webp",
+          "w": 320,
+          "h": 480,
+          "bytes": 12438
+        },
+        {
+          "file": "assets/otto-960.webp",
+          "w": 639,
+          "h": 960,
+          "bytes": 28528
+        },
+        {
+          "file": "assets/otto-1600.webp",
+          "w": 666,
+          "h": 1000,
+          "bytes": 38948
+        }
+      ]
+    },
+    "mary": {
+      "original_bytes": 541474,
+      "width": 426,
+      "height": 640,
+      "variants": [
+        {
+          "file": "assets/mary-480.webp",
+          "w": 320,
+          "h": 480,
+          "bytes": 14334
+        },
+        {
+          "file": "assets/mary-960.webp",
+          "w": 426,
+          "h": 640,
+          "bytes": 23414
+        }
+      ]
+    },
+    "susi": {
+      "original_bytes": 535933,
+      "width": 426,
+      "height": 640,
+      "variants": [
+        {
+          "file": "assets/susi-480.webp",
+          "w": 320,
+          "h": 480,
+          "bytes": 14194
+        },
+        {
+          "file": "assets/susi-960.webp",
+          "w": 426,
+          "h": 640,
+          "bytes": 23276
+        }
+      ]
+    },
+    "alex": {
+      "original_bytes": 1430253,
+      "width": 666,
+      "height": 1000,
+      "variants": [
+        {
+          "file": "assets/alex-480.webp",
+          "w": 320,
+          "h": 480,
+          "bytes": 13486
+        },
+        {
+          "file": "assets/alex-960.webp",
+          "w": 639,
+          "h": 960,
+          "bytes": 29202
+        },
+        {
+          "file": "assets/alex-1600.webp",
+          "w": 666,
+          "h": 1000,
+          "bytes": 41260
+        }
+      ]
+    },
+    "sabrina": {
+      "original_bytes": 1319635,
+      "width": 666,
+      "height": 1000,
+      "variants": [
+        {
+          "file": "assets/sabrina-480.webp",
+          "w": 320,
+          "h": 480,
+          "bytes": 11344
+        },
+        {
+          "file": "assets/sabrina-960.webp",
+          "w": 639,
+          "h": 960,
+          "bytes": 26000
+        },
+        {
+          "file": "assets/sabrina-1600.webp",
+          "w": 666,
+          "h": 1000,
+          "bytes": 36372
+        }
+      ]
+    },
+    "conny": {
+      "original_bytes": 1330496,
+      "width": 666,
+      "height": 1000,
+      "variants": [
+        {
+          "file": "assets/conny-480.webp",
+          "w": 320,
+          "h": 480,
+          "bytes": 11832
+        },
+        {
+          "file": "assets/conny-960.webp",
+          "w": 639,
+          "h": 960,
+          "bytes": 24994
+        },
+        {
+          "file": "assets/conny-1600.webp",
+          "w": 666,
+          "h": 1000,
+          "bytes": 35040
+        }
+      ]
+    },
+    "patrick": {
+      "original_bytes": 1340240,
+      "width": 666,
+      "height": 1000,
+      "variants": [
+        {
+          "file": "assets/patrick-480.webp",
+          "w": 320,
+          "h": 480,
+          "bytes": 11760
+        },
+        {
+          "file": "assets/patrick-960.webp",
+          "w": 639,
+          "h": 960,
+          "bytes": 25806
+        },
+        {
+          "file": "assets/patrick-1600.webp",
+          "w": 666,
+          "h": 1000,
+          "bytes": 35768
+        }
+      ]
+    },
+    "gabi": {
+      "original_bytes": 1351253,
+      "width": 666,
+      "height": 1000,
+      "variants": [
+        {
+          "file": "assets/gabi-480.webp",
+          "w": 320,
+          "h": 480,
+          "bytes": 12150
+        },
+        {
+          "file": "assets/gabi-960.webp",
+          "w": 639,
+          "h": 960,
+          "bytes": 28926
+        },
+        {
+          "file": "assets/gabi-1600.webp",
+          "w": 666,
+          "h": 1000,
+          "bytes": 40480
+        }
+      ]
+    }
+  }
+}
