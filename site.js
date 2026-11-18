@@ -35,51 +35,57 @@ if('IntersectionObserver' in window){const observer=new IntersectionObserver(es=
  if(!reduced.matches&&'IntersectionObserver'in window){root.classList.add('thv-motion');const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){show(e.target);obs.unobserve(e.target)}}),{threshold:.06,rootMargin:'0px 0px -3% 0px'});nodes.forEach(n=>obs.observe(n))}else nodes.forEach(show);
 })();
 
-/* Portrait camera: focus on the face, center it in the viewport, and allow manual correction. */
+
+/* Generated focal points are measured from the original photos, not guessed per browser. */
+const thvPhotoData=fetch('generated-media/photo-focus.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).catch(()=>null);
+thvPhotoData.then(data=>{
+ const hero=document.querySelector('.hero-subject'),img=hero?.querySelector('img');if(!img||!data?.hero)return;
+ const cut=new Image();cut.onload=()=>{img.src=cut.src;hero.classList.add('hero-is-cutout')};cut.src='generated-media/'+data.hero;
+});
 (()=>{
  const dlg=document.querySelector('.portrait-dialog');if(!dlg)return;
  const image=dlg.querySelector('.portrait-modal-image'),viewport=dlg.querySelector('.portrait-viewport'),toggle=dlg.querySelector('.portrait-zoom-toggle');if(!image||!viewport||!toggle)return;
- let generation=0,zoom=false,point={x:.5,y:.22},scale=2.05,drag=null,current=null,manual=false;
+ let generation=0,zoom=false,point={x:.5,y:.22},scale=2.35,drag=null,manual=false,current=null,focus=null;
  const enabled=()=>!matchMedia('(prefers-reduced-motion: reduce)').matches&&!document.documentElement.classList.contains('paused');
  const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
  function apply(animate=true){
-  const w=image.offsetWidth,h=image.offsetHeight;
-  const iw=image.naturalWidth||w,ih=image.naturalHeight||h;
-  const fitted=Math.min(w/iw,h/ih),rw=iw*fitted,rh=ih*fitted;
-  const s=zoom?scale:1;
-  const x=clamp((.5-point.x)*rw*s,-Math.max(0,(rw*s-w)/2),Math.max(0,(rw*s-w)/2));
-  const y=clamp((.5-point.y)*rh*s,-Math.max(0,(rh*s-h)/2),Math.max(0,(rh*s-h)/2));
+  const w=image.offsetWidth,h=image.offsetHeight,iw=image.naturalWidth,ih=image.naturalHeight;
+  if(!w||!h||!iw||!ih)return;
+  const fit=Math.min(w/iw,h/ih),rw=iw*fit,rh=ih*fit;
+  if(focus&&!manual)scale=clamp(Math.min(w*.43/Math.max(1,focus.width*rw),h*.50/Math.max(1,focus.height*rh)),1.55,4.8);
+  const s=zoom?scale:1,x=zoom?(.5-point.x)*rw*s:0,y=zoom?(.5-point.y)*rh*s:0;
   viewport.style.setProperty('--portrait-scale',String(s));viewport.style.setProperty('--portrait-pan-x',x+'px');viewport.style.setProperty('--portrait-pan-y',y+'px');
   viewport.classList.toggle('portrait-no-motion',!animate||!enabled());viewport.classList.toggle('portrait-zoomed',zoom);
-  toggle.textContent=zoom?'Ganzes Foto ansehen':'Gesichter vergrößern';toggle.setAttribute('aria-pressed',String(zoom));
+  toggle.textContent=zoom?'Ganzes Foto ansehen':'Gesicht vergrößern';toggle.setAttribute('aria-pressed',String(zoom));
  }
  function open(button){
-  const id=++generation;current=button;zoom=false;manual=false;point={x:.5,y:.22};scale=2.05;apply(false);
+  const id=++generation;current=button;zoom=false;manual=false;focus=null;point={x:.5,y:.22};scale=2.35;
+  viewport.style.setProperty('--portrait-scale','1');viewport.style.setProperty('--portrait-pan-x','0px');viewport.style.setProperty('--portrait-pan-y','0px');viewport.classList.remove('portrait-zoomed');viewport.classList.add('portrait-no-motion');toggle.textContent='Gesicht vergrößern';toggle.setAttribute('aria-pressed','false');
   let triggered=false;
-  const start=()=>{if(triggered||id!==generation||!dlg.open)return;triggered=true;requestAnimationFrame(()=>requestAnimationFrame(()=>{if(id!==generation||!dlg.open)return;zoom=true;apply(true)}))};
-  const ready=async()=>{if(id!==generation||!dlg.open)return;
-   const timer=setTimeout(start,250);
+  const valid=()=>id===generation&&dlg.open;
+  const use=f=>{if(!valid()||manual||!f||!Number.isFinite(f.x)||!Number.isFinite(f.y))return;focus=f;point={x:clamp(f.x,0,1),y:clamp(f.y,0,1)};if(zoom)apply(true)};
+  const start=()=>{if(triggered||!valid()||!image.naturalWidth)return;triggered=true;apply(false);requestAnimationFrame(()=>requestAnimationFrame(()=>{if(!valid())return;zoom=true;apply(true)}))};
+  const ready=async()=>{
+   if(!valid())return;
+   const key=button.querySelector('img')?.dataset.asset;
+   const timer=setTimeout(start,700);
+   const data=await thvPhotoData;if(!valid())return;const f=data?.faces?.[key];
+   if(f){use(f);clearTimeout(timer);start();return}
    try{if('FaceDetector'in window){
-    const faces=await new FaceDetector({fastMode:true,maxDetectedFaces:5}).detect(image);
-    if(id!==generation||!dlg.open||manual)return;
-    if(faces.length&&image.naturalWidth&&image.naturalHeight){
-     const f=faces.map(a=>a.boundingBox).sort((a,b)=>b.width*b.height-a.width*a.height)[0];
-     const bounds=[f,...faces.map(a=>a.boundingBox).filter(b=>b!==f&&b.width*b.height>f.width*f.height*.55)];
-     const l=Math.min(...bounds.map(b=>b.x)),r=Math.max(...bounds.map(b=>b.x+b.width)),t=Math.min(...bounds.map(b=>b.y)),bt=Math.max(...bounds.map(b=>b.y+b.height));
-     point={x:clamp((l+r)/2/image.naturalWidth,.03,.97),y:clamp((t+bt)/2/image.naturalHeight,.03,.97)};
-     scale=clamp(Math.min(.68*image.naturalWidth/Math.max(1,r-l),.68*image.naturalHeight/Math.max(1,bt-t)),1.35,3.15);
-     if(zoom)apply(true);
-    }
+    const faces=await new FaceDetector({fastMode:true,maxDetectedFaces:4}).detect(image);
+    if(!valid())return;
+    const best=faces.map(a=>a.boundingBox).sort((a,b)=>b.width*b.height-a.width*a.height)[0];
+    if(best)use({x:(best.x+best.width/2)/image.naturalWidth,y:(best.y+best.height/2)/image.naturalHeight,width:best.width/image.naturalWidth,height:best.height/image.naturalHeight});
    }}catch(_){}finally{clearTimeout(timer);start()}
   };
-  if(image.complete&&image.naturalWidth)ready();else{image.addEventListener('load',ready,{once:true});setTimeout(start,650)}
+  if(image.complete&&image.naturalWidth)ready();else image.addEventListener('load',ready,{once:true});
  }
  document.querySelectorAll('.portrait-frame').forEach(b=>b.addEventListener('click',()=>open(b)));
- toggle.addEventListener('click',()=>{zoom=!zoom;manual=true;apply(true)});
+ toggle.addEventListener('click',()=>{zoom=!zoom;apply(true)});
  viewport.addEventListener('pointerdown',e=>{if(!zoom||e.button!==0)return;drag={x:e.clientX,y:e.clientY,px:point.x,py:point.y};manual=true;viewport.setPointerCapture?.(e.pointerId)});
  viewport.addEventListener('pointermove',e=>{if(!drag)return;const w=image.offsetWidth,h=image.offsetHeight,fit=Math.min(w/(image.naturalWidth||w),h/(image.naturalHeight||h));point={x:clamp(drag.px-(e.clientX-drag.x)/Math.max(1,(image.naturalWidth||w)*fit*scale),0,1),y:clamp(drag.py-(e.clientY-drag.y)/Math.max(1,(image.naturalHeight||h)*fit*scale),0,1)};apply(false)});
  for(const event of ['pointerup','pointercancel','lostpointercapture'])viewport.addEventListener(event,()=>{drag=null});
- viewport.addEventListener('dblclick',()=>{if(!current)return;zoom=!zoom;manual=true;apply(true)});
+ viewport.addEventListener('dblclick',()=>{if(!current)return;zoom=!zoom;apply(true)});
  window.addEventListener('resize',()=>{if(dlg.open)apply(false)});dlg.addEventListener('close',()=>{generation++;zoom=false;drag=null;current=null;apply(false)});
  image.setAttribute('draggable','false');toggle.insertAdjacentHTML('afterend','<small class="portrait-help">Vergrößertes Foto verschieben, um den Ausschnitt anzupassen.</small>');
 })();
