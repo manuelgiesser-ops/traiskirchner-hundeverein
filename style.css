@@ -469,3 +469,61 @@ header.scrolled .brand img{width:52px;height:52px}
 .portrait-dialog .portrait-zoomed .portrait-modal-image{transform:translate3d(var(--portrait-pan-x,0px),var(--portrait-pan-y,0px),0) scale(var(--portrait-scale,1.65))}
 .portrait-dialog .portrait-no-motion .portrait-modal-image{transition:none}
 @media(prefers-reduced-motion:reduce){.portrait-dialog .portrait-modal-image{transition:none!important}}
+
+/* Cinematic header: warm natural focal light, restrained ornaments and soft contours. */
+.hero-character.hero-editorial{background:radial-gradient(ellipse at 77% 46%,#626044 0%,#3e4838 28%,#26362a 53%,#17241b 81%)}
+.hero-character.hero-editorial .hero-subject img{mask-image:radial-gradient(ellipse 53% 51% at 50% 50%,#000 59%,#000 69%,#000d 80%,#0007 92%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 53% 51% at 50% 50%,#000 59%,#000 69%,#000d 80%,#0007 92%,transparent 100%);mask-size:var(--hero-mask-w,100%) var(--hero-mask-h,100%);-webkit-mask-size:var(--hero-mask-w,100%) var(--hero-mask-h,100%);mask-repeat:no-repeat;-webkit-mask-repeat:no-repeat;mask-position:center;-webkit-mask-position:center}
+.hero-character .hero-orbit{background:radial-gradient(circle,#d3a36545 0%,#d8a26b12 55%,transparent 72%);border:1px solid #d9a76d30;box-shadow:none;opacity:.75}
+.hero-character .hero-orbit:before{border-color:#d9ac751e}
+.hero-character .hero-orbit:after{border-color:#d9ac7513}
+.hero-character .hero-ground{opacity:.4;background:radial-gradient(ellipse at 48% 24%,#9d9d5945 0%,#32473558 35%,transparent 65%)}
+.hero-character .hero-leash{opacity:.27}
+.hero-character .hero-terrain{opacity:.06}
+.hero-character .hero-film{opacity:.085}
+.hero-horizon{position:absolute;z-index:1;bottom:0;right:-3%;width:75%;height:auto;color:#e6ba80;opacity:.34;pointer-events:none}
+.hero-horizon path{fill:none;stroke:currentColor;stroke-width:1.1;stroke-linecap:round}
+.hero-horizon .horizon-accent{stroke-width:1.7;stroke-dasharray:1;stroke-dashoffset:0;animation:thvHorizonDraw 3s .5s both}
+@keyframes thvHorizonDraw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+.hero-character .hero-copy h1{margin-bottom:clamp(19px,3vw,32px)}
+.hero-character .hero-lead{line-height:1.68}
+.hero-character .hero-copy .hero-meta{letter-spacing:.015em}
+.hero-character .hero-edge{height:clamp(26px,4vw,62px)}
+/* Calm paw reveal: visible steps first, then the full photograph. */
+.thv-motion .thv-media.thv-media-seen .thv-film-paws .dog-paw{animation:thvPawOpening 1.35s var(--paw-delay) both}
+.thv-motion .media-frame.thv-media:has(.thv-film-paws).thv-media-seen .thv-film-paws{opacity:0;transition:opacity .65s 1.95s}
+.thv-motion .media-frame.thv-media:has(.thv-film-paws).thv-media-seen>img{transition-delay:.72s,.72s,0s;transition-duration:1.95s,1.4s,1.3s}
+/* Magnifying glass and accessible group photo dialog. */
+.group-photo{position:relative;display:block;min-width:0;overflow:hidden;isolation:isolate}
+.group-photo-shell{width:100%}
+.pagelead .group-photo-shell .lead-img{display:block;width:100%;height:auto;margin:0}
+.media-frame.group-photo>img{transform:none!important}
+.group-photo>img{display:block;cursor:zoom-in}
+.group-photo-lens{position:absolute;z-index:5;border:2px solid #f7eddb;border-radius:50%;box-shadow:0 5px 30px #15221750,0 0 0 1px #ac8257;transform:translate(-50%,-50%) scale(.96);opacity:0;visibility:hidden;pointer-events:none;background-repeat:no-repeat;background-color:#e7e1d6;transition:opacity .17s ease,transform .17s ease,visibility .17s;box-sizing:border-box}
+.group-photo.lens-visible .group-photo-lens{opacity:1;visibility:visible;transform:translate(-50%,-50%) scale(1)}
+.group-photo-open{position:absolute;z-index:6;right:12px;bottom:12px;padding:9px 12px;display:inline-flex;align-items:center;gap:7px;line-height:1.3;font-size:11px;font-weight:700;color:#faf4e8;background:#26372ceb;border:1px solid #f1dec55c;border-radius:5px;cursor:zoom-in;box-shadow:0 4px 15px #0002}
+.group-photo-open:hover,.group-photo-open:focus-visible{background:#3e523e;outline:2px solid #d6aa77;outline-offset:2px}
+.thv-motion .media-frame.group-photo:not(.thv-media-seen) .group-photo-open{opacity:0}
+.thv-motion .media-frame.group-photo.thv-media-seen .group-photo-open{animation:groupButtonIn .55s 2s both}
+.group-photo-open:focus-visible{opacity:1!important;animation:none!important}
+@keyframes groupButtonIn{from{opacity:0}to{opacity:1}}
+.paused .group-photo .group-photo-open{opacity:1!important;animation:none!important}
+.group-photo-dialog{width:min(1120px,calc(100vw - 32px));max-width:calc(100vw - 32px);max-height:calc(100dvh - 28px);padding:0;overflow:hidden;border:1px solid #dcc6a0;border-radius:12px;background:#f7f2e7;color:#25372b;box-shadow:0 26px 100px #0006}
+.group-photo-dialog::backdrop{background:#101b15d9;backdrop-filter:blur(5px)}
+.group-photo-dialog[open]{animation:groupDialogIn .28s ease-out both}
+@keyframes groupDialogIn{from{opacity:0;transform:translateY(8px) scale(.985)}to{opacity:1;transform:none}}
+.group-dialog-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 16px;flex-wrap:wrap}
+.group-dialog-head strong{font-size:16px}
+.group-dialog-controls{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.group-dialog-controls button{background:transparent;border:1px solid #a7b29e;border-radius:4px;min-width:37px;min-height:37px;padding:5px 9px;color:#26372b;font-weight:700;cursor:pointer;font-size:13px}
+.group-dialog-controls button[data-close]{margin-left:7px;background:#26372b;color:#fff;font-size:20px;line-height:1}
+.group-dialog-controls button[data-zoom="plus"],.group-dialog-controls button[data-zoom="minus"]{font-size:20px;line-height:1}
+.group-dialog-controls button:disabled{opacity:.35;cursor:default}
+.group-dialog-controls output{font-size:12px;min-width:45px;text-align:center;font-variant-numeric:tabular-nums}
+.group-dialog-stage{position:relative;width:100%;height:min(68dvh,680px);overflow:auto;background:#18261e;overscroll-behavior:contain;touch-action:pan-x pan-y}
+.group-dialog-stage img{display:block;max-width:none;max-height:none;flex:none;object-fit:contain;background:transparent;user-select:none;-webkit-user-drag:none}
+.group-dialog-stage.is-enlarged{cursor:grab}
+.group-dialog-stage.is-enlarged:active{cursor:grabbing}
+.group-dialog-hint{font-size:12px;text-align:center;padding:10px 14px;margin:0;color:#596958}
+@media(max-width:760px){.hero-horizon{width:120%;bottom:35%;right:-19%;opacity:.21}.hero-character.hero-editorial .hero-subject{margin-bottom:2px}.hero-character .hero-copy h1{margin-bottom:19px}.hero-character .hero-edge{height:30px}.thv-motion .media-frame.thv-media:has(.thv-film-paws).thv-media-seen>img{transition-delay:.58s,.58s,0s;transition-duration:1.65s,1.15s,.9s}.group-photo-open{right:8px;bottom:8px;padding:8px 10px}.group-photo-dialog{width:calc(100vw - 16px);max-width:calc(100vw - 16px)}.group-dialog-head{padding:9px 10px;gap:5px}.group-dialog-controls{gap:4px}.group-dialog-controls button{min-width:34px;min-height:34px;padding:5px 7px}.group-dialog-stage{height:58dvh}.group-dialog-hint{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.hero-horizon .horizon-accent,.group-photo-dialog[open],.thv-motion .media-frame.group-photo.thv-media-seen .group-photo-open{animation:none!important}.group-photo .group-photo-open{opacity:1!important}.group-photo-lens{transition:none!important}}
+.paused .hero-horizon .horizon-accent{animation:none!important}

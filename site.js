@@ -29,7 +29,7 @@ if('IntersectionObserver' in window){const observer=new IntersectionObserver(es=
  else{decor(document.querySelector('.pagelead'),'corner-right','trail');const sections=[...document.querySelectorAll('main>.section')];if(sections.length>1)decor(sections[sections.length-1],'corner-left','leaf');}
  // The old silhouette illustrations are intentionally retired.
  document.querySelectorAll('header .brand img[data-asset="logo"]').forEach(img=>{const mark=document.createElement('span');mark.className='mark thv-wordmark';mark.setAttribute('aria-hidden','true');mark.innerHTML='THV<span>●</span>';img.replaceWith(mark)});
- const frames=[...document.querySelectorAll('.media-frame')];frames.forEach(f=>{f.classList.add('thv-media');if(f.closest('.gallery-item'))return;const svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox','0 0 240 140');svg.setAttribute('preserveAspectRatio','xMidYMid slice');svg.setAttribute('aria-hidden','true');svg.setAttribute('focusable','false');svg.setAttribute('class','thv-film-paws');svg.innerHTML=[[20,117,-22],[62,94,14],[106,68,-15],[150,45,18],[194,23,-12]].map(([x,y,r],i)=>'<g transform="translate('+x+' '+y+') rotate('+r+') scale(.31) translate(-55 -50)"><g class="dog-paw" style="--paw-delay:'+i*115+'ms">'+paw+'</g></g>').join('');f.append(svg)});
+ const frames=[...document.querySelectorAll('.media-frame')];frames.forEach(f=>{f.classList.add('thv-media');if(f.closest('.gallery-item'))return;const svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox','0 0 240 140');svg.setAttribute('preserveAspectRatio','xMidYMid slice');svg.setAttribute('aria-hidden','true');svg.setAttribute('focusable','false');svg.setAttribute('class','thv-film-paws');svg.innerHTML=[[20,117,-22],[62,94,14],[106,68,-15],[150,45,18],[194,23,-12]].map(([x,y,r],i)=>'<g transform="translate('+x+' '+y+') rotate('+r+') scale(.31) translate(-55 -50)"><g class="dog-paw" style="--paw-delay:'+i*235+'ms">'+paw+'</g></g>').join('');f.append(svg)});
  const seal=document.querySelector('.thv-bond-seal'),nodes=[...document.querySelectorAll('.thv-corner'),...frames,...(seal?[seal]:[])];
  const show=e=>e.classList.add(e.classList.contains('thv-media')?'thv-media-seen':'thv-ornament-seen');
  if(!reduced.matches&&'IntersectionObserver'in window){root.classList.add('thv-motion');const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){show(e.target);obs.unobserve(e.target)}}),{threshold:.06,rootMargin:'0px 0px -3% 0px'});nodes.forEach(n=>obs.observe(n))}else nodes.forEach(show);
@@ -85,4 +85,54 @@ const thvPhotoData=Promise.resolve({"faces":{"sari":{"x":0.39743,"y":0.59646,"wi
  viewport.addEventListener('dblclick',()=>{if(!current)return;zoom=!zoom;apply(true)});
  window.addEventListener('resize',()=>{if(dlg.open)apply(false)});dlg.addEventListener('close',()=>{generation++;zoom=false;drag=null;current=null;apply(false)});
  image.setAttribute('draggable','false');toggle.insertAdjacentHTML('afterend','<small class="portrait-help">Vergrößertes Foto verschieben, um den Ausschnitt anzupassen.</small>');
+})();
+
+/* Header mask follows the actual photograph, not its surrounding box. */
+(()=>{
+ const img=document.querySelector('.hero-subject img');if(!img)return;
+ function sizeMask(){const w=img.clientWidth,h=img.clientHeight;if(!w||!h||!img.naturalWidth||!img.naturalHeight)return;const fit=Math.min(w/img.naturalWidth,h/img.naturalHeight);img.style.setProperty('--hero-mask-w',img.naturalWidth*fit+'px');img.style.setProperty('--hero-mask-h',img.naturalHeight*fit+'px')}
+ img.addEventListener('load',sizeMask);sizeMask();if('ResizeObserver'in window)new ResizeObserver(sizeMask).observe(img);else window.addEventListener('resize',sizeMask,{passive:true});
+})();
+/* Group photos: mouse lens and full-size viewer with touch and keyboard controls. */
+(()=>{
+ const photos=[...document.querySelectorAll('img[data-asset="team"]')];if(!photos.length)return;
+ const icon='<svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="m15 15 5 5M10 7v6M7 10h6"/></svg>';
+ const dialog=document.createElement('dialog');dialog.className='group-photo-dialog';dialog.setAttribute('aria-label','Gruppenfoto in großer Ansicht');
+ dialog.innerHTML='<div class="group-dialog-head"><strong>Unser Team</strong><div class="group-dialog-controls"><button type="button" data-zoom="minus" aria-label="Foto verkleinern">−</button><output aria-live="polite">100 %</output><button type="button" data-zoom="plus" aria-label="Foto vergrößern">+</button><button type="button" data-zoom="reset">Ganzes Foto</button><button type="button" data-close aria-label="Schließen">×</button></div></div><div class="group-dialog-stage" tabindex="0" aria-label="Fotoausschnitt verschieben"><img draggable="false" alt=""></div><p class="group-dialog-hint">Mit + und − vergrößern oder verkleinern. Vergrößerte Ansicht verschieben.</p>';
+ document.body.append(dialog);
+ const stage=dialog.querySelector('.group-dialog-stage'),full=stage.querySelector('img'),out=dialog.querySelector('output'),minus=dialog.querySelector('[data-zoom="minus"]'),plus=dialog.querySelector('[data-zoom="plus"]'),reset=dialog.querySelector('[data-zoom="reset"]');
+ let active=null,zoom=1,drag=null;
+ const cap=(v,a,b)=>Math.max(a,Math.min(b,v));
+ function layout(keep=true){
+  if(!dialog.open||!full.naturalWidth||!stage.clientWidth||!stage.clientHeight)return;
+  const cx=keep?(stage.scrollLeft+stage.clientWidth/2)/Math.max(stage.scrollWidth,1):.5,cy=keep?(stage.scrollTop+stage.clientHeight/2)/Math.max(stage.scrollHeight,1):.5;
+  const fit=Math.min(stage.clientWidth/full.naturalWidth,stage.clientHeight/full.naturalHeight),w=full.naturalWidth*fit*zoom,h=full.naturalHeight*fit*zoom;
+  full.style.width=w+'px';full.style.height=h+'px';full.style.marginLeft=Math.max(0,(stage.clientWidth-w)/2)+'px';full.style.marginTop=Math.max(0,(stage.clientHeight-h)/2)+'px';
+  stage.scrollLeft=cx*stage.scrollWidth-stage.clientWidth/2;stage.scrollTop=cy*stage.scrollHeight-stage.clientHeight/2;
+  out.value=Math.round(zoom*100)+' %';minus.disabled=zoom<=1;plus.disabled=zoom>=3;reset.disabled=zoom===1;stage.classList.toggle('is-enlarged',zoom>1);
+ }
+ function setZoom(next){zoom=cap(next,1,3);layout()}
+ minus.addEventListener('click',()=>setZoom(zoom-.5));plus.addEventListener('click',()=>setZoom(zoom+.5));reset.addEventListener('click',()=>{zoom=1;layout(false)});
+ dialog.querySelector('[data-close]').addEventListener('click',()=>dialog.close());
+ dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close()});
+ dialog.addEventListener('close',()=>{active?.focus({preventScroll:true});active=null;drag=null});
+ full.addEventListener('load',()=>layout(false));window.addEventListener('resize',()=>{if(dialog.open)layout()},{passive:true});
+ stage.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse'||e.button!==0||zoom===1)return;drag={x:e.clientX,y:e.clientY,sx:stage.scrollLeft,sy:stage.scrollTop};stage.setPointerCapture(e.pointerId)});
+ stage.addEventListener('pointermove',e=>{if(drag){stage.scrollLeft=drag.sx+drag.x-e.clientX;stage.scrollTop=drag.sy+drag.y-e.clientY}});
+ for(const ev of ['pointerup','pointercancel','lostpointercapture'])stage.addEventListener(ev,()=>{drag=null});
+ function open(photo,button){if(typeof dialog.showModal!=='function'){window.open(photo.currentSrc||photo.src,'_blank','noopener');return}active=button;zoom=1;full.alt=photo.alt;full.src=photo.currentSrc||photo.src;dialog.showModal();layout(false);requestAnimationFrame(()=>layout(false))}
+ photos.forEach(photo=>{
+  let shell=photo.parentElement;if(!shell.classList.contains('media-frame')){shell=document.createElement('div');shell.className='group-photo-shell';photo.before(shell);shell.append(photo)}
+  shell.classList.add('group-photo');const lens=document.createElement('span');lens.className='group-photo-lens';lens.setAttribute('aria-hidden','true');shell.append(lens);
+  const button=document.createElement('button');button.type='button';button.className='group-photo-open';button.setAttribute('aria-label','Gruppenfoto vergrößern');button.setAttribute('aria-haspopup','dialog');button.innerHTML=icon+'<span>Foto vergrößern</span>';shell.append(button);
+  const hide=()=>shell.classList.remove('lens-visible');
+  button.addEventListener('click',e=>{e.stopPropagation();hide();open(photo,button)});photo.addEventListener('click',()=>{hide();open(photo,button)});shell.addEventListener('pointerleave',hide);
+  shell.addEventListener('pointermove',e=>{
+   if(e.pointerType!=='mouse'||!matchMedia('(hover:hover) and (pointer:fine)').matches||!photo.naturalWidth||e.target.closest('button')||dialog.open||(shell.classList.contains('thv-media')&&!shell.classList.contains('thv-media-seen')&&!document.documentElement.classList.contains('paused'))){hide();return}
+   const rect=photo.getBoundingClientRect(),outer=shell.getBoundingClientRect(),fit=Math.min(rect.width/photo.naturalWidth,rect.height/photo.naturalHeight),w=photo.naturalWidth*fit,h=photo.naturalHeight*fit,left=rect.left+(rect.width-w)/2,top=rect.top+(rect.height-h)/2;
+   if(e.clientX<left||e.clientX>left+w||e.clientY<top||e.clientY>top+h){hide();return}
+   const d=Math.min(178,w*.52,h*.72);if(d<48){hide();return}const factor=2.15,px=e.clientX-left,py=e.clientY-top,x=cap(e.clientX-outer.left,d/2,outer.width-d/2),y=cap(e.clientY-outer.top,d/2,outer.height-d/2);
+   lens.style.width=d+'px';lens.style.height=d+'px';lens.style.left=x+'px';lens.style.top=y+'px';lens.style.backgroundImage='url('+JSON.stringify(photo.currentSrc||photo.src)+')';lens.style.backgroundSize=w*factor+'px '+h*factor+'px';lens.style.backgroundPosition=(d/2-px*factor)+'px '+(d/2-py*factor)+'px';shell.classList.add('lens-visible');
+  });
+ });
 })();
