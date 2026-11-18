@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+ini_set('display_errors','0');
 date_default_timezone_set('Europe/Vienna');
 function h($v): string { return htmlspecialchars((string)$v, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'); }
 function thv_private(): string {

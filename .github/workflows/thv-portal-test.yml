@@ -1,0 +1,28 @@
+name: Test THV Vereinsbereich
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'verein-core.php'
+      - 'vereinsbereich.php'
+      - 'vereinsdaten.php'
+      - 'vereinsartikel.php'
+      - 'tests/portal_test.py'
+      - '.github/workflows/thv-portal-test.yml'
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - name: PHP syntax
+        run: |
+          php -l verein-core.php
+          php -l vereinsbereich.php
+          php -l vereinsdaten.php
+          php -l vereinsartikel.php
+      - name: Isolated access and publishing tests
+        run: python3 tests/portal_test.py
