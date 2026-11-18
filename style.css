@@ -982,7 +982,7 @@ body:has(#nav.open) .mobile-course-return,body:has(dialog[open]) .mobile-course-
 @media(prefers-reduced-motion:reduce){.mobile-course-return{animation:none!important}.course-discovery-hint{display:none!important}.thv-motion .course-modern .course-discovery>img{filter:none!important;opacity:1!important;transform:none!important;transition:none!important}}
 
 /* V29: brisk, one-time course discovery; the photo is sharp within 0.65s. */
-.thv-motion .course-modern .media-frame.thv-media.photo-opening.paw-reveal.course-discovery:not(.thv-media-seen)>img{opacity:.84;filter:saturate(.92) blur(.6px);transition:opacity .52s ease-out,filter .58s ease-out,transform .58s ease-out!important}
+.thv-motion .course-modern .media-frame.thv-media.photo-opening.paw-reveal.course-discovery:not(.thv-media-seen)>img{opacity:.60;filter:saturate(.92) blur(.6px);transition:opacity .52s ease-out,filter .58s ease-out,transform .58s ease-out!important}
 .thv-motion .course-modern .media-frame.thv-media.photo-opening.paw-reveal.course-discovery.thv-media-seen>img{transition:opacity .52s ease-out,filter .58s ease-out,transform .58s ease-out!important;transition-delay:.06s!important}
 .thv-motion .course-modern .media-frame.thv-media.photo-opening.paw-reveal.course-discovery .course-discovery-hint{transition:opacity .18s ease-out}
 .thv-motion .course-modern .media-frame.thv-media.photo-opening.paw-reveal.course-discovery.thv-media-seen .thv-film-paws{animation:thvWalkingOverlay 1.38s linear both!important}
@@ -998,7 +998,7 @@ body:has(#nav.open) .mobile-course-return,body:has(dialog[open]) .mobile-course-
 
 /* V31: mobile course preview is revealed by a deliberate tap, not by scrolling. */
 @media(hover:none),(pointer:coarse){
-.thv-motion .course-modern .course:not(.course-tap-opening):not(:focus-visible) .media-frame.thv-media.photo-opening.paw-reveal.course-discovery:not(.thv-media-seen)>img{opacity:.84!important;filter:saturate(.92) blur(.6px)!important;transform:scale(1.012)!important}
+.thv-motion .course-modern .course:not(.course-tap-opening):not(:focus-visible) .media-frame.thv-media.photo-opening.paw-reveal.course-discovery:not(.thv-media-seen)>img{opacity:.60!important;filter:saturate(.92) blur(.6px)!important;transform:scale(1.012)!important}
 .thv-motion .course-modern .course:not(.course-tap-opening):not(:focus-visible) .media-frame.course-discovery:not(.thv-media-seen) .course-discovery-hint{display:grid!important;opacity:1}
 }
 /* Explicit tap takes precedence over the generic focus-within shortcuts. */
