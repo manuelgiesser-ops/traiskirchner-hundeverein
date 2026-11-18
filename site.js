@@ -12,3 +12,52 @@ if('IntersectionObserver' in window){const observer=new IntersectionObserver(es=
 (()=>{const motion=matchMedia('(prefers-reduced-motion: reduce)'),fine=matchMedia('(hover:hover) and (pointer:fine)');const root=document.documentElement;const hero=document.querySelector('.hero-character');const items=[...document.querySelectorAll('.decorated-section')];if('IntersectionObserver'in window){const o=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in-view');o.unobserve(e.target)}}),{threshold:.06});items.forEach(x=>o.observe(x))}else items.forEach(x=>x.classList.add('in-view'));let ticking=false;const enabled=()=>!motion.matches&&!root.classList.contains('paused');function scroll(){ticking=false;if(!hero)return;const y=enabled()&&fine.matches?Math.max(0,Math.min(32,-hero.getBoundingClientRect().top*.065)):0;hero.style.setProperty('--world-y',y+'px');hero.style.setProperty('--subject-y',(-y*.55)+'px')}function schedule(){if(!ticking){ticking=true;requestAnimationFrame(scroll)}}window.addEventListener('scroll',schedule,{passive:true});window.addEventListener('resize',schedule,{passive:true});hero?.addEventListener('pointermove',e=>{if(!enabled()||!fine.matches)return;const r=hero.getBoundingClientRect();hero.style.setProperty('--subject-x',Math.max(-10,Math.min(10,(e.clientX-r.left-r.width/2)*.017))+'px')});hero?.addEventListener('pointerleave',()=>hero.style.setProperty('--subject-x','0px'));document.querySelectorAll('.hero-copy .btn,.bond-copy .btn').forEach(b=>{b.classList.add('magnetic-btn');b.addEventListener('pointermove',e=>{if(!enabled()||!fine.matches)return;const r=b.getBoundingClientRect();b.style.setProperty('--mag-x',((e.clientX-r.left-r.width/2)*.09).toFixed(1)+'px');b.style.setProperty('--mag-y',((e.clientY-r.top-r.height/2)*.12).toFixed(1)+'px')});b.addEventListener('pointerleave',()=>{b.style.setProperty('--mag-x','0px');b.style.setProperty('--mag-y','0px')})});motion.addEventListener?.('change',schedule);document.querySelector('#motion')?.addEventListener('click',schedule);schedule()})();
 
 (()=>{const hero=document.querySelector('.hero-character');if(hero&&'IntersectionObserver'in window){const obs=new IntersectionObserver(es=>es.forEach(e=>hero.classList.toggle('hero-offscreen',!e.isIntersecting)),{threshold:0});obs.observe(hero)}})();
+
+/* THV Hundewelt. Vektorzeichnungen und eigene Reveal-Bewegungen */
+(()=>{
+ const ns='http://www.w3.org/2000/svg',root=document.documentElement,reduced=matchMedia('(prefers-reduced-motion: reduce)');
+ const page=location.pathname.split('/').pop().replace(/\.html$/,'')||'index';
+ const dogs={
+ stand:'M19 90 Q5 87 3 68 Q4 62 10 69 Q20 85 36 71 Q51 56 76 60 L97 63 Q110 61 120 45 L132 27 L139 11 Q145 10 148 29 L162 34 L178 39 Q187 43 180 49 L163 54 L151 68 Q148 85 133 89 L145 119 H132 L117 94 L91 96 L75 119 H62 L73 91 L57 88 L43 120 H31 L40 88 Q29 93 19 90Z',
+ sit:'M45 112 Q24 126 13 113 Q8 106 17 107 Q28 113 38 100 Q39 78 59 63 L81 50 L82 32 L75 16 Q80 7 92 25 L104 23 L115 9 Q121 11 119 32 L134 42 Q143 47 133 53 L115 58 Q111 75 101 83 L109 116 H95 L88 92 Q74 99 66 113 L81 114 L81 121 H45Z',
+ leap:'M12 53 Q-2 42 6 29 Q9 25 13 33 Q28 49 49 48 Q65 35 88 37 L109 42 L127 25 L139 9 Q145 5 145 25 L159 29 L179 34 Q187 38 181 44 L166 49 L151 60 L142 65 L175 79 Q183 82 181 88 L170 88 L128 77 L109 64 L83 71 L51 93 L29 89 L25 82 L48 79 L67 58 L45 62 L20 57Z',
+ puppy:'M28 92 Q9 91 9 74 Q11 67 17 76 Q26 84 39 75 Q44 65 62 69 L83 73 Q92 56 90 43 Q78 32 88 22 Q104 12 123 25 Q136 24 141 35 L158 42 Q165 49 154 52 L137 55 Q131 72 119 80 L123 110 Q123 118 111 117 L102 89 L80 91 L72 113 Q67 121 57 115 L60 92 L45 90 L37 113 Q29 120 20 113Z'
+ };
+ const paw='<ellipse cx="-7" cy="-7" rx="3" ry="4.4" transform="rotate(-25 -7 -7)"/><ellipse cx="0" cy="-10" rx="3" ry="4.5"/><ellipse cx="7" cy="-7" rx="3" ry="4.4" transform="rotate(25 7 -7)"/><ellipse cx="12" cy="-1" rx="2.5" ry="3.8" transform="rotate(42 12 -1)"/><path d="M-6 6Q-9 1-4-3Q0-6 4-3Q11 1 8 6Q6 10 1 7Q-4 10-6 6Z"/>';
+ const grass='<path class="grass" d="M10 155q0-25-12-34m22 34q-1-24 8-36m4 36q-2-17 13-26m-5 27q14-19 19-20m148 20q-7-19-16-25m28 24q-1-27 10-42m0 42q5-18 18-24m-3 24q4-22 15-31"/>';
+ const motifs={agility:'M101 143V93m56 50V93M101 111h56m-56-10h56',hoopers:'M100 145v-21a32 32 0 0 1 64 0v21M95 145h12m52 0h12',walk:'M131 47Q166 20 203 51T262 36m-9-8 9 8-5 10',bond:'M178 62c-12-13-29 2 0 21 29-19 12-34 0-21Z'};
+ function paws(coords,scale=1){return coords.map(([x,y,r],i)=>'<g transform="translate('+x+' '+y+') rotate('+r+') scale('+scale+')"><g class="dog-paw" style="--paw-delay:'+i*95+'ms">'+paw+'</g></g>').join('')}
+ function art(host,type='stand',motif='',position=''){
+ if(!host)return;host.classList.add('thv-decor-host');const svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox','0 0 280 166');svg.setAttribute('aria-hidden','true');svg.setAttribute('focusable','false');svg.setAttribute('class','thv-art '+position);
+ svg.innerHTML='<path class="dog-route" d="M-10 146Q51 109 92 142T286 84"/>'+grass+'<g transform="translate(34 16) scale(1.04)"><path class="dog-shape" d="'+dogs[type]+'"/><path class="dog-outline" pathLength="1" d="'+dogs[type]+'"/></g>'+(motifs[motif]?'<path class="ornament" pathLength="1" d="'+motifs[motif]+'"/>':'')+paws([[12,143,-28],[42,130,18],[72,143,-8],[207,132,53],[237,118,52],[265,96,38]],.56);
+ host.prepend(svg);
+ }
+ if(page==='index'){
+ [['.hero-character','leap','agility','thv-art--ground'],['.editorial-intro','stand','bond','thv-art--ground'],['.course-editorial','leap','agility'],['.team-editorial','sit','bond'],['.field-editorial','stand','walk','thv-art--ground'],['.final-contact','puppy','walk','thv-art--ground']].forEach(([q,...args])=>art(document.querySelector(q),...args));
+ }else{
+ const choices={welpen:['puppy','bond'],grundkurs:['sit','walk'],unterordnung:['sit','bond'],fortgeschritten:['stand','walk'],agility:['leap','agility'],hoopers:['leap','hoopers'],'social-walk':['stand','walk'],team:['sit','bond'],galerie:['leap','walk'],kontakt:['stand','walk'],verein:['stand','bond'],training:['leap','agility'],mitgliedschaft:['puppy','bond'],kurszeiten:['stand','walk'],aktuelles:['sit','walk']};
+ const pick=choices[page];if(pick){art(document.querySelector('.pagelead'),...pick);const sections=[...document.querySelectorAll('main>.section')];if(sections.length>1&&page!=='galerie'&&page!=='team')art(sections[sections.length-1],...pick,'thv-art--ground')}
+ }
+ const frames=[...document.querySelectorAll('.media-frame')];
+ frames.forEach(frame=>{frame.classList.add('thv-media');if(!frame.closest('.photo,.course'))return;const svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox','0 0 240 140');svg.setAttribute('preserveAspectRatio','xMidYMid slice');svg.setAttribute('aria-hidden','true');svg.setAttribute('focusable','false');svg.classList.add('thv-film-paws');svg.innerHTML=paws([[25,115,-23],[66,91,24],[108,64,33],[151,45,37],[196,24,45]],.85);frame.append(svg)});
+ const items=[...document.querySelectorAll('.thv-art')],mark=x=>x.classList.add(x.classList.contains('thv-art')?'thv-art-seen':'thv-media-seen');
+ if(!reduced.matches&&'IntersectionObserver'in window){root.classList.add('thv-motion');const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){mark(e.target);observer.unobserve(e.target)}}),{threshold:.025,rootMargin:'0px 0px -2% 0px'});[...frames,...items].forEach(x=>observer.observe(x))}
+ else [...frames,...items].forEach(mark);
+})();
+/* Originalwappen: Footer übernimmt das echte Logo. Freistellung nur bei überprüfbarer heller Außenfläche. */
+(()=>{
+ const original=document.querySelector('header img[data-asset="logo"]'),placeholder=document.querySelector('footer .brand .mark');
+ if(!original)return;if(placeholder){const clone=original.cloneNode();clone.removeAttribute('hidden');placeholder.replaceWith(clone)}
+ const logos=[...document.querySelectorAll('img[data-asset="logo"]')],test=new Image();test.crossOrigin='anonymous';
+ test.onload=()=>{try{const w=test.naturalWidth,h=test.naturalHeight;if(!w||!h||w*h>4000000)return;
+ const c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d',{willReadFrequently:true});if(!ctx)return;ctx.drawImage(test,0,0);const d=ctx.getImageData(0,0,w,h),p=d.data;
+ const pale=i=>p[i*4+3]<12||(Math.min(p[i*4],p[i*4+1],p[i*4+2])>242&&Math.max(p[i*4],p[i*4+1],p[i*4+2])-Math.min(p[i*4],p[i*4+1],p[i*4+2])<10);
+ if(![0,w-1,(h-1)*w,w*h-1].every(pale))return;
+ const visited=new Uint8Array(w*h),queue=new Int32Array(w*h);let read=0,write=0;function add(i){if(i<0||i>=w*h||visited[i]||!pale(i))return;visited[i]=1;queue[write++]=i}
+ for(let x=0;x<w;x++){add(x);add((h-1)*w+x)}for(let y=0;y<h;y++){add(y*w);add(y*w+w-1)}
+ while(read<write){const i=queue[read++],x=i%w;p[i*4+3]=0;if(x>0)add(i-1);if(x<w-1)add(i+1);add(i-w);add(i+w)}
+ if(write<.015*w*h||write>.65*w*h)return;
+ let l=w,r=-1,t=h,b=-1;for(let y=0;y<h;y++)for(let x=0;x<w;x++)if(p[(y*w+x)*4+3]>32){l=Math.min(l,x);r=Math.max(r,x);t=Math.min(t,y);b=Math.max(b,y)}
+ if(r<l||b<t)return;ctx.putImageData(d,0,0);const m=Math.ceil(Math.max(r-l,b-t)*.04),out=document.createElement('canvas');out.width=r-l+1+2*m;out.height=b-t+1+2*m;out.getContext('2d').drawImage(c,l,t,r-l+1,b-t+1,m,m,r-l+1,b-t+1);const url=out.toDataURL('image/png');logos.forEach(img=>{img.src=url;img.classList.add('logo-is-cut')});
+ }catch(_){/* Original bleibt unverändert. */}};test.onerror=()=>{};test.src=original.src;
+})();

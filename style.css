@@ -310,3 +310,62 @@ header.scrolled .brand img{width:48px;height:48px}
 @media(max-width:760px){.hero-character.hero-editorial{min-height:0;padding:7px 20px 47px;gap:6px}.hero-character .hero-subject{width:calc(100% + 24px);margin-left:-12px;height:clamp(265px,69vw,415px)}.hero-character .hero-orbit{width:min(75vw,395px);right:10%;top:clamp(137px,36vw,215px)}.hero-character .hero-light{inset:-10% -30% 35% 0}.hero-character .hero-haze{inset:0 0 35%}.hero-character .hero-dust{mask-image:linear-gradient(#000 58%,transparent 88%)}.hero-dust i:nth-child(n+23){display:none}.hero-meadow{width:40%;right:-7%;bottom:auto;top:clamp(145px,43vw,250px)}.hero-character .hero-leash{width:94%;left:3%;top:clamp(175px,47vw,270px);bottom:auto}.section{padding:53px 0}.editorial-intro .section-leash{left:-30%;width:92%;opacity:.16}.course-editorial .agility-art{right:-12%;width:52%;opacity:.18}.portrait-dialog .portrait-modal-layout{grid-template-columns:1fr}.portrait-dialog .portrait-modal-image{max-height:62dvh}.portrait-dialog .portrait-modal-copy{padding:20px 23px}.portrait-dialog .portrait-modal-copy h2{font-size:2.2rem}.portrait-dialog .portrait-modal-copy p{font-size:15px}}
 @media(prefers-reduced-motion:reduce){.hero-dust i,.hero-light,.hero-haze,.hero-orbit:before,.hero-orbit:after,.hero-meadow{animation:none!important}.hero-dust{display:none}.media-frame:before,.media-frame:after{display:none!important}.motion-ready .course.reveal>div,.motion-ready .photo.reveal figcaption,.motion-ready .person.reveal>div{opacity:1!important;transform:none!important}.portrait-dialog[open]{animation:none!important}}
 .paused .hero-dust{display:none}.paused .hero-light,.paused .hero-haze,.paused .hero-meadow,.paused .hero-orbit:before,.paused .hero-orbit:after{animation:none!important}
+
+/* THV Hundewelt: organische Bewegung, Pfotenspuren und Vereinswappen */
+.navwrap .brand img,header.scrolled .brand img,footer .brand img{background:#f7f3e7;border:0;border-radius:50%;padding:4px;object-fit:contain;box-shadow:0 0 0 1px #e4b47b45;flex-shrink:0}
+.navwrap .brand img,footer .brand img{width:64px;height:64px}
+header.scrolled .brand img{width:52px;height:52px}
+.navwrap .brand img.logo-is-cut,header.scrolled .brand img.logo-is-cut,footer .brand img.logo-is-cut{background:transparent;border-radius:0;padding:0;box-shadow:none;filter:drop-shadow(0 2px 5px #0003)}
+.navwrap .brand img[hidden],footer .brand img[hidden]{display:none}
+.hero-edge{height:clamp(28px,5vw,76px);clip-path:none;background:var(--paper);border-radius:75% 0 0 0 / 100% 0 0 0;transform:translateY(1px)}
+.hero-character .hero-terrain{opacity:.09}
+.hero-character .hero-leash{opacity:.34}
+.hero-character .hero-orbit{opacity:.66}
+.hero-character .hero-dust i:nth-child(n+25){display:none}
+.thv-decor-host{position:relative;isolation:isolate;overflow:clip}
+.thv-decor-host>.wrap{position:relative;z-index:1}
+.thv-art{position:absolute;z-index:0;width:clamp(130px,25vw,350px);height:auto;right:1%;top:4%;color:#98734c;pointer-events:none;opacity:.37;transform:rotate(-8deg);overflow:visible}
+.thv-art .dog-shape{fill:currentColor;opacity:.19}
+.thv-art .dog-outline{fill:none;stroke:currentColor;stroke-width:1.25;stroke-linecap:round;stroke-linejoin:round}
+.thv-art .dog-paw{fill:currentColor;opacity:.72}
+.thv-art .dog-route{fill:none;stroke:currentColor;stroke-width:1.2;stroke-dasharray:3 7;stroke-linecap:round}
+.thv-art .grass,.thv-art .ornament{stroke:currentColor;fill:none;stroke-width:1.2;stroke-linecap:round}
+.thv-art--ground{top:auto;bottom:0;right:0;transform:rotate(4deg)}
+.thv-decor-host.dark .thv-art,.pagelead .thv-art,.hero-character .thv-art{color:#efc28d;opacity:.28}
+.pagelead .thv-art{width:clamp(140px,26vw,370px);top:auto;bottom:-3%;right:1%}
+.pagelead:has(.thv-art):before{opacity:.2}
+.pagelead.withpic .thv-art{right:1%;top:0;bottom:auto;width:clamp(90px,17vw,230px)}
+.hero-character .thv-art{z-index:1;right:2%;top:auto;bottom:3%;width:clamp(125px,20vw,290px)}
+.editorial-intro .section-leash,.team-editorial .dog-mark{opacity:.08!important}
+.course-editorial .agility-art{opacity:.12}
+.course-editorial .thv-art{right:2%;top:1%;width:clamp(110px,19vw,255px)}
+.final-contact .thv-art{right:2%;top:auto;bottom:0;width:clamp(150px,31vw,440px)}
+.thv-motion .thv-art:not(.thv-art-seen) .dog-paw{opacity:0;translate:0 6px}
+.thv-motion .thv-art .dog-paw{transition:opacity .48s ease,translate .65s var(--ease-out);transition-delay:var(--paw-delay,0ms)}
+.thv-motion .thv-art:not(.thv-art-seen) .dog-outline,.thv-motion .thv-art:not(.thv-art-seen) .ornament{stroke-dasharray:1;stroke-dashoffset:1}
+.thv-motion .thv-art .dog-outline,.thv-motion .thv-art .ornament{stroke-dasharray:1;stroke-dashoffset:0;transition:stroke-dashoffset 1.5s var(--ease-out)}
+.thv-motion .thv-art:not(.thv-art-seen) .dog-shape{opacity:0}
+.thv-motion .thv-art .dog-shape{transition:opacity 1s ease .3s}
+/* Die lineare Farbblende entfällt. Fotos werden entlang einer Wellenkontur enthüllt. */
+.media-frame:before,.media-frame:after{display:none!important}
+.thv-motion .media-frame.thv-media{background:#e9e3d6;clip-path:none!important}
+.thv-motion .media-frame.thv-media>img{clip-path:polygon(0 0,25% 0,50% 0,75% 0,100% 0,100% 100%,75% 100%,50% 100%,25% 100%,0 100%)!important;transition:clip-path .95s cubic-bezier(.24,.69,.22,1),opacity .65s ease,transform 1.15s var(--ease-out)}
+.thv-motion .media-frame.thv-media:not(.thv-media-seen)>img{clip-path:polygon(0 100%,25% 96%,50% 99%,75% 94%,100% 100%,100% 100%,75% 100%,50% 100%,25% 100%,0 100%)!important;opacity:.3}
+.thv-motion .media-frame.thv-media[data-direction="right"]:not(.thv-media-seen)>img{clip-path:polygon(0 0,0 0,2% 25%,0 50%,5% 75%,0 100%,0 100%,0 100%,0 100%,0 100%)!important}
+.thv-motion .gallery-item .media-frame.thv-media:not(.thv-media-seen)>img{clip-path:none!important;opacity:.2;transform:translateY(8px) scale(.985)}
+.thv-motion .gallery-item .media-frame.thv-media>img{clip-path:none!important}
+.thv-film-paws{position:absolute;inset:0;z-index:3;width:100%;height:100%;color:#a7794c;pointer-events:none;opacity:0;transition:opacity .4s .6s}
+.thv-motion .thv-media:not(.thv-media-seen) .thv-film-paws{opacity:.8;transition-delay:0s}
+.thv-film-paws .dog-paw{fill:currentColor;opacity:.5}
+.thv-motion .thv-media.thv-media-seen .thv-film-paws .dog-paw{animation:thvPawPass .65s var(--paw-delay) ease both}
+@keyframes thvPawPass{0%{opacity:0}35%{opacity:.8}100%{opacity:0}}
+.thv-motion .person.reveal .portrait-frame{transition:opacity .65s ease,translate .7s var(--ease-out),box-shadow .4s}
+.thv-motion .person.reveal:not(.seen) .portrait-frame{opacity:.15;translate:0 12px}
+.thv-motion .person.reveal .portrait-frame{opacity:1;translate:none}
+.thv-motion .reveal:focus-within .media-frame.thv-media>img,.thv-motion .reveal:focus-visible .media-frame.thv-media>img,.paused .media-frame.thv-media>img{clip-path:none!important;opacity:1!important;transform:none!important}
+.thv-motion .person:focus-within .portrait-frame,.paused .person .portrait-frame{opacity:1!important;translate:none!important}
+.paused .thv-art .dog-paw,.paused .thv-art .dog-outline,.paused .thv-art .ornament{opacity:1!important;stroke-dashoffset:0!important;translate:none!important;transition:none!important}
+.paused .thv-art .dog-shape{opacity:.19!important}
+.paused .thv-film-paws{display:none}
+@media(max-width:760px){.navwrap .brand img,header.scrolled .brand img{width:48px;height:48px;padding:3px}footer .brand img{width:55px;height:55px}.hero-character .thv-art{bottom:4%;right:-10%;width:145px;opacity:.19}.hero-character .hero-dust i:nth-child(n+17){display:none}.hero-edge{height:30px}.thv-art{width:135px;right:-12px;top:1%;opacity:.23}.thv-art--ground{top:auto;bottom:0;width:150px}.pagelead .thv-art{width:155px;right:-12px;opacity:.18}.pagelead.withpic .thv-art{width:100px;top:5px}.course-editorial .thv-art{width:130px;right:0;top:0}.final-contact .thv-art{width:155px;bottom:0;right:-20px}.thv-motion .media-frame.thv-media>img{transition-duration:.7s,.45s,.7s}}
+@media(prefers-reduced-motion:reduce){.thv-motion .media-frame.thv-media>img{clip-path:none!important;opacity:1!important;transform:none!important;transition:none!important}.thv-film-paws{display:none!important}.thv-art .dog-paw,.thv-art .dog-outline,.thv-art .ornament{opacity:1!important;stroke-dashoffset:0!important;translate:none!important;transition:none!important}.thv-art .dog-shape{opacity:.19!important}.thv-motion .person .portrait-frame{opacity:1!important;translate:none!important;transition:none!important}}
