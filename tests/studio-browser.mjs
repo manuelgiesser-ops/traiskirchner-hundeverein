@@ -121,16 +121,16 @@ try{
  await page.locator('[data-studio-tab=blocks]').click();
  await page.locator('[data-add-block=image]').click();
  await page.locator('#block-title').fill('Neues Foto mit Text');
- const fixture={name:'test-upload.png',mimeType:'image/png',buffer:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jR1sAAAAASUVORK5CYII=','base64')};
+ const fixture={name:'test-upload.webp',mimeType:'image/webp',buffer:fs.readFileSync(path.join(web,'assets','dog-960.webp'))};
  await page.locator('#block-upload-file').setInputFiles(fixture);
  const uploadResponse=page.waitForResponse(r=>r.url().endsWith('/studio-upload.php')&&r.request().method()==='POST');
  await page.locator('#block-upload').click();
  const uploaded=await uploadResponse;const info=await uploaded.json();assert.equal(uploaded.status(),200,JSON.stringify(info));
- await page.waitForFunction(url=>document.getElementById('preview').contentDocument.querySelector('.studio-added-section img[src="'+url+'"]')?.complete,info.url);
+ await page.waitForFunction(url=>document.getElementById('preview').contentDocument.querySelector('.studio-added-section img[src="'+url+'"]')?.naturalWidth>0,info.url);
  await page.locator('#block-alt').fill('Testfoto');
  const anonBefore=await browser.newPage();assert.equal((await anonBefore.request.get(origin+'/'+info.url)).status(),404);await anonBefore.close();
  await page.locator('[data-add-block=photo]').click();
- await page.locator('#block-media-grid .media-tile').filter({hasText:'test-upload.png'}).click();
+ await page.locator('#block-media-grid .media-tile').filter({hasText:'test-upload.webp'}).click();
  await page.waitForFunction(url=>document.getElementById('preview').contentDocument.querySelectorAll('.studio-added-section img[src="'+url+'"]').length===2,info.url);
  const imageOrder=await visualIds();
 
