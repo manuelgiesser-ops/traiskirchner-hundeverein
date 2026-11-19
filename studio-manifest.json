@@ -24,7 +24,7 @@
       "f005": {
         "kind": "text",
         "label": "Text",
-        "default": "Gemeinsam einen Hindernisparcours meistern: Tunnel, Slalom und Steg werden sorgfältig aufgebaut. Dabei zählen klare Signale, Konzentration und passende Laufwege. Das Training richtet sich an Anfänger und Fortgeschrittene."
+        "default": "Agility ist eine beliebte Hundesportart, die auch viele aus unserem Trainerteam selbst betreiben. Willkommen sind sportliche, gesunde Hunde ab einem Jahr und ihre Menschen."
       },
       "f006": {
         "kind": "text",
@@ -34,7 +34,7 @@
       "f007": {
         "kind": "text",
         "label": "Text",
-        "default": "Gut sitzendes Halsband oder Brustgeschirr, normale Leine, kleine Leckerlis und ein geeignetes Lieblingsspielzeug. Für Details und die passende Ausrüstung frag beim Trainerteam nach."
+        "default": "Leine und Halsband oder Brustgeschirr für die Laufpausen"
       },
       "f008": {
         "kind": "button",
@@ -55,6 +55,56 @@
         "kind": "text",
         "label": "Text",
         "default": "Finde das passende Angebot für dich und deinen Hund."
+      },
+      "f100": {
+        "kind": "text",
+        "label": "Zwischenüberschrift",
+        "default": "Gemeinsam durch den Parcours"
+      },
+      "f101": {
+        "kind": "text",
+        "label": "Absatz",
+        "default": "Die Anfänger lernen die Geräte kennen, etwa Slalom, Tunnel und Steg. Dabei arbeiten wir an der Verständigung zwischen Mensch und Hund, um einen Parcours gemeinsam zu bewältigen."
+      },
+      "f102": {
+        "kind": "text",
+        "label": "Absatz",
+        "default": "Auf den richtigen Aufbau der Geräte legen wir großen Wert. Dein Hund soll lernen, die einzelnen Hindernisse selbstständig zu meistern."
+      },
+      "f103": {
+        "kind": "text",
+        "label": "Absatz",
+        "default": "Vor dem Lauf gehen wir den Parcours gemeinsam ab und suchen geeignete Laufwege. Der Sport fordert Bewegung und Konzentration von euch beiden."
+      },
+      "f104": {
+        "kind": "text",
+        "label": "Absatz",
+        "default": "Weil Agility körperlich anspruchsvoll ist und Hindernisse überwunden werden, ist es wichtig, dass dein Hund gesund ist und keine Vorerkrankungen hat."
+      },
+      "f105": {
+        "kind": "text",
+        "label": "Listenpunkt",
+        "default": "Viele schmackhafte Leckerlis, vor allem für Hunde, die sich schwer motivieren lassen"
+      },
+      "f106": {
+        "kind": "text",
+        "label": "Listenpunkt",
+        "default": "Lieblingsspielzeug"
+      },
+      "f107": {
+        "kind": "text",
+        "label": "Listenpunkt",
+        "default": "Freude, Motivation und Ausdauer beim gemeinsamen Training"
+      },
+      "f108": {
+        "kind": "text",
+        "label": "Überschrift",
+        "default": "Kurszeiten"
+      },
+      "f109": {
+        "kind": "text",
+        "label": "Kurszeit",
+        "default": "Anfänger und Fortgeschrittene trainieren in unterschiedlichen Gruppen. Die bisherigen Kursbeschreibungen und Kurszeiten nennen unterschiedliche Trainingstage. Bitte die passende Gruppe und die aktuellen Termine erfragen."
       }
     },
     "sections": {}
@@ -189,7 +239,7 @@
       "f005": {
         "kind": "text",
         "label": "Text",
-        "default": "Festige bereits erlernte Übungen, verfeinere die Kommunikation und reduziere Hilfen schrittweise. Auf Wunsch kannst du auf weitere Begleithundeprüfungen hinarbeiten."
+        "default": "Ihr habt schon eine Begleithundeprüfung absolviert und möchtet gemeinsam weiterkommen? Dann seid ihr in dieser Gruppe richtig."
       },
       "f006": {
         "kind": "text",
@@ -199,7 +249,7 @@
       "f007": {
         "kind": "text",
         "label": "Text",
-        "default": "Gut sitzendes Halsband oder Brustgeschirr, normale Leine, kleine Leckerlis und ein geeignetes Lieblingsspielzeug. Für Details und die passende Ausrüstung frag beim Trainerteam nach."
+        "default": "Passendes Halsband oder Brustgeschirr"
       },
       "f008": {
         "kind": "button",
@@ -220,6 +270,56 @@
         "kind": "text",
         "label": "Text",
         "default": "Finde das passende Angebot für dich und deinen Hund."
+      },
+      "f100": {
+        "kind": "text",
+        "label": "Zwischenüberschrift",
+        "default": "Erlerntes festigen, Neues entdecken"
+      },
+      "f101": {
+        "kind": "text",
+        "label": "Absatz",
+        "default": "Wir bauen auf euren bisherigen Fähigkeiten auf, lernen Neues und stärken dabei die Bindung zwischen euch."
+      },
+      "f102": {
+        "kind": "text",
+        "label": "Absatz",
+        "default": "Die Verständigung mit deinem Vierbeiner wird immer feiner. Nach und nach nehmen wir die Hilfestellungen zurück. Wer möchte, kann sich auf eine weitere Begleithundeprüfung vorbereiten."
+      },
+      "f103": {
+        "kind": "text",
+        "label": "Absatz",
+        "default": "Vor allem solltet ihr Lust auf gemeinsames Training, Motivation und Ehrgeiz mitbringen."
+      },
+      "f104": {
+        "kind": "text",
+        "label": "Listenpunkt",
+        "default": "Normale, verstellbare Leine (keine Flexileine)"
+      },
+      "f105": {
+        "kind": "text",
+        "label": "Listenpunkt",
+        "default": "Reichlich gute Leckerlis, besonders für schwer motivierbare Hunde"
+      },
+      "f106": {
+        "kind": "text",
+        "label": "Listenpunkt",
+        "default": "Lieblingsspielzeug zum gemeinsamen Spielen, zum Beispiel ein Zergelspielzeug statt eines Balls"
+      },
+      "f107": {
+        "kind": "text",
+        "label": "Listenpunkt",
+        "default": "Spaß am Training, Motivation und Durchhaltevermögen"
+      },
+      "f108": {
+        "kind": "text",
+        "label": "Überschrift",
+        "default": "Kurszeiten"
+      },
+      "f109": {
+        "kind": "text",
+        "label": "Kurszeit",
+        "default": "Montag um 19 Uhr, etwa 50 Minuten, laut bisheriger Kursbeschreibung. Bitte den Termin vorab bestätigen."
       }
     },
     "sections": {}
@@ -328,7 +428,7 @@
       "f005": {
         "kind": "text",
         "label": "Text",
-        "default": "Kommunikation, Alltag und Grundgehorsam stehen im Mittelpunkt. Mit positiver Bestätigung werden Signale wie Platz und Steh sowie Übungen für eine mögliche Begleithundeprüfung aufgebaut."
+        "default": "Bei uns wird Abwechslung großgeschrieben: Alltagstraining trifft auf Unterordnung. Willkommen sind alle Hunde ab neun Monaten, deren Menschen den Grundgehorsam spielerisch erlernen oder verbessern möchten und vielleicht später eine Begleithundeprüfung anstreben."
       },
       "f006": {
         "kind": "text",
@@ -338,7 +438,7 @@
       "f007": {
         "kind": "text",
         "label": "Text",
-        "default": "Gut sitzendes Halsband oder Brustgeschirr, normale Leine, kleine Leckerlis und ein geeignetes Lieblingsspielzeug. Für Details und die passende Ausrüstung frag beim Trainerteam nach."
+        "default": "Passendes Halsband oder Brustgeschirr"
       },
       "f008": {
         "kind": "button",
@@ -359,6 +459,56 @@
         "kind": "text",
         "label": "Text",
         "default": "Finde das passende Angebot für dich und deinen Hund."
+      },
+      "f100": {
+        "kind": "text",
+        "label": "Zwischenüberschrift",
+        "default": "Kommunikation und gemeinsames Lernen"
+      },
+      "f101": {
+        "kind": "text",
+        "label": "Absatz",
+        "default": "Ein Schwerpunkt liegt darauf, wie du dich mit deinem Hund verständigst. Hunde kommunizieren auf unterschiedliche Weise. Gemeinsam finden wir heraus, wie ihr euch besser verstehen könnt."
+      },
+      "f102": {
+        "kind": "text",
+        "label": "Absatz",
+        "default": "Wir lernen mit Spiel, Futter und positiven Bestätigungen. Freude und Motivation gehören bei jeder Übung dazu."
+      },
+      "f103": {
+        "kind": "text",
+        "label": "Absatz",
+        "default": "Signale wie Platz und Steh und die Übungen für eine mögliche Prüfung werden langsam aufgebaut. Auch ohne Prüfungsziel helfen sie euch, eure Verständigung einzuschätzen und zu erkennen, woran ihr noch arbeiten könnt."
+      },
+      "f104": {
+        "kind": "text",
+        "label": "Listenpunkt",
+        "default": "Normale, verstellbare Leine (keine Flexileine)"
+      },
+      "f105": {
+        "kind": "text",
+        "label": "Listenpunkt",
+        "default": "Reichlich gute Leckerlis, besonders für schwer motivierbare Hunde"
+      },
+      "f106": {
+        "kind": "text",
+        "label": "Listenpunkt",
+        "default": "Lieblingsspielzeug zum gemeinsamen Spielen, zum Beispiel ein Zergelspielzeug statt eines Balls"
+      },
+      "f107": {
+        "kind": "text",
+        "label": "Listenpunkt",
+        "default": "Spaß am Training, Motivation und Durchhaltevermögen"
+      },
+      "f108": {
+        "kind": "text",
+        "label": "Überschrift",
+        "default": "Kurszeiten"
+      },
+      "f109": {
+        "kind": "text",
+        "label": "Kurszeit",
+        "default": "Mittwoch um 19 Uhr, etwa 50 Minuten, laut bisheriger Kursbeschreibung. Bitte vor dem Besuch bestätigen lassen."
       }
     },
     "sections": {}
@@ -388,7 +538,7 @@
       "f005": {
         "kind": "text",
         "label": "Text",
-        "default": "Beim Hoopers führst du deinen Hund mit Signalen auf Distanz durch einen Parcours. Da keine Sprünge oder Zonengeräte vorkommen, kann der Sport auch für ältere Hunde geeignet sein."
+        "default": "Hoopers ist eine Form des Agilitysports am Boden. Hunde ab einem Jahr können daran teilnehmen; auch für ältere Hunde und Hunde mit Handicap kann diese Sportart passend sein."
       },
       "f006": {
         "kind": "text",
@@ -398,7 +548,7 @@
       "f007": {
         "kind": "text",
         "label": "Text",
-        "default": "Gut sitzendes Halsband oder Brustgeschirr, normale Leine, kleine Leckerlis und ein geeignetes Lieblingsspielzeug. Für Details und die passende Ausrüstung frag beim Trainerteam nach."
+        "default": "Leine und Halsband oder Brustgeschirr für die Laufpausen"
       },
       "f008": {
         "kind": "button",
@@ -419,6 +569,46 @@
         "kind": "text",
         "label": "Text",
         "default": "Finde das passende Angebot für dich und deinen Hund."
+      },
+      "f100": {
+        "kind": "text",
+        "label": "Zwischenüberschrift",
+        "default": "Führen auf Distanz"
+      },
+      "f101": {
+        "kind": "text",
+        "label": "Absatz",
+        "default": "Beim Hoopers trainieren wir Richtungswechsel aus der Distanz. Dein Hund soll lernen, auf deine Signale hin einen Parcours zu durchlaufen, während du ihn aus der Entfernung führst."
+      },
+      "f102": {
+        "kind": "text",
+        "label": "Absatz",
+        "default": "Da es weder Sprünge noch Zonengeräte gibt, eignet sich der Sport für viele unterschiedliche Hunde, darunter auch ältere Agilityhunde."
+      },
+      "f103": {
+        "kind": "text",
+        "label": "Listenpunkt",
+        "default": "Viele schmackhafte Leckerlis, vor allem für Hunde, die sich schwer motivieren lassen"
+      },
+      "f104": {
+        "kind": "text",
+        "label": "Listenpunkt",
+        "default": "Lieblingsspielzeug"
+      },
+      "f105": {
+        "kind": "text",
+        "label": "Listenpunkt",
+        "default": "Freude, Motivation und Ausdauer beim gemeinsamen Training"
+      },
+      "f106": {
+        "kind": "text",
+        "label": "Überschrift",
+        "default": "Kurszeiten"
+      },
+      "f107": {
+        "kind": "text",
+        "label": "Kurszeit",
+        "default": "Freitag. Die bisherige Kursbeschreibung nennt 18 Uhr, die Kurszeitenübersicht 16:30 Uhr. Bitte vorab den aktuellen Beginn erfragen."
       }
     },
     "sections": {}
@@ -1198,17 +1388,17 @@
       "f005": {
         "kind": "text",
         "label": "Text",
-        "default": "Begleitete Spaziergänge in kleinen Gruppen bieten Gelegenheit, Hundebegegnungen, Leinenführigkeit und Impulskontrolle zu üben. Auch für unsichere oder reaktive Hunde ist das Angebot gedacht. Treffpunkt ist der Verein."
+        "default": "Du wünschst dir entspannte Spaziergänge und weniger Stress, wenn euch andere Hunde begegnen? In unserem Social Walk trainieren wir genau das, gemeinsam in einer kleinen, kontrollierten Gruppe."
       },
       "f006": {
         "kind": "text",
         "label": "Text",
-        "default": "Was du mitbringen solltest"
+        "default": "Für wen eignet sich der Social Walk?"
       },
       "f007": {
         "kind": "text",
         "label": "Text",
-        "default": "Gut sitzendes Halsband oder Brustgeschirr, normale Leine, kleine Leckerlis und ein geeignetes Lieblingsspielzeug. Für Details und die passende Ausrüstung frag beim Trainerteam nach."
+        "default": "Hunde, bei denen Leinenführigkeit, Impulskontrolle oder Sozialverhalten trainiert werden sollen"
       },
       "f008": {
         "kind": "button",
@@ -1229,6 +1419,51 @@
         "kind": "text",
         "label": "Text",
         "default": "Finde das passende Angebot für dich und deinen Hund."
+      },
+      "f100": {
+        "kind": "text",
+        "label": "Zwischenüberschrift",
+        "default": "Was erwartet dich?"
+      },
+      "f101": {
+        "kind": "text",
+        "label": "Absatz",
+        "default": "Wir begleiten euch bei Spaziergängen mit Hundebegegnungen in einer ruhigen Atmosphäre."
+      },
+      "f102": {
+        "kind": "text",
+        "label": "Absatz",
+        "default": "Mit praktischen Übungen arbeitet ihr an entspannter Leinenführigkeit. Du bekommst individuelle Hinweise für euch als Mensch-Hund-Team und stärkst durch positive gemeinsame Erfahrungen eure Bindung."
+      },
+      "f103": {
+        "kind": "text",
+        "label": "Absatz",
+        "default": "Der Kurs hilft dir, deinem Hund Sicherheit zu vermitteln, seine sozialen Fähigkeiten zu fördern und Alltagssituationen souveräner zu gestalten."
+      },
+      "f104": {
+        "kind": "text",
+        "label": "Listenpunkt",
+        "default": "Unsichere, reaktive und besonders aufgeregte Hunde"
+      },
+      "f105": {
+        "kind": "text",
+        "label": "Listenpunkt",
+        "default": "Menschen, die sich mehr Sicherheit und klare Abläufe bei Spaziergängen wünschen"
+      },
+      "f106": {
+        "kind": "text",
+        "label": "Treffpunkt und Kosten",
+        "default": "Treffpunkt ist der Traiskirchner Hundeverein. Laut bisheriger Kursbeschreibung kostet ein Zehnerblock 120 Euro und ist ab Ausstellung zwölf Monate gültig. Bitte die aktuellen Konditionen bestätigen lassen."
+      },
+      "f107": {
+        "kind": "text",
+        "label": "Überschrift",
+        "default": "Kurszeiten"
+      },
+      "f108": {
+        "kind": "text",
+        "label": "Kurszeit",
+        "default": "Die Termine werden flexibel vereinbart. Frag beim Verein nach den nächsten Möglichkeiten."
       }
     },
     "sections": {}
@@ -1737,7 +1972,7 @@
       "f005": {
         "kind": "text",
         "label": "Text",
-        "default": "Lerne die Grundlagen der Unterordnung kennen und übe mit deinem Hund die Zusammenarbeit. Der Kurs ist auch für Teams geeignet, die diesen Hundesport erstmals ausprobieren möchten."
+        "default": "Im Anfängerkurs machen wir gemeinsam die ersten Schritte in der Unterordnung. Im Mittelpunkt stehen eure Bindung und die Freude am Training miteinander."
       },
       "f006": {
         "kind": "text",
@@ -1747,7 +1982,7 @@
       "f007": {
         "kind": "text",
         "label": "Text",
-        "default": "Gut sitzendes Halsband oder Brustgeschirr, normale Leine, kleine Leckerlis und ein geeignetes Lieblingsspielzeug. Für Details und die passende Ausrüstung frag beim Trainerteam nach."
+        "default": "Passendes Halsband oder Brustgeschirr"
       },
       "f008": {
         "kind": "button",
@@ -1768,6 +2003,56 @@
         "kind": "text",
         "label": "Text",
         "default": "Finde das passende Angebot für dich und deinen Hund."
+      },
+      "f100": {
+        "kind": "text",
+        "label": "Zwischenüberschrift",
+        "default": "Als Team weiterkommen"
+      },
+      "f101": {
+        "kind": "text",
+        "label": "Absatz",
+        "default": "Ihr lernt euch gegenseitig noch besser kennen und bewältigt gemeinsam neue Aufgaben. So entsteht nach und nach die Basis für eine harmonische Zusammenarbeit."
+      },
+      "f102": {
+        "kind": "text",
+        "label": "Absatz",
+        "default": "Der Kurs richtet sich an alle, die gerne Unterordnung trainieren und sich darin weiterentwickeln möchten, ebenso an diejenigen, die diesen Bereich des Hundesports einfach kennenlernen wollen."
+      },
+      "f103": {
+        "kind": "text",
+        "label": "Absatz",
+        "default": "Euer Hund ist ab neun Monaten herzlich willkommen. Wir freuen uns auf viele spannende Trainingsstunden mit euch!"
+      },
+      "f104": {
+        "kind": "text",
+        "label": "Listenpunkt",
+        "default": "Normale, verstellbare Leine (keine Flexileine)"
+      },
+      "f105": {
+        "kind": "text",
+        "label": "Listenpunkt",
+        "default": "Reichlich gute Leckerlis, besonders für schwer motivierbare Hunde"
+      },
+      "f106": {
+        "kind": "text",
+        "label": "Listenpunkt",
+        "default": "Lieblingsspielzeug zum gemeinsamen Spielen, zum Beispiel ein Zergelspielzeug statt eines Balls"
+      },
+      "f107": {
+        "kind": "text",
+        "label": "Listenpunkt",
+        "default": "Spaß am Training, Motivation und Durchhaltevermögen"
+      },
+      "f108": {
+        "kind": "text",
+        "label": "Überschrift",
+        "default": "Kurszeiten"
+      },
+      "f109": {
+        "kind": "text",
+        "label": "Kurszeit",
+        "default": "Laut bisheriger Kursbeschreibung Montag um 18 Uhr, etwa 50 Minuten. Die Kurszeitenübersicht nennt auch Mittwoch. Bitte die aktuelle Einteilung erfragen."
       }
     },
     "sections": {}
@@ -1881,7 +2166,7 @@
       "f005": {
         "kind": "text",
         "label": "Text",
-        "default": "Die ersten gemeinsamen Schritte: Spielen, Bindung, Rückruf, Leinenführigkeit und erste Signale. Verschiedene Untergründe und Geräte helfen jungen Hunden, Neues kennenzulernen. Eine Junghundeveranlagung ist zum Abschluss möglich."
+        "default": "Die ersten Lebenswochen und Monate prägen deinen Hund besonders stark. Bei uns lernen die Kleinen, neue Situationen und Aufgaben gelassen anzugehen. Auch du lernst deinen Vierbeiner besser kennen und seine Körpersprache zu verstehen."
       },
       "f006": {
         "kind": "text",
@@ -1891,7 +2176,7 @@
       "f007": {
         "kind": "text",
         "label": "Text",
-        "default": "Gut sitzendes Halsband oder Brustgeschirr, normale Leine, kleine Leckerlis und ein geeignetes Lieblingsspielzeug. Für Details und die passende Ausrüstung frag beim Trainerteam nach."
+        "default": "Halsband oder Brustgeschirr"
       },
       "f008": {
         "kind": "button",
@@ -1912,6 +2197,61 @@
         "kind": "text",
         "label": "Text",
         "default": "Finde das passende Angebot für dich und deinen Hund."
+      },
+      "f100": {
+        "kind": "text",
+        "label": "Zwischenüberschrift",
+        "default": "Das lernen wir gemeinsam"
+      },
+      "f101": {
+        "kind": "text",
+        "label": "Absatz",
+        "default": "Mit gemeinsamen Spielen und Vertrauensübungen stärken wir eure Bindung."
+      },
+      "f102": {
+        "kind": "text",
+        "label": "Absatz",
+        "default": "Im Bällebad, auf unterschiedlichen Untergründen und an weiteren Trainingsgeräten entdecken die Welpen spielerisch ihre Umwelt. So können sie Selbstvertrauen und Geschicklichkeit entwickeln und sich an Unbekanntes gewöhnen."
+      },
+      "f103": {
+        "kind": "text",
+        "label": "Absatz",
+        "default": "Wir üben die ersten Signale Sitz, Platz und Fuß sowie den Rückruf, auch wenn Ablenkungen dazukommen. Die Leinenführigkeit gehört ebenfalls dazu."
+      },
+      "f104": {
+        "kind": "text",
+        "label": "Absatz",
+        "default": "Zum Kursabschluss besteht die Möglichkeit, an einer Junghundeveranlagung teilzunehmen."
+      },
+      "f105": {
+        "kind": "text",
+        "label": "Listenpunkt",
+        "default": "Eine verstellbare Leine, bitte ohne Flexileine"
+      },
+      "f106": {
+        "kind": "text",
+        "label": "Listenpunkt",
+        "default": "Reichlich kleine, weiche Leckerlis, die schnell geschluckt werden können"
+      },
+      "f107": {
+        "kind": "text",
+        "label": "Listenpunkt",
+        "default": "Das Lieblingsspielzeug für gemeinsames Spielen, etwa ein Zergelspielzeug statt eines Balls"
+      },
+      "f108": {
+        "kind": "text",
+        "label": "Listenpunkt",
+        "default": "Freude und Geduld beim Üben"
+      },
+      "f109": {
+        "kind": "text",
+        "label": "Überschrift",
+        "default": "Kurszeiten"
+      },
+      "f110": {
+        "kind": "text",
+        "label": "Kurszeit",
+        "default": "Mittwoch, etwa 50 Minuten. Die genaue Uhrzeit bitte vor dem Besuch erfragen."
       }
     },
     "sections": {}
