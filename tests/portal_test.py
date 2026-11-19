@@ -5,7 +5,7 @@ with tempfile.TemporaryDirectory() as temp:
     base=pathlib.Path(temp)
     web=base/'public_html';web.mkdir()
     private=base/'thv-private';private.mkdir(mode=0o700)
-    for name in ['verein-core.php','vereinsbereich.php','vereinsdaten.php','vereinsartikel.php','studio-media-lib.php','studio-blocks-lib.php','studio-api.php','studio-manifest.json','website-studio.php','vereins-backup.php']:
+    for name in ['verein-core.php','vereinsbereich.php','vereinsdaten.php','vereinsartikel.php','studio-media-lib.php','studio-blocks-lib.php','studio-bootstrap.php','studio-api.php','studio-manifest.json','website-studio.php','vereins-backup.php']:
         shutil.copy(root/name,web/name)
     key=secrets.token_hex(24);adminpw=secrets.token_hex(16);newpw=secrets.token_hex(16)
     (private/'setup.key').write_text(key)
