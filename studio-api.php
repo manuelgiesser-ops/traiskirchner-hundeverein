@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 require __DIR__.'/verein-core.php';
+require __DIR__.'/studio-blocks-lib.php';
 thv_headers();header('Content-Type: application/json; charset=utf-8');
 function studio_out($value,int $status=200): never {http_response_code($status);echo json_encode($value,JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR);exit;}
 function studio_manifest(): array {return json_decode((string)file_get_contents(__DIR__.'/studio-manifest.json'),true,512,JSON_THROW_ON_ERROR);}
@@ -30,6 +31,7 @@ function studio_validate(array $content,array $manifest,array $media): array {
             if($font!=='default'||$size!=='default'||$weight!=='default'||$more)$format[$key]=['font'=>$font,'size'=>$size,'weight'=>$weight]+$more;
         }
         $out[$page]=['fields'=>$fields,'format'=>$format,'hidden'=>array_values($hidden),'order'=>array_values($order)];
+        if(array_key_exists('blocks',$patch))$out[$page]['blocks']=thv_blocks($patch['blocks'],$media);
         if($page==='team.html'&&array_key_exists('trainers',$patch)){
             $list=$patch['trainers'];if(!is_array($list)||count($list)>60)throw new DomainException('Ungültige Trainerliste.');
             $seen=[];$clean=[];foreach($list as $t){if(!is_array($t)||!is_string($t['id']??null)||isset($seen[$t['id']]))throw new DomainException('Ungültige Trainerkarte.');

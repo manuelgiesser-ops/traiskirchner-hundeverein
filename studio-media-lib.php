@@ -11,6 +11,6 @@ function thv_media_choices(array $s): array {$out=[];foreach($s['media']??[] as 
 function thv_media_public(array $s,string $id): bool {
     $url=thv_media_url($id);
     foreach($s['entries'] as $e)if($e['visibility']==='public'&&($e['image']??'')===$url)return true;
-    foreach($s['studio']['published']??[] as $p){if(in_array($url,$p['fields']??[],true))return true;foreach($p['trainers']??[] as $t)if(($t['image']??'')===$url)return true;}
+    foreach($s['studio']['published']??[] as $p){if(in_array($url,$p['fields']??[],true))return true;foreach($p['trainers']??[] as $t)if(($t['image']??'')===$url)return true;foreach($p['blocks']??[] as $b)if(($b['image']??'')===$url)return true;}
     return false;
 }
