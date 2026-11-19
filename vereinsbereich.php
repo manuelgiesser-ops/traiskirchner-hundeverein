@@ -28,16 +28,16 @@ try {
                 return null;
             },true);
             if(!$u)throw new DomainException('Anmeldung fehlgeschlagen. Bitte prüfe die Zugangsdaten oder versuche es später erneut.');
-            thv_login($u);thv_redirect();
+            thv_login($u);if(($_POST['remember']??'')==='1')thv_keep_issue($u);thv_redirect();
         }
-        if($action==='logout'){$_SESSION=[];session_regenerate_id(true);thv_redirect();}
+        if($action==='logout'){thv_keep_revoke();$_SESSION=[];session_regenerate_id(true);thv_redirect();}
         if(!$user)throw new DomainException('Bitte melde dich zuerst an.');
         if($action==='password'){
             $old=(string)($_POST['old']??'');$new=thv_password();
             $u=thv_state(function(&$s)use($old,$new){$u=thv_user($s);if(!$u||!password_verify($old,$u['hash']))throw new DomainException('Das bisherige Passwort stimmt nicht.');
                 $u['hash']=password_hash($new,PASSWORD_DEFAULT);$u['change']=false;$u['version']++;$s['users'][$u['id']]=$u;return $u;
             },true);
-            thv_login($u);thv_flash('Passwort geändert.');thv_redirect();
+            thv_keep_revoke();thv_login($u);thv_flash('Passwort geändert.');thv_redirect();
         }
         if($action==='save-entry'){
             $id=thv_text('id',24,false);$type=thv_text('type',12);$visibility=thv_text('visibility',12);
@@ -110,7 +110,7 @@ thv_layout_start('Vereinsbereich');
 <form method="post" class="club-form"><?php thv_action('setup'); thv_field('Einrichtungsschlüssel','key','password');thv_field('Name','name');thv_field('E-Mail-Adresse','email','email');thv_field('Eigenes Passwort (mindestens 12 Zeichen)','password','password');?><button>Einrichten</button></form></section>
 <?php elseif(!$user):?>
 <section class="club-card narrow"><h2>Willkommen zurück</h2><p>Melde dich mit deinem Vereinszugang an. Den Zugang erhältst du von der Vereinsverwaltung.</p>
-<form method="post" class="club-form"><?php thv_action('login');thv_field('E-Mail-Adresse','email','email');?><label>Passwort<input name="password" type="password" autocomplete="current-password" required></label><button>Anmelden</button></form><p class="small">Zugang vergessen? <a href="kontakt.html">Vereinsverwaltung kontaktieren</a>.</p></section>
+<form method="post" class="club-form"><?php thv_action('login');thv_field('E-Mail-Adresse','email','email');?><label>Passwort<input name="password" type="password" autocomplete="current-password" required></label><label class="club-remember"><input type="checkbox" name="remember" value="1"><span>Angemeldet bleiben (30 Tage auf diesem Gerät)</span></label><button>Anmelden</button></form><p class="small">Zugang vergessen? <a href="kontakt.html">Vereinsverwaltung kontaktieren</a>.</p></section>
 <?php elseif($user['change']):?>
 <section class="club-card narrow"><h2>Dein eigenes Passwort</h2><p>Bitte ersetze das Startpasswort durch ein persönliches Passwort mit mindestens 12 Zeichen.</p><form method="post" class="club-form"><?php thv_action('password');thv_field('Startpasswort','old','password');thv_field('Neues Passwort','password','password');?><button>Passwort speichern</button></form></section>
 <?php else:?>

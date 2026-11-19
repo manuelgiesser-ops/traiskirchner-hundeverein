@@ -34,7 +34,7 @@ function thv_session(): void {
     session_name('STUDIO_'.substr(hash('sha256',realpath(__DIR__)),0,20)); session_set_cookie_params(['lifetime'=>0,'path'=>'/','secure'=>true,'httponly'=>true,'samesite'=>'Lax']);
     session_start();
     if(isset($_SESSION['uid']) && (time()-($_SESSION['last']??0)>1800 || time()-($_SESSION['start']??0)>43200)) { $_SESSION=[]; session_regenerate_id(true); }
-    $_SESSION['last']=time(); $_SESSION['csrf']??=bin2hex(random_bytes(32));
+    $_SESSION['last']=time(); $_SESSION['csrf']??=bin2hex(random_bytes(32)); thv_keep_resume();
 }
 function thv_headers(bool $private=true): void {
     header('X-Content-Type-Options: nosniff'); header('Referrer-Policy: same-origin'); header('X-Frame-Options: DENY');
@@ -59,6 +59,7 @@ function thv_email(): string { $v=strtolower(thv_text('email',254)); if(!filter_
 function thv_password(string $key='password'): string { $p=(string)($_POST[$key]??''); if(strlen($p)<12||strlen($p)>72)throw new DomainException('Das Passwort muss 12 bis 72 Bytes lang sein.');return $p; }
 function thv_id(): string { return bin2hex(random_bytes(12)); }
 require_once __DIR__.'/studio-media-lib.php';
+require_once __DIR__.'/studio-remember.php';
 function thv_new_user(string $email,string $name,string $password,string $role,bool $change): array {
     return ['id'=>thv_id(),'email'=>$email,'name'=>$name,'hash'=>password_hash($password,PASSWORD_DEFAULT),'role'=>$role,'active'=>true,'change'=>$change,'version'=>1,'created'=>date(DATE_ATOM)];
 }

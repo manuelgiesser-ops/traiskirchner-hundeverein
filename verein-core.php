@@ -33,7 +33,7 @@ function thv_session(): void {
     session_name('THV_VEREIN'); session_set_cookie_params(['lifetime'=>0,'path'=>'/','secure'=>true,'httponly'=>true,'samesite'=>'Lax']);
     session_start();
     if(isset($_SESSION['uid']) && (time()-($_SESSION['last']??0)>1800 || time()-($_SESSION['start']??0)>43200)) { $_SESSION=[]; session_regenerate_id(true); }
-    $_SESSION['last']=time(); $_SESSION['csrf']??=bin2hex(random_bytes(32));
+    $_SESSION['last']=time(); $_SESSION['csrf']??=bin2hex(random_bytes(32)); thv_keep_resume();
 }
 function thv_headers(bool $private=true): void {
     header('X-Content-Type-Options: nosniff'); header('Referrer-Policy: same-origin'); header('X-Frame-Options: DENY');
@@ -59,6 +59,7 @@ function thv_password(string $key='password'): string { $p=(string)($_POST[$key]
 function thv_id(): string { return bin2hex(random_bytes(12)); }
 require_once __DIR__.'/studio-media-lib.php';
 function thv_images(): array { $base=[''=>'Ohne Bild','assets/team-960.webp'=>'Vereinsteam','assets/jump-960.webp'=>'Agility','assets/puppy-960.webp'=>'Welpen','assets/dog-960.webp'=>'Grundkurs','assets/obed-960.webp'=>'Unterordnung','assets/hoopers-960.webp'=>'Hoopers','assets/walk-960.webp'=>'Gemeinsam unterwegs','assets/field-960.webp'=>'Trainingsgelände','assets/house-960.webp'=>'Vereinshaus']; try{return $base+thv_state(fn($s)=>thv_media_choices($s));}catch(Throwable $e){return $base;} }
+require_once __DIR__.'/studio-remember.php';
 function thv_new_user(string $email,string $name,string $password,string $role,bool $change): array {
     return ['id'=>thv_id(),'email'=>$email,'name'=>$name,'hash'=>password_hash($password,PASSWORD_DEFAULT),'role'=>$role,'active'=>true,'change'=>$change,'version'=>1,'created'=>date(DATE_ATOM)];
 }
