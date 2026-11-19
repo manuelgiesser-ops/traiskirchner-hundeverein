@@ -12,3 +12,22 @@
 
 /* Bounded visual layout; desktop and phone can be configured independently. */
 .studio-added-section>.wrap{width:100%;max-width:var(--studio-width,1080px)}.studio-added-section .studio-builder-content{position:relative;box-sizing:border-box;width:var(--builder-desk-width,100%);margin-left:var(--builder-desk-x,0%);margin-top:var(--builder-desk-top,0px);min-width:0}.studio-added-section .studio-builder-content>*{max-width:100%}.studio-builder-handles{display:none}.studio-preview-mode .studio-added-section .studio-builder-content{outline:1px dashed #90b5ed;outline-offset:5px}.studio-preview-mode .studio-builder-handles{position:relative;display:flex;gap:4px;justify-content:flex-end;z-index:16;margin:0 0 8px}.studio-builder-handles button{font:600 11px system-ui;background:#255bd5;color:white;border:1px solid #255bd5;border-radius:5px;padding:5px 9px;min-height:28px;cursor:grab;touch-action:none}.studio-builder-handles .studio-builder-resize{cursor:nwse-resize;font-size:18px;line-height:12px}.studio-preview-mode .studio-dragging-block .studio-builder-content{outline:2px solid #255bd5}.studio-preview-mode .studio-dragging-block .wrap:before{content:'';position:absolute;inset:0 50% 0 auto;width:1px;background:#255bd580;pointer-events:none}.studio-clean .studio-builder-handles{display:none!important}.studio-clean .studio-added-section .studio-builder-content{outline:none!important}@media(max-width:720px){.studio-added-section .studio-builder-content{width:var(--builder-mobile-width,100%);margin-left:var(--builder-mobile-x,0%);margin-top:var(--builder-mobile-top,0px)}}
+
+/* V54: content-sized responsive 12-column grid. Only inserted layout sections. */
+.studio-added-section .studio-free-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(10px,1.6vw,22px);position:relative;align-items:start;min-width:0}
+.studio-added-section .studio-grid-element{position:relative;box-sizing:border-box;min-width:0;max-width:100%;grid-column:var(--grid-d-col,1)/span var(--grid-d-span,12);grid-row:var(--grid-d-row,1);align-self:start}
+.studio-added-section .studio-grid-element h2,.studio-added-section .studio-grid-element p{margin:0!important;white-space:pre-wrap;overflow-wrap:anywhere}
+.studio-added-section .studio-grid-element img{display:block;width:100%;height:auto;border-radius:var(--studio-radius,8px)}
+.studio-added-section .studio-grid-element hr{border:0;height:1px;background:currentColor;opacity:.35;margin:10px 0}
+.studio-added-section .studio-grid-element .btn{max-width:100%;white-space:normal;overflow-wrap:anywhere}
+.studio-grid-element-tools{display:none!important}
+.studio-preview-mode:not(.studio-clean) .studio-grid-element:hover,.studio-preview-mode:not(.studio-clean) .studio-grid-element-selected{outline:2px solid #4584e4;outline-offset:3px}
+.studio-preview-mode:not(.studio-clean) .studio-grid-element:hover>.studio-grid-element-tools,.studio-preview-mode:not(.studio-clean) .studio-grid-element-selected>.studio-grid-element-tools,.studio-preview-mode:not(.studio-clean) .studio-grid-element:focus-within>.studio-grid-element-tools{display:flex!important;position:absolute;right:0;top:-31px;z-index:25;gap:3px}
+.studio-grid-element-tools button{border:1px solid #c7d5ed;border-radius:5px;background:#fff;color:#255bd5;min-width:29px;height:28px;padding:3px 7px;font:600 14px system-ui;touch-action:none;cursor:grab}
+.studio-grid-element-tools .studio-grid-resize{cursor:ew-resize}.studio-grid-element-tools .studio-grid-remove{color:#a32b3a;cursor:pointer}
+.studio-grid-dragging{background:repeating-linear-gradient(to right,#255bd512 0,#255bd512 calc(100% / 12 - 1px),#255bd57a calc(100% / 12 - 1px),#255bd57a calc(100% / 12))}
+.studio-grid-moving{outline:2px solid #255bd5!important;z-index:24}
+.studio-grid-empty{grid-column:1/-1;text-align:center;padding:30px;color:#255bd5;border:1px dashed #9cb8e8;border-radius:8px;font:14px system-ui}
+.studio-preview-mode .studio-grid-spacer{background:#eaf2ff;border:1px dashed #aac1e7}
+@media(max-width:720px){.studio-added-section .studio-free-grid{gap:10px}.studio-added-section .studio-grid-element{grid-column:var(--grid-m-col,1)/span var(--grid-m-span,12);grid-row:var(--grid-m-row,1)}}
+@media(hover:none){.studio-preview-mode:not(.studio-clean) .studio-grid-element-selected>.studio-grid-element-tools button{height:32px;min-width:33px}}
