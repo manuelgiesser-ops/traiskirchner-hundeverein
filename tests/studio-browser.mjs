@@ -52,7 +52,8 @@ try{
  await heading.fill('Direkt bearbeitet');
  await heading.press('Control+Enter');
  await page.waitForFunction(()=>document.getElementById('text').value==='Direkt bearbeitet');
- await page.locator('[data-studio-tab=blocks]').click();
+ await iframe.locator('.studio-add-here').last().click();
+ assert.equal(await page.locator('[data-studio-tab=blocks]').getAttribute('aria-pressed'),'true');
  await page.locator('[data-add-block=cta]').click();
  await page.locator('#block-title').fill('Test Kontaktaktion');
  await page.locator('#block-body').fill('Absatz eins\n\nAbsatz zwei');

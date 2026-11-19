@@ -78,7 +78,7 @@ def main():
         for pos,addition in sorted(changes,reverse=True):s=s[:pos]+addition+s[pos:]
         title=next((text(n) for n in parser.nodes if n['tag']=='h1' and leaf(n)),p.stem)
         manifest[p.name]={'label':title,'fields':fields,'sections':sections}
-        work[p]=s.replace('</head>','<link rel="stylesheet" href="studio-blocks.css?v=1"><script src="website-content.js?v=47" defer></script></head>',1)
+        work[p]=s.replace('</head>','<link rel="stylesheet" href="studio-blocks.css?v=1"><script src="website-content.js?v=48" defer></script></head>',1)
     if not work:raise SystemExit('No editable content in main elements.')
     disk.mkdir(parents=True,exist_ok=True,mode=0o700)
     if any(disk.iterdir()):raise SystemExit('Private storage must be empty to avoid sharing another site’s data.')

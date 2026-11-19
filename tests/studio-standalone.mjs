@@ -12,7 +12,7 @@ for(const id of ['a','b']){
 const server=spawn('php',['-d','auto_prepend_file='+php,'-S','127.0.0.1:18766','-t',web],{stdio:'ignore'});let browser;
 try{
  await new Promise(r=>setTimeout(r,700));browser=await chromium.launch({headless:true,args:['--no-sandbox'],...(process.env.STUDIO_BROWSER?{executablePath:process.env.STUDIO_BROWSER}:{})});
- const page=await browser.newPage({viewport:{width:1400,height:900},bypassCSP:true});
+ const page=await browser.newPage({viewport:{width:1400,height:900}});
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
  const origin='http://localhost:18766';
  await page.goto(origin+'/a/studio-login.php');await page.locator('[name=email]').fill('a@example.invalid');await page.locator('[name=password]').fill(password);await page.getByRole('button',{name:'Anmelden'}).click();

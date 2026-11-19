@@ -36,3 +36,5 @@ body:not([data-inspector=welcome]) #studio-welcome{display:none}body:not([data-i
 .studio-login-card [role=alert]{color:#b33440;background:#fdf1f2;padding:12px;border-radius:8px}
 .studio-side #image-settings:not([open])>label{display:none}.studio-side .format-advanced:not([open])>label,.studio-side .format-advanced:not([open])>.studio-grid-two{display:none}
 .studio-navigator [data-add-block]{position:relative;padding:10px 13px!important}.studio-side .studio-text-tools>label:first-child{font-weight:650}.studio-side .studio-format-row button{min-height:35px}
+
+.insertion-label{padding:9px 11px;margin:4px 0 8px!important;background:var(--ui-soft);color:var(--ui-blue)!important;border:1px solid #d8e4f8;border-radius:7px;font-size:12px;font-weight:650}
