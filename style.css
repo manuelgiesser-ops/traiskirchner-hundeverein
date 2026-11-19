@@ -1154,3 +1154,5 @@ body>header .menu[aria-expanded=true]{background:#dce7d8!important}
 .thv-archive-viewer>p{padding:12px 18px;margin:0;text-align:center;color:#f4f2e7;font-size:15px;line-height:1.4}
 @media(max-width:760px){.archive-photo .archive-open{border-radius:8px}.archive-open .archive-expand{width:29px;height:29px;bottom:6px;right:6px}.archive-expand svg{width:16px;height:16px}.thv-archive-viewer{width:calc(100vw - 16px)}}
 @media(prefers-reduced-motion:reduce){body>header *, .archive-photo .archive-open img{transition:none!important;animation:none!important}}
+
+.thv-archive-viewer button[hidden]{display:none!important}
