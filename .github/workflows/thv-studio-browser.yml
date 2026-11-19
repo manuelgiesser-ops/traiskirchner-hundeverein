@@ -23,6 +23,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Ensure PHP GD with WebP
+        run: |
+          php -r 'exit(function_exists("imagewebp") ? 0 : 1);' || (sudo apt-get update -qq && sudo apt-get install -y php-gd)
+          php -r 'exit(function_exists("imagewebp") ? 0 : 1);'
       - run: npm install --no-save --no-package-lock playwright@1.51.1
       - name: Use hosted runner browser or Playwright Chromium
         run: |

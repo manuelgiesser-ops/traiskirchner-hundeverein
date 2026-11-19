@@ -117,6 +117,23 @@ try{
  assert.equal(await page.locator('#clean-preview').getAttribute('aria-pressed'),'true');
  await page.locator('#clean-preview').click();
  await page.locator('#desktop').click();
+ // Real upload to the newly inserted image/text block and standalone photo.
+ await page.locator('[data-studio-tab=blocks]').click();
+ await page.locator('[data-add-block=image]').click();
+ await page.locator('#block-title').fill('Neues Foto mit Text');
+ const fixture={name:'test-upload.png',mimeType:'image/png',buffer:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jR1sAAAAASUVORK5CYII=','base64')};
+ await page.locator('#block-upload-file').setInputFiles(fixture);
+ const uploadResponse=page.waitForResponse(r=>r.url().endsWith('/studio-upload.php')&&r.request().method()==='POST');
+ await page.locator('#block-upload').click();
+ const uploaded=await uploadResponse;const info=await uploaded.json();assert.equal(uploaded.status(),200,JSON.stringify(info));
+ await page.waitForFunction(url=>document.getElementById('preview').contentDocument.querySelector('.studio-added-section img[src="'+url+'"]')?.complete,info.url);
+ await page.locator('#block-alt').fill('Testfoto');
+ const anonBefore=await browser.newPage();assert.equal((await anonBefore.request.get(origin+'/'+info.url)).status(),404);await anonBefore.close();
+ await page.locator('[data-add-block=photo]').click();
+ await page.locator('#block-media-grid .media-tile').filter({hasText:'test-upload.png'}).click();
+ await page.waitForFunction(url=>document.getElementById('preview').contentDocument.querySelectorAll('.studio-added-section img[src="'+url+'"]').length===2,info.url);
+ const imageOrder=await visualIds();
+
  await page.waitForFunction(()=>!document.getElementById('publish').disabled);
  page.once('dialog',d=>d.accept());
  await page.locator('#publish').click();
@@ -126,8 +143,9 @@ try{
  await anon.waitForFunction(()=>document.querySelector('h1[data-studio-field]')?.textContent==='Direkt bearbeitet');
  assert.equal(await anon.locator('.studio-added-section h2').filter({hasText:'Test Kontaktaktion'}).count(),1);
  assert.equal(await anon.locator('.studio-content-list li').count(),2);
- assert.deepEqual(await anon.locator('main > [data-studio-section], main > [data-studio-block]').evaluateAll(els=>els.map(el=>el.dataset.studioSection||el.dataset.studioBlock)),finalOrder,'published visitor order must match canvas');
+ assert.deepEqual(await anon.locator('main > [data-studio-section], main > [data-studio-block]').evaluateAll(els=>els.map(el=>el.dataset.studioSection||el.dataset.studioBlock)),imageOrder,'published visitor order must match canvas');
  assert.equal(await anon.locator('.studio-section-tools,.studio-drop-zone').count(),0);
+ assert.equal(await anon.locator('.studio-added-section img[src="'+info.url+'"]').count(),2);assert.equal((await anon.request.get(origin+'/'+info.url)).status(),200);assert.equal(await anon.locator('.studio-added-section img[alt="Testfoto"]').count(),1);
  assert.equal(await anon.locator('.studio-added-section a.btn').getAttribute('href'),'kontakt.html');
  await anon.goto(origin+'/index.html');
  await anon.waitForFunction(()=>document.querySelector('.course-modern .paw-reveal'));

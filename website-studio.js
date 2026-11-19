@@ -56,13 +56,13 @@ function trainerList(){
 let chosenBlock='',insertion={anchor:'end',before:''};
 function chooseInsertion(anchor='end',before=''){insertion={anchor,before};const label=data?.manifest[page]?.sections?.[anchor]?.label;$('insertion-label').textContent=label?'Einfügen vor: '+label:before?'Einfügen vor ausgewähltem Baustein':'Einfügen am Seitenende';}
 function openInsertion(anchor='end',before=''){chooseInsertion(anchor,before);navTab('blocks');document.body.classList.add('pages-open');document.body.classList.remove('inspector-collapsed');$('insertion-label').scrollIntoView({block:'nearest'});}
-const blockTypes={text:'Textabschnitt',image:'Bild und Text',notice:'Infobox',cta:'Kontaktaufruf',faq:'Frage und Antwort',list:'Liste',quote:'Zitat'};
+const blockTypes={text:'Textabschnitt',image:'Bild und Text',photo:'Einzelbild',notice:'Infobox',cta:'Kontaktaufruf',faq:'Frage und Antwort',list:'Liste',quote:'Zitat'};
 const blockValues={'block-title':'title','block-body':'body','block-tone':'tone','block-image':'image','block-alt':'alt','block-button':'button','block-link':'link','block-anchor':'anchor','block-spacing':'spacing','block-side':'side'};
 function renderBlocks(){
  const list=patch().blocks||[],host=$('block-list');host.replaceChildren();
  const b=list.find(x=>x.id===chosenBlock);$('block-editor').hidden=!b;if(!b)return;
  $('block-anchor').replaceChildren();option($('block-anchor'),'end','Am Seitenende');for(const [id,def] of Object.entries(data.manifest[page].sections))option($('block-anchor'),id,'Vor: '+def.label);for(const [id,key] of Object.entries(blockValues))$(id).value=b[key]||({anchor:'end',spacing:'normal',side:'left',tone:'light'})[key]||'';
- $('block-image-wrap').hidden=b.type!=='image';$('block-link-wrap').hidden=b.type!=='cta';
+ $('block-image-wrap').hidden=!['image','photo'].includes(b.type);$('block-link-wrap').hidden=b.type!=='cta';$('block-body-label').hidden=b.type==='photo';$('block-side-label').hidden=b.type==='photo';renderBlockMedia();
 }
 
 const makeId=()=> 'block-'+Array.from(crypto.getRandomValues(new Uint8Array(8)),b=>b.toString(16).padStart(2,'0')).join('');
@@ -74,7 +74,7 @@ function placeBlock(record,anchor='end',before=''){
 }
 function addBlock(type,anchor='end',before=''){
  if(!data||!blockTypes[type])return;const list=patch().blocks||[];if(list.length>=20){message('Maximal 20 zusätzliche Bausteine pro Seite.');return}
- const b={id:makeId(),type,title:blockTypes[type],body:type==='list'?'Erster Punkt\nZweiter Punkt':'Hier kannst du deinen eigenen Text eintragen.',tone:type==='notice'?'cream':type==='cta'?'green':'light',image:'',alt:'',button:type==='cta'?'Kontakt aufnehmen':'',link:type==='cta'?(data.manifest['kontakt.html']?'kontakt.html':page):'',spacing:'normal',side:'left'};
+ const b={id:makeId(),type,title:blockTypes[type],body:type==='photo'?'':type==='list'?'Erster Punkt\nZweiter Punkt':'Hier kannst du deinen eigenen Text eintragen.',tone:type==='notice'?'cream':type==='cta'?'green':'light',image:'',alt:'',button:type==='cta'?'Kontakt aufnehmen':'',link:type==='cta'?(data.manifest['kontakt.html']?'kontakt.html':page):'',spacing:'normal',side:'left'};
  placeBlock(b,anchor,before);try{frame.contentWindow.thvStudioFocusBlock?.(b.id)}catch{}
 }
 function receiveDrop(type,value,anchor,before){
@@ -101,7 +101,35 @@ document.addEventListener('click',e=>{if(e.target.closest('[data-add-block]')&&i
 $('toggle-pages').onclick=()=>document.body.classList.toggle('pages-open');$('show-properties').onclick=()=>{document.body.classList.toggle('properties-open');document.body.classList.remove('inspector-collapsed')};$('toggle-inspector').onclick=()=>{if(innerWidth>850)document.body.classList.toggle('inspector-collapsed');else document.body.classList.toggle('properties-open')};
 document.addEventListener('keydown',e=>{if(!(e.ctrlKey||e.metaKey)||!data)return;const k=e.key.toLowerCase();if(k==='s'){e.preventDefault();save('save');return}if(e.target.matches('input,textarea,[contenteditable=true]'))return;if(k==='z'||k==='y'){e.preventDefault();(k==='y'||e.shiftKey)?restoreLocal(redoStack,undoStack):restoreLocal(undoStack,redoStack)}});
 async function save(action,id,automatic=false){if(busy||!data)return;if(action==='publish'&&!confirm('Entwurf für alle Besucher veröffentlichen?'))return;clearTimeout(autoTimer);const serial=editSerial;const sent=clone(data.draft);busy=true;buttons();try{const res=await fetch('studio-api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action,id,csrf:data.csrf,revision:data.revision,draft:sent})});const result=await res.json();if(!res.ok)throw Error(result.error||'Speichern fehlgeschlagen');const newer=editSerial!==serial?data.draft:null;const before=JSON.stringify(data.draft);Object.assign(data,result);data.draft=normalize(newer||data.draft);if(action==='restore'){undoStack.push(before);redoStack=[]}lastSnapshot=JSON.stringify(data.draft);dirty=!!newer;autosaveBlocked=false;message(action==='publish'?'Änderungen veröffentlicht.':action==='restore'?'Frühere Version als Entwurf geladen.':(automatic?'Automatisch gespeichert · '+new Date().toLocaleTimeString('de-AT',{hour:'2-digit',minute:'2-digit'}):'Entwurf gespeichert.'));history();if(!newer&&!automatic)syncUI();}catch(e){autosaveBlocked=e.message.includes('andere Person')?'conflict':'validation';message('Nicht gespeichert: '+e.message)}finally{busy=false;buttons();if(dirty&&!autosaveBlocked)autoTimer=setTimeout(()=>save('save',undefined,true),2200)}}
-$('upload').onclick=async()=>{const file=$('upload-file').files[0];if(!file||!data||busy)return;busy=true;buttons();try{const form=new FormData();form.append('csrf',data.csrf);form.append('name',$('upload-name').value||file.name);form.append('image',file);const r=await fetch('studio-upload.php',{method:'POST',body:form});const v=await r.json();if(!r.ok)throw Error(v.error);data.media[v.url]=v.name;option($('image'),v.url,v.name);option($('trainer-image'),v.url,v.name);option($('block-image'),v.url,v.name);$('image').value=v.url;update(v.url);renderMedia();$('upload-file').value='';$('upload-name').value='';message('Foto optimiert und dem Entwurf hinzugefügt.')}catch(e){message(e.message)}finally{busy=false;buttons()}};
+function setBlockImage(id,url,p=page){
+ const b=data.draft[p]?.blocks?.find(x=>x.id===id);
+ if(!b)return false;b.image=url;mark();if(page===p){apply();if(chosenBlock===id){$('block-image').value=url;renderBlockMedia()}}return true;
+}
+function renderBlockMedia(){
+ const b=patch().blocks?.find(x=>x.id===chosenBlock),host=$('block-media-grid'),preview=$('block-photo-preview');host.replaceChildren();
+ if(!b||!['image','photo'].includes(b.type)){preview.hidden=true;return}
+ preview.hidden=!b.image;if(b.image)preview.src=b.image;else preview.removeAttribute('src');$('block-image-clear').disabled=!b.image;
+ const q=$('block-media-search').value.toLowerCase();
+ for(const [url,name] of Object.entries(data.media)){if(!String(name).toLowerCase().includes(q))continue;const button=document.createElement('button');button.type='button';button.className='media-tile';button.classList.toggle('active',b.image===url);button.setAttribute('aria-label','Bild auswählen: '+name);const img=document.createElement('img');img.src=url;img.alt='';img.loading='lazy';const label=document.createElement('span');label.textContent=name;button.append(img,label);button.onclick=()=>setBlockImage(b.id,url);host.append(button)}
+}
+async function uploadFor(kind){
+ const input=$(kind==='block'?'block-upload-file':'upload-file'),file=input.files[0];
+ if(!data||busy)return;if(!file){message('Bitte zuerst ein Bild auswählen.');return}
+ const targetPage=page,target=kind==='block'?chosenBlock:selected;
+ if(kind==='block'&&!patch().blocks?.some(b=>b.id===target&&['image','photo'].includes(b.type)))return;
+ if(kind==='field'&&data.manifest[page].fields[target]?.kind!=='image')return;
+ if(file.size>12000000){message('Bild zu groß. Bitte maximal 12 MB auswählen.');return}
+ busy=true;buttons();$('upload').disabled=true;$('block-upload').disabled=true;message('Bild wird hochgeladen und optimiert …');
+ try{
+ const form=new FormData();form.append('csrf',data.csrf);form.append('name',kind==='field'?$('upload-name').value||file.name:file.name);form.append('image',file);
+ const r=await fetch('studio-upload.php',{method:'POST',body:form});const v=await r.json();if(!r.ok)throw Error(v.error||'Upload fehlgeschlagen');
+ data.media[v.url]=v.name;for(const id of ['image','trainer-image','block-image'])option($(id),v.url,v.name);
+ if(kind==='block')setBlockImage(target,v.url,targetPage);else{
+ const p=data.draft[targetPage];if(p){p.fields[target]=v.url;mark();if(page===targetPage){apply();if(selected===target)selectField(target)}}}
+ input.value='';if(kind==='field')$('upload-name').value='';if(page===targetPage){if(kind==='field'&&selected===target)renderMedia();if(kind==='block'&&chosenBlock===target)renderBlockMedia()}message('Bild hochgeladen und im Entwurf verfügbar.');
+ }catch(e){message('Upload fehlgeschlagen: '+e.message)}finally{busy=false;$('upload').disabled=false;$('block-upload').disabled=false;buttons();if(dirty&&!autosaveBlocked){clearTimeout(autoTimer);autoTimer=setTimeout(()=>save('save',undefined,true),1000)}}
+}
+$('upload').onclick=()=>uploadFor('field');$('block-upload').onclick=()=>uploadFor('block');$('block-media-search').oninput=renderBlockMedia;$('block-image-clear').onclick=()=>setBlockImage(chosenBlock,'');
 $('save').onclick=()=>save('save');if($('publish'))$('publish').onclick=()=>save('publish');
 window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue=''}});
 fetch('studio-api.php',{cache:'no-store'}).then(async r=>{const v=await r.json();if(!r.ok)throw Error(v.error);return v}).then(v=>{data=v;for(const p of [...new Set([...Object.keys(siteLabels),...Object.keys(v.manifest)])]){const def=v.manifest[p];if(def)labels[p]=def.label||siteLabels[p]||p.replace(/\.html$/,'').replace(/-/g,' ')}$('page-count').textContent=Object.keys(v.manifest).length+' Seiten';data.draft=normalize(v.draft);lastSnapshot=JSON.stringify(data.draft);for(const [p,l] of Object.entries(labels))if(v.manifest[p])option(sel,p,l);option($('block-image'),'','Kein Bild');for(const [src,label] of Object.entries(v.media)){option($('image'),src,label);option($('trainer-image'),src,label);option($('block-image'),src,label)}history();showPage(sel.value);message('Bereit. Änderungen sind zunächst nur im Entwurf sichtbar.');buttons()}).catch(e=>message(e.message));
