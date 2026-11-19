@@ -175,7 +175,8 @@ try{
  await page.locator('#grid-layers button').filter({hasText:/^Text:/}).click();
  await page.locator('#grid-text').fill('Freier Text im Raster');await page.locator('#grid-font').selectOption('serif');
  await page.locator('#grid-size').fill('24');await page.locator('#grid-size').press('Tab');
- const gridText=grid.locator('[data-kind=text]');assert.equal(await gridText.locator('p').textContent(),'Freier Text im Raster');
+ await page.locator('#grid-text').evaluate(el=>{el.focus();el.setSelectionRange(0,6)});await page.locator('[data-word-style=bold]').click();
+ const gridText=grid.locator('[data-kind=text]');assert.equal(await gridText.locator('strong').textContent(),'Freier');assert.equal(await gridText.locator('p').textContent(),'Freier Text im Raster');
  assert.ok((await gridText.locator('p').evaluate(el=>el.style.fontFamily)).includes('Georgia'));
  await page.locator('.grid-position-details summary').click();await page.locator('#grid-col').fill('7');await page.locator('#grid-col').press('Tab');
  assert.equal(await gridText.evaluate(el=>el.style.getPropertyValue('--grid-d-col')),'7');
@@ -187,7 +188,7 @@ try{
  await page.locator('[data-grid-add=image]').click();await page.locator('#grid-upload-file').setInputFiles({...fixture,name:'grid-upload.webp'});
  const gridUploadResponse=page.waitForResponse(r=>r.url().endsWith('/studio-upload.php')&&r.request().method()==='POST');
  await page.locator('#grid-upload').click();const gridUploaded=await gridUploadResponse;const gridInfo=await gridUploaded.json();assert.equal(gridUploaded.status(),200,JSON.stringify(gridInfo));
- const gridImage=grid.locator('[data-kind=image]');await gridImage.locator('img').waitFor();await page.locator('#grid-alt').fill('Rasterfoto');
+ const gridImage=grid.locator('[data-kind=image]');await gridImage.locator('img').waitFor();await page.locator('#grid-alt').fill('Rasterfoto');await page.locator('.grid-image-design summary').click();await page.locator('#grid-ratio').selectOption('square');await page.locator('#grid-fit').selectOption('cover');assert.equal(await gridImage.locator('img').evaluate(el=>el.style.aspectRatio),'1 / 1');
  await page.locator('#grid-row').fill('2');await page.locator('#grid-row').press('Tab');assert.equal(await gridImage.evaluate(el=>el.style.getPropertyValue('--grid-d-row')),'2');
  await page.locator('#mobile').click();await page.waitForFunction(()=>document.getElementById('preview').clientWidth<=390);
  assert.equal(await page.locator('#grid-device-label').textContent(),'Smartphone');assert.equal(await page.locator('#grid-span').inputValue(),'12');await page.locator('#grid-span').fill('8');await page.locator('#grid-span').press('Tab');assert.equal(await gridImage.evaluate(el=>el.style.getPropertyValue('--grid-m-span')),'8');assert.equal(await gridImage.evaluate(el=>el.style.getPropertyValue('--grid-d-span')),'6');
@@ -226,6 +227,7 @@ try{
  await page.keyboard.press('Escape');await page.mouse.up();
  const afterDrag=await scrollY();await page.waitForTimeout(180);
  assert.ok(Math.abs((await scrollY())-afterDrag)<30,'autoscroll must stop when drag is canceled');
+ await page.locator('[data-studio-tab=blocks]').click();await page.locator('.studio-template-panel summary').click();await page.locator('[data-studio-template=cards]').click();assert.equal(await iframe.locator('.studio-free-grid').last().locator('[data-studio-element]').count(),7);
  const imageOrder=await visualIds();
 
  await page.waitForFunction(()=>!document.getElementById('publish').disabled);
@@ -244,7 +246,7 @@ try{
  assert.equal(await anon.locator('.studio-added-section a.btn').getAttribute('href'),'kontakt.html');
  const servedSeo=await anon.request.get(origin+'/studio-page.php?page=welpen.html');assert.equal(servedSeo.status(),200);const seoHtml=await servedSeo.text();assert.ok(seoHtml.includes('<title>Welpenkurs in Traiskirchen | Test</title>'));assert.ok(seoHtml.includes('Ein veröffentlichter Testtext für die Suchmaschinenbeschreibung'));
  assert.equal(await anon.locator('.studio-added-section').filter({hasText:'Formatierter Text'}).locator('[data-studio-part=body]').evaluate(el=>el.style.fontWeight),'700');
- assert.equal(await anon.locator('.studio-free-grid [data-kind=text] p').textContent(),'Freier Text im Raster');
+ assert.equal(await anon.locator('.studio-free-grid [data-kind=text] p').first().textContent(),'Freier Text im Raster');assert.equal(await anon.locator('.studio-free-grid [data-kind=text] strong').textContent(),'Freier');assert.equal(await anon.locator('.studio-free-grid img[alt="Rasterfoto"]').evaluate(el=>el.style.aspectRatio),'1 / 1');
  assert.equal(await anon.locator('.studio-free-grid [data-kind=image]').evaluate(el=>el.style.getPropertyValue('--grid-m-span')),'8');
  assert.equal(await anon.locator('.studio-free-grid img[alt="Rasterfoto"]').count(),1);
  assert.equal((await anon.request.get(origin+'/'+gridInfo.url)).status(),200);

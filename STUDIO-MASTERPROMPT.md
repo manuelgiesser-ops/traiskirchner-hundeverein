@@ -68,3 +68,6 @@ HTTPS, serverseitige Rollen und Berechtigungen, CSRF, XSS-Vermeidung, sichere Up
 
 ## Verbindliche Bedienregel: stabiler Viewport und Drag-Autoscroll
 Keine Scrollsprünge beim Ändern, Einfügen, Formatieren, Löschen, automatischen Speichern oder Undo. Bestehende unveränderte DOM-Bausteine und Bilder behalten; Scrollposition vor Mutation sichern und sofort wiederherstellen. Explizite Navigation zu einem Element darf nur so weit wie nötig scrollen. Beim Halten eines Drag-Griffs am oberen/unteren Rand scrollt die Arbeitsfläche kontinuierlich mit variabler Geschwindigkeit, auch ohne weitere Mausbewegung. Beim Loslassen, Abbruch und Escape endet Autoscroll. Touchgriffe und native Drag-and-drop-Ziele, auch Strukturpanel, berücksichtigen. Rasterpositionen während Scrollen aktualisieren. Browser-Test: Scrollposition bei Feldänderung und Einfügen, echtes Drag-Autoscroll in beide Richtungen, Drop nach langem Scrollen, speichern und neu laden.
+
+## V56: Design-Ausbau
+Rasterelemente unterstützen strukturierte Wortmarkierungen (Fett, Kursiv, Unterstrich), nicht destruktive Bildformate, Fokus und Ecken sowie fünf editierbare Abschnittsvorlagen. Bilder im Editor auch außerhalb des sichtbaren Bereichs laden; Besucher behalten Lazy Loading. Weitere Masterprompt-Module bleiben offen.
