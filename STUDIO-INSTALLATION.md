@@ -23,3 +23,6 @@ Bestehende IDs bei Änderungen an HTML beibehalten; Manifest synchron ergänzen.
 
 ## Geräte-Layouts und angemeldet bleiben
 Neu eingefügte Bausteine können mit den Griffen innerhalb des Seitenbereichs positioniert und skaliert werden. Desktop und Smartphone bekommen getrennte Werte. Die Anmeldung kann optional 30 Tage gemerkt werden; im privaten Speicher liegt nur ein Token-Hash. Die Zugangsdaten selbst speichert der Browser-Passwortmanager, nicht das Studio. Abmelden widerruft die dauerhafte Anmeldung auf dem aktuellen Gerät.
+
+## Freie Layout-Abschnitte (V54)
+Neue Grid-Abschnitte enthalten unabhängig bearbeitbare Überschriften, Texte, Fotos, Buttons, Linien und Abstände. Desktop und Mobil erhalten getrennte Rasterpositionen; das Inhaltsmodell bleibt gemeinsam. Die Grenzen (40 neue Abschnitte je Seite, 24 Elemente je Layout-Abschnitt, 64 Zeilen) schützen Server und Bedienung. Die ursprünglichen HTML-Layouts bleiben als Adapter erhalten. Eigene hochgeladene Rasterbilder werden wie bisher erst nach Veröffentlichung öffentlich erreichbar.

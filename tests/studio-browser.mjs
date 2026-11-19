@@ -169,6 +169,36 @@ try{
  await page.locator('#seo-title').fill('Welpenkurs in Traiskirchen | Test');
  await page.locator('#seo-description').fill('Ein veröffentlichter Testtext für die Suchmaschinenbeschreibung auf der Website des Hundevereins.');
  const beforeSeo=await page.request.get(origin+'/studio-page.php?page=welpen.html');assert.ok(!(await beforeSeo.text()).includes('<title>Welpenkurs in Traiskirchen | Test</title>'));
+ // V54: independent, editable grid elements and site-specific uploads
+ await page.locator('[data-studio-tab=blocks]').click();await page.locator('[data-add-block=grid]').click();
+ const grid=iframe.locator('.studio-free-grid').last();await grid.waitFor();
+ await page.locator('#grid-layers button').filter({hasText:/^Text:/}).click();
+ await page.locator('#grid-text').fill('Freier Text im Raster');await page.locator('#grid-font').selectOption('serif');
+ await page.locator('#grid-size').fill('24');await page.locator('#grid-size').press('Tab');
+ const gridText=grid.locator('[data-kind=text]');assert.equal(await gridText.locator('p').textContent(),'Freier Text im Raster');
+ assert.ok((await gridText.locator('p').evaluate(el=>el.style.fontFamily)).includes('Georgia'));
+ await page.locator('.grid-position-details summary').click();await page.locator('#grid-col').fill('7');await page.locator('#grid-col').press('Tab');
+ assert.equal(await gridText.evaluate(el=>el.style.getPropertyValue('--grid-d-col')),'7');
+ // Resize via a genuine pointer drag on the selected element.
+ const resize=gridText.locator('.studio-grid-resize');await resize.scrollIntoViewIfNeeded();const gripBox=await resize.boundingBox();assert.ok(gripBox);
+ const gridWidth=await grid.evaluate(el=>el.getBoundingClientRect().width);
+ await page.mouse.move(gripBox.x+gripBox.width/2,gripBox.y+gripBox.height/2);await page.mouse.down();await page.mouse.move(gripBox.x+gripBox.width/2-gridWidth/12,gripBox.y+gripBox.height/2,{steps:5});await page.mouse.up();
+ assert.equal(await gridText.evaluate(el=>el.style.getPropertyValue('--grid-d-span')),'5');
+ await page.locator('[data-grid-add=image]').click();await page.locator('#grid-upload-file').setInputFiles({...fixture,name:'grid-upload.webp'});
+ const gridUploadResponse=page.waitForResponse(r=>r.url().endsWith('/studio-upload.php')&&r.request().method()==='POST');
+ await page.locator('#grid-upload').click();const gridUploaded=await gridUploadResponse;const gridInfo=await gridUploaded.json();assert.equal(gridUploaded.status(),200,JSON.stringify(gridInfo));
+ const gridImage=grid.locator('[data-kind=image]');await gridImage.locator('img').waitFor();await page.locator('#grid-alt').fill('Rasterfoto');
+ await page.locator('#grid-row').fill('2');await page.locator('#grid-row').press('Tab');assert.equal(await gridImage.evaluate(el=>el.style.getPropertyValue('--grid-d-row')),'2');
+ await page.locator('#mobile').click();await page.waitForFunction(()=>document.getElementById('preview').clientWidth<=390);
+ await page.locator('#grid-span').fill('8');await page.locator('#grid-span').press('Tab');assert.equal(await gridImage.evaluate(el=>el.style.getPropertyValue('--grid-m-span')),'8');assert.equal(await gridImage.evaluate(el=>el.style.getPropertyValue('--grid-d-span')),'6');
+ await page.locator('[data-grid-add=divider]').click();await page.locator('#grid-delete').click();assert.equal(await grid.locator('[data-kind=divider]').count(),0);await page.locator('#undo').click();assert.equal(await grid.locator('[data-kind=divider]').count(),1);await page.locator('#redo').click();assert.equal(await grid.locator('[data-kind=divider]').count(),0);
+ await page.locator('#desktop').click();
+ const gridAnon=await browser.newPage();assert.equal((await gridAnon.request.get(origin+'/'+gridInfo.url)).status(),404);await gridAnon.close();
+ await page.waitForFunction(()=>document.getElementById('studio-message').textContent.includes('Automatisch gespeichert'),null,{timeout:15000});
+ await page.reload();await page.waitForFunction(()=>document.getElementById('studio-message')?.textContent.startsWith('Bereit.'));
+ await page.locator('#page-list').getByRole('button',{name:'Welpen und Junghunde',exact:true}).click();await grid.locator('[data-kind=image] img[src="'+gridInfo.url+'"]').waitFor();
+ assert.equal(await gridText.evaluate(el=>el.style.getPropertyValue('--grid-d-span')),'5');
+ assert.equal(await gridImage.evaluate(el=>el.style.getPropertyValue('--grid-m-span')),'8');
  const imageOrder=await visualIds();
 
  await page.waitForFunction(()=>!document.getElementById('publish').disabled);
@@ -187,6 +217,11 @@ try{
  assert.equal(await anon.locator('.studio-added-section a.btn').getAttribute('href'),'kontakt.html');
  const servedSeo=await anon.request.get(origin+'/studio-page.php?page=welpen.html');assert.equal(servedSeo.status(),200);const seoHtml=await servedSeo.text();assert.ok(seoHtml.includes('<title>Welpenkurs in Traiskirchen | Test</title>'));assert.ok(seoHtml.includes('Ein veröffentlichter Testtext für die Suchmaschinenbeschreibung'));
  assert.equal(await anon.locator('.studio-added-section').filter({hasText:'Formatierter Text'}).locator('[data-studio-part=body]').evaluate(el=>el.style.fontWeight),'700');
+ assert.equal(await anon.locator('.studio-free-grid [data-kind=text] p').textContent(),'Freier Text im Raster');
+ assert.equal(await anon.locator('.studio-free-grid [data-kind=image]').evaluate(el=>el.style.getPropertyValue('--grid-m-span')),'8');
+ assert.equal(await anon.locator('.studio-free-grid img[alt="Rasterfoto"]').count(),1);
+ assert.equal((await anon.request.get(origin+'/'+gridInfo.url)).status(),200);
+ assert.equal(await anon.locator('.studio-grid-element-tools').count(),0);
  await anon.goto(origin+'/index.html');
  await anon.waitForFunction(()=>document.querySelector('.course-modern .paw-reveal'));
  assert.equal(await anon.locator('.paw-reveal:not(.course-modern .paw-reveal)').count(),0);
