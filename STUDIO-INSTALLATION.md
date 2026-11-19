@@ -20,3 +20,6 @@ Erneute Installation überschreibt keine bestehenden Editor-Dateien. Bei Umzug: 
 Das Installationsskript übernimmt Root-HTML-Seiten, Texte, Bilder, Buttons und Hauptabschnitte. Mit `data-studio-protect` lassen sich Elemente vor Bearbeitung schützen. Komplexe Widgets, verschachtelte Routen, React/Next.js oder serverseitige Templates benötigen einen eigenen Adapter. Ein visueller Editor für vorhandene Inhalte ist kein völlig freier Pixel-Builder. 
 Farben für neue Bausteine über CSS-Variablen `--studio-accent`, `--studio-ink`, `--studio-soft`, `--studio-light`, `--studio-highlight`, `--studio-radius`, `--studio-width` anpassen.
 Bestehende IDs bei Änderungen an HTML beibehalten; Manifest synchron ergänzen. Nicht erneut nummerieren. 
+
+## Geräte-Layouts und angemeldet bleiben
+Neu eingefügte Bausteine können mit den Griffen innerhalb des Seitenbereichs positioniert und skaliert werden. Desktop und Smartphone bekommen getrennte Werte. Die Anmeldung kann optional 30 Tage gemerkt werden; im privaten Speicher liegt nur ein Token-Hash. Die Zugangsdaten selbst speichert der Browser-Passwortmanager, nicht das Studio. Abmelden widerruft die dauerhafte Anmeldung auf dem aktuellen Gerät.

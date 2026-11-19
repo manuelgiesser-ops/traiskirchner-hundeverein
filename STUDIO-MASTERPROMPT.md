@@ -22,3 +22,6 @@ Du bist Produktdesigner, UX-Spezialist, Senior Fullstack-Entwickler und QA-Veran
 
 ## Verbindliche Strukturregel
 Eine gemeinsame Reihenfolge für vorhandene und neue Abschnitte; Pfeile und Drag-and-drop müssen den gleichen gespeicherten Zustand erzeugen. Alle freigegebenen Hauptabschnitte auf jeder Seite erhalten sichtbare Werkzeugleisten. Test: Abschnitt vor und hinter einen neu hinzugefügten Abschnitt verschieben, speichern, neu laden und veröffentlichen. Kein freies Pixel-Layout für geschützte Originalkomponenten.
+
+## Layout & Anmeldung
+Freigegebene neue Blöcke erhalten sichtbare Verschiebe- und Größenanfasser. Visuelle Ausrichtung bei 5%-Schritten; Breite 35 bis 100%, horizontal nur innerhalb des Inhaltsbereichs, oberer Zusatzabstand 0 bis 160 px. Desktop und Mobil können getrennt eingestellt werden und gelten für Entwurf und Veröffentlichung. Geschützte Originalelemente bleiben im Responsive-Layout. Für Anmeldungen optional 30 Tage „Angemeldet bleiben“ mit signiertem, widerrufbarem, site-scoped HttpOnly/Secure Token; keine Passwörter in LocalStorage, Cookies oder Datenbank im Klartext.

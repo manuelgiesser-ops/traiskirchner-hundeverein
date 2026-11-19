@@ -132,6 +132,19 @@ try{
  await page.locator('[data-add-block=photo]').click();
  await page.locator('#block-media-grid .media-tile').filter({hasText:'test-upload.webp'}).click();
  await page.waitForFunction(url=>document.getElementById('preview').contentDocument.querySelectorAll('.studio-added-section img[src="'+url+'"]').length===2,info.url);
+ const setRange=async(id,value)=>page.locator('#'+id).evaluate((el,v)=>{el.value=String(v);el.dispatchEvent(new Event('input',{bubbles:true}))},value);
+ const blockId=await page.locator('#block-editor').evaluate(el=>el.hidden?null:document.querySelector('#preview').contentDocument.querySelectorAll('[data-studio-block]')[document.querySelector('#preview').contentDocument.querySelectorAll('[data-studio-block]').length-1]?.dataset.studioBlock);
+ assert.ok(blockId);await setRange('layout-width',60);await setRange('layout-x',20);await setRange('layout-top',24);
+ await page.waitForFunction(id=>document.getElementById('preview').contentDocument.querySelector('[data-studio-block="'+id+'"]')?.style.getPropertyValue('--builder-desk-width')==='60%',blockId);
+ await page.locator('[data-layout-device=mobile]').click();await setRange('layout-width',90);await setRange('layout-x',5);await setRange('layout-top',8);
+ await page.waitForFunction(id=>document.getElementById('preview').contentDocument.querySelector('[data-studio-block="'+id+'"]')?.style.getPropertyValue('--builder-mobile-width')==='90%',blockId);
+ await page.locator('#desktop').click();const grip=iframe.locator('[data-studio-block="'+blockId+'"] .studio-builder-resize');
+ await grip.scrollIntoViewIfNeeded();const box=await grip.boundingBox();assert.ok(box);
+ await page.mouse.move(box.x+box.width/2,box.y+box.height/2);await page.mouse.down();await page.mouse.move(box.x+box.width/2+60,box.y+box.height/2,{steps:5});await page.mouse.up();
+ await page.waitForFunction(()=>document.getElementById('studio-message').textContent.includes('Automatisch gespeichert'),null,{timeout:15000});
+ await page.reload();await page.waitForFunction(()=>document.getElementById('studio-message')?.textContent.startsWith('Bereit.'));
+ await page.locator('#page-list').getByRole('button',{name:'Welpen und Junghunde',exact:true}).click();
+ await page.waitForFunction(id=>document.getElementById('preview')?.contentDocument?.querySelector('[data-studio-block="'+id+'"]')?.style.getPropertyValue('--builder-mobile-width')==='90%',blockId);
  const imageOrder=await visualIds();
 
  await page.waitForFunction(()=>!document.getElementById('publish').disabled);
@@ -146,6 +159,7 @@ try{
  assert.deepEqual(await anon.locator('main > [data-studio-section], main > [data-studio-block]').evaluateAll(els=>els.map(el=>el.dataset.studioSection||el.dataset.studioBlock)),imageOrder,'published visitor order must match canvas');
  assert.equal(await anon.locator('.studio-section-tools,.studio-drop-zone').count(),0);
  assert.equal(await anon.locator('.studio-added-section img[src="'+info.url+'"]').count(),2);assert.equal((await anon.request.get(origin+'/'+info.url)).status(),200);assert.equal(await anon.locator('.studio-added-section img[alt="Testfoto"]').count(),1);
+ assert.equal(await anon.locator('[data-studio-block="'+blockId+'"]').evaluate(el=>el.style.getPropertyValue('--builder-mobile-width')),'90%');
  assert.equal(await anon.locator('.studio-added-section a.btn').getAttribute('href'),'kontakt.html');
  await anon.goto(origin+'/index.html');
  await anon.waitForFunction(()=>document.querySelector('.course-modern .paw-reveal'));

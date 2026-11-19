@@ -15,8 +15,12 @@ try{
  const page=await browser.newPage({viewport:{width:1400,height:900}});
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
  const origin='http://localhost:18766';
- await page.goto(origin+'/a/studio-login.php');await page.locator('[name=email]').fill('a@example.invalid');await page.locator('[name=password]').fill(password);await page.getByRole('button',{name:'Anmelden'}).click();
+ await page.goto(origin+'/a/studio-login.php');await page.locator('[name=email]').fill('a@example.invalid');await page.locator('[name=password]').fill(password);await page.locator('[name=remember]').check();await page.getByRole('button',{name:'Anmelden'}).click();
  await page.locator('#studio-message').filter({hasText:'Bereit.'}).waitFor();
+ const tokens=await page.context().cookies();assert.equal(tokens.some(c=>c.name.startsWith('STUDIO_KEEP_')&&c.httpOnly),true,'remember token must be HttpOnly');
+ const keep=tokens.find(c=>c.name.startsWith('STUDIO_KEEP_'));assert.ok(keep.expires>Date.now()/1000+25*86400);
+ await page.context().clearCookies({name:/^STUDIO_[a-f0-9]{20}$/});
+ await page.reload();await page.locator('#studio-message').filter({hasText:'Bereit.'}).waitFor();
  await page.frameLocator('#preview').locator('h1').click();await page.locator('#text').fill('Nur Website A');
  await page.frameLocator('#preview').getByRole('heading',{name:'Nur Website A',exact:true}).waitFor();
  await page.frameLocator('#preview').locator('[data-layout-id="s002"] [data-studio-action=up]').click();
@@ -26,6 +30,7 @@ try{
  await page.goto(origin+'/b/studio-api.php');assert.equal(await page.locator('body').textContent(),'{"error":"Dafür fehlt die Berechtigung."}');
  await page.goto(origin+'/b/studio-login.php');await page.locator('[name=email]').fill('b@example.invalid');await page.locator('[name=password]').fill(password);await page.getByRole('button',{name:'Anmelden'}).click();
  await page.frameLocator('#preview').getByRole('heading',{name:'Original b',exact:true}).waitFor();
+ const cookiesB=await page.context().cookies(origin+'/b/studio-login.php');assert.equal(cookiesB.filter(c=>c.name.startsWith('STUDIO_KEEP_')).length,0,'website A remember cookie must not leak to website B');
  const ans=await (await page.request.get(origin+'/b/studio-api.php')).json();assert.deepEqual(ans.published,[]);
  const other=await browser.newPage();await other.goto(origin+'/a/index.html');await other.getByRole('heading',{name:'Nur Website A',exact:true}).waitFor();assert.equal(await other.locator('main > [data-studio-section]').first().getAttribute('data-studio-section'),'s002');await other.goto(origin+'/b/index.html');assert.equal(await other.locator('h1').textContent(),'Original b');
  assert.deepEqual(errors,[]);console.log('PASS: two installed websites, independent accounts, private storage, draft and publishing');
