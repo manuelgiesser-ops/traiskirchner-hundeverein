@@ -122,6 +122,26 @@
       "s003": {
         "label": "Einblick ins Agility-Training"
       }
+    },
+    "layoutGroups": {
+      "g001": {
+        "kind": "flow",
+        "units": [
+          "g001u1",
+          "g001u2",
+          "g001u3",
+          "g001u4",
+          "g001u5",
+          "g001u6"
+        ]
+      },
+      "g002": {
+        "kind": "flow",
+        "units": [
+          "g002u1",
+          "g002u2"
+        ]
+      }
     }
   },
   "aktuelles.html": {
@@ -226,6 +246,37 @@
       },
       "s003": {
         "label": "Weitere Einblicke"
+      }
+    },
+    "layoutGroups": {
+      "g001": {
+        "kind": "flow",
+        "units": [
+          "g001u1",
+          "g001u2",
+          "g001u3"
+        ]
+      },
+      "g002": {
+        "kind": "flow",
+        "units": [
+          "g002u1",
+          "g002u2"
+        ]
+      },
+      "g003": {
+        "kind": "flow",
+        "units": [
+          "g003u1",
+          "g003u2"
+        ]
+      },
+      "g004": {
+        "kind": "flow",
+        "units": [
+          "g004u1",
+          "g004u2"
+        ]
       }
     }
   },
@@ -344,6 +395,25 @@
       "s002": {
         "label": "Was du mitbringen solltest"
       }
+    },
+    "layoutGroups": {
+      "g001": {
+        "kind": "flow",
+        "units": [
+          "g001u1",
+          "g001u2",
+          "g001u3",
+          "g001u4",
+          "g001u5"
+        ]
+      },
+      "g002": {
+        "kind": "flow",
+        "units": [
+          "g002u1",
+          "g002u2"
+        ]
+      }
     }
   },
   "galerie.html": {
@@ -456,7 +526,8 @@
       "s090": {
         "label": "Aus dem Vereinsarchiv"
       }
-    }
+    },
+    "layoutGroups": {}
   },
   "grundkurs.html": {
     "fields": {
@@ -573,6 +644,25 @@
       "s002": {
         "label": "Was du mitbringen solltest"
       }
+    },
+    "layoutGroups": {
+      "g001": {
+        "kind": "flow",
+        "units": [
+          "g001u1",
+          "g001u2",
+          "g001u3",
+          "g001u4",
+          "g001u5"
+        ]
+      },
+      "g002": {
+        "kind": "flow",
+        "units": [
+          "g002u1",
+          "g002u2"
+        ]
+      }
     }
   },
   "hoopers.html": {
@@ -679,6 +769,24 @@
       },
       "s002": {
         "label": "Was du mitbringen solltest"
+      }
+    },
+    "layoutGroups": {
+      "g001": {
+        "kind": "flow",
+        "units": [
+          "g001u1",
+          "g001u2",
+          "g001u3",
+          "g001u4"
+        ]
+      },
+      "g002": {
+        "kind": "flow",
+        "units": [
+          "g002u1",
+          "g002u2"
+        ]
       }
     }
   },
@@ -1143,6 +1251,44 @@
       "s008": {
         "label": "Wir freuen uns auf euch."
       }
+    },
+    "layoutGroups": {
+      "g001": {
+        "kind": "columns",
+        "units": [
+          "g001u1",
+          "g001u2"
+        ]
+      },
+      "g002": {
+        "kind": "flow",
+        "units": [
+          "g002u1",
+          "g002u2"
+        ]
+      },
+      "g003": {
+        "kind": "flow",
+        "units": [
+          "g003u1",
+          "g003u2"
+        ]
+      },
+      "g004": {
+        "kind": "flow",
+        "units": [
+          "g004u1",
+          "g004u2"
+        ]
+      },
+      "g005": {
+        "kind": "flow",
+        "units": [
+          "g005u1",
+          "g005u2",
+          "g005u3"
+        ]
+      }
     }
   },
   "kontakt.html": {
@@ -1200,7 +1346,8 @@
       "s002": {
         "label": "Unser Gelände"
       }
-    }
+    },
+    "layoutGroups": {}
   },
   "kurszeiten.html": {
     "fields": {
@@ -1339,7 +1486,8 @@
       "s001": {
         "label": "Trainingsübersicht"
       }
-    }
+    },
+    "layoutGroups": {}
   },
   "mitgliedschaft.html": {
     "fields": {
@@ -1479,6 +1627,15 @@
       "s003": {
         "label": "Häufige Fragen"
       }
+    },
+    "layoutGroups": {
+      "g001": {
+        "kind": "flow",
+        "units": [
+          "g001u1",
+          "g001u2"
+        ]
+      }
     }
   },
   "social-walk.html": {
@@ -1590,6 +1747,25 @@
       },
       "s002": {
         "label": "Für wen eignet sich der Social Walk?"
+      }
+    },
+    "layoutGroups": {
+      "g001": {
+        "kind": "flow",
+        "units": [
+          "g001u1",
+          "g001u2",
+          "g001u3",
+          "g001u4",
+          "g001u5"
+        ]
+      },
+      "g002": {
+        "kind": "flow",
+        "units": [
+          "g002u1",
+          "g002u2"
+        ]
       }
     }
   },
@@ -1895,6 +2071,64 @@
         "roleKey": "f028",
         "name": "Gabi"
       }
+    },
+    "layoutGroups": {
+      "g001": {
+        "kind": "flow",
+        "units": [
+          "g001u1",
+          "g001u2"
+        ]
+      },
+      "g002": {
+        "kind": "flow",
+        "units": [
+          "g002u1",
+          "g002u2"
+        ]
+      },
+      "g003": {
+        "kind": "flow",
+        "units": [
+          "g003u1",
+          "g003u2"
+        ]
+      },
+      "g004": {
+        "kind": "flow",
+        "units": [
+          "g004u1",
+          "g004u2"
+        ]
+      },
+      "g005": {
+        "kind": "flow",
+        "units": [
+          "g005u1",
+          "g005u2"
+        ]
+      },
+      "g006": {
+        "kind": "flow",
+        "units": [
+          "g006u1",
+          "g006u2"
+        ]
+      },
+      "g007": {
+        "kind": "flow",
+        "units": [
+          "g007u1",
+          "g007u2"
+        ]
+      },
+      "g008": {
+        "kind": "flow",
+        "units": [
+          "g008u1",
+          "g008u2"
+        ]
+      }
     }
   },
   "training.html": {
@@ -2077,6 +2311,15 @@
       "s002": {
         "label": "Beiträge und Kurskosten"
       }
+    },
+    "layoutGroups": {
+      "g001": {
+        "kind": "flow",
+        "units": [
+          "g001u1",
+          "g001u2"
+        ]
+      }
     }
   },
   "unterordnung.html": {
@@ -2193,6 +2436,25 @@
       },
       "s002": {
         "label": "Was du mitbringen solltest"
+      }
+    },
+    "layoutGroups": {
+      "g001": {
+        "kind": "flow",
+        "units": [
+          "g001u1",
+          "g001u2",
+          "g001u3",
+          "g001u4",
+          "g001u5"
+        ]
+      },
+      "g002": {
+        "kind": "flow",
+        "units": [
+          "g002u1",
+          "g002u2"
+        ]
       }
     }
   },
@@ -2320,6 +2582,29 @@
       },
       "s090": {
         "label": "Unser Trainingsgelände"
+      }
+    },
+    "layoutGroups": {
+      "g001": {
+        "kind": "columns",
+        "units": [
+          "g001u1",
+          "g001u2"
+        ]
+      },
+      "g002": {
+        "kind": "flow",
+        "units": [
+          "g002u1",
+          "g002u2"
+        ]
+      },
+      "g003": {
+        "kind": "flow",
+        "units": [
+          "g003u1",
+          "g003u2"
+        ]
       }
     }
   },
@@ -2455,6 +2740,26 @@
       },
       "s003": {
         "label": "Unsere jungen Hunde im Training"
+      }
+    },
+    "layoutGroups": {
+      "g001": {
+        "kind": "flow",
+        "units": [
+          "g001u1",
+          "g001u2",
+          "g001u3",
+          "g001u4",
+          "g001u5",
+          "g001u6"
+        ]
+      },
+      "g002": {
+        "kind": "flow",
+        "units": [
+          "g002u1",
+          "g002u2"
+        ]
       }
     }
   }
