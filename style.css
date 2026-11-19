@@ -1278,3 +1278,41 @@ body>main .final-photo-contact .section-head h2{font-size:clamp(2.65rem,5.4vw,5.
 @media(prefers-reduced-motion:reduce){
  .thv-motion .course-modern .course .media-frame.thv-media.photo-opening.paw-reveal.course-discovery.thv-media-seen>img{opacity:1!important;transition:none!important}
 }
+
+
+/* V46: optically centered paw badges, a restrained warm accent, and clean archive photos. */
+.archive-open .archive-expand{display:none!important}
+.link-paw{
+ display:inline-flex!important;align-items:center;justify-content:center;
+ flex:0 0 auto;line-height:1;padding:0!important;
+}
+.link-paw svg{display:block;width:100%;height:100%;overflow:visible;transform-origin:50% 50%;transform-box:view-box}
+.btn .link-paw,.textlink .link-paw,.hero-secondary .link-paw{
+ margin-left:3px;align-self:center;transform:none!important;translate:none!important;
+ animation:none!important;
+}
+.btn .link-paw{color:#344b32}
+.textlink .link-paw{color:#985e35}
+.dark .textlink .link-paw,.hero-secondary .link-paw{color:#f1ca96}
+body>header #nav .btn.small .link-paw{color:#f4d3a2}
+.course-modern .course-action{
+ display:grid!important;place-items:center!important;
+ width:38px;height:38px;gap:0!important;padding:0!important;
+ background:#e5ebdf;color:#3f6745;border:1px solid #ccd8c5;
+ transition:background .24s ease,color .24s ease,border-color .24s ease;
+}
+.course-modern .course-action>.link-paw,
+.course-modern .course:hover .course-action>.link-paw,
+.course-modern .course:focus-visible .course-action>.link-paw{
+ position:static;display:flex!important;align-items:center;justify-content:center;
+ align-self:center;justify-self:center;width:20px;height:20px;margin:0!important;padding:0!important;
+ transform:none!important;translate:none!important;animation:none!important;color:inherit;
+}
+.course-modern .course:hover .course-action,
+.course-modern .course:focus-visible .course-action,
+.course-modern .course.course-tap-opening .course-action{background:#3f6243;border-color:#3f6243;color:#ffe1b5}
+@media(max-width:760px){
+ .course-modern .course-action{width:31px;height:31px}
+ .course-modern .course-action>.link-paw,.course-modern .course:hover .course-action>.link-paw,.course-modern .course:focus-visible .course-action>.link-paw{width:17px;height:17px}
+}
+@media(prefers-reduced-motion:reduce){.course-modern .course-action{transition:none!important}}
