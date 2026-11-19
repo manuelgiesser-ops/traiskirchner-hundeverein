@@ -26,7 +26,8 @@ function studio_validate(array $content,array $manifest,array $media): array {
             if(!$def||$def['kind']==='image'||!is_array($fmt))throw new DomainException('Ungültiges Formatierungsfeld.');
             $font=$fmt['font']??'default';$size=$fmt['size']??'default';$weight=$fmt['weight']??'default';
             if(!in_array($font,['default','sans','modern','serif','humanist'],true)||!in_array($size,['default','small','medium','large','xl'],true)||!in_array($weight,['default','regular','bold'],true))throw new DomainException('Ungültige Schriftformatierung.');
-            if($font!=='default'||$size!=='default'||$weight!=='default')$format[$key]=['font'=>$font,'size'=>$size,'weight'=>$weight];
+            $extras=['align'=>['default','left','center','right'],'line'=>['default','compact','normal','wide'],'style'=>['default','italic','normal'],'color'=>['default','green','dark','gold','cream']];$more=[];foreach($extras as $prop=>$allowed){$v=$fmt[$prop]??'default';if(!in_array($v,$allowed,true))throw new DomainException('Ungültige Schriftformatierung.');if($v!=='default')$more[$prop]=$v;}
+            if($font!=='default'||$size!=='default'||$weight!=='default'||$more)$format[$key]=['font'=>$font,'size'=>$size,'weight'=>$weight]+$more;
         }
         $out[$page]=['fields'=>$fields,'format'=>$format,'hidden'=>array_values($hidden),'order'=>array_values($order)];
         if($page==='team.html'&&array_key_exists('trainers',$patch)){
