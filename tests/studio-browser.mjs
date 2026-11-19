@@ -181,7 +181,7 @@ try{
  await page.locator('.grid-position-details summary').click();await page.locator('#grid-col').fill('7');await page.locator('#grid-col').press('Tab');
  assert.equal(await gridText.evaluate(el=>el.style.getPropertyValue('--grid-d-col')),'7');
  // Resize via a genuine pointer drag on the selected element.
- const resize=gridText.locator('.studio-grid-resize');await resize.scrollIntoViewIfNeeded();const gripBox=await resize.boundingBox();assert.ok(gripBox);
+ const resize=gridText.locator('.studio-grid-resize');await resize.evaluate(el=>el.scrollIntoView({block:'center',behavior:'instant'}));await resize.hover();const gripBox=await resize.boundingBox();assert.ok(gripBox);assert.ok(await resize.evaluate(el=>{const r=el.getBoundingClientRect();return el.contains(document.elementFromPoint(r.x+r.width/2,r.y+r.height/2))}),'resize handle must not be covered');
  const gridWidth=await grid.evaluate(el=>el.getBoundingClientRect().width);
  await page.mouse.move(gripBox.x+gripBox.width/2,gripBox.y+gripBox.height/2);await page.mouse.down();await page.mouse.move(gripBox.x+gripBox.width/2-gridWidth/12,gripBox.y+gripBox.height/2,{steps:5});await page.mouse.up();
  assert.equal(await gridText.evaluate(el=>el.style.getPropertyValue('--grid-d-span')),'5');
