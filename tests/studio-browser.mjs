@@ -145,6 +145,30 @@ try{
  await page.reload();await page.waitForFunction(()=>document.getElementById('studio-message')?.textContent.startsWith('Bereit.'));
  await page.locator('#page-list').getByRole('button',{name:'Welpen und Junghunde',exact:true}).click();
  await page.waitForFunction(id=>document.getElementById('preview')?.contentDocument?.querySelector('[data-studio-block="'+id+'"]')?.style.getPropertyValue('--builder-mobile-width')==='90%',blockId);
+ // New text styles and inline toolbar.
+ await page.locator('[data-studio-tab=blocks]').click();
+ await page.locator('[data-add-block=text]').click();
+ await page.locator('#block-title').fill('Formatierter Text');
+ await page.locator('#block-body').fill('Beispiel für Schriftgestaltung');
+ await page.locator('#block-format-part').selectOption('body');
+ await page.locator('#block-font').selectOption('serif');
+ await page.locator('#block-size').fill('26');await page.locator('#block-size').press('Tab');
+ const formatted=iframe.locator('.studio-added-section').filter({hasText:'Formatierter Text'}).locator('[data-studio-part=body]');
+ await formatted.click();await iframe.locator('.studio-quick-tools button[aria-label="Fett"]').click();
+ assert.equal(await formatted.evaluate(el=>el.style.fontWeight),'700');assert.ok((await formatted.evaluate(el=>el.style.fontFamily)).includes('Georgia'));
+ await page.locator('[data-add-block=text]').click();
+ await page.locator('#block-title').fill('Entfernbar');
+ const temporary=iframe.locator('.studio-added-section').filter({hasText:'Entfernbar'});
+ await temporary.locator('h2').click();
+ page.once('dialog',d=>d.accept());
+ await iframe.locator('.studio-quick-tools button[aria-label="Baustein entfernen"]').click();assert.equal(await temporary.count(),0);
+ const removable=iframe.locator('main p[data-studio-field]').first();await removable.click();
+ await page.locator('#remove-field').click();assert.equal(await removable.isVisible(),false);
+ await page.locator('#undo').click();assert.equal(await removable.isVisible(),true);
+ await page.locator('[data-studio-tab=pages]').click();await page.locator('#open-seo').click();
+ await page.locator('#seo-title').fill('Welpenkurs in Traiskirchen | Test');
+ await page.locator('#seo-description').fill('Ein veröffentlichter Testtext für die Suchmaschinenbeschreibung auf der Website des Hundevereins.');
+ const beforeSeo=await page.request.get(origin+'/studio-page.php?page=welpen.html');assert.ok(!(await beforeSeo.text()).includes('<title>Welpenkurs in Traiskirchen | Test</title>'));
  const imageOrder=await visualIds();
 
  await page.waitForFunction(()=>!document.getElementById('publish').disabled);
@@ -161,6 +185,8 @@ try{
  assert.equal(await anon.locator('.studio-added-section img[src="'+info.url+'"]').count(),2);assert.equal((await anon.request.get(origin+'/'+info.url)).status(),200);assert.equal(await anon.locator('.studio-added-section img[alt="Testfoto"]').count(),1);
  assert.equal(await anon.locator('[data-studio-block="'+blockId+'"]').evaluate(el=>el.style.getPropertyValue('--builder-mobile-width')),'90%');
  assert.equal(await anon.locator('.studio-added-section a.btn').getAttribute('href'),'kontakt.html');
+ const servedSeo=await anon.request.get(origin+'/studio-page.php?page=welpen.html');assert.equal(servedSeo.status(),200);const seoHtml=await servedSeo.text();assert.ok(seoHtml.includes('<title>Welpenkurs in Traiskirchen | Test</title>'));assert.ok(seoHtml.includes('Ein veröffentlichter Testtext für die Suchmaschinenbeschreibung'));
+ assert.equal(await anon.locator('.studio-added-section').filter({hasText:'Formatierter Text'}).locator('[data-studio-part=body]').evaluate(el=>el.style.fontWeight),'700');
  await anon.goto(origin+'/index.html');
  await anon.waitForFunction(()=>document.querySelector('.course-modern .paw-reveal'));
  assert.equal(await anon.locator('.paw-reveal:not(.course-modern .paw-reveal)').count(),0);

@@ -25,3 +25,6 @@ Eine gemeinsame Reihenfolge für vorhandene und neue Abschnitte; Pfeile und Drag
 
 ## Layout & Anmeldung
 Freigegebene neue Blöcke erhalten sichtbare Verschiebe- und Größenanfasser. Visuelle Ausrichtung bei 5%-Schritten; Breite 35 bis 100%, horizontal nur innerhalb des Inhaltsbereichs, oberer Zusatzabstand 0 bis 160 px. Desktop und Mobil können getrennt eingestellt werden und gelten für Entwurf und Veröffentlichung. Geschützte Originalelemente bleiben im Responsive-Layout. Für Anmeldungen optional 30 Tage „Angemeldet bleiben“ mit signiertem, widerrufbarem, site-scoped HttpOnly/Secure Token; keine Passwörter in LocalStorage, Cookies oder Datenbank im Klartext.
+
+## Direkte Textbearbeitung und SEO
+Kontextwerkzeuge am ausgewählten Text statt wechselnder Menüs. Neu eingefügte Überschriften und Texte getrennt formatierbar. Entfernen über X ist rückgängig machbar; geschützte Seitenfunktionen werden nicht gelöscht. SEO-Titel und Beschreibungen werden als Entwurf gespeichert und erst bei Veröffentlichung serverseitig im HTML-Head ausgegeben. Suchbegriff- und Längenprüfung sind redaktionelle Hinweise, keine Rankinggarantie.

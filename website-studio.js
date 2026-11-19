@@ -111,7 +111,7 @@ function placeBlock(record,anchor='end',before=''){
 }
 function addBlock(type,anchor='end',before=''){
  if(!data||!blockTypes[type])return;const list=patch().blocks||[];if(list.length>=20){message('Maximal 20 zusätzliche Bausteine pro Seite.');return}
- const b={id:makeId(),type,title:blockTypes[type],body:type==='photo'?'':type==='list'?'Erster Punkt\nZweiter Punkt':'Hier kannst du deinen eigenen Text eintragen.',tone:type==='notice'?'cream':type==='cta'?'green':'light',image:'',alt:'',button:type==='cta'?'Kontakt aufnehmen':'',link:type==='cta'?(data.manifest['kontakt.html']?'kontakt.html':page):'',spacing:'normal',side:'left'};
+ $('block-format-part').value='title';const b={id:makeId(),type,title:blockTypes[type],body:type==='photo'?'':type==='list'?'Erster Punkt\nZweiter Punkt':'Hier kannst du deinen eigenen Text eintragen.',tone:type==='notice'?'cream':type==='cta'?'green':'light',image:'',alt:'',button:type==='cta'?'Kontakt aufnehmen':'',link:type==='cta'?(data.manifest['kontakt.html']?'kontakt.html':page):'',spacing:'normal',side:'left'};
  placeBlock(b,anchor,before);try{frame.contentWindow.thvStudioFocusBlock?.(b.id)}catch{}
 }
 function receiveDrop(type,value,anchor,before){
