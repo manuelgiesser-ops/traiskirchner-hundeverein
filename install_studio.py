@@ -39,7 +39,7 @@ def main():
         raise SystemExit('Choose a different existing website with index.html.')
     if root!=web and web not in root.parents:raise SystemExit('Target must be within the actual document root.')
     if disk==web or web in disk.parents or disk==root:raise SystemExit('Storage must be outside document root.')
-    files=['website-studio.php','website-studio.js','website-studio.css','studio-interface.css','studio-bootstrap.php','studio-standalone-core.php','studio-login.php','studio-user-cli.php','website-content.js','studio-api.php','studio-upload.php','studio-blocks-lib.php','studio-media-lib.php','website-media.php','studio-blocks.css']
+    files=['website-studio.php','website-studio.js','website-studio.css','studio-interface.css','studio-bootstrap.php','studio-standalone-core.php','studio-remember.php','studio-login.php','studio-user-cli.php','website-content.js','studio-api.php','studio-upload.php','studio-blocks-lib.php','studio-media-lib.php','website-media.php','studio-blocks.css']
     if any((root/f).exists() for f in files+['studio-site.php','studio-manifest.json']):raise SystemExit('An editor already exists. Back up and migrate manually; no overwrite.')
     pages=sorted(root.glob('*.html'))
     work={};manifest={}
