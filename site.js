@@ -67,7 +67,7 @@ if('IntersectionObserver' in window){const observer=new IntersectionObserver(es=
   f.dataset.opening=kind;
   if(kind==='soft')return;
   f.classList.add('paw-reveal');
-  const svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox','0 0 240 140');svg.setAttribute('preserveAspectRatio','xMidYMid meet');svg.setAttribute('aria-hidden','true');svg.setAttribute('focusable','false');svg.setAttribute('class','thv-film-paws');
+  const svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox','0 0 240 140');svg.setAttribute('preserveAspectRatio','xMidYMid meet');svg.setAttribute('aria-hidden','true');svg.setAttribute('focusable','false');svg.setAttribute('class','course-click-trail');
   const gap=f.closest('.course-modern .course')?(kind==='pair'?190:130):(kind==='pair'?630:kind==='meadow'?470:380),scale=kind==='pair'?.42:kind==='meadow'?.27:.32;
   svg.innerHTML=trails[kind].map(([x,y,r],i)=>'<g transform="translate('+x+' '+y+') rotate('+r+') scale('+scale+') translate(-55 -50)"><g class="dog-paw" style="--paw-delay:'+i*gap+'ms">'+paw+'</g></g>').join('');f.append(svg)
  });
@@ -84,29 +84,22 @@ if('IntersectionObserver' in window){const observer=new IntersectionObserver(es=
   courseFrames.forEach(f=>{
    const card=f.closest('.course');
    f.classList.add('course-discovery');
-   const hint=document.createElement('span');hint.className='course-discovery-hint';hint.setAttribute('aria-hidden','true');
-   hint.innerHTML='<svg viewBox="0 0 110 100" aria-hidden="true" focusable="false"><g fill="currentColor">'+paw+'</g></svg>';
-   f.append(hint);
-   let pointerType='',opening=false;
-   const discover=()=>show(f);
-   card.addEventListener('pointerenter',e=>{if(e.pointerType!=='touch'&&fine.matches)discover()});
-   card.addEventListener('pointerdown',e=>{pointerType=e.pointerType},{passive:true});
-   card.addEventListener('focusin',()=>{if(card.matches(':focus-visible'))discover()});
+   let opening=false,timer=null;
+   show(f);
    card.addEventListener('click',e=>{
-    if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||card.target&&card.target!=='_self')return;
-    const touch=e.detail!==0&&(pointerType==='touch'||(!fine.matches&&pointerType!=='mouse'));
-    if(!touch||reduced.matches||root.classList.contains('paused')||f.classList.contains('thv-media-seen')&&!opening)return;
+    if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||card.target&&card.target!=='_self'||card.hasAttribute('download'))return;
+    if(reduced.matches||root.classList.contains('paused'))return;
+    if(eventualUrlIsExternal(card.href))return;
     e.preventDefault();
     if(opening)return;
     opening=true;
     card.classList.add('course-tap-opening');
     card.setAttribute('aria-busy','true');
-    // A single tap: the same fast reveal, followed by navigation. Scrolling alone does not open a card.
-    discover();
-    const url=card.href;
-    window.setTimeout(()=>{window.location.assign(url)},950);
+    timer=window.setTimeout(()=>{window.location.assign(card.href)},950);
    });
-   window.addEventListener('pageshow',e=>{if(e.persisted&&opening){opening=false;card.classList.remove('course-tap-opening');card.removeAttribute('aria-busy')}});
+   function eventualUrlIsExternal(href){return new URL(href,location.href).origin!==location.origin}
+   window.addEventListener('pageshow',e=>{if(e.persisted){clearTimeout(timer);opening=false;card.classList.remove('course-tap-opening');card.removeAttribute('aria-busy')}});
+
 
   });
  }else nodes.forEach(show);
