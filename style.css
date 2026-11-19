@@ -1156,3 +1156,19 @@ body>header .menu[aria-expanded=true]{background:#dce7d8!important}
 @media(prefers-reduced-motion:reduce){body>header *, .archive-photo .archive-open img{transition:none!important;animation:none!important}}
 
 .thv-archive-viewer button[hidden]{display:none!important}
+
+
+/* V39: frosted glass only once the visitor scrolls. */
+body>header,body.home-page>header{transition:background-color .32s ease,border-color .32s ease,box-shadow .32s ease}
+body>header.scrolled,body.home-page>header.scrolled{
+ background:rgba(250,249,243,.72)!important;
+ -webkit-backdrop-filter:blur(20px) saturate(1.15);
+ backdrop-filter:blur(20px) saturate(1.15);
+ border-bottom-color:rgba(220,227,214,.58)!important;
+ box-shadow:0 4px 20px #253f2812!important;
+}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+ body>header.scrolled,body.home-page>header.scrolled{background:rgba(250,249,243,.94)!important}
+}
+body>header:has(#nav.open),body.home-page>header:has(#nav.open){background:rgba(250,249,243,.98)!important}
+@media(prefers-reduced-motion:reduce){body>header,body.home-page>header{transition:none!important}}
