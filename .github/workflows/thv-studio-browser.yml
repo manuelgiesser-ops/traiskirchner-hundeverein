@@ -1,0 +1,25 @@
+name: Test THV Studio in browser
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'website-studio.*'
+      - 'website-content.js'
+      - 'studio-*.php'
+      - 'tests/studio-browser.mjs'
+      - '.github/workflows/thv-studio-browser.yml'
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-save --no-package-lock playwright@1.51.1
+      - run: npx playwright install chromium --with-deps
+      - run: node tests/studio-browser.mjs
