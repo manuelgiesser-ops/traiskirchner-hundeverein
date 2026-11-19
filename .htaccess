@@ -16,3 +16,11 @@
 <IfModule mod_brotli.c>
   AddOutputFilterByType BROTLI_COMPRESS text/html text/css text/javascript application/javascript application/json image/svg+xml
 </IfModule>
+
+# Website Studio: render published SEO metadata before the browser runs JavaScript.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^$ studio-page.php?page=index.html [END]
+  RewriteCond %{REQUEST_FILENAME} -f
+  RewriteRule ^([A-Za-z0-9_-]+\.html)$ studio-page.php?page=$1 [END]
+</IfModule>

@@ -39,7 +39,7 @@ def main():
         raise SystemExit('Choose a different existing website with index.html.')
     if root!=web and web not in root.parents:raise SystemExit('Target must be within the actual document root.')
     if disk==web or web in disk.parents or disk==root:raise SystemExit('Storage must be outside document root.')
-    files=['website-studio.php','website-studio.js','website-studio.css','studio-interface.css','studio-bootstrap.php','studio-standalone-core.php','studio-remember.php','studio-login.php','studio-user-cli.php','website-content.js','studio-api.php','studio-upload.php','studio-blocks-lib.php','studio-media-lib.php','website-media.php','studio-blocks.css']
+    files=['website-studio.php','website-studio.js','website-studio.css','studio-interface.css','studio-bootstrap.php','studio-standalone-core.php','studio-remember.php','studio-login.php','studio-user-cli.php','website-content.js','studio-api.php','studio-upload.php','studio-blocks-lib.php','studio-seo-lib.php','studio-page.php','studio-media-lib.php','website-media.php','studio-blocks.css']
     if any((root/f).exists() for f in files+['studio-site.php','studio-manifest.json']):raise SystemExit('An editor already exists. Back up and migrate manually; no overwrite.')
     pages=sorted(root.glob('*.html'))
     work={};manifest={}
@@ -100,7 +100,7 @@ def main():
         for pos,addition in sorted(changes,reverse=True):s=s[:pos]+addition+s[pos:]
         title=next((text(n) for n in parser.nodes if n['tag']=='h1' and leaf(n)),p.stem)
         manifest[p.name]={'label':title,'fields':fields,'sections':sections,'layoutGroups':groups}
-        work[p]=s.replace('</head>','<link rel="stylesheet" href="studio-blocks.css?v=2"><script src="website-content.js?v=52" defer></script></head>',1)
+        work[p]=s.replace('</head>','<link rel="stylesheet" href="studio-blocks.css?v=2"><script src="website-content.js?v=53" defer></script></head>',1)
     if not work:raise SystemExit('No editable content in main elements.')
     disk.mkdir(parents=True,exist_ok=True,mode=0o700)
     if any(disk.iterdir()):raise SystemExit('Private storage must be empty to avoid sharing another site’s data.')
@@ -114,5 +114,6 @@ def main():
     (root/'studio-site.php').write_text(config,encoding='utf-8')
     (root/'studio-manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     for p,s in work.items():p.write_text(s,encoding='utf-8')
+    with (root/'.htaccess').open('a',encoding='utf-8') as fh:fh.write("\n# Website Studio: render published SEO metadata before the browser runs JavaScript.\n<IfModule mod_rewrite.c>\n  RewriteEngine On\n  RewriteRule ^$ studio-page.php?page=index.html [END]\n  RewriteCond %{REQUEST_FILENAME} -f\n  RewriteRule ^([A-Za-z0-9_-]+\\.html)$ studio-page.php?page=$1 [END]\n</IfModule>\n")
     print('Installed',len(work),'pages. Create your own account with studio-user-cli.php. Original HTML backed up in private storage.')
 if __name__=='__main__':main()

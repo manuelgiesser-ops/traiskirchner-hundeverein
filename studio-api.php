@@ -2,9 +2,10 @@
 declare(strict_types=1);
 require __DIR__.'/studio-bootstrap.php';
 require __DIR__.'/studio-blocks-lib.php';
+require __DIR__.'/studio-seo-lib.php';
 thv_headers();header('Content-Type: application/json; charset=utf-8');
 function studio_out($value,int $status=200): never {http_response_code($status);echo json_encode($value,JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR);exit;}
-function studio_manifest(): array {return json_decode((string)file_get_contents(__DIR__.'/studio-manifest.json'),true,512,JSON_THROW_ON_ERROR);}
+function studio_manifest(): array {$m=json_decode((string)file_get_contents(__DIR__.'/studio-manifest.json'),true,512,JSON_THROW_ON_ERROR);foreach($m as $page=>&$def)$def['seoDefaults']=studio_seo_defaults($page);unset($def);return $m;}
 function studio_media(): array {
     $out=[];foreach(glob(__DIR__.'/assets/*-960.webp')?:[] as $p){$rel='assets/'.basename($p);$out[$rel]=str_replace('-960.webp','',basename($p));}foreach(studio_manifest() as $page){foreach($page['fields']??[] as $def){$src=$def['default']??'';if(($def['kind']??'')==='image'&&is_string($src)&&preg_match('~^(?:(?:[a-zA-Z0-9_-]+/)*[a-zA-Z0-9_.-]+\\.(?:webp|avif|png|jpe?g|gif))$~iD',$src)&&is_file(__DIR__.'/'.$src))$out[$src]??=basename($src);}}try{return $out+thv_state(fn($s)=>thv_media_choices($s));}catch(Throwable $e){return $out;}
 }
@@ -33,6 +34,7 @@ function studio_validate(array $content,array $manifest,array $media): array {
         $images=[];if(isset($patch['images'])&&!is_array($patch['images']))throw new DomainException('Ungültige Bildinformationen.');
         foreach($patch['images']??[] as $key=>$meta){if(($manifest[$page]['fields'][$key]['kind']??null)!=='image'||!is_array($meta)||!is_string($meta['alt']??null)||strlen($meta['alt'])>240||!preg_match('//u',$meta['alt'])||!in_array($meta['position']??'default',['default','center','top','bottom','left','right'],true))throw new DomainException('Ungültige Bildinformationen.');$images[$key]=['alt'=>$meta['alt'],'position'=>$meta['position']??'default'];}
         $out[$page]=['fields'=>$fields,'format'=>$format,'images'=>$images,'hidden'=>array_values($hidden),'order'=>array_values($order)];
+        if(isset($patch['removed'])){if(!is_array($patch['removed'])||array_filter($patch['removed'],fn($k)=>!is_string($k)||!isset($manifest[$page]['fields'][$k])))throw new DomainException('Unbekannter Inhalt.');if($patch['removed'])$out[$page]['removed']=array_values(array_unique($patch['removed']));}if(isset($patch['seo'])){$seo=studio_seo_validate($patch['seo']);if($seo)$out[$page]['seo']=$seo;}
         if(isset($patch['layout'])){if(!is_array($patch['layout']))throw new DomainException('Ungültige Anordnung.');$layouts=[];foreach($patch['layout'] as $g=>$ids){$allowed=$manifest[$page]['layoutGroups'][$g]['units']??null;if(!$allowed||!is_array($ids)||count($ids)!==count($allowed)||count(array_unique($ids))!==count($allowed)||array_diff($ids,$allowed))throw new DomainException('Nicht freigegebene Anordnung.');$layouts[$g]=array_values($ids);}if($layouts)$out[$page]['layout']=$layouts;}
         if(array_key_exists('blocks',$patch))$out[$page]['blocks']=thv_blocks($patch['blocks'],$media,$sections);
         if($page==='team.html'&&array_key_exists('trainers',$patch)){
