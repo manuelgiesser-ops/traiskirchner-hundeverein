@@ -54,6 +54,23 @@ try{
  await page.locator('#block-title').fill('Test Kontaktaktion');
  await page.locator('#block-body').fill('Absatz eins\n\nAbsatz zwei');
  await page.waitForFunction(()=>document.getElementById('preview').contentDocument.querySelector('.studio-added-section h2')?.textContent==='Test Kontaktaktion');
+ // Exercise the palette-to-iframe drag and drop with the browser's DataTransfer API.
+ await page.evaluate(()=>{
+  const frame=document.getElementById('preview'),win=frame.contentWindow;
+  const source=document.querySelector('[data-add-block=list]');
+  const transfer=new DataTransfer();
+  source.dispatchEvent(new DragEvent('dragstart',{bubbles:true,cancelable:true,dataTransfer:transfer}));
+  const target=win.document.querySelector('.studio-drop-zone[data-anchor="end"]:not([data-before=""])')||win.document.querySelector('.studio-drop-zone[data-anchor="end"]');
+  if(!target)throw Error('Missing drop zone');
+  target.dispatchEvent(new win.DragEvent('dragover',{bubbles:true,cancelable:true,dataTransfer:transfer}));
+  target.dispatchEvent(new win.DragEvent('drop',{bubbles:true,cancelable:true,dataTransfer:transfer}));
+ });
+ await page.waitForFunction(()=>document.getElementById('preview').contentDocument.querySelectorAll('.studio-added-section').length===2);
+ assert.equal(await iframe.locator('.studio-content-list li').count(),2);
+ await page.locator('#block-duplicate').click();
+ await page.waitForFunction(()=>document.getElementById('preview').contentDocument.querySelectorAll('.studio-added-section').length===3);
+ await page.locator('#undo').click();
+ await page.waitForFunction(()=>document.getElementById('preview').contentDocument.querySelectorAll('.studio-added-section').length===2);
  await page.locator('#mobile').click();
  await page.waitForFunction(()=>document.getElementById('preview').clientWidth<=390);
  await page.locator('#clean-preview').click();
@@ -67,8 +84,14 @@ try{
  const anon=await browser.newPage({bypassCSP:true});
  await anon.goto(origin+'/welpen.html');
  await anon.waitForFunction(()=>document.querySelector('h1[data-studio-field]')?.textContent==='Direkt bearbeitet');
- assert.equal(await anon.locator('.studio-added-section h2').textContent(),'Test Kontaktaktion');
+ assert.equal(await anon.locator('.studio-added-section h2').filter({hasText:'Test Kontaktaktion'}).count(),1);
+ assert.equal(await anon.locator('.studio-content-list li').count(),2);
  assert.equal(await anon.locator('.studio-added-section a.btn').getAttribute('href'),'kontakt.html');
+ await anon.goto(origin+'/index.html');
+ await anon.waitForFunction(()=>document.querySelector('.course-modern .paw-reveal'));
+ assert.equal(await anon.locator('.paw-reveal:not(.course-modern .paw-reveal)').count(),0);
+ assert.equal(await anon.locator('.group-photo-lens,.group-photo-open').count(),0);
+ assert.equal(await anon.locator('[data-original-archive] img').count(),3);
  await anon.close();
  assert.deepEqual(errors,[]);
  console.log('PASS: visual editing, autosave, undo/redo, typography, inline editing, content blocks, mobile preview, publishing');
