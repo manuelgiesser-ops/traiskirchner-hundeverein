@@ -307,3 +307,36 @@ const thvPhotoData=Promise.resolve({"faces":{"sari":{"x":0.39743,"y":0.59646,"wi
  picture.addEventListener('touchstart',e=>{start=e.touches.length===1?{x:e.touches[0].clientX,y:e.touches[0].clientY}:null},{passive:true});
  picture.addEventListener('touchend',e=>{if(!start)return;const t=e.changedTouches[0],dx=t.clientX-start.x,dy=t.clientY-start.y;start=null;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5)show(index+(dx<0?1:-1))},{passive:true});
 })();
+
+
+/* V41: a friendly little paw wiggle on activation, including touch and keyboard. */
+(()=>{
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+ const pending=new WeakSet(),running=new WeakMap();
+ const duration=240;
+ document.addEventListener('click',e=>{
+  if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||reduced.matches||document.documentElement.classList.contains('paused'))return;
+  const link=e.target.closest?.('a.btn,a.textlink,a.hero-secondary');
+  const paw=link?.querySelector('.link-paw svg');
+  if(!paw||typeof paw.animate!=='function'||link.closest('.course'))return;
+  if(pending.has(link)){e.preventDefault();return}
+  running.get(paw)?.cancel();
+  const effect=paw.animate([
+   {transform:'rotate(0deg)',offset:0},
+   {transform:'rotate(-16deg)',offset:.18},
+   {transform:'rotate(14deg)',offset:.38},
+   {transform:'rotate(-10deg)',offset:.58},
+   {transform:'rotate(7deg)',offset:.78},
+   {transform:'rotate(0deg)',offset:1}
+  ],{duration,easing:'ease-out'});
+  running.set(paw,effect);
+  // Keep modified clicks, new tabs, external URLs, downloads and in-page anchors native.
+  if(link.hasAttribute('download')||(link.target&&link.target!=='_self'))return;
+  const url=new URL(link.href,location.href);
+  if(!/^https?:$/.test(url.protocol)||url.origin!==location.origin)return;
+  if(url.pathname===location.pathname&&url.search===location.search&&url.hash)return;
+  e.preventDefault();pending.add(link);
+  const go=()=>{pending.delete(link);location.assign(url.href)};
+  effect.finished.then(go,go);
+ });
+})();
