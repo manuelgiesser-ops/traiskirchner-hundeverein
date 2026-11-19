@@ -112,7 +112,17 @@
         "default": "assets/archive-agility-2022-960.webp"
       }
     },
-    "sections": {}
+    "sections": {
+      "s001": {
+        "label": "Was euch erwartet"
+      },
+      "s002": {
+        "label": "Was du mitbringen solltest"
+      },
+      "s003": {
+        "label": "Einblick ins Agility-Training"
+      }
+    }
   },
   "aktuelles.html": {
     "fields": {
@@ -327,7 +337,14 @@
         "default": "Montag um 19 Uhr, etwa 50 Minuten, laut bisheriger Kursbeschreibung. Bitte den Termin vorab bestätigen."
       }
     },
-    "sections": {}
+    "sections": {
+      "s001": {
+        "label": "Was euch erwartet"
+      },
+      "s002": {
+        "label": "Was du mitbringen solltest"
+      }
+    }
   },
   "galerie.html": {
     "fields": {
@@ -549,7 +566,14 @@
         "default": "Mittwoch um 19 Uhr, etwa 50 Minuten, laut bisheriger Kursbeschreibung. Bitte vor dem Besuch bestätigen lassen."
       }
     },
-    "sections": {}
+    "sections": {
+      "s001": {
+        "label": "Was euch erwartet"
+      },
+      "s002": {
+        "label": "Was du mitbringen solltest"
+      }
+    }
   },
   "hoopers.html": {
     "fields": {
@@ -649,7 +673,14 @@
         "default": "Freitag. Die bisherige Kursbeschreibung nennt 18 Uhr, die Kurszeitenübersicht 16:30 Uhr. Bitte vorab den aktuellen Beginn erfragen."
       }
     },
-    "sections": {}
+    "sections": {
+      "s001": {
+        "label": "Was euch erwartet"
+      },
+      "s002": {
+        "label": "Was du mitbringen solltest"
+      }
+    }
   },
   "index.html": {
     "fields": {
@@ -1106,11 +1137,11 @@
       "s007": {
         "label": "Gut zu wissen"
       },
-      "s008": {
-        "label": "Wir freuen uns auf euch."
-      },
       "s090": {
         "label": "Einblicke ins Vereinsleben"
+      },
+      "s008": {
+        "label": "Wir freuen uns auf euch."
       }
     }
   },
@@ -1162,7 +1193,14 @@
         "default": "Route planen"
       }
     },
-    "sections": {}
+    "sections": {
+      "s001": {
+        "label": "Kontakt aufnehmen"
+      },
+      "s002": {
+        "label": "Unser Gelände"
+      }
+    }
   },
   "kurszeiten.html": {
     "fields": {
@@ -1297,7 +1335,11 @@
         "default": "Aktuelle Zeiten erfragen"
       }
     },
-    "sections": {}
+    "sections": {
+      "s001": {
+        "label": "Trainingsübersicht"
+      }
+    }
   },
   "mitgliedschaft.html": {
     "fields": {
@@ -1427,7 +1469,17 @@
         "default": "Laut veröffentlichter Preisliste 30 € pro Kalenderjahr. Ein Zehnerblock kostet 120 € und ist ein Jahr gültig. Bitte bestätige die Konditionen vor deiner Anmeldung."
       }
     },
-    "sections": {}
+    "sections": {
+      "s001": {
+        "label": "So kannst du mitmachen"
+      },
+      "s002": {
+        "label": "Mitgliedschaft und Preise"
+      },
+      "s003": {
+        "label": "Häufige Fragen"
+      }
+    }
   },
   "social-walk.html": {
     "fields": {
@@ -1532,7 +1584,14 @@
         "default": "Die Termine werden flexibel vereinbart. Frag beim Verein nach den nächsten Möglichkeiten."
       }
     },
-    "sections": {}
+    "sections": {
+      "s001": {
+        "label": "Was euch erwartet"
+      },
+      "s002": {
+        "label": "Für wen eignet sich der Social Walk?"
+      }
+    }
   },
   "team.html": {
     "fields": {
@@ -1767,7 +1826,14 @@
         "default": "Vorstand laut veröffentlichter Vereinsliste. Änderungen bitte direkt beim Verein erfragen."
       }
     },
-    "sections": {},
+    "sections": {
+      "s001": {
+        "label": "Unsere Kursleiter"
+      },
+      "s002": {
+        "label": "Unser Vorstand"
+      }
+    },
     "trainers": {
       "sari": {
         "nameKey": "f005",
@@ -2121,7 +2187,14 @@
         "default": "Laut bisheriger Kursbeschreibung Montag um 18 Uhr, etwa 50 Minuten. Die Kurszeitenübersicht nennt auch Mittwoch. Bitte die aktuelle Einteilung erfragen."
       }
     },
-    "sections": {}
+    "sections": {
+      "s001": {
+        "label": "Was euch erwartet"
+      },
+      "s002": {
+        "label": "Was du mitbringen solltest"
+      }
+    }
   },
   "verein.html": {
     "fields": {
@@ -2373,6 +2446,16 @@
         "default": "assets/archive-jhv-2022-960.webp"
       }
     },
-    "sections": {}
+    "sections": {
+      "s001": {
+        "label": "Was euch erwartet"
+      },
+      "s002": {
+        "label": "Was du mitbringen solltest"
+      },
+      "s003": {
+        "label": "Unsere jungen Hunde im Training"
+      }
+    }
   }
 }
