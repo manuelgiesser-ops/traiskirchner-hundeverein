@@ -1265,3 +1265,16 @@ body>main .final-photo-contact .section-head h2{font-size:clamp(2.65rem,5.4vw,5.
 @keyframes thvClickTrail{0%,90%{opacity:1}100%{opacity:0}}
 @keyframes thvClickStep{0%{opacity:0}20%,59%{opacity:1}100%{opacity:0}}
 @media(prefers-reduced-motion:reduce){.course-modern .course-click-trail{display:none!important}}
+
+
+/* V44: preserve the 60% course preview until activation; no static paw. */
+.thv-motion:not(.paused) .course-modern .course .media-frame.thv-media.photo-opening.paw-reveal.course-discovery.thv-media-seen>img{
+ opacity:.60!important;filter:none!important;clip-path:none!important;transform:none!important;animation:none!important;
+ transition:opacity .56s ease-out!important;transition-delay:0s!important;
+}
+.thv-motion:not(.paused) .course-modern .course.course-tap-opening .media-frame.thv-media.photo-opening.paw-reveal.course-discovery.thv-media-seen>img{
+ opacity:1!important;transition:opacity .56s ease-out!important;transition-delay:0s!important;
+}
+@media(prefers-reduced-motion:reduce){
+ .thv-motion .course-modern .course .media-frame.thv-media.photo-opening.paw-reveal.course-discovery.thv-media-seen>img{opacity:1!important;transition:none!important}
+}
