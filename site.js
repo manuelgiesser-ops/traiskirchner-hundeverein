@@ -104,7 +104,7 @@ if('IntersectionObserver' in window){const observer=new IntersectionObserver(es=
     // A single tap: the same fast reveal, followed by navigation. Scrolling alone does not open a card.
     discover();
     const url=card.href;
-    window.setTimeout(()=>{window.location.assign(url)},420);
+    window.setTimeout(()=>{window.location.assign(url)},950);
    });
    window.addEventListener('pageshow',e=>{if(e.persisted&&opening){opening=false;card.classList.remove('course-tap-opening');card.removeAttribute('aria-busy')}});
 
