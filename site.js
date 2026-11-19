@@ -1,7 +1,7 @@
 
 (()=>{const people=[...document.querySelectorAll('.person>img')];if(!people.length)return;const dlg=document.createElement('dialog');dlg.className='portrait-dialog';dlg.setAttribute('aria-labelledby','portrait-modal-name');dlg.innerHTML='<button type="button" class="portrait-close" aria-label="Foto schließen">×</button><div class="portrait-modal-layout"><div class="portrait-viewport"><img class="portrait-modal-image" alt=""></div><div class="portrait-modal-copy"><h2 id="portrait-modal-name"></h2><p></p></div></div>';document.body.append(dlg);let trigger=null;const close=()=>dlg.close();dlg.querySelector('.portrait-close').addEventListener('click',close);dlg.addEventListener('click',e=>{if(e.target===dlg)close()});dlg.addEventListener('close',()=>{trigger?.focus({preventScroll:true});trigger=null});people.forEach(img=>{const person=img.closest('.person'),name=person.querySelector('h3')?.textContent||img.alt,role=person.querySelector('p')?.textContent||'';const button=document.createElement('button');button.type='button';button.className='portrait-frame';button.setAttribute('aria-label','Trainerfoto von '+name+' in großer Ansicht öffnen');button.setAttribute('aria-haspopup','dialog');img.before(button);button.append(img);const mark=document.createElement('span');mark.className='portrait-icon';mark.setAttribute('aria-hidden','true');mark.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg>';button.append(mark);button.addEventListener('click',()=>{const target=dlg.querySelector('img');target.src=img.dataset.full||img.currentSrc||img.src;target.alt=img.alt;dlg.querySelector('h2').textContent=name;dlg.querySelector('p').textContent=role;trigger=button;if(typeof dlg.showModal==='function')dlg.showModal();else window.open(img.src,'_blank','noopener')})})})();
 (()=>{const targets=document.querySelectorAll('.photo>img,.course>img,.gallery-item>img,.bond-image>img');targets.forEach((img,i)=>{const frame=document.createElement('span');frame.className='media-frame';if(i%3===1)frame.dataset.direction='right';img.before(frame);frame.append(img)});const nav=document.querySelector('#nav');const here=location.pathname.split('/').pop()||'index.html';nav?.querySelectorAll('a').forEach(a=>{if(a.getAttribute('href')===here)a.setAttribute('aria-current','page')})})();
-(()=>{const reduced=matchMedia('(prefers-reduced-motion: reduce)');let paused=reduced.matches;const root=document.documentElement;const motion=document.getElementById('motion');let interval;const slides=[...document.querySelectorAll('.hero-scene')];let index=0;function setSlide(i){slides.forEach((s,j)=>{s.classList.toggle('active',i===j);s.setAttribute('aria-hidden',String(i!==j))});const c=document.querySelector('.hero-current'),l=document.querySelector('.hero-label');if(c)c.textContent=String(i+1).padStart(2,'0');if(l)l.textContent=slides[i]?.dataset.label||''}function sync(){root.classList.toggle('paused',paused);if(motion)motion.textContent=paused?'Animationen aktivieren':'Animationen pausieren';clearInterval(interval);if(!paused&&slides.length>1)interval=setInterval(()=>{if(document.hidden)return;index=(index+1)%slides.length;setSlide(index)},6500)}if(!paused&&'IntersectionObserver'in window){const obs=new IntersectionObserver(entries=>entries.forEach(x=>{if(x.isIntersecting){x.target.classList.add('seen');obs.unobserve(x.target)}}),{threshold:.06,rootMargin:'0px 0px -3% 0px'});document.querySelectorAll('.photo,.gallery-item,.lead-img,.steps article').forEach(x=>x.classList.add('reveal'));document.querySelectorAll('.courses,.people,.gallery,.steps').forEach(g=>[...g.children].forEach((el,i)=>el.style.setProperty('--stagger',Math.min(i%4,3)*65+'ms')));root.classList.add('motion-ready');document.querySelectorAll('.reveal').forEach(x=>obs.observe(x))}sync();motion?.addEventListener('click',()=>{paused=!paused;sync()});reduced.addEventListener?.('change',e=>{paused=e.matches;sync()});const menu=document.querySelector('.menu'),nav=document.querySelector('#nav');function close(){nav?.classList.remove('open');menu?.setAttribute('aria-expanded','false');menu?.setAttribute('aria-label','Menü öffnen')}menu?.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',String(open));menu.setAttribute('aria-label',open?'Menü schließen':'Menü öffnen')});nav?.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));document.addEventListener('click',e=>{if(nav?.classList.contains('open')&&!nav.contains(e.target)&&!menu?.contains(e.target))close()});document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});const dlg=document.querySelector('#lightbox');if(dlg){document.querySelectorAll('.gallery-item').forEach(b=>b.addEventListener('click',()=>{const p=b.querySelector('img');dlg.querySelector('img').src=p.dataset.full||b.dataset.full||p.currentSrc||p.src;dlg.querySelector('img').alt=p.alt;dlg.querySelector('p').textContent=p.alt;dlg.showModal()}));dlg.querySelector('.close').addEventListener('click',()=>dlg.close());dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close()})}const form=document.querySelector('#contact');form?.addEventListener('submit',e=>{e.preventDefault();const d=new FormData(form);const body=`Name: ${d.get('name')}\nE-Mail: ${d.get('email')}\n\n${d.get('message')}`;const link='mailto:office@traiskirchner-hundeverein.at?subject='+encodeURIComponent('Anfrage an den THV')+'&body='+encodeURIComponent(body);const f=document.querySelector('#mail-fallback');f.href=link;f.hidden=false;document.querySelector('#form-status').textContent='Deine Nachricht ist vorbereitet. Bitte sende sie in deiner E-Mail-App ab.';location.href=link});})();
+(()=>{const reduced=matchMedia('(prefers-reduced-motion: reduce)');let paused=reduced.matches;const root=document.documentElement;const motion=document.getElementById('motion');let interval;const slides=[...document.querySelectorAll('.hero-scene')];let index=0;function setSlide(i){slides.forEach((s,j)=>{s.classList.toggle('active',i===j);s.setAttribute('aria-hidden',String(i!==j))});const c=document.querySelector('.hero-current'),l=document.querySelector('.hero-label');if(c)c.textContent=String(i+1).padStart(2,'0');if(l)l.textContent=slides[i]?.dataset.label||''}function sync(){root.classList.toggle('paused',paused);if(motion)motion.textContent=paused?'Animationen aktivieren':'Animationen pausieren';clearInterval(interval);if(!paused&&slides.length>1)interval=setInterval(()=>{if(document.hidden)return;index=(index+1)%slides.length;setSlide(index)},6500)}if(!paused&&'IntersectionObserver'in window){const obs=new IntersectionObserver(entries=>entries.forEach(x=>{if(x.isIntersecting){x.target.classList.add('seen');obs.unobserve(x.target)}}),{threshold:.06,rootMargin:'0px 0px -3% 0px'});document.querySelectorAll('.photo,.gallery-item,.lead-img,.steps article').forEach(x=>x.classList.add('reveal'));document.querySelectorAll('.courses,.people,.gallery,.steps').forEach(g=>[...g.children].forEach((el,i)=>el.style.setProperty('--stagger',Math.min(i%4,3)*65+'ms')));root.classList.add('motion-ready');document.querySelectorAll('.reveal').forEach(x=>obs.observe(x))}sync();motion?.addEventListener('click',()=>{paused=!paused;sync()});reduced.addEventListener?.('change',e=>{paused=e.matches;sync()});const menu=document.querySelector('.menu'),nav=document.querySelector('#nav');function close(){nav?.classList.remove('open');menu?.setAttribute('aria-expanded','false');menu?.setAttribute('aria-label','Menü öffnen')}menu?.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',String(open));menu.setAttribute('aria-label',open?'Menü schließen':'Menü öffnen')});nav?.querySelectorAll('a').forEach(a=>a.addEventListener('click',e=>{if(a.querySelector('.link-paw svg')&&e.button===0&&!e.metaKey&&!e.ctrlKey&&!e.shiftKey&&!e.altKey&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!document.documentElement.classList.contains('paused')){if(!a.target||a.target==='_self'){window.setTimeout(close,400);return}}close()}));document.addEventListener('click',e=>{if(nav?.classList.contains('open')&&!nav.contains(e.target)&&!menu?.contains(e.target))close()});document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});const dlg=document.querySelector('#lightbox');if(dlg){document.querySelectorAll('.gallery-item').forEach(b=>b.addEventListener('click',()=>{const p=b.querySelector('img');dlg.querySelector('img').src=p.dataset.full||b.dataset.full||p.currentSrc||p.src;dlg.querySelector('img').alt=p.alt;dlg.querySelector('p').textContent=p.alt;dlg.showModal()}));dlg.querySelector('.close').addEventListener('click',()=>dlg.close());dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close()})}const form=document.querySelector('#contact');form?.addEventListener('submit',e=>{e.preventDefault();const d=new FormData(form);const body=`Name: ${d.get('name')}\nE-Mail: ${d.get('email')}\n\n${d.get('message')}`;const link='mailto:office@traiskirchner-hundeverein.at?subject='+encodeURIComponent('Anfrage an den THV')+'&body='+encodeURIComponent(body);const f=document.querySelector('#mail-fallback');f.href=link;f.hidden=false;document.querySelector('#form-status').textContent='Deine Nachricht ist vorbereitet. Bitte sende sie in deiner E-Mail-App ab.';location.href=link});})();
 
 (()=>{const header=document.querySelector('header'),progress=document.querySelector('.reading-progress');let scheduled=false;function update(){scheduled=false;const y=window.scrollY||0;header?.classList.toggle('scrolled',y>24);if(progress){const avail=document.documentElement.scrollHeight-innerHeight;progress.style.transform='scaleX('+Math.max(0,Math.min(1,avail>0?y/avail:0))+')'}}window.addEventListener('scroll',()=>{if(!scheduled){scheduled=true;requestAnimationFrame(update)}},{passive:true});update();})();
 
@@ -302,34 +302,41 @@ const thvPhotoData=Promise.resolve({"faces":{"sari":{"x":0.39743,"y":0.59646,"wi
 })();
 
 
-/* V41: a friendly little paw wiggle on activation, including touch and keyboard. */
+/* V45: every existing paw action gets the same cheerful click wiggle. */
 (()=>{
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
  const pending=new WeakSet(),running=new WeakMap();
- const duration=240;
+ const duration=380;
  document.addEventListener('click',e=>{
-  if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||reduced.matches||document.documentElement.classList.contains('paused'))return;
-  const link=e.target.closest?.('a.btn,a.textlink,a.hero-secondary');
-  const paw=link?.querySelector('.link-paw svg');
-  if(!paw||typeof paw.animate!=='function'||link.closest('.course'))return;
-  if(pending.has(link)){e.preventDefault();return}
-  running.get(paw)?.cancel();
-  const effect=paw.animate([
-   {transform:'rotate(0deg)',offset:0},
-   {transform:'rotate(-16deg)',offset:.18},
-   {transform:'rotate(14deg)',offset:.38},
-   {transform:'rotate(-10deg)',offset:.58},
-   {transform:'rotate(7deg)',offset:.78},
-   {transform:'rotate(0deg)',offset:1}
-  ],{duration,easing:'ease-out'});
-  running.set(paw,effect);
-  // Keep modified clicks, new tabs, external URLs, downloads and in-page anchors native.
-  if(link.hasAttribute('download')||(link.target&&link.target!=='_self'))return;
-  const url=new URL(link.href,location.href);
-  if(!/^https?:$/.test(url.protocol)||url.origin!==location.origin)return;
-  if(url.pathname===location.pathname&&url.search===location.search&&url.hash)return;
-  e.preventDefault();pending.add(link);
-  const go=()=>{pending.delete(link);location.assign(url.href)};
-  effect.finished.then(go,go);
+  if(e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||reduced.matches||document.documentElement.classList.contains('paused'))return;
+  const action=e.target.closest?.('a,button,summary,[role="button"]');
+  if(!action||action.disabled)return;
+  const course=action.matches('a.course');
+  if(e.defaultPrevented&&!(course&&action.classList.contains('course-tap-opening')))return;
+  const paws=[...action.querySelectorAll('.link-paw svg')];
+  if(!paws.length)return;
+  if(pending.has(action)){e.preventDefault();return}
+  const effects=[];
+  for(const paw of paws){
+   if(typeof paw.animate!=='function')continue;
+   running.get(paw)?.cancel();
+   const effect=paw.animate([
+    {transform:'rotate(0deg) scale(1)',offset:0},
+    {transform:'rotate(-18deg) scale(1.08)',offset:.19},
+    {transform:'rotate(16deg) scale(1.10)',offset:.39},
+    {transform:'rotate(-11deg) scale(1.05)',offset:.59},
+    {transform:'rotate(7deg) scale(1.02)',offset:.79},
+    {transform:'rotate(0deg) scale(1)',offset:1}
+   ],{duration,easing:'ease-in-out'});
+   running.set(paw,effect);effects.push(effect.finished.catch(()=>{}));
+  }
+  // Course links already wait for their photo animation. Never add a second delay.
+  if(!effects.length||course||action.tagName!=='A'||e.defaultPrevented||action.hasAttribute('download')||(action.target&&action.target!=='_self'))return;
+  const url=new URL(action.href,location.href);
+  if(!/^https?:$/.test(url.protocol))return;
+  if(url.origin===location.origin&&url.pathname===location.pathname&&url.search===location.search&&url.hash)return;
+  e.preventDefault();pending.add(action);
+  const go=()=>{pending.delete(action);location.assign(url.href)};
+  Promise.all(effects).then(go);
  });
 })();
