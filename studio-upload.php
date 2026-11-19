@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-require __DIR__.'/verein-core.php';
+require __DIR__.'/studio-bootstrap.php';
 thv_headers();header('Content-Type: application/json; charset=utf-8');thv_session();
 try{
     if($_SERVER['REQUEST_METHOD']!=='POST'||!thv_secure())throw new DomainException('HTTPS erforderlich.');

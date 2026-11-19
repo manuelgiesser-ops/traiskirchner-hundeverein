@@ -876,7 +876,7 @@
       "f045": {
         "kind": "text",
         "label": "Text",
-        "default": "Mit Geduld, Respekt und Freude wird aus Mensch und Hund ein Team. Ob im Alltag oder auf dem Parcours, wir begleiten euch auf diesem gemeinsamen Weg."
+        "default": "Mit Geduld, Respekt und Freude wird aus Mensch und Hund ein Team."
       },
       "f046": {
         "kind": "button",
@@ -911,7 +911,7 @@
       "f052": {
         "kind": "button",
         "label": "Button",
-        "default": "Unser Gelände"
+        "default": "Trainingsgelände entdecken"
       },
       "f053": {
         "kind": "button",
@@ -951,7 +951,7 @@
       "f060": {
         "kind": "text",
         "label": "Text",
-        "default": "Erkundige dich nach der Einteilung und bring die passende Ausrüstung mit."
+        "default": "Mit der passenden Ausrüstung geht es los."
       },
       "f061": {
         "kind": "button",
@@ -976,7 +976,7 @@
       "f065": {
         "kind": "text",
         "label": "Text",
-        "default": "Der letzte veröffentlichte Herbstkurs startete im September 2026. Die kommenden Termine bitte beim Verein erfragen."
+        "default": "Die nächsten Kursstarts und Termine kannst du direkt beim Verein erfragen."
       },
       "f066": {
         "kind": "button",
@@ -1072,6 +1072,16 @@
         "kind": "image",
         "label": "Originalfoto",
         "default": "assets/archive-abschluss-2022-960.webp"
+      },
+      "f903": {
+        "kind": "button",
+        "label": "Button",
+        "default": "Zur gesamten Galerie"
+      },
+      "f904": {
+        "kind": "image",
+        "label": "Bild",
+        "default": "assets/hero-960.webp"
       }
     },
     "sections": {
@@ -2189,11 +2199,54 @@
         "kind": "text",
         "label": "Text",
         "default": "Agilityplatz"
+      },
+      "f910": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Agilityplatz"
+      },
+      "f911": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Hier trainieren Mensch und Hund gemeinsam am Hindernisparcours."
+      },
+      "f912": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Unterordnungsplatz"
+      },
+      "f913": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Der Platz ist mit Kletterwand, Steigleiter, Sprunggrube und Hürden ausgestattet."
+      },
+      "f914": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Welpenplatz"
+      },
+      "f915": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Für unsere jüngsten Hunde gibt es einen eigenen Trainingsbereich."
+      },
+      "f916": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Vereinshaus"
+      },
+      "f917": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Zum Vereinsgelände gehört auch unser Vereinshaus."
       }
     },
     "sections": {
       "s001": {
         "label": "Seit über 40 Jahren gemeinsam"
+      },
+      "s090": {
+        "label": "Unser Trainingsgelände"
       }
     }
   },

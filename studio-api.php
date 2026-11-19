@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-require __DIR__.'/verein-core.php';
+require __DIR__.'/studio-bootstrap.php';
 require __DIR__.'/studio-blocks-lib.php';
 thv_headers();header('Content-Type: application/json; charset=utf-8');
 function studio_out($value,int $status=200): never {http_response_code($status);echo json_encode($value,JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR);exit;}
@@ -20,7 +20,7 @@ function studio_validate(array $content,array $manifest,array $media): array {
         }
         $sections=array_keys($manifest[$page]['sections']);$hidden=$patch['hidden']??[];$order=$patch['order']??[];
         if(!is_array($hidden)||!is_array($order)||count(array_unique($hidden))!==count($hidden)||count(array_unique($order))!==count($order)||array_diff($hidden,$sections)||array_diff($order,$sections))throw new DomainException('Abschnitt nicht verfügbar.');
-        if($order&&count($order)!==count($sections))throw new DomainException('Abschnittsreihenfolge unvollständig.');
+        if($order&&count($order)!==count($sections))$order=array_merge($order,array_values(array_diff($sections,$order)));
         $format=[];if(isset($patch['format'])&&!is_array($patch['format']))throw new DomainException('Ungültige Formatierung.');
         foreach($patch['format']??[] as $key=>$fmt){
             $def=$manifest[$page]['fields'][$key]??null;

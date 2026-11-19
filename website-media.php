@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-require __DIR__.'/verein-core.php';
+require __DIR__.'/studio-bootstrap.php';
 header('X-Content-Type-Options: nosniff');header('Cache-Control: no-store');header("Content-Security-Policy: default-src 'none'; sandbox");
 $id=(string)($_GET['id']??'');if(!preg_match('/^[a-f0-9]{24}$/',$id)){http_response_code(404);exit;}
 try{
