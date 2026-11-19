@@ -199,6 +199,33 @@ try{
  await page.locator('#page-list').getByRole('button',{name:'Welpen und Junghunde',exact:true}).click();await grid.locator('[data-kind=image] img[src="'+gridInfo.url+'"]').waitFor();
  assert.equal(await gridText.evaluate(el=>el.style.getPropertyValue('--grid-d-span')),'5');
  assert.equal(await gridImage.evaluate(el=>el.style.getPropertyValue('--grid-m-span')),'8');
+ // V55: editing or inserting must not jump away from the current viewport.
+ const canvas=page.locator('#preview');
+ const scrollY=()=>canvas.evaluate(f=>f.contentWindow.scrollY);
+ const known=iframe.locator('.studio-added-section').filter({hasText:'Formatierter Text'}).locator('h2');
+ await known.click();await known.evaluate(n=>n.scrollIntoView({block:'center',behavior:'instant'}));
+ await canvas.evaluate(f=>{f.contentWindow.__unchangedGrid=f.contentDocument.querySelector('.studio-free-grid')});
+ const beforeEdit=await scrollY();await page.locator('#block-title').fill('Formatierter Text aktualisiert');
+ assert.ok(Math.abs((await scrollY())-beforeEdit)<5,'text edits retain scroll');
+ assert.equal(await canvas.evaluate(f=>f.contentWindow.__unchangedGrid===f.contentDocument.querySelector('.studio-free-grid')),true,'unrelated blocks must not be rebuilt');
+ await page.locator('[data-studio-tab=blocks]').click();const beforeAdd=await scrollY();
+ await page.locator('[data-add-block=text]').click();
+ assert.ok(Math.abs((await scrollY())-beforeAdd)<5,'adding a section must not jump to the page end');
+ // A genuine held native drag must scroll continuously at both canvas edges.
+ const sourceGrip=iframe.locator('.studio-section-tools .studio-drag-grip').nth(2);
+ await sourceGrip.scrollIntoViewIfNeeded();
+ const sourceBox=await sourceGrip.boundingBox(),canvasBox=await canvas.boundingBox();
+ assert.ok(sourceBox&&canvasBox);
+ const sx=sourceBox.x+sourceBox.width/2,sy=sourceBox.y+sourceBox.height/2;
+ const cx=canvasBox.x+canvasBox.width/2,bottom=canvasBox.y+canvasBox.height-16,top=canvasBox.y+16;
+ await page.mouse.move(sx,sy);await page.mouse.down();await page.mouse.move(cx,bottom,{steps:16});
+ const lowerStart=await scrollY();
+ await page.waitForFunction(y=>document.getElementById('preview').contentWindow.scrollY>y+80,lowerStart,{timeout:6000});
+ await page.mouse.move(cx,top,{steps:12});const upperStart=await scrollY();
+ await page.waitForFunction(y=>document.getElementById('preview').contentWindow.scrollY<y-60,upperStart,{timeout:6000});
+ await page.keyboard.press('Escape');await page.mouse.up();
+ const afterDrag=await scrollY();await page.waitForTimeout(180);
+ assert.ok(Math.abs((await scrollY())-afterDrag)<30,'autoscroll must stop when drag is canceled');
  const imageOrder=await visualIds();
 
  await page.waitForFunction(()=>!document.getElementById('publish').disabled);
