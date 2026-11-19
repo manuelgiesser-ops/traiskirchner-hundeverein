@@ -75,6 +75,40 @@ try{
  await page.waitForFunction(()=>document.getElementById('preview').contentDocument.querySelectorAll('.studio-added-section').length===3);
  await page.locator('#undo').click();
  await page.waitForFunction(()=>document.getElementById('preview').contentDocument.querySelectorAll('.studio-added-section').length===2);
+ // Existing and inserted sections must share the same visual order.
+ const visualIds=()=>page.locator('#preview').evaluate(f=>Array.from(f.contentDocument.querySelectorAll('main > [data-studio-section], main > [data-studio-block]'),el=>el.dataset.studioSection||el.dataset.studioBlock));
+ const initialOrder=await visualIds();
+ assert.equal(initialOrder.length,5,'Welpen page: three original plus two inserted sections');
+ const firstBlock=initialOrder.find(x=>x.startsWith('block-'));
+ await iframe.locator('[data-layout-id="'+firstBlock+'"] [data-studio-action=up]').click();
+ const shifted=await visualIds();assert.equal(shifted.indexOf(firstBlock),initialOrder.indexOf(firstBlock)-1);
+ await iframe.locator('[data-layout-id="'+firstBlock+'"] [data-studio-action=down]').click();
+ assert.deepEqual(await visualIds(),initialOrder);
+ // Real drag-and-drop in the structure list; existing section moves across inserted sections.
+ await page.locator('[data-studio-tab=layers]').click();
+ const first=initialOrder[0],last=initialOrder.at(-1);
+ const source=page.locator('#sections [data-layout-id="'+first+'"] .drag-handle');
+ const target=page.locator('#sections [data-layout-id="'+last+'"]');
+ await source.dragTo(target);
+ const dragged=await visualIds();assert.equal(dragged.at(-1),first,'actual drag must move original past new blocks');
+ // Test underlying canvas DnD for original plus new blocks, using the same real DOM drag targets.
+ await page.evaluate(id=>{
+  const win=document.getElementById('preview').contentWindow;
+  const grip=win.document.querySelector('.studio-section-tools[data-layout-id="'+id+'"] .studio-drag-grip');
+  const zone=win.document.querySelector('.studio-drop-zone[data-anchor="s001"]');
+  if(!grip||!zone)throw Error('Missing canvas move controls');
+  const transfer=new DataTransfer();
+  grip.dispatchEvent(new win.DragEvent('dragstart',{bubbles:true,cancelable:true,dataTransfer:transfer}));
+  zone.dispatchEvent(new win.DragEvent('dragover',{bubbles:true,cancelable:true,dataTransfer:transfer}));
+  zone.dispatchEvent(new win.DragEvent('drop',{bubbles:true,cancelable:true,dataTransfer:transfer}));
+ },last);
+ const finalOrder=await visualIds();
+ await page.waitForFunction(()=>document.getElementById('studio-message').textContent.includes('Automatisch gespeichert'),null,{timeout:15000});
+ await page.reload();
+ await page.waitForFunction(()=>document.getElementById('studio-message')?.textContent.startsWith('Bereit.'));
+ await page.locator('#page-list').getByRole('button',{name:'Welpen und Junghunde',exact:true}).click();
+ await page.waitForFunction(()=>document.getElementById('preview')?.contentWindow?.location.pathname.endsWith('/welpen.html')&&document.getElementById('preview')?.contentDocument?.querySelectorAll('.studio-added-section').length===2);
+ assert.deepEqual(await visualIds(),finalOrder,'saved order must survive reload');
  await page.locator('#mobile').click();
  await page.waitForFunction(()=>document.getElementById('preview').clientWidth<=390);
  await page.locator('#clean-preview').click();
@@ -90,6 +124,8 @@ try{
  await anon.waitForFunction(()=>document.querySelector('h1[data-studio-field]')?.textContent==='Direkt bearbeitet');
  assert.equal(await anon.locator('.studio-added-section h2').filter({hasText:'Test Kontaktaktion'}).count(),1);
  assert.equal(await anon.locator('.studio-content-list li').count(),2);
+ assert.deepEqual(await anon.locator('main > [data-studio-section], main > [data-studio-block]').evaluateAll(els=>els.map(el=>el.dataset.studioSection||el.dataset.studioBlock)),finalOrder,'published visitor order must match canvas');
+ assert.equal(await anon.locator('.studio-section-tools,.studio-drop-zone').count(),0);
  assert.equal(await anon.locator('.studio-added-section a.btn').getAttribute('href'),'kontakt.html');
  await anon.goto(origin+'/index.html');
  await anon.waitForFunction(()=>document.querySelector('.course-modern .paw-reveal'));
