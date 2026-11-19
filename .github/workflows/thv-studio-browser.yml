@@ -21,5 +21,13 @@ jobs:
         with:
           node-version: 22
       - run: npm install --no-save --no-package-lock playwright@1.51.1
-      - run: npx playwright install chromium --with-deps
+      - name: Use hosted runner browser or Playwright Chromium
+        run: |
+          if command -v google-chrome >/dev/null 2>&1; then
+            echo "STUDIO_BROWSER=$(command -v google-chrome)" >> "$GITHUB_ENV"
+          elif command -v chromium >/dev/null 2>&1; then
+            echo "STUDIO_BROWSER=$(command -v chromium)" >> "$GITHUB_ENV"
+          else
+            npx playwright install chromium
+          fi
       - run: node tests/studio-browser.mjs

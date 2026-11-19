@@ -18,7 +18,7 @@ const server=spawn('php',['-d','auto_prepend_file='+prep,'-S','127.0.0.1:18765',
 let browser;
 try{
  await new Promise(r=>setTimeout(r,800));
- browser=await chromium.launch({headless:true,args:['--no-sandbox']});
+ browser=await chromium.launch({headless:true,args:['--no-sandbox'],...(process.env.STUDIO_BROWSER?{executablePath:process.env.STUDIO_BROWSER}:{})});
  const page=await browser.newPage({viewport:{width:1600,height:1000}});
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.goto(origin+'/vereinsbereich.php');
