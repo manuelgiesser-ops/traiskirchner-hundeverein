@@ -1244,3 +1244,24 @@ body>main .final-photo-contact .section-head h2{font-size:clamp(2.65rem,5.4vw,5.
  .thv-motion .course-modern .course.course-tap-opening .media-frame.thv-media.photo-opening.paw-reveal.course-discovery.thv-media-seen .thv-film-paws .dog-paw{animation:thvCourseFootstep .46s calc(var(--paw-delay,0ms) * .46) ease-out both!important}
 }
 @media(prefers-reduced-motion:reduce){.facility-expand{transition:none!important}}
+
+
+/* V43: clean course photos. The independent paw trail plays only on activation. */
+.thv-motion .course-modern .media-frame.thv-media.photo-opening.paw-reveal.course-discovery>img,
+.thv-motion .course-modern .media-frame.thv-media.photo-opening.paw-reveal.course-discovery:not(.thv-media-seen)>img{
+ opacity:1!important;filter:none!important;clip-path:none!important;transform:none!important;animation:none!important;transition:none!important;
+}
+.course-modern .course-discovery-hint{display:none!important}
+.course-modern .course-click-trail{
+ display:none;position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:8;
+ color:#ffe5b7;overflow:visible;filter:drop-shadow(0 1px 2px #152019) drop-shadow(0 2px 4px #15201980);
+}
+.thv-motion:not(.paused) .course-modern .course.course-tap-opening .course-click-trail{
+ display:block;visibility:visible;opacity:1;animation:thvClickTrail .94s linear both;
+}
+.thv-motion:not(.paused) .course-modern .course.course-tap-opening .course-click-trail .dog-paw{
+ opacity:0;animation:thvClickStep .55s calc(var(--paw-delay,0ms) * .70) ease-in-out both!important;
+}
+@keyframes thvClickTrail{0%,90%{opacity:1}100%{opacity:0}}
+@keyframes thvClickStep{0%{opacity:0}20%,59%{opacity:1}100%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.course-modern .course-click-trail{display:none!important}}
