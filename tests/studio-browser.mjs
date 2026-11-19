@@ -212,9 +212,9 @@ try{
  await page.locator('[data-studio-tab=blocks]').click();const beforeAdd=await scrollY();
  await page.locator('[data-add-block=text]').click();
  assert.ok(Math.abs((await scrollY())-beforeAdd)<5,'adding a section must not jump to the page end');
- // A genuine held native drag must scroll continuously at both canvas edges.
+ // A genuine held pointer drag must scroll continuously at both canvas edges.
  const sourceGrip=iframe.locator('.studio-section-tools .studio-drag-grip').nth(2);
- await sourceGrip.scrollIntoViewIfNeeded();
+ await sourceGrip.evaluate(el=>el.scrollIntoView({block:'center',behavior:'instant'}));await sourceGrip.hover();
  const sourceBox=await sourceGrip.boundingBox(),canvasBox=await canvas.boundingBox();
  assert.ok(sourceBox&&canvasBox);
  const sx=sourceBox.x+sourceBox.width/2,sy=sourceBox.y+sourceBox.height/2;
@@ -224,7 +224,7 @@ try{
  await page.waitForFunction(y=>document.getElementById('preview').contentWindow.scrollY>y+80,lowerStart,{timeout:6000});
  await page.mouse.move(cx,top,{steps:12});const upperStart=await scrollY();
  await page.waitForFunction(y=>document.getElementById('preview').contentWindow.scrollY<y-60,upperStart,{timeout:6000});
- await page.keyboard.press('Escape');await page.mouse.up();
+ const orderBeforeCancel=await visualIds();await page.keyboard.press('Escape');await page.mouse.up();assert.deepEqual(await visualIds(),orderBeforeCancel,'Escape must cancel rather than commit the move');
  const afterDrag=await scrollY();await page.waitForTimeout(180);
  assert.ok(Math.abs((await scrollY())-afterDrag)<30,'autoscroll must stop when drag is canceled');
  await page.locator('[data-studio-tab=blocks]').click();await page.locator('.studio-template-panel summary').click();await page.locator('[data-studio-template=cards]').click();assert.equal(await iframe.locator('.studio-free-grid').last().locator('[data-studio-element]').count(),7);
