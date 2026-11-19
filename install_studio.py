@@ -47,7 +47,7 @@ def main():
         s=p.read_text(encoding='utf-8')
         if 'data-studio-field=' in s or 'data-studio-section=' in s:raise SystemExit('Existing editor markers: '+p.name)
         if not re.fullmatch(r'[a-zA-Z0-9_-]+\.html',p.name):raise SystemExit('Unsupported page filename: '+p.name)
-        parser=Parser(s);parser.feed(s);fields={};sections={};changes=[]
+        parser=Parser(s);parser.feed(s);fields={};sections={};changes=[];groups={}
         def mark(n,attr,key):
             pos=n['openend']-1
             if s[pos-1:pos]=='/':pos-=1
@@ -69,15 +69,37 @@ def main():
                 prefix=re.match(r'^([^<]+)',s[n['openend']:n['close']])
                 if prefix and prefix.group(1).strip():kind='button';value=html.unescape(prefix.group(1)).strip()
             if kind:
-                key='f%03d'%(len(fields)+1);fields[key]={'kind':kind,'label':{'image':'Bild','button':'Button','text':'Text'}[kind],'default':value};mark(n,'data-studio-field',key)
+                key='f%03d'%(len(fields)+1);fields[key]={'kind':kind,'label':{'image':'Bild','button':'Button','text':'Text'}[kind],'default':value};mark(n,'data-studio-field',key);n['studio_field']=key
             if tag=='section' and n['parent'] and n['parent']['tag']=='main' and not any(x in classes(n) for x in ('hero','pagelead')):
                 label=next((text(x) for x in parser.nodes if x['tag'] in ('h2','h3') and leaf(x) and n['start']<x['start']<n['end']),None)
                 key='s%03d'%(len(sections)+1);sections[key]={'label':label or 'Abschnitt '+str(len(sections)+1)};mark(n,'data-studio-section',key)
+        # Mark only safe, adjacent editable text/button elements and simple image/text columns.
+        protected={'hero','pagelead','course','course-directory','course-modern','course-finder','people','person','faq','gallery-grid','archive-grid','verein-feed','steps','schedule','field-story','facility-grid','course-return','bond-story','final-photo-contact'}
+        def safe(n):
+            return not any(x['tag'] in ('form','svg','button','details','nav','dialog','ul','ol') or protected.intersection(classes(x)) or 'data-studio-protect' in x['attrs'] for x in [n]+list(ancestors(n)))
+        def has_field(n):
+            return bool(n.get('studio_field')) or any(has_field(c) for c in n['children'])
+        def add_group(units,kind):
+            if len(units)<2:return
+            gid='g%03d'%(len(groups)+1);ids=[]
+            for i,n in enumerate(units,1):
+                uid=gid+'u'+str(i);ids.append(uid);mark(n,'data-studio-unit',uid);mark(n,'data-studio-group',gid)
+            groups[gid]={'kind':kind,'units':ids}
+        for n in parser.nodes:
+            if not safe(n) or not any(x['tag']=='main' for x in [n]+list(ancestors(n))):continue
+            ch=n['children']
+            if 'split' in classes(n) and len(ch)==2 and all(c['tag'] in ('div','figure') and safe(c) and has_field(c) for c in ch) and any('photo' in classes(c) for c in ch) and any('prose' in classes(c) for c in ch):
+                add_group(ch,'columns')
+            run=[]
+            for c in ch:
+                if c.get('studio_field') and c['tag'] in ('h2','h3','h4','p','a') and safe(c):run.append(c)
+                else:add_group(run,'flow');run=[]
+            add_group(run,'flow')
         if not fields and not sections:continue
         if '</head>' not in s:raise SystemExit('Missing </head>: '+p.name)
         for pos,addition in sorted(changes,reverse=True):s=s[:pos]+addition+s[pos:]
         title=next((text(n) for n in parser.nodes if n['tag']=='h1' and leaf(n)),p.stem)
-        manifest[p.name]={'label':title,'fields':fields,'sections':sections}
+        manifest[p.name]={'label':title,'fields':fields,'sections':sections,'layoutGroups':groups}
         work[p]=s.replace('</head>','<link rel="stylesheet" href="studio-blocks.css?v=1"><script src="website-content.js?v=50" defer></script></head>',1)
     if not work:raise SystemExit('No editable content in main elements.')
     disk.mkdir(parents=True,exist_ok=True,mode=0o700)
