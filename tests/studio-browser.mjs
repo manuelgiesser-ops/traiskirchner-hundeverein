@@ -75,6 +75,8 @@ try{
  await page.waitForFunction(()=>document.getElementById('preview').contentDocument.querySelectorAll('.studio-added-section').length===3);
  await page.locator('#undo').click();
  await page.waitForFunction(()=>document.getElementById('preview').contentDocument.querySelectorAll('.studio-added-section').length===2);
+ // Safe individual text items can be reordered and restored independently.
+ const group=iframe.locator('[data-studio-group="g001"]');const firstUnit=await group.first().getAttribute('data-studio-unit');const secondUnit=await group.nth(1).getAttribute('data-studio-unit');await group.nth(1).click();await page.locator('#unit-controls button').first().click();assert.equal(await group.first().getAttribute('data-studio-unit'),secondUnit);await page.locator('#undo').click();assert.equal(await group.first().getAttribute('data-studio-unit'),firstUnit);
  // Existing and inserted sections must share the same visual order.
  const visualIds=()=>page.locator('#preview').evaluate(f=>Array.from(f.contentDocument.querySelectorAll('main > [data-studio-section], main > [data-studio-block]'),el=>el.dataset.studioSection||el.dataset.studioBlock));
  const initialOrder=await visualIds();
