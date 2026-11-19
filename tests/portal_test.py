@@ -93,6 +93,7 @@ with tempfile.TemporaryDirectory() as temp:
         assert public['patch']['fields'][key]=='Vorläufiger Testtext\n\nZweiter Absatz'
         assert public['patch']['format'][key]=={'font':'serif','size':'large','weight':'bold','align':'center','line':'wide','style':'italic','color':'green'}
         assert public['patch']['blocks'][0]['title']=='Testabschnitt'
+        assert public['patch']['blocks'][0]['anchor']=='end'
         assert 'history' not in public
         v=answer['history'][-1]['id']
         status,answer=admin.studio({'action':'restore','csrf':ss['csrf'],'revision':answer['revision'],'id':v})

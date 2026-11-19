@@ -30,8 +30,10 @@ function studio_validate(array $content,array $manifest,array $media): array {
             $extras=['align'=>['default','left','center','right'],'line'=>['default','compact','normal','wide'],'style'=>['default','italic','normal'],'color'=>['default','green','dark','gold','cream']];$more=[];foreach($extras as $prop=>$allowed){$v=$fmt[$prop]??'default';if(!in_array($v,$allowed,true))throw new DomainException('Ungültige Schriftformatierung.');if($v!=='default')$more[$prop]=$v;}
             if($font!=='default'||$size!=='default'||$weight!=='default'||$more)$format[$key]=['font'=>$font,'size'=>$size,'weight'=>$weight]+$more;
         }
-        $out[$page]=['fields'=>$fields,'format'=>$format,'hidden'=>array_values($hidden),'order'=>array_values($order)];
-        if(array_key_exists('blocks',$patch))$out[$page]['blocks']=thv_blocks($patch['blocks'],$media);
+        $images=[];if(isset($patch['images'])&&!is_array($patch['images']))throw new DomainException('Ungültige Bildinformationen.');
+        foreach($patch['images']??[] as $key=>$meta){if(($manifest[$page]['fields'][$key]['kind']??null)!=='image'||!is_array($meta)||!is_string($meta['alt']??null)||strlen($meta['alt'])>240||!preg_match('//u',$meta['alt'])||!in_array($meta['position']??'default',['default','center','top','bottom','left','right'],true))throw new DomainException('Ungültige Bildinformationen.');$images[$key]=['alt'=>$meta['alt'],'position'=>$meta['position']??'default'];}
+        $out[$page]=['fields'=>$fields,'format'=>$format,'images'=>$images,'hidden'=>array_values($hidden),'order'=>array_values($order)];
+        if(array_key_exists('blocks',$patch))$out[$page]['blocks']=thv_blocks($patch['blocks'],$media,$sections);
         if($page==='team.html'&&array_key_exists('trainers',$patch)){
             $list=$patch['trainers'];if(!is_array($list)||count($list)>60)throw new DomainException('Ungültige Trainerliste.');
             $seen=[];$clean=[];foreach($list as $t){if(!is_array($t)||!is_string($t['id']??null)||isset($seen[$t['id']]))throw new DomainException('Ungültige Trainerkarte.');

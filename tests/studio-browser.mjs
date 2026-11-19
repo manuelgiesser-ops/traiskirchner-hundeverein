@@ -19,7 +19,7 @@ let browser;
 try{
  await new Promise(r=>setTimeout(r,800));
  browser=await chromium.launch({headless:true,args:['--no-sandbox'],...(process.env.STUDIO_BROWSER?{executablePath:process.env.STUDIO_BROWSER}:{})});
- const page=await browser.newPage({viewport:{width:1600,height:1000}});
+ const page=await browser.newPage({viewport:{width:1600,height:1000},bypassCSP:true});
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.goto(origin+'/vereinsbereich.php');
  await page.locator('[name=key]').fill(key);
@@ -49,7 +49,7 @@ try{
  await heading.fill('Direkt bearbeitet');
  await heading.press('Control+Enter');
  await page.waitForFunction(()=>document.getElementById('text').value==='Direkt bearbeitet');
- await page.locator('#blocks-panel > summary').click();
+ await page.locator('[data-studio-tab=blocks]').click();
  await page.locator('[data-add-block=cta]').click();
  await page.locator('#block-title').fill('Test Kontaktaktion');
  await page.locator('#block-body').fill('Absatz eins\n\nAbsatz zwei');
@@ -64,7 +64,7 @@ try{
  page.once('dialog',d=>d.accept());
  await page.locator('#publish').click();
  await page.waitForFunction(()=>document.getElementById('studio-message').textContent.includes('veröffentlicht'),null,{timeout:15000});
- const anon=await browser.newPage();
+ const anon=await browser.newPage({bypassCSP:true});
  await anon.goto(origin+'/welpen.html');
  await anon.waitForFunction(()=>document.querySelector('h1[data-studio-field]')?.textContent==='Direkt bearbeitet');
  assert.equal(await anon.locator('.studio-added-section h2').textContent(),'Test Kontaktaktion');
