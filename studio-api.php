@@ -20,7 +20,15 @@ function studio_validate(array $content,array $manifest,array $media): array {
         $sections=array_keys($manifest[$page]['sections']);$hidden=$patch['hidden']??[];$order=$patch['order']??[];
         if(!is_array($hidden)||!is_array($order)||count(array_unique($hidden))!==count($hidden)||count(array_unique($order))!==count($order)||array_diff($hidden,$sections)||array_diff($order,$sections))throw new DomainException('Abschnitt nicht verfügbar.');
         if($order&&count($order)!==count($sections))throw new DomainException('Abschnittsreihenfolge unvollständig.');
-        $out[$page]=['fields'=>$fields,'hidden'=>array_values($hidden),'order'=>array_values($order)];
+        $format=[];if(isset($patch['format'])&&!is_array($patch['format']))throw new DomainException('Ungültige Formatierung.');
+        foreach($patch['format']??[] as $key=>$fmt){
+            $def=$manifest[$page]['fields'][$key]??null;
+            if(!$def||$def['kind']==='image'||!is_array($fmt))throw new DomainException('Ungültiges Formatierungsfeld.');
+            $font=$fmt['font']??'default';$size=$fmt['size']??'default';$weight=$fmt['weight']??'default';
+            if(!in_array($font,['default','sans','modern','serif','humanist'],true)||!in_array($size,['default','small','medium','large','xl'],true)||!in_array($weight,['default','regular','bold'],true))throw new DomainException('Ungültige Schriftformatierung.');
+            if($font!=='default'||$size!=='default'||$weight!=='default')$format[$key]=['font'=>$font,'size'=>$size,'weight'=>$weight];
+        }
+        $out[$page]=['fields'=>$fields,'format'=>$format,'hidden'=>array_values($hidden),'order'=>array_values($order)];
         if($page==='team.html'&&array_key_exists('trainers',$patch)){
             $list=$patch['trainers'];if(!is_array($list)||count($list)>60)throw new DomainException('Ungültige Trainerliste.');
             $seen=[];$clean=[];foreach($list as $t){if(!is_array($t)||!is_string($t['id']??null)||isset($seen[$t['id']]))throw new DomainException('Ungültige Trainerkarte.');

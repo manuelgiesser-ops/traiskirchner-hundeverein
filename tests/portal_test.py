@@ -78,20 +78,21 @@ with tempfile.TemporaryDirectory() as temp:
         assert admin.req('/website-studio.php')[0]==200
         assert admin.req('/vereins-backup.php')[0]==200
         key=next(k for k,v in ss['manifest']['index.html']['fields'].items() if v['kind']=='text')
-        patch={'index.html':{'fields':{key:'Vorläufiger Testtext'},'hidden':[],'order':[]}}
+        patch={'index.html':{'fields':{key:'Vorläufiger Testtext\n\nZweiter Absatz'},'format':{key:{'font':'serif','size':'large','weight':'bold'}},'hidden':[],'order':[]}}
         status,answer=admin.studio({'action':'save','csrf':ss['csrf'],'revision':ss['revision'],'draft':patch})
         assert status==200,answer
         assert json.loads(anon.req('/studio-api.php?mode=public&page=index.html')[1])['patch'] is None
         status,answer=admin.studio({'action':'publish','csrf':ss['csrf'],'revision':answer['revision'],'draft':patch})
         assert status==200,answer
         public=json.loads(anon.req('/studio-api.php?mode=public&page=index.html')[1])
-        assert public['patch']['fields'][key]=='Vorläufiger Testtext'
+        assert public['patch']['fields'][key]=='Vorläufiger Testtext\n\nZweiter Absatz'
+        assert public['patch']['format'][key]=={'font':'serif','size':'large','weight':'bold'}
         assert 'history' not in public
         v=answer['history'][-1]['id']
         status,answer=admin.studio({'action':'restore','csrf':ss['csrf'],'revision':answer['revision'],'id':v})
         assert status==200,answer
         assert not answer['draft']
-        assert json.loads(anon.req('/studio-api.php?mode=public&page=index.html')[1])['patch']['fields'][key]=='Vorläufiger Testtext'
+        assert json.loads(anon.req('/studio-api.php?mode=public&page=index.html')[1])['patch']['fields'][key]=='Vorläufiger Testtext\n\nZweiter Absatz'
         status,answer=admin.studio({'action':'publish','csrf':ss['csrf'],'revision':answer['revision'],'draft':{}})
         assert status==200,answer
         assert json.loads(anon.req('/studio-api.php?mode=public&page=index.html')[1])['patch'] is None
