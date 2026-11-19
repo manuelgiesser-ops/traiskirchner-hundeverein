@@ -1,0 +1,28 @@
+name: Import more original THV photos
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'import_original_photos.py'
+      - '.github/workflows/thv-import-original-photos.yml'
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install Pillow==11.3.0
+      - run: python import_original_photos.py
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets assets.json studio-manifest.json photo-import-report.json '*.html'
+          git commit -m "Import verified original THV archive photographs"
+          git pull --rebase origin main
+          git push origin HEAD:main
