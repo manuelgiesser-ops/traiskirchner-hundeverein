@@ -1,0 +1,11 @@
+/* Only newly added sections are styled. Set variables in your own website CSS. */
+.studio-added-section{padding:clamp(30px,6vw,80px) 20px;background:var(--studio-surface,#fff);color:var(--studio-ink,#263447)}
+.studio-added-section>.wrap{max-width:var(--studio-width,1080px);margin:auto}
+.studio-added-section.cream{background:var(--studio-soft,#f1f5f7)}
+.studio-added-section.dark{background:var(--studio-accent,#35543d);color:var(--studio-light,#fff)}
+.studio-added-section[data-studio-spacing=compact]{padding-block:24px}.studio-added-section[data-studio-spacing=wide]{padding-block:clamp(60px,10vw,120px)}
+.studio-added-section .split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,60px);align-items:center}
+.studio-added-section .split.reverse>.photo{order:2}.studio-added-section .photo{margin:0}.studio-added-section .photo img{display:block;width:100%;height:auto;border-radius:var(--studio-radius,8px)}
+.studio-added-section h2{font-size:clamp(24px,4vw,44px);line-height:1.15;margin:0 0 16px;color:inherit}.studio-added-section p,.studio-added-section li{line-height:1.65}.studio-added-section .notice{padding:24px;border:1px solid currentColor;border-radius:8px}.studio-added-section summary{cursor:pointer}.studio-added-section .btn{display:inline-block;padding:12px 20px;background:var(--studio-accent,#35543d);color:#fff;border:1px solid currentColor;border-radius:7px;text-decoration:none}.studio-added-section.dark .btn{background:#fff;color:var(--studio-ink,#263447)}
+.studio-added-section blockquote{white-space:pre-line;border-left:3px solid currentColor;padding-left:20px;margin:0}
+@media(max-width:720px){.studio-added-section .split{grid-template-columns:1fr}.studio-added-section .split.reverse>.photo{order:0}}

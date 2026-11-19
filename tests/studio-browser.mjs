@@ -35,6 +35,8 @@ try{
  const heading=iframe.locator('h1[data-studio-field]');
  const original=await heading.textContent();
  await heading.click();
+ assert.equal(await page.locator('body').getAttribute('data-inspector'),'text');
+ assert.equal(await page.locator('#blocks-panel').isVisible(),false);
  await page.locator('#text').fill('Welpen und Junghunde Test');
  await page.waitForFunction(()=>document.getElementById('preview').contentDocument.querySelector('h1[data-studio-field]').textContent==='Welpen und Junghunde Test');
  await page.waitForFunction(()=>document.getElementById('studio-message').textContent.includes('Automatisch gespeichert'),null,{timeout:15000});
@@ -42,6 +44,7 @@ try{
  assert.equal(await heading.textContent(),original);
  await page.locator('#redo').click();
  assert.equal(await heading.textContent(),'Welpen und Junghunde Test');
+ await page.locator('.format-advanced summary').click();
  await page.locator('#font-style').selectOption('italic');
  await page.locator('#text-align').selectOption('center');
  assert.equal(await heading.evaluate(el=>el.style.textAlign),'center');

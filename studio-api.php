@@ -6,7 +6,7 @@ thv_headers();header('Content-Type: application/json; charset=utf-8');
 function studio_out($value,int $status=200): never {http_response_code($status);echo json_encode($value,JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR);exit;}
 function studio_manifest(): array {return json_decode((string)file_get_contents(__DIR__.'/studio-manifest.json'),true,512,JSON_THROW_ON_ERROR);}
 function studio_media(): array {
-    $out=[];foreach(glob(__DIR__.'/assets/*-960.webp')?:[] as $p){$rel='assets/'.basename($p);$out[$rel]=str_replace('-960.webp','',basename($p));}try{return $out+thv_state(fn($s)=>thv_media_choices($s));}catch(Throwable $e){return $out;}
+    $out=[];foreach(glob(__DIR__.'/assets/*-960.webp')?:[] as $p){$rel='assets/'.basename($p);$out[$rel]=str_replace('-960.webp','',basename($p));}foreach(studio_manifest() as $page){foreach($page['fields']??[] as $def){$src=$def['default']??'';if(($def['kind']??'')==='image'&&is_string($src)&&preg_match('~^(?:(?:[a-zA-Z0-9_-]+/)*[a-zA-Z0-9_.-]+\\.(?:webp|avif|png|jpe?g|gif))$~iD',$src)&&is_file(__DIR__.'/'.$src))$out[$src]??=basename($src);}}try{return $out+thv_state(fn($s)=>thv_media_choices($s));}catch(Throwable $e){return $out;}
 }
 function studio_validate(array $content,array $manifest,array $media): array {
     $out=[];
