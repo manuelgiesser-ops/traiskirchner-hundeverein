@@ -16,15 +16,15 @@ try{
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
  const origin='http://localhost:18766';
  await page.goto(origin+'/a/studio-login.php');await page.locator('[name=email]').fill('a@example.invalid');await page.locator('[name=password]').fill(password);await page.getByRole('button',{name:'Anmelden'}).click();
- await page.waitForFunction(()=>document.getElementById('studio-message')?.textContent.startsWith('Bereit.'));
+ await page.locator('#studio-message').filter({hasText:'Bereit.'}).waitFor();
  await page.frameLocator('#preview').locator('h1').click();await page.locator('#text').fill('Nur Website A');
- await page.waitForFunction(()=>document.getElementById('preview').contentDocument.querySelector('h1').textContent==='Nur Website A');
- await page.waitForFunction(()=>document.getElementById('studio-message').textContent.includes('Automatisch gespeichert'),null,{timeout:15000});
- page.once('dialog',d=>d.accept());await page.locator('#publish').click();await page.waitForFunction(()=>document.getElementById('studio-message').textContent.includes('veröffentlicht'));
+ await page.frameLocator('#preview').getByRole('heading',{name:'Nur Website A',exact:true}).waitFor();
+ await page.locator('#studio-message').filter({hasText:'Automatisch gespeichert'}).waitFor({timeout:15000});
+ page.once('dialog',d=>d.accept());await page.locator('#publish').click();await page.locator('#studio-message').filter({hasText:'veröffentlicht'}).waitFor();
  await page.goto(origin+'/b/studio-api.php');assert.equal(await page.locator('body').textContent(),'{"error":"Dafür fehlt die Berechtigung."}');
  await page.goto(origin+'/b/studio-login.php');await page.locator('[name=email]').fill('b@example.invalid');await page.locator('[name=password]').fill(password);await page.getByRole('button',{name:'Anmelden'}).click();
- await page.waitForFunction(()=>document.getElementById('preview')?.contentDocument?.querySelector('h1')?.textContent==='Original b');
- const ans=await page.evaluate(async()=>await (await fetch('studio-api.php')).json());assert.deepEqual(ans.published,[]);
- const other=await browser.newPage();await other.goto(origin+'/a/index.html');await other.waitForFunction(()=>document.querySelector('h1')?.textContent==='Nur Website A');await other.goto(origin+'/b/index.html');assert.equal(await other.locator('h1').textContent(),'Original b');
+ await page.frameLocator('#preview').getByRole('heading',{name:'Original b',exact:true}).waitFor();
+ const ans=await (await page.request.get(origin+'/b/studio-api.php')).json();assert.deepEqual(ans.published,[]);
+ const other=await browser.newPage();await other.goto(origin+'/a/index.html');await other.getByRole('heading',{name:'Nur Website A',exact:true}).waitFor();await other.goto(origin+'/b/index.html');assert.equal(await other.locator('h1').textContent(),'Original b');
  assert.deepEqual(errors,[]);console.log('PASS: two installed websites, independent accounts, private storage, draft and publishing');
 }finally{await browser?.close();server.kill();fs.rmSync(base,{recursive:true,force:true})}
