@@ -8,6 +8,9 @@ on:
       - 'website-content.js'
       - 'studio-*.php'
       - 'tests/studio-browser.mjs'
+      - 'tests/studio-standalone.mjs'
+      - 'install_studio.py'
+      - 'studio-*.css'
       - '.github/workflows/thv-studio-browser.yml'
 permissions:
   contents: read
@@ -31,3 +34,4 @@ jobs:
             npx playwright install chromium
           fi
       - run: node tests/studio-browser.mjs
+      - run: node tests/studio-standalone.mjs

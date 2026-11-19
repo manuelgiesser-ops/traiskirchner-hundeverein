@@ -27,3 +27,12 @@ body:not([data-inspector=welcome]) #studio-welcome{display:none}body:not([data-i
 @media(max-width:1100px){.studio-work{grid-template-columns:180px minmax(0,1fr) 270px}.studio-header .club-brand{font-size:14px}.studio-header .club-brand small{max-width:120px;overflow:hidden;text-overflow:ellipsis}.studio-actions button{font-size:12px;padding:7px 9px}}
 @media(max-width:850px){.studio-header{min-height:100px}.studio-work{height:calc(100dvh - 148px);grid-template-columns:minmax(0,1fr)}.studio-side,.studio-navigator{top:145px;padding:12px}.studio-status{font-size:11px}.studio-status #studio-message{font-size:11px}.studio-preview{padding:6px}.studio-side .media-tile{min-height:94px}.studio-header .studio-exit{display:inline}.studio-header .club-brand small{display:none}.studio-actions{gap:4px}.studio-actions button{font-size:11px;padding:7px}.canvas-bar{flex-wrap:wrap}.canvas-bar #add-tools{margin-left:0}}
 @media(max-width:410px){.studio-header .club-brand{font-size:12px}.studio-brand-mark{width:28px;height:28px;font-size:17px}.studio-exit{font-size:11px}.studio-header{gap:5px}.studio-header .studio-actions{gap:3px}.studio-actions button{font-size:10px;padding:7px 5px}}
+
+/* Standalone login and intuitive contextual inspector polish. */
+.studio-login{min-height:100dvh;display:grid;place-items:center;padding:24px;background:#edf2f8}
+.studio-login-card{width:min(420px,100%);background:white;border:1px solid #dce4ed;border-radius:18px;padding:32px;box-shadow:0 16px 60px #19314c13}
+.studio-login-card h1{font-size:26px;letter-spacing:-.035em;margin:18px 0 3px}.studio-login-card p{color:#526176;margin:6px 0 20px}
+.studio-login-card form{display:grid;gap:15px;margin:20px 0}.studio-login-card label{display:grid;gap:7px;font-size:13px;font-weight:600}.studio-login-card input{border:1px solid #d7dfe9;border-radius:8px;padding:12px;min-width:0}.studio-login-card form button{background:#255bd5;color:white;border-color:#255bd5;min-height:44px}
+.studio-login-card [role=alert]{color:#b33440;background:#fdf1f2;padding:12px;border-radius:8px}
+.studio-side #image-settings:not([open])>label{display:none}.studio-side .format-advanced:not([open])>label,.studio-side .format-advanced:not([open])>.studio-grid-two{display:none}
+.studio-navigator [data-add-block]{position:relative;padding:10px 13px!important}.studio-side .studio-text-tools>label:first-child{font-weight:650}.studio-side .studio-format-row button{min-height:35px}

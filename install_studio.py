@@ -48,7 +48,10 @@ def main():
         if 'data-studio-field=' in s or 'data-studio-section=' in s:raise SystemExit('Existing editor markers: '+p.name)
         if not re.fullmatch(r'[a-zA-Z0-9_-]+\.html',p.name):raise SystemExit('Unsupported page filename: '+p.name)
         parser=Parser(s);parser.feed(s);fields={};sections={};changes=[]
-        def mark(n,attr,key):changes.append((n['openend']-1,f' {attr}="{key}"'))
+        def mark(n,attr,key):
+            pos=n['openend']-1
+            if s[pos-1:pos]=='/':pos-=1
+            changes.append((pos,f' {attr}="{key}"'))
         def leaf(n):return not n['children'] and n['close']>n['openend']
         def text(n):return html.unescape(s[n['openend']:n['close']]).strip()
         for n in parser.nodes:
