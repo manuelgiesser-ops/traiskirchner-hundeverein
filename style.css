@@ -1239,8 +1239,8 @@ body>main .final-photo-contact .section-head h2{font-size:clamp(2.65rem,5.4vw,5.
  .final-photo-contact .thv-corner{opacity:.09}
 }
 @media(hover:none),(pointer:coarse){
- .thv-motion .course-modern .course.course-tap-opening .media-frame.thv-media.photo-opening.paw-reveal.course-discovery.thv-media-seen>img{transition:opacity .30s ease-out,filter .30s ease-out,transform .30s ease-out!important;transition-delay:0s!important}
- .thv-motion .course-modern .course.course-tap-opening .media-frame.thv-media.photo-opening.paw-reveal.course-discovery.thv-media-seen .thv-film-paws{animation:thvWalkingOverlay .42s linear both!important}
- .thv-motion .course-modern .course.course-tap-opening .media-frame.thv-media.photo-opening.paw-reveal.course-discovery.thv-media-seen .thv-film-paws .dog-paw{animation:thvCourseFootstep .24s calc(var(--paw-delay,0ms) * .22) ease-out both!important}
+ .thv-motion .course-modern .course.course-tap-opening .media-frame.thv-media.photo-opening.paw-reveal.course-discovery.thv-media-seen>img{transition:opacity .52s ease-out,filter .52s ease-out,transform .52s ease-out!important;transition-delay:.04s!important}
+ .thv-motion .course-modern .course.course-tap-opening .media-frame.thv-media.photo-opening.paw-reveal.course-discovery.thv-media-seen .thv-film-paws{animation:thvWalkingOverlay .90s linear both!important}
+ .thv-motion .course-modern .course.course-tap-opening .media-frame.thv-media.photo-opening.paw-reveal.course-discovery.thv-media-seen .thv-film-paws .dog-paw{animation:thvCourseFootstep .46s calc(var(--paw-delay,0ms) * .46) ease-out both!important}
 }
 @media(prefers-reduced-motion:reduce){.facility-expand{transition:none!important}}
