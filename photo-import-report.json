@@ -1,0 +1,182 @@
+{
+  "source_page": "https://traiskirchner-hundeverein.jimdofree.com/galerie/2022/",
+  "imported": 6,
+  "requested": 6,
+  "photos": [
+    {
+      "key": "archive-junghund-2022",
+      "label": "Junghundekurs 2022",
+      "source": "https://image.jimcdn.com/app/cms/image/transf/none/path/s304ff6c883af050c/image/ic71fd0f895d4ee84/version/1684336469/image.jpg",
+      "original": [
+        1024,
+        768
+      ],
+      "variants": [
+        {
+          "file": "assets/archive-junghund-2022-480.webp",
+          "w": 480,
+          "h": 360,
+          "bytes": 70606
+        },
+        {
+          "file": "assets/archive-junghund-2022-960.webp",
+          "w": 960,
+          "h": 720,
+          "bytes": 293576
+        },
+        {
+          "file": "assets/archive-junghund-2022-1600.webp",
+          "w": 1024,
+          "h": 768,
+          "bytes": 339138
+        }
+      ]
+    },
+    {
+      "key": "archive-longieren-2022",
+      "label": "Dog Activity Longieren 2022",
+      "source": "https://image.jimcdn.com/app/cms/image/transf/none/path/s304ff6c883af050c/image/i0765b825ed9c1547/version/1684336787/image.png",
+      "original": [
+        1000,
+        748
+      ],
+      "variants": [
+        {
+          "file": "assets/archive-longieren-2022-480.webp",
+          "w": 480,
+          "h": 359,
+          "bytes": 71806
+        },
+        {
+          "file": "assets/archive-longieren-2022-960.webp",
+          "w": 960,
+          "h": 718,
+          "bytes": 246980
+        },
+        {
+          "file": "assets/archive-longieren-2022-1600.webp",
+          "w": 1000,
+          "h": 748,
+          "bytes": 267204
+        }
+      ]
+    },
+    {
+      "key": "archive-jhv-2022",
+      "label": "Junghundeveranlagung 2022",
+      "source": "https://image.jimcdn.com/app/cms/image/transf/none/path/s304ff6c883af050c/image/ia185a2c25ef632a6/version/1684336469/image.jpg",
+      "original": [
+        1024,
+        768
+      ],
+      "variants": [
+        {
+          "file": "assets/archive-jhv-2022-480.webp",
+          "w": 480,
+          "h": 360,
+          "bytes": 71518
+        },
+        {
+          "file": "assets/archive-jhv-2022-960.webp",
+          "w": 960,
+          "h": 720,
+          "bytes": 281434
+        },
+        {
+          "file": "assets/archive-jhv-2022-1600.webp",
+          "w": 1024,
+          "h": 768,
+          "bytes": 318318
+        }
+      ]
+    },
+    {
+      "key": "archive-turnier-2022",
+      "label": "Vereinsturnier 2022",
+      "source": "https://image.jimcdn.com/app/cms/image/transf/none/path/s304ff6c883af050c/image/i6da1f021d798444c/version/1684336469/image.jpg",
+      "original": [
+        4032,
+        3024
+      ],
+      "variants": [
+        {
+          "file": "assets/archive-turnier-2022-480.webp",
+          "w": 480,
+          "h": 360,
+          "bytes": 55226
+        },
+        {
+          "file": "assets/archive-turnier-2022-960.webp",
+          "w": 960,
+          "h": 720,
+          "bytes": 219866
+        },
+        {
+          "file": "assets/archive-turnier-2022-1600.webp",
+          "w": 1600,
+          "h": 1200,
+          "bytes": 604104
+        }
+      ]
+    },
+    {
+      "key": "archive-agility-2022",
+      "label": "Abschlussturnier Agility 2022",
+      "source": "https://image.jimcdn.com/app/cms/image/transf/none/path/s304ff6c883af050c/image/if5d52e6751817562/version/1684336469/image.jpg",
+      "original": [
+        1368,
+        1824
+      ],
+      "variants": [
+        {
+          "file": "assets/archive-agility-2022-480.webp",
+          "w": 360,
+          "h": 480,
+          "bytes": 65470
+        },
+        {
+          "file": "assets/archive-agility-2022-960.webp",
+          "w": 720,
+          "h": 960,
+          "bytes": 230838
+        },
+        {
+          "file": "assets/archive-agility-2022-1600.webp",
+          "w": 1200,
+          "h": 1600,
+          "bytes": 495652
+        }
+      ]
+    },
+    {
+      "key": "archive-abschluss-2022",
+      "label": "Kursabschluss Herbst 2022",
+      "source": "https://image.jimcdn.com/app/cms/image/transf/none/path/s304ff6c883af050c/image/i1e74fb32a09170e2/version/1684336469/image.jpg",
+      "original": [
+        2000,
+        1500
+      ],
+      "variants": [
+        {
+          "file": "assets/archive-abschluss-2022-480.webp",
+          "w": 480,
+          "h": 360,
+          "bytes": 34602
+        },
+        {
+          "file": "assets/archive-abschluss-2022-960.webp",
+          "w": 960,
+          "h": 720,
+          "bytes": 101714
+        },
+        {
+          "file": "assets/archive-abschluss-2022-1600.webp",
+          "w": 1600,
+          "h": 1200,
+          "bytes": 210892
+        }
+      ]
+    }
+  ],
+  "failed": []
+}

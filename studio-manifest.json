@@ -105,6 +105,11 @@
         "kind": "text",
         "label": "Kurszeit",
         "default": "Anfänger und Fortgeschrittene trainieren in unterschiedlichen Gruppen. Die bisherigen Kursbeschreibungen und Kurszeiten nennen unterschiedliche Trainingstage. Bitte die passende Gruppe und die aktuellen Termine erfragen."
+      },
+      "f900": {
+        "kind": "image",
+        "label": "Originalfoto",
+        "default": "assets/archive-agility-2022-960.webp"
       }
     },
     "sections": {}
@@ -395,11 +400,44 @@
         "kind": "image",
         "label": "Bild",
         "default": "assets/field-960.webp"
+      },
+      "f900": {
+        "kind": "image",
+        "label": "Originalfoto",
+        "default": "assets/archive-junghund-2022-960.webp"
+      },
+      "f901": {
+        "kind": "image",
+        "label": "Originalfoto",
+        "default": "assets/archive-longieren-2022-960.webp"
+      },
+      "f902": {
+        "kind": "image",
+        "label": "Originalfoto",
+        "default": "assets/archive-jhv-2022-960.webp"
+      },
+      "f903": {
+        "kind": "image",
+        "label": "Originalfoto",
+        "default": "assets/archive-turnier-2022-960.webp"
+      },
+      "f904": {
+        "kind": "image",
+        "label": "Originalfoto",
+        "default": "assets/archive-agility-2022-960.webp"
+      },
+      "f905": {
+        "kind": "image",
+        "label": "Originalfoto",
+        "default": "assets/archive-abschluss-2022-960.webp"
       }
     },
     "sections": {
       "s001": {
         "label": "Auf dem Trainingsplatz"
+      },
+      "s090": {
+        "label": "Aus dem Vereinsarchiv"
       }
     }
   },
@@ -1019,6 +1057,21 @@
         "kind": "button",
         "label": "Button",
         "default": "Mitglied werden"
+      },
+      "f900": {
+        "kind": "image",
+        "label": "Originalfoto",
+        "default": "assets/archive-longieren-2022-960.webp"
+      },
+      "f901": {
+        "kind": "image",
+        "label": "Originalfoto",
+        "default": "assets/archive-turnier-2022-960.webp"
+      },
+      "f902": {
+        "kind": "image",
+        "label": "Originalfoto",
+        "default": "assets/archive-abschluss-2022-960.webp"
       }
     },
     "sections": {
@@ -1045,6 +1098,9 @@
       },
       "s008": {
         "label": "Wir freuen uns auf euch."
+      },
+      "s090": {
+        "label": "Einblicke ins Vereinsleben"
       }
     }
   },
@@ -2252,6 +2308,16 @@
         "kind": "text",
         "label": "Kurszeit",
         "default": "Mittwoch, etwa 50 Minuten. Die genaue Uhrzeit bitte vor dem Besuch erfragen."
+      },
+      "f900": {
+        "kind": "image",
+        "label": "Originalfoto",
+        "default": "assets/archive-junghund-2022-960.webp"
+      },
+      "f901": {
+        "kind": "image",
+        "label": "Originalfoto",
+        "default": "assets/archive-jhv-2022-960.webp"
       }
     },
     "sections": {}
