@@ -22,3 +22,6 @@ Verwaltung: Datensicherung herunterladen (PHP ZIP erforderlich). Bewahre die ZIP
 Trainerteam: vorhandene Trainerkarten umsortieren, ausblenden und wieder anzeigen; neue Karten mit Bild, Name und Trainingsbereichen ergänzen. Neue Karten nutzen das Standardlayout, ohne den handvermessenen Fokuspunkt der ursprünglichen Porträts.
 
 Der Mitgliederbereich zeigt kommende datierte Beiträge und Kurse im Vereinskalender. Vergangene Termine erscheinen weiterhin in den Nachrichten und Kursangeboten.
+
+## Studio 2
+Dreispaltige Oberfläche mit Seitenliste, durchsuchbaren Inhaltsfeldern, Live-Vorschau und kontextbezogenen Eigenschaften. Desktop-, Tablet- und Mobilansicht, Vorschau ohne Markierung, Text-Doppelklick, automatische Entwurfsspeicherung, Rückgängig/Wiederholen (bis 60 lokale Zustände), Tastenkürzel Strg+S und Strg+Z. Zusätzlich Ausrichtung, Zeilenabstand, Kursiv und Vereinsfarben. Neue Seitenbausteine (Text, Bild/Text, Infobox, Kontaktbutton, FAQ) können angelegt, sortiert und entfernt werden. Entwürfe und Medien bleiben geschützt. Nur Verwaltung veröffentlicht. Bestehende Seitenabschnitte und neue Bausteine lassen sich innerhalb ihrer jeweiligen Liste ziehen oder per Pfeiltasten sortieren. Kein freies Überlagern oder pixelgenaues Positionieren der bestehenden Elemente.

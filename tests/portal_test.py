@@ -5,7 +5,7 @@ with tempfile.TemporaryDirectory() as temp:
     base=pathlib.Path(temp)
     web=base/'public_html';web.mkdir()
     private=base/'thv-private';private.mkdir(mode=0o700)
-    for name in ['verein-core.php','vereinsbereich.php','vereinsdaten.php','vereinsartikel.php','studio-media-lib.php','studio-api.php','studio-manifest.json','website-studio.php','vereins-backup.php']:
+    for name in ['verein-core.php','vereinsbereich.php','vereinsdaten.php','vereinsartikel.php','studio-media-lib.php','studio-blocks-lib.php','studio-api.php','studio-manifest.json','website-studio.php','vereins-backup.php']:
         shutil.copy(root/name,web/name)
     key=secrets.token_hex(24);adminpw=secrets.token_hex(16);newpw=secrets.token_hex(16)
     (private/'setup.key').write_text(key)
@@ -79,6 +79,11 @@ with tempfile.TemporaryDirectory() as temp:
         assert admin.req('/vereins-backup.php')[0]==200
         key=next(k for k,v in ss['manifest']['index.html']['fields'].items() if v['kind']=='text')
         patch={'index.html':{'fields':{key:'Vorläufiger Testtext\n\nZweiter Absatz'},'format':{key:{'font':'serif','size':'large','weight':'bold'}},'hidden':[],'order':[]}}
+        patch['index.html']['format'][key].update({'align':'center','line':'wide','style':'italic','color':'green'})
+        patch['index.html']['blocks']=[{'id':'block-1234567890abcdef','type':'cta','title':'Testabschnitt','body':'Absatz eins\n\nAbsatz zwei','tone':'green','image':'','button':'Kontakt','link':'kontakt.html','alt':''}]
+        invalid=json.loads(json.dumps(patch));invalid['index.html']['blocks'][0]['link']='javascript:alert(1)'
+        status,answer=admin.studio({'action':'save','csrf':ss['csrf'],'revision':ss['revision'],'draft':invalid})
+        assert status==403,answer
         status,answer=admin.studio({'action':'save','csrf':ss['csrf'],'revision':ss['revision'],'draft':patch})
         assert status==200,answer
         assert json.loads(anon.req('/studio-api.php?mode=public&page=index.html')[1])['patch'] is None
@@ -86,7 +91,8 @@ with tempfile.TemporaryDirectory() as temp:
         assert status==200,answer
         public=json.loads(anon.req('/studio-api.php?mode=public&page=index.html')[1])
         assert public['patch']['fields'][key]=='Vorläufiger Testtext\n\nZweiter Absatz'
-        assert public['patch']['format'][key]=={'font':'serif','size':'large','weight':'bold'}
+        assert public['patch']['format'][key]=={'font':'serif','size':'large','weight':'bold','align':'center','line':'wide','style':'italic','color':'green'}
+        assert public['patch']['blocks'][0]['title']=='Testabschnitt'
         assert 'history' not in public
         v=answer['history'][-1]['id']
         status,answer=admin.studio({'action':'restore','csrf':ss['csrf'],'revision':answer['revision'],'id':v})
