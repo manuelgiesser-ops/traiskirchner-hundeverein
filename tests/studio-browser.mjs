@@ -190,7 +190,7 @@ try{
  const gridImage=grid.locator('[data-kind=image]');await gridImage.locator('img').waitFor();await page.locator('#grid-alt').fill('Rasterfoto');
  await page.locator('#grid-row').fill('2');await page.locator('#grid-row').press('Tab');assert.equal(await gridImage.evaluate(el=>el.style.getPropertyValue('--grid-d-row')),'2');
  await page.locator('#mobile').click();await page.waitForFunction(()=>document.getElementById('preview').clientWidth<=390);
- await page.locator('#grid-span').fill('8');await page.locator('#grid-span').press('Tab');assert.equal(await gridImage.evaluate(el=>el.style.getPropertyValue('--grid-m-span')),'8');assert.equal(await gridImage.evaluate(el=>el.style.getPropertyValue('--grid-d-span')),'6');
+ assert.equal(await page.locator('#grid-device-label').textContent(),'Smartphone');assert.equal(await page.locator('#grid-span').inputValue(),'12');await page.locator('#grid-span').fill('8');await page.locator('#grid-span').press('Tab');assert.equal(await gridImage.evaluate(el=>el.style.getPropertyValue('--grid-m-span')),'8');assert.equal(await gridImage.evaluate(el=>el.style.getPropertyValue('--grid-d-span')),'6');
  await page.locator('[data-grid-add=divider]').click();await page.locator('#grid-delete').click();assert.equal(await grid.locator('[data-kind=divider]').count(),0);await page.locator('#undo').click();assert.equal(await grid.locator('[data-kind=divider]').count(),1);await page.locator('#redo').click();assert.equal(await grid.locator('[data-kind=divider]').count(),0);
  await page.locator('#desktop').click();
  const gridAnon=await browser.newPage();assert.equal((await gridAnon.request.get(origin+'/'+gridInfo.url)).status(),404);await gridAnon.close();
