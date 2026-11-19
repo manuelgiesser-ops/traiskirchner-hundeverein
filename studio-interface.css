@@ -38,3 +38,6 @@ body:not([data-inspector=welcome]) #studio-welcome{display:none}body:not([data-i
 .studio-navigator [data-add-block]{position:relative;padding:10px 13px!important}.studio-side .studio-text-tools>label:first-child{font-weight:650}.studio-side .studio-format-row button{min-height:35px}
 
 .insertion-label{padding:9px 11px;margin:4px 0 8px!important;background:var(--ui-soft);color:var(--ui-blue)!important;border:1px solid #d8e4f8;border-radius:7px;font-size:12px;font-weight:650}
+
+/* V49 one structure, one order */
+#block-list:empty{display:none}.section-choice{flex:1;min-width:0;white-space:normal;text-align:left;line-height:1.25;overflow-wrap:anywhere}#sections .studio-section{display:flex;align-items:center;gap:4px;min-height:48px}#sections .studio-section>button:not(.section-choice){min-width:27px;flex:none;padding:5px 6px}#sections .drag-handle{flex:none;color:#7589a3}#sections .studio-section:hover{background:#f4f8fd}.studio-side #sections-panel>p{margin:10px 0}.studio-navigator #open-structure{background:var(--ui-soft);color:var(--ui-blue);border:1px solid #c8d7f1}

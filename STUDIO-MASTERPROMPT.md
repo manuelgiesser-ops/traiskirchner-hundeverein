@@ -19,3 +19,6 @@ Du bist Produktdesigner, UX-Spezialist, Senior Fullstack-Entwickler und QA-Veran
 - Rückgängig/Wiederholen, Autosave, Vorschau, Wiederherstellung und Veröffentlichung.
 - Mobilansicht und Bedienung auf Touchscreen; keine Schäden an der öffentlichen Seite.
 - Zweite unabhängige Installation mit separatem Login und Datenspeicher.
+
+## Verbindliche Strukturregel
+Eine gemeinsame Reihenfolge für vorhandene und neue Abschnitte; Pfeile und Drag-and-drop müssen den gleichen gespeicherten Zustand erzeugen. Alle freigegebenen Hauptabschnitte auf jeder Seite erhalten sichtbare Werkzeugleisten. Test: Abschnitt vor und hinter einen neu hinzugefügten Abschnitt verschieben, speichern, neu laden und veröffentlichen. Kein freies Pixel-Layout für geschützte Originalkomponenten.
