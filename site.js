@@ -63,13 +63,7 @@ if('IntersectionObserver' in window){const observer=new IntersectionObserver(es=
  frames.forEach(f=>{
   f.classList.add('thv-media','photo-opening');
   const img=f.querySelector('img');
-  let kind='soft';
-  if(f.closest('.gallery-item')||img?.dataset.asset==='team')kind='soft';
-  else if(f.closest('.bond-image'))kind='pair';
-  else if(f.closest('.editorial-intro'))kind='diagonal';
-  else if(f.closest('.field-editorial'))kind='meadow';
-  else if(f.closest('.course'))kind=['diagonal','reverse','pair','diagonal','meadow','reverse','pair'][courseCount++%7];
-  else kind=['reverse','soft','meadow','pair'][otherCount++%4];
+  const kind=f.closest('.course-modern .course')?['diagonal','reverse','pair','diagonal','meadow','reverse','pair'][courseCount++%7]:'soft';
   f.dataset.opening=kind;
   if(kind==='soft')return;
   f.classList.add('paw-reveal');
@@ -180,54 +174,8 @@ const thvPhotoData=Promise.resolve({"faces":{"sari":{"x":0.39743,"y":0.59646,"wi
  let loaded=0;const ready=()=>{if(++loaded!==2||bg.naturalWidth!==dog.naturalWidth||bg.naturalHeight!==dog.naturalHeight)return;layer.append(bg,dog);hero.append(layer);sizeMask();requestAnimationFrame(()=>hero.classList.add('has-hero-depth'))};
  bg.onload=ready;dog.onload=ready;bg.src='generated-media/hero-depth-background.webp?v=16';dog.src='generated-media/hero-depth-dog.webp?v=16';
 })();
-/* Group photograph: locally anchored zoom, pinch, drag and a precision lens. */
-(()=>{
- const photos=[...document.querySelectorAll('img[data-asset="team"]')].filter(photo=>!photo.closest('.gallery-item'));if(!photos.length)return;
- const icon='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="m15 15 5 5M10 7v6M7 10h6"/></svg>';
- const dialog=document.createElement('dialog');dialog.className='group-photo-dialog group-photo-v2';dialog.setAttribute('aria-label','Gruppenfoto vergrößern');
- dialog.innerHTML='<div class="group-dialog-head"><strong>Unser Team</strong><button type="button" data-close aria-label="Schließen">×</button></div><div class="group-dialog-stage" tabindex="0" aria-label="Gruppenfoto: mit Pfeiltasten verschieben"><img draggable="false" alt=""></div><div class="group-dialog-footer"><div class="group-dialog-controls"><button type="button" data-zoom="minus" aria-label="Verkleinern">−</button><output aria-live="polite">100 %</output><button type="button" data-zoom="plus" aria-label="Vergrößern">+</button><button type="button" data-zoom="reset">Ganzes Foto</button></div><p class="group-dialog-hint">Mit zwei Fingern oder Mausrad zoomen. Bild verschieben.</p></div>';
- document.body.append(dialog);const stage=dialog.querySelector('.group-dialog-stage'),full=stage.querySelector('img'),out=dialog.querySelector('output'),minus=dialog.querySelector('[data-zoom="minus"]'),plus=dialog.querySelector('[data-zoom="plus"]'),reset=dialog.querySelector('[data-zoom="reset"]');
- const cap=(n,a,b)=>Math.min(b,Math.max(a,n));let active=null,zoom=1,fitW=0,fitH=0,x=0,y=0,maxZoom=2.7,points=new Map(),pinch=null,dragged=false,initial=null;
- function render(animate=false){
-  if(!fitW||!fitH)return;
-  const mx=Math.max(0,(fitW*zoom-stage.clientWidth)/2),my=Math.max(0,(fitH*zoom-stage.clientHeight)/2);x=cap(x,-mx,mx);y=cap(y,-my,my);
-  full.style.width=fitW+'px';full.style.height=fitH+'px';full.style.margin='0';full.style.transition=animate&&!matchMedia('(prefers-reduced-motion:reduce)').matches?'transform .24s cubic-bezier(.2,.75,.2,1)':'none';
-  full.style.transform='translate(-50%,-50%) translate('+x+'px,'+y+'px) scale('+zoom+')';
-  const val=Math.round(zoom*100)+' %';if(out.value!==val)out.value=val;minus.disabled=zoom<=1.005;plus.disabled=zoom>=maxZoom-.005;reset.disabled=zoom<=1.005;stage.classList.toggle('is-enlarged',zoom>1.005);
- }
- function measure(){if(!dialog.open||!full.naturalWidth||!stage.clientWidth||!stage.clientHeight)return;const fit=Math.min(stage.clientWidth/full.naturalWidth,stage.clientHeight/full.naturalHeight);fitW=full.naturalWidth*fit;fitH=full.naturalHeight*fit;maxZoom=Math.max(1.5,Math.min(2.7,1.35/fit));zoom=Math.min(zoom,maxZoom);render()}
- function coords(e){const r=stage.getBoundingClientRect();return{x:e.clientX-r.left-r.width/2,y:e.clientY-r.top-r.height/2}}
- function setZoom(next,anchor={x:0,y:0},animate=true){next=cap(next,1,maxZoom);const k=next/zoom;x=anchor.x-(anchor.x-x)*k;y=anchor.y-(anchor.y-y)*k;zoom=next;render(animate)}
- function resetView(){zoom=1;x=0;y=0;render(true)}
- minus.addEventListener('click',()=>setZoom(zoom-.25));plus.addEventListener('click',()=>setZoom(zoom+.25));reset.addEventListener('click',resetView);
- dialog.querySelector('[data-close]').addEventListener('click',()=>dialog.close());dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close()});
- dialog.addEventListener('close',()=>{active?.focus({preventScroll:true});active=null;points.clear();pinch=null;initial=null});
- full.addEventListener('load',measure);window.addEventListener('resize',measure,{passive:true});
- stage.addEventListener('wheel',e=>{e.preventDefault();setZoom(zoom*Math.exp(-e.deltaY*.0025),coords(e),false)},{passive:false});
- stage.addEventListener('keydown',e=>{if(e.key==='+'||e.key==='='){e.preventDefault();setZoom(zoom+.25)}else if(e.key==='-'){e.preventDefault();setZoom(zoom-.25)}else if(e.key.startsWith('Arrow')){e.preventDefault();if(e.key==='ArrowLeft')x+=45;if(e.key==='ArrowRight')x-=45;if(e.key==='ArrowUp')y+=45;if(e.key==='ArrowDown')y-=45;render(true)}});
- stage.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse'&&e.button!==0)return;const a=coords(e);if(!points.size){dragged=false;initial={...a}}points.set(e.pointerId,a);stage.setPointerCapture(e.pointerId);if(points.size===2){const [a,b]=points.values();pinch={distance:Math.max(1,Math.hypot(a.x-b.x,a.y-b.y)),mid:{x:(a.x+b.x)/2,y:(a.y+b.y)/2}};dragged=true}});
- stage.addEventListener('pointermove',e=>{if(!points.has(e.pointerId))return;const a=coords(e),old=points.get(e.pointerId);points.set(e.pointerId,a);if(points.size===2&&pinch){const [u,v]=points.values(),distance=Math.max(1,Math.hypot(u.x-v.x,u.y-v.y)),mid={x:(u.x+v.x)/2,y:(u.y+v.y)/2};x+=mid.x-pinch.mid.x;y+=mid.y-pinch.mid.y;setZoom(zoom*distance/pinch.distance,mid,false);pinch={distance,mid};return}if(initial&&Math.hypot(a.x-initial.x,a.y-initial.y)>5)dragged=true;if(points.size===1&&zoom>1){x+=a.x-old.x;y+=a.y-old.y;render(false)}});
- for(const ev of ['pointerup','pointercancel','lostpointercapture'])stage.addEventListener(ev,e=>{points.delete(e.pointerId);pinch=null;if(!points.size)initial=null});
- stage.addEventListener('dblclick',e=>{if(!dragged)setZoom(zoom>1.01?1:Math.min(1.8,maxZoom),coords(e))});
- function open(photo,button,anchor){if(typeof dialog.showModal!=='function'){window.open(photo.currentSrc||photo.src,'_blank','noopener');return}active=button;zoom=1;x=y=0;fitW=fitH=0;full.alt=photo.alt;full.src=photo.dataset.full||photo.currentSrc||photo.src;dialog.showModal();measure();requestAnimationFrame(()=>{measure();if(anchor&&fitW){setZoom(Math.min(1.65,maxZoom),{x:(anchor.x-.5)*fitW,y:(anchor.y-.5)*fitH},true)}})}
- photos.forEach(photo=>{
-  let shell=photo.parentElement;if(!shell.classList.contains('media-frame')){shell=document.createElement('div');shell.className='group-photo-shell';photo.before(shell);shell.append(photo)}
-  shell.classList.add('group-photo');const lens=document.createElement('span');lens.className='group-photo-lens';lens.setAttribute('aria-hidden','true');shell.append(lens);
-  const btn=document.createElement('button');btn.type='button';btn.className='group-photo-open';btn.setAttribute('aria-label','Gruppenfoto vergrößern');btn.setAttribute('aria-haspopup','dialog');btn.innerHTML=icon+'<span>Vergrößern</span>';shell.append(btn);
-  const hide=()=>shell.classList.remove('lens-visible');
-  function geometry(){const r=photo.getBoundingClientRect(),cover=getComputedStyle(photo).objectFit==='cover',fit=(cover?Math.max:Math.min)(r.width/photo.naturalWidth,r.height/photo.naturalHeight),w=photo.naturalWidth*fit,h=photo.naturalHeight*fit;return{r,w,h,left:r.left+(r.width-w)/2,top:r.top+(r.height-h)/2,fit}}
-  btn.addEventListener('click',e=>{e.stopPropagation();hide();open(photo,btn)});
-  photo.addEventListener('click',e=>{let a=null;if(photo.naturalWidth&&matchMedia('(hover:hover) and (pointer:fine)').matches){const g=geometry();a={x:cap((e.clientX-g.left)/g.w,0,1),y:cap((e.clientY-g.top)/g.h,0,1)}}hide();open(photo,btn,a)});
-  shell.addEventListener('pointerleave',hide);shell.addEventListener('pointermove',e=>{
-   if(e.pointerType!=='mouse'||!matchMedia('(hover:hover) and (pointer:fine)').matches||!photo.naturalWidth||e.target.closest('button')||dialog.open||(shell.classList.contains('thv-media')&&!shell.classList.contains('thv-media-seen')&&!document.documentElement.classList.contains('paused'))){hide();return}
-   const g=geometry(),r=g.r;if(e.clientX<Math.max(r.left,g.left)||e.clientX>Math.min(r.right,g.left+g.w)||e.clientY<Math.max(r.top,g.top)||e.clientY>Math.min(r.bottom,g.top+g.h)){hide();return}
-   const outer=shell.getBoundingClientRect(),d=Math.min(238,r.width*.57,r.height*.84);if(d<48){hide();return}
-   const factor=Math.max(1.45,Math.min(2.05,1.3/g.fit)),px=e.clientX-g.left,py=e.clientY-g.top,bw=g.w*factor,bh=g.h*factor;
-   lens.style.width=d+'px';lens.style.height=d+'px';lens.style.left=cap(e.clientX-outer.left,d/2,outer.width-d/2)+'px';lens.style.top=cap(e.clientY-outer.top,d/2,outer.height-d/2)+'px';
-   lens.style.backgroundImage='url('+JSON.stringify(photo.currentSrc||photo.src)+')';lens.style.backgroundSize=bw+'px '+bh+'px';lens.style.backgroundPosition=cap(d/2-px*factor,Math.min(0,d-bw),0)+'px '+cap(d/2-py*factor,Math.min(0,d-bh),0)+'px';shell.classList.add('lens-visible');
-  });
- });
-})();
+/* Group photos remain natural, without magnifier or zoom overlay. Gallery still uses its normal lightbox. */
+
 
 /* Friendly paw marks on navigation and action links, not functional direction controls. */
 (()=>{const paw="<svg viewBox=\"0 0 32 32\" aria-hidden=\"true\" focusable=\"false\" fill=\"currentColor\"><ellipse cx=\"7.1\" cy=\"12.3\" rx=\"3.4\" ry=\"5\" transform=\"rotate(-28 7.1 12.3)\"/><ellipse cx=\"13.2\" cy=\"7.4\" rx=\"3.5\" ry=\"5.2\" transform=\"rotate(-9 13.2 7.4)\"/><ellipse cx=\"21\" cy=\"7.4\" rx=\"3.5\" ry=\"5.2\" transform=\"rotate(9 21 7.4)\"/><ellipse cx=\"27\" cy=\"12.3\" rx=\"3.4\" ry=\"5\" transform=\"rotate(28 27 12.3)\"/><path d=\"M6.5 23.1C6.5 19.4 10.3 17.1 12.6 14.2Q17.1 9.3 21.4 14.2C23.9 17.1 27 19.5 27 23.1C27 29.5 21.1 30 17 27.6C12.5 30 6.5 29.5 6.5 23.1Z\"/></svg>";document.querySelectorAll('a.btn,a.textlink,a.hero-secondary,a.course').forEach(link=>{link.querySelectorAll('span').forEach(s=>{if(!['↗','→'].includes(s.textContent.trim())||s.children.length)return;s.classList.add('link-paw');s.setAttribute('aria-hidden','true');s.innerHTML=paw})})})();
