@@ -215,7 +215,7 @@ const thvPhotoData=Promise.resolve({"faces":{"sari":{"x":0.39743,"y":0.59646,"wi
    const body=document.createElement('div');body.className='finder-result-copy';
    const title=document.createElement('h3');title.textContent=data.name;const p=document.createElement('p');p.textContent=data.info;
    const link=document.createElement('a');link.className='finder-result-link';link.href=data.href;link.textContent='Zum Kurs';const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('aria-hidden','true');svg.innerHTML='<path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>';link.append(svg);
-   body.append(title,p,link);article.append(body);return article;
+   const ask=document.createElement('a');ask.className='finder-result-link finder-apply';ask.href='kursanfrage.php?kurs='+encodeURIComponent(data.href.replace(/\.html.*$/,''));ask.textContent='Kurs anfragen';body.append(title,p,link,ask);article.append(body);return article;
   });
   const title=document.createElement('p');title.className='finder-result-label';title.textContent=keys.length===1?'Das könnte gut zu euch passen':'Diese Kurse könnten zu euch passen';
   const grid=document.createElement('div');grid.className='finder-result-grid';grid.append(...items);
