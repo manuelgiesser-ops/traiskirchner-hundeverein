@@ -25,3 +25,10 @@ Der Mitgliederbereich zeigt kommende datierte Beiträge und Kurse im Vereinskale
 
 ## Studio 2
 Dreispaltige Oberfläche mit Seitenliste, durchsuchbaren Inhaltsfeldern, Live-Vorschau und kontextbezogenen Eigenschaften. Desktop-, Tablet- und Mobilansicht, Vorschau ohne Markierung, Text-Doppelklick, automatische Entwurfsspeicherung, Rückgängig/Wiederholen (bis 60 lokale Zustände), Tastenkürzel Strg+S und Strg+Z. Zusätzlich Ausrichtung, Zeilenabstand, Kursiv und Vereinsfarben. Neue Seitenbausteine (Text, Bild/Text, Infobox, Kontaktbutton, FAQ) können angelegt, sortiert und entfernt werden. Entwürfe und Medien bleiben geschützt. Nur Verwaltung veröffentlicht. Bestehende Seitenabschnitte und neue Bausteine lassen sich innerhalb ihrer jeweiligen Liste ziehen oder per Pfeiltasten sortieren. Kein freies Überlagern oder pixelgenaues Positionieren der bestehenden Elemente.
+
+## Öffentliche Kursanfragen und Kalender
+- /kursanfrage.php: ohne Login, mit CSRF, Honeypot und Rate Limit. Daten werden im privaten Vereinsdatenspeicher abgelegt. Die Redaktion und Administration betreuen sie unter /vereins-tools.php. Keine verbindliche Buchung.
+- /vereins-tools.php?tab=training: bestätigte Termine, Uhrzeit, Status und Hinweise pflegen. Keine automatisch bestätigten Termine aus der alten Liste. Kalenderdownload nur für nicht abgesagte Termine.
+- E-Mail optional: im privaten Verzeichnis thv-private mail-settings.json anlegen, mit {"from":"office@traiskirchner-hundeverein.at","office":"office@traiskirchner-hundeverein.at","trainers":{}}. Bestätigte Absenderadresse und funktionierendes PHP-mail erforderlich. Trainerzuordnung optional nach Kurs-ID. Ohne Konfiguration funktioniert das Postfach, kein E-Mail-Versprechen. Zustellung am Hosting testen.
+- Daten regelmäßig prüfen und löschen, sobald sie nicht mehr benötigt werden. Backups vertraulich behandeln. Datenschutztext und Lerninhalte vor Vereinsfreigabe prüfen.
+- Hundeschule und Einstiegsbegleiter sind im Website Studio bearbeitbar. Fortschritt bleibt lokal im Browser und kann zurückgesetzt werden.
