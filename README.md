@@ -5,7 +5,7 @@ Eigenständige statische Website. Alle Seiten funktionieren ohne Buildsystem. `i
 - Die 25 Vereinsfotos sind als 68 lokale responsive WebP-Dateien eingebunden. Die Original-URLs verbleiben in `assets.json`. `optimize_web_assets.py` und der GitHub-Workflow erzeugen Varianten und den Größenbericht `performance-report.json`. Nutzungsberechtigung sowie Datenschutzbeschreibung und absolute Open-Graph-Bild-URL vor dem endgültigen Domainwechsel prüfen.
 - Kurszeiten, Preise, Vorstand, aktuelle Kurse und Termine durch den Verein bestätigen lassen. Die Quellen widersprechen sich teilweise. DogActivity und Gehorsam PLUS sind in der Meldung Frühjahr 2026 enthalten, aber nicht in der heute abrufbaren Kursübersicht; daher nicht als reguläre aktuelle Kurse beworben.
 - Die Galerie enthält eine kuratierte Auswahl der erreichbaren Originalbilder. Die Galerie-Hauptseite lieferte HTTP 403; vollständiges Archiv und Dokumente müssen vom Verein ergänzt werden.
-- Kontaktformular öffnet eine E-Mail im Mailprogramm; kein Serverversand. Die bestehende Online-Beitrittserklärung ist verlinkt.
+- Öffentliche Kursanfragen werden über ein PHP-Formular im privaten Vereinsbereich gespeichert. E-Mail-Benachrichtigungen sind optional konfigurierbar (siehe VEREINSBEREICH.md). Die bestehende Online-Beitrittserklärung bleibt verlinkt.
 - Impressum/Datenschutz durch Verein prüfen und Hostingdaten ergänzen. Keine automatische Veröffentlichung oder Domainumstellung.
 - Sitemap nach Festlegung der Domain generieren, mit `python sitemap.py https://beispiel.at/`.
 - Bilder auf kleine Auflösungen und echte Bildausschnitte im finalen Hosting prüfen.
