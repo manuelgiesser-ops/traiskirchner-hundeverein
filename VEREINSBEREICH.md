@@ -6,7 +6,7 @@
 4. Über Mitglieder weitere Zugänge anlegen. Einmalige Startpasswörter persönlich sicher übergeben; beim ersten Login muss das Passwort geändert werden.
 5. Den Ordner thv-private regelmäßig durch den Verein sichern; enthält Konten, Beiträge, Anfragen. Nicht im Git-Deployment ablegen.
 ## Rollen
-Mitglied: interne Nachrichten, zusätzliche Kursangebote, eigene Kursanfragen und Konto.
+Kursteilnehmer (technische Bestandsrolle `member`): interne Nachrichten, zusätzliche Kursangebote, eigene Kursanfragen und Konto.
 Redaktion: Beiträge und zusätzliche Kurse, Entwurf, öffentlich oder nur Mitglieder; Kursanfragen bearbeiten.
 Vereinsverwaltung: zusätzlich Nutzer, Rollen, Sperren und Passwort-Reset.
 ## Umfang
@@ -32,3 +32,10 @@ Dreispaltige Oberfläche mit Seitenliste, durchsuchbaren Inhaltsfeldern, Live-Vo
 - E-Mail optional: im privaten Verzeichnis thv-private mail-settings.json anlegen, mit {"from":"office@traiskirchner-hundeverein.at","office":"office@traiskirchner-hundeverein.at","trainers":{}}. Bestätigte Absenderadresse und funktionierendes PHP-mail erforderlich. Trainerzuordnung optional nach Kurs-ID. Ohne Konfiguration funktioniert das Postfach, kein E-Mail-Versprechen. Zustellung am Hosting testen.
 - Daten regelmäßig prüfen und löschen, sobald sie nicht mehr benötigt werden. Backups vertraulich behandeln. Datenschutztext und Lerninhalte vor Vereinsfreigabe prüfen.
 - Hundeschule und Einstiegsbegleiter sind im Website Studio bearbeitbar. Fortschritt bleibt lokal im Browser und kann zurückgesetzt werden.
+
+## Getrennte Zugänge
+- `vereinsbereich.php`: Auswahlseite und Weiterleitung für bereits angemeldete Konten.
+- `kursteilnehmer.php`: eigenständige Anmeldung nur für die Bestandsrolle member. Keine Verwaltungsaktionen.
+- `verwaltung.php`: eigenständige Anmeldung nur für admin und editor; Ersteinrichtung ausschließlich hier.
+- Konten, gespeicherte Kursanfragen und bestehende Session-/Passwortschutzmechanismen bleiben unverändert. Keine automatische Umwidmung von Vereinsmitgliedern: Verein prüft, welche bestehenden member-Konten als Kursteilnehmer dienen. Redaktion und Verwaltung bleiben die vorhandenen Rollen; eine gesonderte, kursbezogene Trainerrolle und persönliche Hundedaten sind noch nicht implementiert.
+- Vor Veröffentlichung prüfen: beide Logins, falsche Rollen, Startpasswort, Logout, direkter Zugriff auf Verwaltungsaktionen, bestehende Anfragen und Weiterleitungen unter HTTPS.
