@@ -71,7 +71,7 @@ function thv_rate(array &$s,string $key,int $limit=8): bool {
     $a['count']++; $s['attempts'][$id]=$a; return $a['count']<=$limit;
 }
 function thv_login(array $u): void { session_regenerate_id(true); $_SESSION=['uid'=>$u['id'],'version'=>$u['version'],'start'=>time(),'last'=>time(),'csrf'=>bin2hex(random_bytes(32))]; }
-function thv_redirect(string $tab=''): never { header('Location: vereinsbereich.php'.($tab?'?tab='.rawurlencode($tab):''),true,303);exit; }
+function thv_redirect(string $tab=''): never { $dest=defined('THV_PORTAL')?(THV_PORTAL==='staff'?'verwaltung.php':'kursteilnehmer.php'):'vereinsbereich.php';header('Location: '.$dest.($tab?'?tab='.rawurlencode($tab):''),true,303);exit; }
 function thv_flash(string $text): void { $_SESSION['flash']=$text; }
 function thv_public(array $state): array {
     $out=[]; foreach($state['entries'] as $e)if($e['visibility']==='public')$out[]=array_intersect_key($e,array_flip(['id','type','title','summary','body','date','image','age','schedule','capacity','updated']));
