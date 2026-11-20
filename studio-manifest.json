@@ -2762,5 +2762,441 @@
         ]
       }
     }
+  },
+  "hundeschule.html": {
+    "label": "Digitale Hundeschule",
+    "fields": {
+      "f001": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Digitale Hundeschule"
+      },
+      "f002": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Kleine Übungen. Große Wirkung im Alltag."
+      },
+      "f003": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Gemeinsam jeden Tag ein bisschen besser"
+      },
+      "f004": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Entdecke zehn kurze Lerneinheiten für zu Hause. Übe mit Geduld, Belohnung und ausreichend Pausen."
+      },
+      "f005": {
+        "kind": "text",
+        "label": "Text",
+        "default": "So lernt dein Hund"
+      },
+      "f006": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Belohne Verhalten, das du häufiger sehen möchtest. Eine Belohnung kann Futter, Spiel oder etwas anderes sein, das dein Hund gerade mag."
+      },
+      "f007": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Wähle einen ruhigen Ort und kleine, passende Belohnungen."
+      },
+      "f008": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Sobald dein Hund freiwillig zu dir schaut, sag ein kurzes Markerwort wie „Ja“ und belohne ihn unmittelbar."
+      },
+      "f009": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Wiederhole wenige Male und beende die Einheit, solange ihr beide Freude daran habt."
+      },
+      "f010": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Nicht schimpfen, wenn etwas nicht klappt. Vereinfache die Übung."
+      },
+      "f011": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Aufmerksamkeit aufbauen"
+      },
+      "f012": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Ein Blick zu dir ist die Grundlage für viele Alltagssituationen. Übe zuerst ohne Ablenkung."
+      },
+      "f013": {
+        "kind": "text",
+        "label": "Text",
+        "default": "War­te, bis dein Hund dich freiwillig anschaut."
+      },
+      "f014": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Markiere den Blick und belohne ihn."
+      },
+      "f015": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Sag seinen Namen einmal, wenn er ansprechbar ist. Belohne, wenn er sich zu dir orientiert."
+      },
+      "f016": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Den Namen nicht ständig wiederholen. Wenn er nicht reagiert, schaffe mehr Abstand zur Ablenkung."
+      },
+      "f017": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Der sichere Rückruf"
+      },
+      "f018": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Dein Hund soll gern zu dir zurückkommen. Sicherheit geht immer vor."
+      },
+      "f019": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Beginne im Haus oder in einem sicher eingezäunten Bereich."
+      },
+      "f020": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Rufe einmal mit freundlicher Stimme, wenn dein Hund dir Aufmerksamkeit schenkt. Belohne das Ankommen besonders großzügig."
+      },
+      "f021": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Übe draußen erst mit geeigneter Schleppleine am gut sitzenden Geschirr und ausreichend Abstand zu Gefahren."
+      },
+      "f022": {
+        "kind": "text",
+        "label": "Text",
+        "default": "In ungesichertem Gelände nicht ableinen, solange der Rückruf nicht zuverlässig ist. Nie zur Strafe zurückrufen."
+      },
+      "f023": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Entspannt an der Leine"
+      },
+      "f024": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Lockere Leine ist ein Lernziel, keine Frage von Kraft. Schnüffeln darf ebenfalls Teil des Spaziergangs sein."
+      },
+      "f025": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Starte an einem ruhigen Ort mit einer bequemen Leine und passendem Geschirr."
+      },
+      "f026": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Belohne wenige Schritte mit lockerer Leine."
+      },
+      "f027": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Wird die Leine straff, bleibe ruhig stehen oder wechsle sanft die Richtung. Belohne wieder, sobald die Leine locker ist."
+      },
+      "f028": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Keine Leinenrucke. Wähle kleinere Schritte und eine ruhigere Umgebung, wenn es schwierig wird."
+      },
+      "f029": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Eine Ruhedecke kennenlernen"
+      },
+      "f030": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Eine Decke kann ein vertrauter Ruheort werden. Ruhe lässt sich nicht erzwingen."
+      },
+      "f031": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Lege die Decke an einen ruhigen Platz."
+      },
+      "f032": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Belohne freiwilliges Annähern und entspanntes Verweilen auf der Decke."
+      },
+      "f033": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Steigere die Dauer langsam. Dein Hund darf aufstehen und eine Pause machen."
+      },
+      "f034": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Bei Unruhe, Hecheln oder Ausweichen die Anforderungen reduzieren."
+      },
+      "f035": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Die Welt in kleinen Schritten"
+      },
+      "f036": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Neue Eindrücke sollen mit Sicherheit und guten Erfahrungen verbunden sein, nicht mit Überforderung."
+      },
+      "f037": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Wähle einen ruhigen, sicheren Ort mit etwas Neuem in ausreichendem Abstand."
+      },
+      "f038": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Lass deinen Welpen selbst entscheiden, ob er sich nähern möchte. Belohne ruhige Neugier."
+      },
+      "f039": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Plane kurze Erkundungen und danach viel Ruhe ein."
+      },
+      "f040": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Impf- und Gesundheitsfragen mit der Tierarztpraxis klären. Keine erzwungenen Begegnungen."
+      },
+      "f041": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Körpersprache verstehen"
+      },
+      "f042": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Abwenden, Erstarren, gespannte Haltung oder vermehrtes Lecken über die Lippen können auf Unwohlsein hinweisen. Beurteile immer die ganze Situation."
+      },
+      "f043": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Beobachte deinen Hund in einer ruhigen Alltagssituation."
+      },
+      "f044": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Achte auf Haltung, Bewegungen und die Situation davor."
+      },
+      "f045": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Gib ihm mehr Abstand oder eine Pause, wenn er sich unwohl zeigt."
+      },
+      "f046": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Knurren nicht bestrafen. Bei Beißrisiko oder starken Ängsten Abstand sichern und qualifizierte Hilfe suchen."
+      },
+      "f047": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Hundebegegnungen ohne Druck"
+      },
+      "f048": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Nicht jeder Hund möchte jeden anderen Hund begrüßen. Abstand schafft Handlungsspielraum."
+      },
+      "f049": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Wähle einen Abstand, in dem dein Hund noch ansprechbar ist."
+      },
+      "f050": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Belohne freiwillige Orientierung zu dir."
+      },
+      "f051": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Gehe bei Bedarf in einem Bogen vorbei oder wechsle die Straßenseite."
+      },
+      "f052": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Keine erzwungenen Leinenkontakte. Bei starker Reaktivität individuell mit einer Fachperson trainieren."
+      },
+      "f053": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Kleine Nasenarbeit"
+      },
+      "f054": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Suchen ist für viele Hunde eine schöne ruhige Beschäftigung."
+      },
+      "f055": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Verteile einige geeignete Futterstücke auf einer sauberen, übersichtlichen Fläche."
+      },
+      "f056": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Lass deinen Hund freiwillig suchen und in seinem Tempo arbeiten."
+      },
+      "f057": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Mache das Versteck erst schwieriger, wenn die einfache Variante gut gelingt."
+      },
+      "f058": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Futtermenge auf die Tagesration abstimmen und ungeeignete Gegenstände vermeiden."
+      },
+      "f059": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Kurze Einheiten, gute Pausen"
+      },
+      "f060": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Viele kleine erfolgreiche Wiederholungen sind angenehmer als langes Üben bis zur Erschöpfung."
+      },
+      "f061": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Wähle ein einziges kleines Ziel."
+      },
+      "f062": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Übe einige Wiederholungen mit passender Belohnung."
+      },
+      "f063": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Beende die Einheit, bevor die Aufmerksamkeit nachlässt. Notiere, was gut funktioniert hat."
+      },
+      "f064": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Bei Schmerzen, Lahmheit, starker Angst oder plötzlichen Verhaltensänderungen tierärztlich abklären lassen."
+      },
+      "f065": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Gemeinsam weiterlernen"
+      },
+      "f066": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Das Trainerteam hilft dir, die Übungen passend zu deinem Hund weiterzuentwickeln."
+      }
+    },
+    "sections": {
+      "s001": {
+        "label": "Lernübersicht"
+      },
+      "s002": {
+        "label": "Trainingsbegleitung"
+      }
+    },
+    "layoutGroups": {}
+  },
+  "erstes-training.html": {
+    "label": "Mein erstes Training",
+    "fields": {
+      "f001": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Mein erstes Training"
+      },
+      "f002": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Mit einem guten Gefühl zum ersten gemeinsamen Besuch."
+      },
+      "f003": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Alles dabei?"
+      },
+      "f004": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Diese Checkliste hilft euch bei der Vorbereitung. Die verbindlichen Voraussetzungen erfährst du vom Trainerteam."
+      },
+      "f005": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Termin und passenden Kurs vom Trainerteam bestätigen lassen"
+      },
+      "f006": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Impfpass und gegebenenfalls verlangte Unterlagen mitnehmen"
+      },
+      "f007": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Gut sitzendes Geschirr oder Halsband und passende Leine einpacken"
+      },
+      "f008": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Kleine geeignete Trainingsbelohnungen mitnehmen"
+      },
+      "f009": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Wasser und Trinknapf einpacken"
+      },
+      "f010": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Kotbeutel und gegebenenfalls ein Spielzeug mitnehmen"
+      },
+      "f011": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Genügend Zeit einplanen und den Hund vorab lösen lassen"
+      },
+      "f012": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Hier treffen wir uns"
+      },
+      "f013": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Bitte kläre vor dem Besuch den genauen Treffpunkt, Kursbeginn, Kosten und die Voraussetzungen."
+      },
+      "f014": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Was ihr schon zu Hause üben könnt"
+      },
+      "f015": {
+        "kind": "text",
+        "label": "Text",
+        "default": "Kurze Aufmerksamkeitsspiele, ruhiges Belohnen und lockeres Gehen an der Leine sind ein guter Einstieg. Dein Hund muss vor dem ersten Kurs noch nicht perfekt sein."
+      }
+    },
+    "sections": {
+      "s001": {
+        "label": "Persönliche Checkliste"
+      },
+      "s002": {
+        "label": "Anfahrt und Zeiten"
+      },
+      "s003": {
+        "label": "Erste Übungen"
+      }
+    },
+    "layoutGroups": {}
   }
 }
