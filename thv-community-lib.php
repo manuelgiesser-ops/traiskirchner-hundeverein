@@ -8,7 +8,7 @@ function thv_training_status():array{return ['scheduled'=>'Findet statt','full'=
 function thv_day(string $s):bool{return preg_match('/^\d{4}-\d{2}-\d{2}$/D',$s)&&checkdate((int)substr($s,5,2),(int)substr($s,8,2),(int)substr($s,0,4));}
 function thv_events(array $s):array{
  $out=[];foreach($s['training_dates']??[] as $e)if($e['date']>=date('Y-m-d')&&$e['date']<=date('Y-m-d',strtotime('+90 days')))$out[]=$e;
- foreach($s['entries'] as $e)if($e['type']==='post'&&$e['visibility']==='public'&&$e['date']>=date('Y-m-d')&&$e['date']<=date('Y-m-d',strtotime('+90 days')))$out[]=['id'=>$e['id'],'course'=>'event','title'=>$e['title'],'date'=>$e['date'],'time'=>'','end'=>'','status'=>'scheduled','note'=>$e['summary'],'link'=>'vereinsartikel.php?id='.$e['id']];
+ foreach($s['entries'] as $e)if(in_array($e['type'],['post','event','tournament'],true)&&$e['visibility']==='public'&&$e['date']>=date('Y-m-d')&&$e['date']<=date('Y-m-d',strtotime('+90 days')))$out[]=['id'=>$e['id'],'course'=>'event','title'=>$e['title'],'date'=>$e['date'],'time'=>$e['time']??'','end'=>$e['end']??'','status'=>'scheduled','note'=>trim(($e['summary']??'').(!empty($e['place'])?' · Ort: '.$e['place']:'')),'type'=>$e['type'],'link'=>'vereinsartikel.php?id='.$e['id']];
  usort($out,fn($a,$b)=>strcmp($a['date'].$a['time'],$b['date'].$b['time']));return $out;
 }
 function thv_inquiry(array $input,array $courses):array{

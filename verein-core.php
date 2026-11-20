@@ -74,9 +74,13 @@ function thv_login(array $u): void { session_regenerate_id(true); $_SESSION=['ui
 function thv_redirect(string $tab=''): never { $dest=defined('THV_PORTAL')?(THV_PORTAL==='staff'?'verwaltung.php':'kursteilnehmer.php'):'vereinsbereich.php';header('Location: '.$dest.($tab?'?tab='.rawurlencode($tab):''),true,303);exit; }
 function thv_flash(string $text): void { $_SESSION['flash']=$text; }
 function thv_public(array $state): array {
-    $out=[]; foreach($state['entries'] as $e)if($e['visibility']==='public')$out[]=array_intersect_key($e,array_flip(['id','type','title','summary','body','date','image','age','schedule','capacity','updated']));
+    $out=[]; foreach($state['entries'] as $e)if($e['visibility']==='public')$out[]=array_intersect_key($e,array_flip(['id','type','title','summary','body','date','image','age','schedule','time','end','place','capacity','updated']));
     usort($out,fn($a,$b)=>strcmp($b['updated'],$a['updated'])); return $out;
 }
+function thv_entry_types(): array { return ['post'=>'Beitrag','course'=>'Kurs','event'=>'Veranstaltung','tournament'=>'Turnier']; }
+function thv_entry_label(string $type): string { return thv_entry_types()[$type]??'Beitrag'; }
+function thv_event_type(string $type): bool { return in_array($type,['event','tournament'],true); }
+function thv_valid_time(string $time): bool { return preg_match('/^(?:[01]\d|2[0-3]):[0-5]\d$/D',$time)===1; }
 function thv_visible(array $e,?array $u): bool { return $e['visibility']==='public'||($e['visibility']==='members'&&thv_role($u,'member','editor','admin')); }
 function thv_layout_start(string $title,bool $portal=true): void { ?><!doctype html><html lang="de-AT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="<?= $portal?'noindex,nofollow':'index,follow' ?>"><title><?=h($title)?> | Traiskirchner Hundeverein</title><link rel="icon" href="favicon-v24.svg" type="image/svg+xml"><link rel="stylesheet" href="vereinsbereich.css?v=2"></head><body><header class="club-header"><a href="index.html" class="club-brand"><img src="generated-media/thv-clubmark-v23.svg" alt="" width="48" height="48"><span>Traiskirchner<br>Hundeverein</span></a><a class="club-back" href="index.html">Zur Website</a></header><main class="club-main"><?php }
 function thv_layout_end(): void { ?><footer class="club-footer"><a href="index.html">Startseite</a><a href="impressum.html">Impressum &amp; Datenschutz</a><a href="kontakt.html">Kontakt</a></footer></main></body></html><?php }
