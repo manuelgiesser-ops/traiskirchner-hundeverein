@@ -79,10 +79,25 @@ function thv_public(array $state): array {
 }
 function thv_entry_types(): array { return ['post'=>'Beitrag','course'=>'Kurs','event'=>'Veranstaltung','tournament'=>'Turnier']; }
 function thv_entry_label(string $type): string { return thv_entry_types()[$type]??'Beitrag'; }
+// Delete the editorial entry without losing existing inquiries.
+function thv_entry_delete(array &$s,string $id): void {
+    $e=$s['entries'][$id]??null;
+    if(!$e)throw new DomainException('Eintrag nicht gefunden.');
+    foreach($s['requests'] as &$q){
+        if(($q['course']??'')===$id){
+            $q['course_title']=$e['title'];
+            $q['course_deleted']=true;
+        }
+    }unset($q);
+    foreach($s['training_dates']??[] as $key=>$date){
+        if(($date['course']??'')===$id)unset($s['training_dates'][$key]);
+    }
+    unset($s['entries'][$id]);
+}
 function thv_event_type(string $type): bool { return in_array($type,['event','tournament'],true); }
 function thv_valid_time(string $time): bool { return preg_match('/^(?:[01]\d|2[0-3]):[0-5]\d$/D',$time)===1; }
 function thv_visible(array $e,?array $u): bool { return $e['visibility']==='public'||($e['visibility']==='members'&&thv_role($u,'member','editor','admin')); }
-function thv_layout_start(string $title,bool $portal=true): void { ?><!doctype html><html lang="de-AT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="<?= $portal?'noindex,nofollow':'index,follow' ?>"><title><?=h($title)?> | Traiskirchner Hundeverein</title><link rel="icon" href="favicon-v24.svg" type="image/svg+xml"><link rel="stylesheet" href="vereinsbereich.css?v=2"></head><body><header class="club-header"><a href="index.html" class="club-brand"><img src="generated-media/thv-clubmark-v23.svg" alt="" width="48" height="48"><span>Traiskirchner<br>Hundeverein</span></a><a class="club-back" href="index.html">Zur Website</a></header><main class="club-main"><?php }
+function thv_layout_start(string $title,bool $portal=true): void { ?><!doctype html><html lang="de-AT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="<?= $portal?'noindex,nofollow':'index,follow' ?>"><title><?=h($title)?> | Traiskirchner Hundeverein</title><link rel="icon" href="favicon-v24.svg" type="image/svg+xml"><link rel="stylesheet" href="vereinsbereich.css?v=3"></head><body><header class="club-header"><a href="index.html" class="club-brand"><img src="generated-media/thv-clubmark-v23.svg" alt="" width="48" height="48"><span>Traiskirchner<br>Hundeverein</span></a><a class="club-back" href="index.html">Zur Website</a></header><main class="club-main"><?php }
 function thv_layout_end(): void { ?><footer class="club-footer"><a href="index.html">Startseite</a><a href="impressum.html">Impressum &amp; Datenschutz</a><a href="kontakt.html">Kontakt</a></footer></main></body></html><?php }
 function thv_field(string $label,string $name,string $type='text',string $value='',bool $required=true): void { ?><label><?=h($label)?><input name="<?=h($name)?>" type="<?=h($type)?>" value="<?=h($value)?>" <?= $required?'required':'' ?> <?= $type==='password'?'autocomplete="new-password"':'' ?>></label><?php }
 function thv_select(string $label,string $name,array $choices,string $value): void { ?><label><?=h($label)?><select name="<?=h($name)?>"><?php foreach($choices as $k=>$v):?><option value="<?=h($k)?>" <?=$k===$value?'selected':''?>><?=h($v)?></option><?php endforeach;?></select></label><?php }

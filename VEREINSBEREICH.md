@@ -42,3 +42,6 @@ Dreispaltige Oberfläche mit Seitenliste, durchsuchbaren Inhaltsfeldern, Live-Vo
 
 ## Veranstaltungen und Turniere
 Unter Vereinsverwaltung → Redaktion stehen zusätzlich „+ Veranstaltung“ und „+ Turnier“ bereit. Datum und Ort sind bei Veröffentlichung erforderlich; Beginn und Ende sind optional, dazu Titel, Beschreibung, Titelbild und Sichtbarkeit. Öffentliche Einträge erscheinen unter Aktuelles, auf der Startseite und im öffentlichen Kalender (90 Tage Vorschau); interne Einträge erscheinen nur angemeldeten Benutzern im Vereinskalender. Keine Turnieranmeldung, automatische Teilnehmerliste oder Buchung. Alte Beiträge und Kursanfragen funktionieren unverändert. Sicherung und Wiederherstellung akzeptieren die neuen Typen.
+
+## Redaktion: endgültig löschen
+Administratoren und Redakteure können selbst angelegte Beiträge, Kurse, Veranstaltungen und Turniere nach ausdrücklicher Bestätigung endgültig löschen. „Als Entwurf“ bleibt zum vorübergehenden Ausblenden erhalten. Zugehörige Trainingstermine werden entfernt. Interne Kursanfragen behalten den bisherigen Kurstitel und Status, öffentliche Anfragen bleiben unverändert. Die Sicherungsprüfung unterstützt historische Anfragen gelöschter Kurse. Fest im HTML hinterlegte reguläre Kursangebote werden hiervon nicht verändert; diese lassen sich separat im Website Studio bearbeiten.
