@@ -5,7 +5,7 @@ with tempfile.TemporaryDirectory() as temp:
     base=pathlib.Path(temp)
     web=base/'public_html';web.mkdir()
     private=base/'thv-private';private.mkdir(mode=0o700)
-    for name in ['verein-core.php','vereinsbereich.php','vereinsdaten.php','vereinsartikel.php','studio-media-lib.php','studio-blocks-lib.php','studio-seo-lib.php','studio-bootstrap.php','studio-remember.php','studio-api.php','studio-manifest.json','website-studio.php','vereins-backup.php']:
+    for name in ['verein-core.php','thv-community-lib.php','kursanfrage.php','trainingsdaten.php','vereins-tools.php','vereinsbereich.php','vereinsdaten.php','vereinsartikel.php','studio-media-lib.php','studio-blocks-lib.php','studio-seo-lib.php','studio-bootstrap.php','studio-remember.php','studio-api.php','studio-manifest.json','website-studio.php','vereins-backup.php']:
         shutil.copy(root/name,web/name)
     key=secrets.token_hex(24);adminpw=secrets.token_hex(16);newpw=secrets.token_hex(16)
     (private/'setup.key').write_text(key)
@@ -71,10 +71,35 @@ with tempfile.TemporaryDirectory() as temp:
         assert 'Berechtigung' in member.post('request-status',id=qid,status='confirmed')[1]
         assert 'Anfrage aktualisiert' in admin.post('request-status',id=qid,status='confirmed')[1]
         assert 'Bestätigt' in member.req('/vereinsbereich.php?tab=anfragen')[1]
+        guest=Client()
+        status,form=guest.req('/kursanfrage.php?kurs=welpen')
+        assert status==200 and 'Unverbindlich anfragen' in form
+        token=re.search(r'name="csrf" value="([a-f0-9]+)"',form).group(1)
+        inquiry={'csrf':token,'kind':'course','course':'welpen','name':'External Tester','email':'guest@example.invalid','dog':'Balu','age':'6 Monate','breed':'','phone':'','note':'Training bitte','website':''}
+        assert 'Danke für deine Anfrage' in guest.req('/kursanfrage.php',inquiry)[1]
+        assert guest.req('/vereins-tools.php')[0]==403
+        assert member.req('/vereins-tools.php')[0]==403
+        assert 'External Tester' in admin.req('/vereins-tools.php')[1]
+        assert 'External Tester' not in anon.req('/vereinsdaten.php')[1]
+        assert 'External Tester' not in anon.req('/trainingsdaten.php')[1]
+        state=json.loads((private/'vereinsdaten.json').read_text());qkey=next(iter(state['public_inquiries']))
+        admin.req('/vereins-tools.php',{'csrf':admin.csrf(),'action':'inquiry-status','id':qkey,'status':'waitlist'})
+        assert json.loads((private/'vereinsdaten.json').read_text())['public_inquiries'][qkey]['status']=='waitlist'
+        from datetime import date,timedelta
+        day=(date.today()+timedelta(days=2)).isoformat()
+        payload={'csrf':admin.csrf(),'action':'save-training','id':'','course':'welpen','date':day,'time':'18:00','end':'19:00','status':'scheduled','note':'Test training'}
+        assert 'Gespeichert.' in admin.req('/vereins-tools.php?tab=training',payload)[1]
+        events=json.loads(anon.req('/trainingsdaten.php')[1])['events']
+        assert len(events)==1 and events[0]['title']=='Welpen und Junghunde'
+        eid=events[0]['id'];assert 'BEGIN:VCALENDAR' in anon.req('/trainingsdaten.php?ics='+eid)[1]
+        payload.update(id=eid,status='cancelled')
+        admin.req('/vereins-tools.php?tab=training',payload)
+        assert json.loads(anon.req('/trainingsdaten.php')[1])['events'][0]['status']=='cancelled'
+        assert anon.req('/trainingsdaten.php?ics='+eid)[0]==404
         # Studio permission and published-versus-draft checks.
         assert anon.req('/studio-api.php')[0]==403
         assert member.req('/studio-api.php')[0]==403
-        ss=json.loads(admin.req('/studio-api.php')[1]);assert len(ss['manifest'])==16
+        ss=json.loads(admin.req('/studio-api.php')[1]);assert len(ss['manifest'])==18
         assert admin.req('/website-studio.php')[0]==200
         assert admin.req('/vereins-backup.php')[0]==200
         key=next(k for k,v in ss['manifest']['index.html']['fields'].items() if v['kind']=='text')
